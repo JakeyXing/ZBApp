@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		990F7AF4216FAF490075A04C /* CalendarBgView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 990F7AF3216FAF490075A04C /* CalendarBgView.swift */; };
 		9921CE262160A2D3005DC836 /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 9921CE252160A2D3005DC836 /* Podfile */; };
 		9921CE2C2160AB37005DC836 /* PersonalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9921CE2B2160AB37005DC836 /* PersonalViewController.swift */; };
 		9921CE2E2160AB56005DC836 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9921CE2D2160AB56005DC836 /* HomeViewController.swift */; };
@@ -42,6 +43,7 @@
 /* Begin PBXFileReference section */
 		233D6273A18A983E8E7A4B91 /* Pods-ZBApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZBApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ZBApp/Pods-ZBApp.debug.xcconfig"; sourceTree = "<group>"; };
 		8B6E88C85390293304321D12 /* Pods_ZBApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ZBApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		990F7AF3216FAF490075A04C /* CalendarBgView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarBgView.swift; sourceTree = "<group>"; };
 		9921CE252160A2D3005DC836 /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		9921CE2B2160AB37005DC836 /* PersonalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalViewController.swift; sourceTree = "<group>"; };
 		9921CE2D2160AB56005DC836 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
@@ -173,6 +175,7 @@
 				994F634A216C822C0063044B /* StarView.swift */,
 				994F6354216C9C480063044B /* JHNavigationBar.swift */,
 				994EE45F216DDC3700EB86DD /* MissionTypeTopBar.swift */,
+				990F7AF3216FAF490075A04C /* CalendarBgView.swift */,
 				994EE461216DEDDE00EB86DD /* JHListChooseView */,
 			);
 			path = View;
@@ -415,6 +418,7 @@
 				99F43AD921606EB400A84EBD /* ViewController.swift in Sources */,
 				9923CBB5216B56F900EDCA7A /* MissionCell.swift in Sources */,
 				994F6346216C78F20063044B /* NSObject+CZRuntime.m in Sources */,
+				990F7AF4216FAF490075A04C /* CalendarBgView.swift in Sources */,
 				9921CE2C2160AB37005DC836 /* PersonalViewController.swift in Sources */,
 				994EE465216DF7F500EB86DD /* JHListChooseView.swift in Sources */,
 				994F633F216C78F20063044B /* UIButton+CZAddition.m in Sources */,
@@ -585,7 +589,10 @@
 				DEVELOPMENT_TEAM = Y6RH2VSRP8;
 				INFOPLIST_FILE = ZBApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = AskParents.com.cn;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = PPfile1;
@@ -607,7 +614,10 @@
 				DEVELOPMENT_TEAM = Y6RH2VSRP8;
 				INFOPLIST_FILE = ZBApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = AskParents.com.cn;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = PPfile1;

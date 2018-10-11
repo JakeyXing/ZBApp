@@ -57,21 +57,31 @@ class MissionTypeTopBar: UIView {
     }
     
     @objc private func dateAction(){
-       
-//        UIApplication.shared.keyWindow?.addSubview(calendarBg)
-        
-        
+        let calendarBg = CalendarBgView(frame: CGRect.init())
+        calendarBg.delegate = self;
+        UIApplication.shared.keyWindow?.addSubview(calendarBg)
     }
+    
     
 }
 
-extension MissionTypeTopBar: JHListChooseViewDelegate{
+extension MissionTypeTopBar: JHListChooseViewDelegate,CalendarBgViewDelegate{
     func listChooseViewDidClosed(_ listChooseView: JHListChooseView) {
         self.typeListView.removeFromSuperview()
     }
     
     func listChooseView(_ listChooseView: JHListChooseView, didSelectedIndex index: NSInteger) {
         self.typeListView.removeFromSuperview()
+    }
+    
+    func calendarDidChoosedDate(choosedDate: Date) {
+        //更新提醒时间文本框
+        let formatter = DateFormatter()
+        //日期样式
+        formatter.dateFormat = "yyyy-MM-dd"
+        print(formatter.string(from: choosedDate))
+        
+        self.dateChooseButton.setTitle(formatter.string(from: choosedDate), for: .normal)
     }
     
 }
@@ -106,7 +116,7 @@ extension MissionTypeTopBar{
         self.dateChooseButton.mas_makeConstraints { (make:MASConstraintMaker!) in
             make.centerY.equalTo()(self.mas_centerY)
             make.left.equalTo()(self.iconImageView.mas_right)?.offset()(kResizedPoint(pt: 20))
-            make.width.equalTo()(kResizedPoint(pt: 80))
+            make.width.equalTo()(kResizedPoint(pt: 90))
             make.height.equalTo()(kResizedPoint(pt: 30))
         }
         
