@@ -13,14 +13,24 @@ import CYLTabBarController
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
-
+    var mainTabBarVc: MainTabBarController!
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        let mainTabBarVc = MainTabBarController(viewControllers: self.viewControllers(), tabBarItemsAttributes: self.tabBarItemsAttributesForController())
+        mainTabBarVc = MainTabBarController(viewControllers: self.viewControllers(), tabBarItemsAttributes: self.tabBarItemsAttributesForController())
         
         self.window = UIWindow()
         self.window?.frame  = UIScreen.main.bounds
-        self.window?.rootViewController = mainTabBarVc
+        
+        let isLogin = false
+        if isLogin {
+            self.window?.rootViewController = mainTabBarVc
+        }else{
+            let loginVC = LoginViewController()
+            let naviVC = UINavigationController(rootViewController: loginVC)
+            
+            self.window?.rootViewController = naviVC
+        }
+        
         self.window?.makeKeyAndVisible()
         
         //tabbar背景色

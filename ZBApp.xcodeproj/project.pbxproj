@@ -7,6 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		99017C1421706C5700155724 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99017C1221706C5700155724 /* RegisterViewController.swift */; };
+		99017C1521706C5700155724 /* RegisterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 99017C1321706C5700155724 /* RegisterViewController.xib */; };
+		99017C18217077CE00155724 /* ResetPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99017C16217077CE00155724 /* ResetPasswordViewController.swift */; };
+		99017C19217077CE00155724 /* ResetPasswordViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 99017C17217077CE00155724 /* ResetPasswordViewController.xib */; };
+		99017C1D2170889500155724 /* CarryMissionDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99017C1C2170889500155724 /* CarryMissionDetailViewController.swift */; };
+		99017C1F217088AF00155724 /* MissionDetailBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99017C1E217088AF00155724 /* MissionDetailBaseViewController.swift */; };
+		99017C2121708A6B00155724 /* MissionBaseInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99017C2021708A6B00155724 /* MissionBaseInfoView.swift */; };
+		99017C232170A8E900155724 /* CarryMissionInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99017C222170A8E900155724 /* CarryMissionInfoView.swift */; };
 		990F7AF4216FAF490075A04C /* CalendarBgView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 990F7AF3216FAF490075A04C /* CalendarBgView.swift */; };
 		9921CE262160A2D3005DC836 /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 9921CE252160A2D3005DC836 /* Podfile */; };
 		9921CE2C2160AB37005DC836 /* PersonalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9921CE2B2160AB37005DC836 /* PersonalViewController.swift */; };
@@ -14,6 +22,8 @@
 		9921CE302160AB70005DC836 /* UnTakeMissionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9921CE2F2160AB70005DC836 /* UnTakeMissionViewController.swift */; };
 		9923CBB0216B014100EDCA7A /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9923CBAF216B014100EDCA7A /* MainTabBarController.swift */; };
 		9923CBB5216B56F900EDCA7A /* MissionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9923CBB4216B56F900EDCA7A /* MissionCell.swift */; };
+		9932153521703F2100CAB18B /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9932153321703F2100CAB18B /* LoginViewController.swift */; };
+		9932153621703F2100CAB18B /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9932153421703F2100CAB18B /* LoginViewController.xib */; };
 		994EE460216DDC3700EB86DD /* MissionTypeTopBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 994EE45F216DDC3700EB86DD /* MissionTypeTopBar.swift */; };
 		994EE463216DF6A300EB86DD /* ListChooseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 994EE462216DF6A300EB86DD /* ListChooseCell.swift */; };
 		994EE465216DF7F500EB86DD /* JHListChooseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 994EE464216DF7F500EB86DD /* JHListChooseView.swift */; };
@@ -43,6 +53,14 @@
 /* Begin PBXFileReference section */
 		233D6273A18A983E8E7A4B91 /* Pods-ZBApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZBApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ZBApp/Pods-ZBApp.debug.xcconfig"; sourceTree = "<group>"; };
 		8B6E88C85390293304321D12 /* Pods_ZBApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ZBApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		99017C1221706C5700155724 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
+		99017C1321706C5700155724 /* RegisterViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RegisterViewController.xib; sourceTree = "<group>"; };
+		99017C16217077CE00155724 /* ResetPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordViewController.swift; sourceTree = "<group>"; };
+		99017C17217077CE00155724 /* ResetPasswordViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ResetPasswordViewController.xib; sourceTree = "<group>"; };
+		99017C1C2170889500155724 /* CarryMissionDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarryMissionDetailViewController.swift; sourceTree = "<group>"; };
+		99017C1E217088AF00155724 /* MissionDetailBaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MissionDetailBaseViewController.swift; sourceTree = "<group>"; };
+		99017C2021708A6B00155724 /* MissionBaseInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MissionBaseInfoView.swift; sourceTree = "<group>"; };
+		99017C222170A8E900155724 /* CarryMissionInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarryMissionInfoView.swift; sourceTree = "<group>"; };
 		990F7AF3216FAF490075A04C /* CalendarBgView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarBgView.swift; sourceTree = "<group>"; };
 		9921CE252160A2D3005DC836 /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		9921CE2B2160AB37005DC836 /* PersonalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalViewController.swift; sourceTree = "<group>"; };
@@ -50,6 +68,8 @@
 		9921CE2F2160AB70005DC836 /* UnTakeMissionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnTakeMissionViewController.swift; sourceTree = "<group>"; };
 		9923CBAF216B014100EDCA7A /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		9923CBB4216B56F900EDCA7A /* MissionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MissionCell.swift; sourceTree = "<group>"; };
+		9932153321703F2100CAB18B /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		9932153421703F2100CAB18B /* LoginViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
 		994EE45F216DDC3700EB86DD /* MissionTypeTopBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MissionTypeTopBar.swift; sourceTree = "<group>"; };
 		994EE462216DF6A300EB86DD /* ListChooseCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListChooseCell.swift; sourceTree = "<group>"; };
 		994EE464216DF7F500EB86DD /* JHListChooseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JHListChooseView.swift; sourceTree = "<group>"; };
@@ -125,6 +145,8 @@
 			isa = PBXGroup;
 			children = (
 				9921CE2F2160AB70005DC836 /* UnTakeMissionViewController.swift */,
+				99017C1E217088AF00155724 /* MissionDetailBaseViewController.swift */,
+				99017C1C2170889500155724 /* CarryMissionDetailViewController.swift */,
 			);
 			path = Mission;
 			sourceTree = "<group>";
@@ -149,6 +171,19 @@
 			path = Other;
 			sourceTree = "<group>";
 		};
+		9932153021703ED100CAB18B /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				9932153321703F2100CAB18B /* LoginViewController.swift */,
+				9932153421703F2100CAB18B /* LoginViewController.xib */,
+				99017C1221706C5700155724 /* RegisterViewController.swift */,
+				99017C1321706C5700155724 /* RegisterViewController.xib */,
+				99017C16217077CE00155724 /* ResetPasswordViewController.swift */,
+				99017C17217077CE00155724 /* ResetPasswordViewController.xib */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
 		994EE461216DEDDE00EB86DD /* JHListChooseView */ = {
 			isa = PBXGroup;
 			children = (
@@ -161,6 +196,7 @@
 		994F631B216C55FA0063044B /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				9932153021703ED100CAB18B /* Login */,
 				9921CE292160A422005DC836 /* Home */,
 				9921CE272160A39F005DC836 /* Mine */,
 				9921CE282160A3A9005DC836 /* Mission */,
@@ -176,6 +212,8 @@
 				994F6354216C9C480063044B /* JHNavigationBar.swift */,
 				994EE45F216DDC3700EB86DD /* MissionTypeTopBar.swift */,
 				990F7AF3216FAF490075A04C /* CalendarBgView.swift */,
+				99017C2021708A6B00155724 /* MissionBaseInfoView.swift */,
+				99017C222170A8E900155724 /* CarryMissionInfoView.swift */,
 				994EE461216DEDDE00EB86DD /* JHListChooseView */,
 			);
 			path = View;
@@ -341,10 +379,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9932153621703F2100CAB18B /* LoginViewController.xib in Resources */,
 				99F43AE121606EB600A84EBD /* LaunchScreen.storyboard in Resources */,
+				99017C19217077CE00155724 /* ResetPasswordViewController.xib in Resources */,
 				99F43ADE21606EB600A84EBD /* Assets.xcassets in Resources */,
 				9921CE262160A2D3005DC836 /* Podfile in Resources */,
 				99F43ADC21606EB400A84EBD /* Main.storyboard in Resources */,
+				99017C1521706C5700155724 /* RegisterViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -411,7 +452,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9932153521703F2100CAB18B /* LoginViewController.swift in Sources */,
 				994F6348216C78F20063044B /* UIColor+CZAddition.m in Sources */,
+				99017C18217077CE00155724 /* ResetPasswordViewController.swift in Sources */,
 				994F6344216C78F20063044B /* NSString+CZHash.m in Sources */,
 				994F633D216C78F20063044B /* UILabel+CZAddition.m in Sources */,
 				994F6341216C78F20063044B /* NSString+CZBase64.m in Sources */,
@@ -426,14 +469,19 @@
 				994F633E216C78F20063044B /* NSArray+Log.m in Sources */,
 				99F43AD721606EB400A84EBD /* AppDelegate.swift in Sources */,
 				994F634B216C822C0063044B /* StarView.swift in Sources */,
+				99017C1F217088AF00155724 /* MissionDetailBaseViewController.swift in Sources */,
 				994F6343216C78F20063044B /* UIView+CZAddition.m in Sources */,
 				994EE460216DDC3700EB86DD /* MissionTypeTopBar.swift in Sources */,
 				9921CE2E2160AB56005DC836 /* HomeViewController.swift in Sources */,
 				994F6340216C78F20063044B /* UIViewController+CZAddition.m in Sources */,
 				994F6355216C9C480063044B /* JHNavigationBar.swift in Sources */,
 				994F6342216C78F20063044B /* NSString+CZPath.m in Sources */,
+				99017C2121708A6B00155724 /* MissionBaseInfoView.swift in Sources */,
+				99017C232170A8E900155724 /* CarryMissionInfoView.swift in Sources */,
 				994F6347216C78F20063044B /* UIScreen+CZAddition.m in Sources */,
+				99017C1421706C5700155724 /* RegisterViewController.swift in Sources */,
 				994EE463216DF6A300EB86DD /* ListChooseCell.swift in Sources */,
+				99017C1D2170889500155724 /* CarryMissionDetailViewController.swift in Sources */,
 				9921CE302160AB70005DC836 /* UnTakeMissionViewController.swift in Sources */,
 				994F6321216C57640063044B /* Constants.swift in Sources */,
 				994F6345216C78F20063044B /* NSAttributedString+CZAdditon.m in Sources */,

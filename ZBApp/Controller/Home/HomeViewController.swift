@@ -59,4 +59,10 @@ extension HomeViewController:UITableViewDelegate,UITableViewDataSource{
         return kResizedPoint(pt: 160)
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView .deselectRow(at: indexPath, animated: false)
+        let carry = CarryMissionDetailViewController()
+        self.navigationController?.pushViewController(carry, animated: true)
+    }
+    
 }

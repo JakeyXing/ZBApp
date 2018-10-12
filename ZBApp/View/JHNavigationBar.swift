@@ -42,7 +42,7 @@ class JHNavigationBar: UIView {
         let lab = UILabel()
         lab.textColor = RGBCOLOR(r: 46, 46, 46)
         lab.textAlignment = NSTextAlignment.center
-        lab.font = kFont(size: 16)
+        lab.font = kFont(size: 17)
         return lab
         
     }()
