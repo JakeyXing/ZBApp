@@ -35,6 +35,7 @@
 		9923CBB5216B56F900EDCA7A /* MissionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9923CBB4216B56F900EDCA7A /* MissionCell.swift */; };
 		9932153521703F2100CAB18B /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9932153321703F2100CAB18B /* LoginViewController.swift */; };
 		9932153621703F2100CAB18B /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9932153421703F2100CAB18B /* LoginViewController.xib */; };
+		9944ABBE21735C6B00B4CB08 /* CleanPicUploadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9944ABBD21735C6B00B4CB08 /* CleanPicUploadView.swift */; };
 		994EE460216DDC3700EB86DD /* MissionTypeTopBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 994EE45F216DDC3700EB86DD /* MissionTypeTopBar.swift */; };
 		994EE463216DF6A300EB86DD /* ListChooseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 994EE462216DF6A300EB86DD /* ListChooseCell.swift */; };
 		994EE465216DF7F500EB86DD /* JHListChooseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 994EE464216DF7F500EB86DD /* JHListChooseView.swift */; };
@@ -92,6 +93,7 @@
 		9923CBB4216B56F900EDCA7A /* MissionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MissionCell.swift; sourceTree = "<group>"; };
 		9932153321703F2100CAB18B /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		9932153421703F2100CAB18B /* LoginViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
+		9944ABBD21735C6B00B4CB08 /* CleanPicUploadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CleanPicUploadView.swift; sourceTree = "<group>"; };
 		994EE45F216DDC3700EB86DD /* MissionTypeTopBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MissionTypeTopBar.swift; sourceTree = "<group>"; };
 		994EE462216DF6A300EB86DD /* ListChooseCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListChooseCell.swift; sourceTree = "<group>"; };
 		994EE464216DF7F500EB86DD /* JHListChooseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JHListChooseView.swift; sourceTree = "<group>"; };
@@ -245,6 +247,7 @@
 				990F7B082172068D0075A04C /* ListRoomInfoView.swift */,
 				990F7B0A217226030075A04C /* RoomRuteCell.swift */,
 				990F7B0C21723B380075A04C /* RepairInfoTextView.swift */,
+				9944ABBD21735C6B00B4CB08 /* CleanPicUploadView.swift */,
 				990F7AFC2171B3700075A04C /* FlieItem.swift */,
 				994EE461216DEDDE00EB86DD /* JHListChooseView */,
 			);
@@ -519,6 +522,7 @@
 				9921CE2C2160AB37005DC836 /* PersonalViewController.swift in Sources */,
 				994EE465216DF7F500EB86DD /* JHListChooseView.swift in Sources */,
 				994F633F216C78F20063044B /* UIButton+CZAddition.m in Sources */,
+				9944ABBE21735C6B00B4CB08 /* CleanPicUploadView.swift in Sources */,
 				9923CBB0216B014100EDCA7A /* MainTabBarController.swift in Sources */,
 				994F633E216C78F20063044B /* NSArray+Log.m in Sources */,
 				990F7B052171DA570075A04C /* RoomInfoView.swift in Sources */,
@@ -697,7 +701,10 @@
 				DEVELOPMENT_TEAM = Y6RH2VSRP8;
 				INFOPLIST_FILE = ZBApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = AskParents.com.cn;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = PPfile1;
@@ -719,7 +726,10 @@
 				DEVELOPMENT_TEAM = Y6RH2VSRP8;
 				INFOPLIST_FILE = ZBApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = AskParents.com.cn;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = PPfile1;
