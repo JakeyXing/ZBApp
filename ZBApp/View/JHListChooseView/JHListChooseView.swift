@@ -94,6 +94,7 @@ extension JHListChooseView:UITableViewDelegate,UITableViewDataSource,UIGestureRe
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        
         return kResizedPoint(pt: 45)
     }
     

@@ -9,5 +9,6 @@
 
 /// 返回视图截图
 - (UIImage *)cz_snapshotImage;
+- (void)removeAllSubviews;
 
 @end

@@ -20,4 +20,22 @@
     return label;
 }
 
++ (CGFloat)cz_labelHeightWithText:(NSString *)text size:(CGSize)rectSize font:(UIFont *)font{
+    
+    NSMutableParagraphStyle *style = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
+    style.lineBreakMode = NSLineBreakByWordWrapping;
+    style.alignment = NSTextAlignmentLeft;
+    
+    NSAttributedString *string = [[NSAttributedString alloc]initWithString:text attributes:@{NSFontAttributeName:font, NSParagraphStyleAttributeName:style}];
+    //CGSizeMake(200.f, MAXFLOAT)
+    CGSize size =  [string boundingRectWithSize:rectSize options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading context:nil].size;
+    NSLog(@" size =  %@", NSStringFromCGSize(size));
+    
+    //在原来计算的基础上 取ceil值，再加1；
+    CGFloat height = ceil(size.height) + 1;
+    return height;
+    
+
+}
+
 @end

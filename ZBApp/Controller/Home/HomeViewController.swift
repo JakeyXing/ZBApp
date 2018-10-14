@@ -61,8 +61,22 @@ extension HomeViewController:UITableViewDelegate,UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView .deselectRow(at: indexPath, animated: false)
-        let carry = CarryMissionDetailViewController()
-        self.navigationController?.pushViewController(carry, animated: true)
+        if indexPath.row == 0 {
+            let carry = CarryMissionDetailViewController()
+            carry.hidesBottomBarWhenPushed = true
+            self.navigationController?.pushViewController(carry, animated: true)
+            
+        }else if indexPath.row == 1{
+            let clean = CleanMissionDetailViewController()
+            clean.hidesBottomBarWhenPushed = true
+            self.navigationController?.pushViewController(clean, animated: true)
+        }else if indexPath.row == 2{
+            let repair = RepairMissionDetailViewController()
+            repair.hidesBottomBarWhenPushed = true
+            self.navigationController?.pushViewController(repair, animated: true)
+            
+        }
+        
     }
     
 }

@@ -33,6 +33,10 @@ func kFont(size:CGFloat) -> UIFont{
     return UIFont.systemFont(ofSize: kResizedFont(ft: size))
 }
 
+func kMediumFont(size:CGFloat) -> UIFont{
+    return UIFont.systemFont(ofSize: kResizedFont(ft: size), weight: UIFont.Weight.medium)
+}
+
 func IS_IPHONE() -> Bool{
     return (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiom.phone)
 }
@@ -54,4 +58,5 @@ let kFontColorGray_177 = RGBCOLOR(r: 117, 117, 117)
 let kTintColorYellow = RGBCOLOR(r: 255, 170, 35)
 let kStateBarColorYellow = RGBCOLOR(r: 254, 153, 0)
 let kBgColorGray_221 = RGBCOLOR(r: 221, 221, 221)
+let kBgColorGray_238_235_220 = RGBCOLOR(r: 238, 235, 220)
 let kFontColorBlack = RGBCOLOR(r: 32, 32, 32)

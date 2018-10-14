@@ -21,7 +21,7 @@ class MissionDetailBaseViewController: UIViewController {
     lazy var scrollview: UIScrollView = {
         let view = UIScrollView(frame: CGRect.init(x: 0, y: navigationBarHeight, width: DEVICE_WIDTH, height: DEVICE_HEIGHT-navigationBarHeight))
         view.backgroundColor = UIColor.white
-        view.contentSize = CGSize.init(width: DEVICE_WIDTH, height: kResizedPoint(pt: 700))
+        view.contentSize = CGSize.init(width: DEVICE_WIDTH, height: kResizedPoint(pt: 900))
         return view
     }()
     
@@ -35,6 +35,7 @@ class MissionDetailBaseViewController: UIViewController {
         self.view.backgroundColor = UIColor .white
         self.navigationController?.navigationBar.isHidden = true
         self.view.addSubview(self.navigationBar)
+        self.navigationBar.delegate = self
         self.view.addSubview(self.scrollview)
         self.scrollview.addSubview(self.missionBaseInfoView)
     }
@@ -50,4 +51,13 @@ class MissionDetailBaseViewController: UIViewController {
     }
     */
 
+}
+
+extension MissionDetailBaseViewController:JHNavigationBarDelegate{
+    func leftAction() {
+        self.navigationController?.popViewController(animated: true)
+    }
+    func rightAction() {
+        
+    }
 }

@@ -15,5 +15,5 @@
 ///
 /// @return UILabel
 + (instancetype)cz_labelWithText:(NSString *)text fontSize:(CGFloat)fontSize color:(UIColor *)color;
-
++ (CGFloat)cz_labelHeightWithText:(NSString *)text size:(CGSize)rectSize font:(UIFont *)font;
 @end

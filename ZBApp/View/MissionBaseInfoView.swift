@@ -18,7 +18,7 @@ class MissionBaseInfoView: UIView {
     
     lazy var contentView: UIView = {
         let content = UIView()
-        content.backgroundColor = kBgColorGray_221
+        content.backgroundColor = kBgColorGray_238_235_220
         return content
     }()
     
@@ -39,7 +39,7 @@ class MissionBaseInfoView: UIView {
     
     lazy var starImage_1: UIImageView = {
         let img = UIImageView()
-        img.backgroundColor = kTintColorYellow
+        img.image = UIImage(named: "starr")
         return img
     }()
     
@@ -47,7 +47,7 @@ class MissionBaseInfoView: UIView {
     
     lazy var starImage_2: UIImageView = {
         let img = UIImageView()
-        img.backgroundColor = kTintColorYellow
+        img.image = UIImage(named: "starr")
         return img
     }()
     
