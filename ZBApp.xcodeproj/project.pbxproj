@@ -56,6 +56,9 @@
 		994F6348216C78F20063044B /* UIColor+CZAddition.m in Sources */ = {isa = PBXBuildFile; fileRef = 994F633C216C78F20063044B /* UIColor+CZAddition.m */; };
 		994F634B216C822C0063044B /* StarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 994F634A216C822C0063044B /* StarView.swift */; };
 		994F6355216C9C480063044B /* JHNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 994F6354216C9C480063044B /* JHNavigationBar.swift */; };
+		99F1FD232174E12B002699FE /* RepairPicUploadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99F1FD222174E12B002699FE /* RepairPicUploadView.swift */; };
+		99F1FD252174E156002699FE /* RepairImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99F1FD242174E156002699FE /* RepairImageCell.swift */; };
+		99F1FD272174E17E002699FE /* RepairHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99F1FD262174E17E002699FE /* RepairHeaderView.swift */; };
 		99F43AD721606EB400A84EBD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99F43AD621606EB400A84EBD /* AppDelegate.swift */; };
 		99F43AD921606EB400A84EBD /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99F43AD821606EB400A84EBD /* ViewController.swift */; };
 		99F43ADC21606EB400A84EBD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 99F43ADA21606EB400A84EBD /* Main.storyboard */; };
@@ -130,6 +133,9 @@
 		994F6349216C7ADA0063044B /* ZBApp_Bridge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZBApp_Bridge.h; sourceTree = "<group>"; };
 		994F634A216C822C0063044B /* StarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarView.swift; sourceTree = "<group>"; };
 		994F6354216C9C480063044B /* JHNavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JHNavigationBar.swift; sourceTree = "<group>"; };
+		99F1FD222174E12B002699FE /* RepairPicUploadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepairPicUploadView.swift; sourceTree = "<group>"; };
+		99F1FD242174E156002699FE /* RepairImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepairImageCell.swift; sourceTree = "<group>"; };
+		99F1FD262174E17E002699FE /* RepairHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepairHeaderView.swift; sourceTree = "<group>"; };
 		99F43AD321606EB400A84EBD /* ZBApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZBApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		99F43AD621606EB400A84EBD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		99F43AD821606EB400A84EBD /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -251,10 +257,13 @@
 				990F7B082172068D0075A04C /* ListRoomInfoView.swift */,
 				990F7B0A217226030075A04C /* RoomRuteCell.swift */,
 				990F7B0C21723B380075A04C /* RepairInfoTextView.swift */,
+				990F7AFC2171B3700075A04C /* FlieItem.swift */,
 				9944ABBD21735C6B00B4CB08 /* CleanPicUploadView.swift */,
 				99425B542174648B00A18E45 /* CleanImageCell.swift */,
-				990F7AFC2171B3700075A04C /* FlieItem.swift */,
 				99425B562174763300A18E45 /* ClaenCollectionHeaderView.swift */,
+				99F1FD222174E12B002699FE /* RepairPicUploadView.swift */,
+				99F1FD262174E17E002699FE /* RepairHeaderView.swift */,
+				99F1FD242174E156002699FE /* RepairImageCell.swift */,
 				994EE461216DEDDE00EB86DD /* JHListChooseView */,
 			);
 			path = View;
@@ -529,7 +538,9 @@
 				994EE465216DF7F500EB86DD /* JHListChooseView.swift in Sources */,
 				994F633F216C78F20063044B /* UIButton+CZAddition.m in Sources */,
 				9944ABBE21735C6B00B4CB08 /* CleanPicUploadView.swift in Sources */,
+				99F1FD232174E12B002699FE /* RepairPicUploadView.swift in Sources */,
 				9923CBB0216B014100EDCA7A /* MainTabBarController.swift in Sources */,
+				99F1FD252174E156002699FE /* RepairImageCell.swift in Sources */,
 				994F633E216C78F20063044B /* NSArray+Log.m in Sources */,
 				990F7B052171DA570075A04C /* RoomInfoView.swift in Sources */,
 				99F43AD721606EB400A84EBD /* AppDelegate.swift in Sources */,
@@ -556,6 +567,7 @@
 				990F7B032171D8D80075A04C /* CleanMissionDetailViewController.swift in Sources */,
 				990F7B07217205490075A04C /* RepairMissionDetailViewController.swift in Sources */,
 				994F6321216C57640063044B /* Constants.swift in Sources */,
+				99F1FD272174E17E002699FE /* RepairHeaderView.swift in Sources */,
 				994F6345216C78F20063044B /* NSAttributedString+CZAdditon.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
