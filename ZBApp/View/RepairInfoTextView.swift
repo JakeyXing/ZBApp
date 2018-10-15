@@ -39,16 +39,8 @@ class RepairInfoTextView: UIView {
     }
     
     func viewHeight() -> CGFloat {
-//        let size = CGSize.init(width: DEVICE_WIDTH-kResizedPoint(pt: 20)*2, height: CGFloat(HUGE))
-//
-//        let remarkH = UILabel.cz_labelHeight(withText: self.remarkLabel.text, size: size, font: self.remarkLabel.font)
-//        let noteH = UILabel.cz_labelHeight(withText: self.checkinNoteLabel.text, size: size, font: self.checkinNoteLabel.font)
-//
-//        //20+17+25+17+10+17+10+remark+10+17+10+noteH+6
-//        let contentH = kResizedPoint(pt: 159) + noteH + remarkH
-//
-//        return (contentH+kResizedPoint(pt: 36))
-        return 0
+
+        return kResizedPoint(pt: 10+17+10+150+5)
     }
     
     
@@ -59,7 +51,7 @@ extension RepairInfoTextView{
     //MARK: - private methods
     
     func initView(){
-        self.backgroundColor = UIColor.white
+        self.backgroundColor = kBgColorGray_238_235_220
         
         self.addSubview(self.resultNameLabel)
         self.addSubview(self.resultLabel)
@@ -77,7 +69,7 @@ extension RepairInfoTextView{
             make.height.equalTo()(kResizedPoint(pt: 17))
         }
         
-        self.resultNameLabel.mas_makeConstraints { (make:MASConstraintMaker!) in
+        self.resultLabel.mas_makeConstraints { (make:MASConstraintMaker!) in
             make.centerY.equalTo()(self.resultNameLabel.mas_centerY)
             make.left.equalTo()(self.resultNameLabel.mas_right)?.offset()(kResizedPoint(pt: 20))
             make.height.equalTo()(kResizedPoint(pt: 17))
@@ -87,7 +79,7 @@ extension RepairInfoTextView{
             make.top.equalTo()(self.resultNameLabel.mas_bottom)?.offset()(kResizedPoint(pt: 10))
             make.left.equalTo()(self)?.offset()(kResizedPoint(pt: 20))
             make.right.equalTo()(self.mas_right)?.offset()(kResizedPoint(pt: -20))
-            make.height.equalTo()(kResizedPoint(pt: 200))
+            make.height.equalTo()(kResizedPoint(pt: 150))
         }
         
     }

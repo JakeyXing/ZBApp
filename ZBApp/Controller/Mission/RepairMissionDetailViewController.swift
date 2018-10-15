@@ -21,6 +21,12 @@ class RepairMissionDetailViewController: MissionDetailBaseViewController {
         return view
     }()
     
+    lazy var infoTextView: RepairInfoTextView = {
+        let view = RepairInfoTextView(frame: CGRect.init(x: 0, y: self.feedbackView.bottom+kResizedPoint(pt: 10), width: DEVICE_WIDTH, height: kResizedPoint(pt: 300)))
+        return view
+    }()
+    
+    
     
     //    lazy var takeButton: UIButton = {
     //        let btn = UIButton(type: UIButton.ButtonType.custom)
@@ -37,16 +43,31 @@ class RepairMissionDetailViewController: MissionDetailBaseViewController {
         super.viewDidLoad()
         self.scrollview.addSubview(self.roomInfoView)
         self.scrollview.addSubview(self.feedbackView)
+        self.scrollview.addSubview(self.infoTextView)
         
         self.feedbackView.congfigData()
         self.roomInfoView.congfigData()
         
         self.roomInfoView.height = self.roomInfoView.viewHeight()
         self.feedbackView.top = self.roomInfoView.bottom + kResizedPoint(pt: 10)
+        
         self.feedbackView.height = self.feedbackView.viewHeight()
+        self.infoTextView.top = self.feedbackView.bottom + kResizedPoint(pt: 10)
+        
+        self.infoTextView.height = self.infoTextView.viewHeight()
+        
+        self.scrollview.contentSize = CGSize.init(width: DEVICE_WIDTH, height: self.missionBaseInfoView.height + kResizedPoint(pt: 10)+self.roomInfoView.height + kResizedPoint(pt: 10) + self.feedbackView.height + kResizedPoint(pt: 10) + self.infoTextView.height)
         
         
-        self.scrollview.contentSize = CGSize.init(width: DEVICE_WIDTH, height: self.missionBaseInfoView.height + kResizedPoint(pt: 10)+self.roomInfoView.height + kResizedPoint(pt: 10) + self.feedbackView.height )
+        // MARK: - 键盘即将弹出
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(keyBoardWillShow(notification:)), name:UIResponder.keyboardWillShowNotification,
+                                               object: nil)
+        // MARK: - 键盘即将回收
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(keyBoardWillHide(notification:)), name: UIResponder.keyboardWillHideNotification,
+                                               object: nil)
+        
         
     }
     
@@ -54,6 +75,44 @@ class RepairMissionDetailViewController: MissionDetailBaseViewController {
     //MARK: - actions
     @objc private func takeAction(){
         
+    }
+    
+    @objc private func keyBoardWillShow(notification: Notification) {
+        let userInfo = notification.userInfo!
+        let keyBoardBounds = (userInfo[UIResponder.keyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
+        let duration = (userInfo[UIResponder.keyboardAnimationDurationUserInfoKey] as! NSNumber).doubleValue
+        
+        let deltaY = keyBoardBounds.size.height
+        let animations:(() -> Void) = {
+            //键盘的偏移量
+           self.scrollview.contentOffset = CGPoint.init(x: 0, y: self.infoTextView.bottom-self.scrollview.height+deltaY)
+        }
+        
+        if duration > 0 {
+            let options = UIView.AnimationOptions(rawValue: UInt((userInfo[UIResponder.keyboardAnimationCurveUserInfoKey] as! NSNumber).intValue << 16))
+
+            UIView.animate(withDuration: duration, delay: 0, options:options, animations: animations, completion: nil)
+
+        }else{
+            animations()
+        }
+    }
+    
+    @objc private func keyBoardWillHide(notification: Notification) {
+        let userInfo  = notification.userInfo!
+        let duration = (userInfo[UIResponder.keyboardAnimationDurationUserInfoKey] as! NSNumber).doubleValue
+        
+        let animations:(() -> Void) = {
+             self.scrollview.contentOffset = CGPoint.init(x: 0, y: self.infoTextView.bottom-self.scrollview.height)
+           
+        }
+        if duration > 0 {
+            let options = UIView.AnimationOptions(rawValue: UInt((userInfo[UIResponder.keyboardAnimationCurveUserInfoKey] as! NSNumber).intValue << 16))
+
+            UIView.animate(withDuration: duration, delay: 0, options:options, animations: animations, completion: nil)
+        }else{
+            animations()
+        }
     }
     
 }

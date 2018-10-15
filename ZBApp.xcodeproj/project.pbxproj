@@ -35,6 +35,8 @@
 		9923CBB5216B56F900EDCA7A /* MissionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9923CBB4216B56F900EDCA7A /* MissionCell.swift */; };
 		9932153521703F2100CAB18B /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9932153321703F2100CAB18B /* LoginViewController.swift */; };
 		9932153621703F2100CAB18B /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9932153421703F2100CAB18B /* LoginViewController.xib */; };
+		99425B552174648B00A18E45 /* CleanImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99425B542174648B00A18E45 /* CleanImageCell.swift */; };
+		99425B572174763300A18E45 /* ClaenCollectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99425B562174763300A18E45 /* ClaenCollectionHeaderView.swift */; };
 		9944ABBE21735C6B00B4CB08 /* CleanPicUploadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9944ABBD21735C6B00B4CB08 /* CleanPicUploadView.swift */; };
 		994EE460216DDC3700EB86DD /* MissionTypeTopBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 994EE45F216DDC3700EB86DD /* MissionTypeTopBar.swift */; };
 		994EE463216DF6A300EB86DD /* ListChooseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 994EE462216DF6A300EB86DD /* ListChooseCell.swift */; };
@@ -93,6 +95,8 @@
 		9923CBB4216B56F900EDCA7A /* MissionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MissionCell.swift; sourceTree = "<group>"; };
 		9932153321703F2100CAB18B /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		9932153421703F2100CAB18B /* LoginViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
+		99425B542174648B00A18E45 /* CleanImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CleanImageCell.swift; sourceTree = "<group>"; };
+		99425B562174763300A18E45 /* ClaenCollectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClaenCollectionHeaderView.swift; sourceTree = "<group>"; };
 		9944ABBD21735C6B00B4CB08 /* CleanPicUploadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CleanPicUploadView.swift; sourceTree = "<group>"; };
 		994EE45F216DDC3700EB86DD /* MissionTypeTopBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MissionTypeTopBar.swift; sourceTree = "<group>"; };
 		994EE462216DF6A300EB86DD /* ListChooseCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListChooseCell.swift; sourceTree = "<group>"; };
@@ -248,7 +252,9 @@
 				990F7B0A217226030075A04C /* RoomRuteCell.swift */,
 				990F7B0C21723B380075A04C /* RepairInfoTextView.swift */,
 				9944ABBD21735C6B00B4CB08 /* CleanPicUploadView.swift */,
+				99425B542174648B00A18E45 /* CleanImageCell.swift */,
 				990F7AFC2171B3700075A04C /* FlieItem.swift */,
+				99425B562174763300A18E45 /* ClaenCollectionHeaderView.swift */,
 				994EE461216DEDDE00EB86DD /* JHListChooseView */,
 			);
 			path = View;
@@ -529,6 +535,7 @@
 				99F43AD721606EB400A84EBD /* AppDelegate.swift in Sources */,
 				994F634B216C822C0063044B /* StarView.swift in Sources */,
 				99017C1F217088AF00155724 /* MissionDetailBaseViewController.swift in Sources */,
+				99425B552174648B00A18E45 /* CleanImageCell.swift in Sources */,
 				994F6343216C78F20063044B /* UIView+CZAddition.m in Sources */,
 				994EE460216DDC3700EB86DD /* MissionTypeTopBar.swift in Sources */,
 				9921CE2E2160AB56005DC836 /* HomeViewController.swift in Sources */,
@@ -536,6 +543,7 @@
 				994F6355216C9C480063044B /* JHNavigationBar.swift in Sources */,
 				994F6342216C78F20063044B /* NSString+CZPath.m in Sources */,
 				99017C2121708A6B00155724 /* MissionBaseInfoView.swift in Sources */,
+				99425B572174763300A18E45 /* ClaenCollectionHeaderView.swift in Sources */,
 				99017C232170A8E900155724 /* CarryMissionInfoView.swift in Sources */,
 				990F7AFD2171B3700075A04C /* FlieItem.swift in Sources */,
 				990F7AFF2171C5E80075A04C /* FeedbackView.swift in Sources */,
