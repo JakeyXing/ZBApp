@@ -13,7 +13,7 @@ class RepairImageCell: UICollectionViewCell {
     //MARK: - 控件
     lazy var imageView: UIImageView = {
         let img = UIImageView()
-        img.image = UIImage(named: "dePic")
+        img.image = UIImage(named: "addImage")
         return img
     }()
     

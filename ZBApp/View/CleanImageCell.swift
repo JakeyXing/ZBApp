@@ -10,6 +10,15 @@ import UIKit
 import Masonry
 
 class CleanImageCell: UICollectionViewCell {
+    //MARK: - 图片相关
+    var oriImage: UIImage?
+    var savedImagePath: String?
+    var uploaddImageUrl: String?
+    
+    
+    var indexpath: NSIndexPath!
+    
+    
     //MARK: - 控件
     lazy var imageView: UIImageView = {
         let img = UIImageView()
@@ -48,9 +57,6 @@ class CleanImageCell: UICollectionViewCell {
         self.subViewsLayout()
     }
     
-
-    
-    
     //MARK: - private method
     func setUpUI(){
         self.addSubview(imageView)
@@ -77,8 +83,14 @@ class CleanImageCell: UICollectionViewCell {
             make.left.right().equalTo()(self)
         }
         
-        
+    }
     
+    func uploadImage(img:UIImage) {
+        self.imageView.image = img
+        self.oriImage = img
+        let imgName = "clen_pic_" + CommonMethod.timestamp()
+        
+        self.savedImagePath = CommonMethod.getImagePath(img, imageName: imgName)
         
     }
     

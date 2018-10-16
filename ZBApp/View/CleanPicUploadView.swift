@@ -11,7 +11,7 @@ import Masonry
 
 
 protocol CleanPicUploadViewDelegate: class {
-    func cleanPicUploadView(_ cleanPicUploadView: CleanPicUploadView,didSelectedCell cell: CleanImageCell);
+    func cleanPicUploadView(_ cleanPicUploadView: CleanPicUploadView,didSelectedCell cell: CleanImageCell,atIndexPath indexPath: IndexPath);
 }
 
 class CleanPicUploadView: UIView {
@@ -83,9 +83,9 @@ class CleanPicUploadView: UIView {
             var h: CGFloat = 0
             
             if nex == 0 {
-                h = CGFloat(arrCount/3)*kResizedPoint(pt: itemH+cap)-kResizedPoint(pt: cap)
+                h = CGFloat(arrCount/3)*(itemH+cap) - cap
             } else{
-                h = CGFloat(arrCount/3)*kResizedPoint(pt: itemH+cap)+kResizedPoint(pt: height)
+                h = CGFloat(arrCount/3)*(itemH+cap) + itemH
             }
             
             viewH = viewH + (headerH + h)
@@ -181,13 +181,14 @@ extension CleanPicUploadView:UICollectionViewDelegateFlowLayout,UICollectionView
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+   
         return CGSize.init(width: DEVICE_WIDTH-kResizedPoint(pt: 20), height: kResizedPoint(pt: 17+30))
     }
     
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let cell: CleanImageCell = self.collectionView(collectionView, cellForItemAt: indexPath) as! CleanImageCell
-        self.delegate?.cleanPicUploadView(self, didSelectedCell: cell)
+        let cell: CleanImageCell = self.collectionView.cellForItem(at: indexPath) as! CleanImageCell
+        self.delegate?.cleanPicUploadView(self, didSelectedCell: cell,atIndexPath: indexPath)
 
         
     }

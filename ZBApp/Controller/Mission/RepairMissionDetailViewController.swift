@@ -8,8 +8,9 @@
 
 import UIKit
 
-class RepairMissionDetailViewController: MissionDetailBaseViewController {
-    
+class RepairMissionDetailViewController: MissionDetailBaseViewController,RepairPicUploadViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate {
+    var cameraPicker: UIImagePickerController!
+    var currentIndexpath: NSIndexPath?
     
     lazy var roomInfoView: ListRoomInfoView = {
         let view = ListRoomInfoView(frame: CGRect.init(x: 0, y: self.missionBaseInfoView.bottom+kResizedPoint(pt: 10), width: DEVICE_WIDTH, height: kResizedPoint(pt: 300)))
@@ -54,6 +55,7 @@ class RepairMissionDetailViewController: MissionDetailBaseViewController {
         self.feedbackView.congfigData()
         self.roomInfoView.congfigData()
         self.uploadView.congfigData()
+        self.uploadView.delegate = self
         
         self.roomInfoView.height = self.roomInfoView.viewHeight()
         self.feedbackView.top = self.roomInfoView.bottom + kResizedPoint(pt: 10)
@@ -86,6 +88,26 @@ class RepairMissionDetailViewController: MissionDetailBaseViewController {
     //MARK: - actions
     @objc private func takeAction(){
         
+    }
+    
+    //MARK: - RepairPicUploadViewDelegate
+    func repairPicUploadView(_ cleanPicUploadView: RepairPicUploadView, didSelectedAtIndexPath indexPath: IndexPath) {
+        currentIndexpath = indexPath as NSIndexPath
+        
+        self.cameraPicker = UIImagePickerController()
+        self.cameraPicker.delegate = self
+        self.cameraPicker.sourceType = .camera
+        
+        self.present(self.cameraPicker, animated: true, completion: nil)
+    }
+    
+    //MARK: - 相机代理
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        
+        let image = info[UIImagePickerController.InfoKey.originalImage] as! UIImage
+        self.uploadView.addAndUploadImage(img: image, atIndexPath: currentIndexpath!)
+        
+        self.dismiss(animated: true, completion: nil)
     }
     
     @objc private func keyBoardWillShow(notification: Notification) {

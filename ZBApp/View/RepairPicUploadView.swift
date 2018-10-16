@@ -8,17 +8,18 @@
 
 import UIKit
 import Masonry
+import JXPhotoBrowser
 
 
 protocol RepairPicUploadViewDelegate: class {
-    func cleanPicUploadView(_ cleanPicUploadView: RepairPicUploadView,didSelectedCell cell: RepairImageCell);
+    func repairPicUploadView(_ cleanPicUploadView: RepairPicUploadView,didSelectedAtIndexPath indexPath: IndexPath);
 }
 
 class RepairPicUploadView: UIView {
     
     weak var delegate: RepairPicUploadViewDelegate?
     
-    var roomWithImagesArray:[[String]] = []
+    var roomWithImagesArray:[[UIImage]] = []
     
     lazy var contentView: UIView = {
         let content = UIView()
@@ -58,7 +59,7 @@ class RepairPicUploadView: UIView {
     
     
     func congfigData() {
-        roomWithImagesArray = [["","","","","",""],["","","","","",""]]
+        roomWithImagesArray = [[],[]]
         
     }
     
@@ -73,15 +74,15 @@ class RepairPicUploadView: UIView {
         for i in 0..<count {
             let arr = self.roomWithImagesArray[i]
             
-            let arrCount = arr.count
+            let arrCount = arr.count + 1
             
             let nex = arrCount%3
             var h: CGFloat = 0
             
             if nex == 0 {
-                h = CGFloat(arrCount/3)*kResizedPoint(pt: itemH+cap)-kResizedPoint(pt: cap)
+                h = CGFloat(arrCount/3)*(itemH+cap)-cap
             } else{
-                h = CGFloat(arrCount/3)*kResizedPoint(pt: itemH+cap)+kResizedPoint(pt: height)
+                h = CGFloat(arrCount/3)*(itemH+cap)+itemH
             }
             
             viewH = viewH + (headerH + h)
@@ -91,6 +92,15 @@ class RepairPicUploadView: UIView {
         
         
         return kResizedPoint(pt: 20) + viewH + kResizedPoint(pt: 10)
+    }
+    
+    func addAndUploadImage(img: UIImage, atIndexPath indexpath: NSIndexPath) {
+        var arr = self.roomWithImagesArray[indexpath.section]
+        arr.append(img)
+        self.roomWithImagesArray[indexpath.section] = arr
+        
+        self.collectionView.reloadData()
+        
     }
     
     
@@ -138,7 +148,7 @@ extension RepairPicUploadView:UICollectionViewDelegateFlowLayout,UICollectionVie
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         let arr = self.roomWithImagesArray[section]
         
-        return arr.count
+        return arr.count + 1
     }
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
@@ -154,10 +164,22 @@ extension RepairPicUploadView:UICollectionViewDelegateFlowLayout,UICollectionVie
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let identifierStr = "RepairImageCell\(indexPath.section)\(indexPath.row)"
+        let identifierStrAdd = "repairAddCell\(indexPath.section)\(indexPath.row)"
         
         collectionView.register(RepairImageCell.self, forCellWithReuseIdentifier: identifierStr)
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifierStr, for: indexPath)
-        return cell
+        collectionView.register(repairAddCell.self, forCellWithReuseIdentifier: identifierStrAdd)
+        
+        let arr = self.roomWithImagesArray[indexPath.section]
+        if indexPath.row < arr.count {
+            let cell:RepairImageCell = collectionView.dequeueReusableCell(withReuseIdentifier: identifierStr, for: indexPath) as! RepairImageCell
+            cell.imageView.image = arr[indexPath.row]
+            return cell
+        }else{
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifierStrAdd, for: indexPath)
+            return cell
+        }
+        
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
@@ -166,8 +188,15 @@ extension RepairPicUploadView:UICollectionViewDelegateFlowLayout,UICollectionVie
     
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let cell: CleanImageCell = self.collectionView(collectionView, cellForItemAt: indexPath) as! CleanImageCell
-//        self.delegate?.cleanPicUploadView(self, didSelectedCell: cell)
+        
+        let arr = self.roomWithImagesArray[indexPath.section]
+        if indexPath.row < arr.count {
+            PhotoBrowser.show(localImages: arr, originPageIndex: indexPath.row)
+        }else{
+            self.delegate?.repairPicUploadView(self, didSelectedAtIndexPath: indexPath)
+        }
+     
+        
         
         
     }

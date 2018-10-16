@@ -7,9 +7,13 @@
 //清扫详情
 
 import UIKit
+import JXPhotoBrowser
 
-class CleanMissionDetailViewController: MissionDetailBaseViewController,CleanPicUploadViewDelegate {
+class CleanMissionDetailViewController: MissionDetailBaseViewController,CleanPicUploadViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate {
 
+    var cameraPicker: UIImagePickerController!
+    var currentImageCell: CleanImageCell?
+    
     
     lazy var roomInfoView: RoomInfoView = {
         let view = RoomInfoView(frame: CGRect.init(x: 0, y: self.missionBaseInfoView.bottom+kResizedPoint(pt: 10), width: DEVICE_WIDTH, height: kResizedPoint(pt: 300)))
@@ -72,14 +76,27 @@ class CleanMissionDetailViewController: MissionDetailBaseViewController,CleanPic
         
     }
     
-    func cleanPicUploadView(_ cleanPicUploadView: CleanPicUploadView, didSelectedCell cell: CleanImageCell) {
+    //MARK: - CleanPicUploadViewDelegate
+    
+    func cleanPicUploadView(_ cleanPicUploadView: CleanPicUploadView,didSelectedCell cell: CleanImageCell,atIndexPath indexPath: IndexPath) {
+        currentImageCell = cell
+        
         let alertController = UIAlertController(title: nil, message: nil, preferredStyle: UIAlertController.Style.actionSheet)
         let lookImageAction = UIAlertAction(title: "查看大图", style:  .default) { (action) in
-            
+            if cell.oriImage == nil{
+                return
+            }
+
+            PhotoBrowser.show(localImages: [cell.imageView.image!], originPageIndex: 0)
         }
         
         let uploadAction = UIAlertAction(title: "上传图片", style:  .default) { (action) in
-            
+            self.cameraPicker = UIImagePickerController()
+            self.cameraPicker.delegate = self
+            self.cameraPicker.sourceType = .camera
+
+            self.present(self.cameraPicker, animated: true, completion: nil)
+
         }
         
         let cancelAction = UIAlertAction(title: "取消", style: .cancel, handler: nil)
@@ -90,6 +107,15 @@ class CleanMissionDetailViewController: MissionDetailBaseViewController,CleanPic
         
         self.present(alertController, animated: true, completion: nil)
         
+    }
+    
+    //MARK: - 相机代理
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        
+        let image = info[UIImagePickerController.InfoKey.originalImage] as! UIImage
+        currentImageCell?.uploadImage(img: image)
+        
+        self.dismiss(animated: true, completion: nil)
     }
 
 }
