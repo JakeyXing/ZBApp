@@ -140,7 +140,7 @@ extension RepairPicUploadView{
 }
 
 
-extension RepairPicUploadView:UICollectionViewDelegateFlowLayout,UICollectionViewDataSource{
+extension RepairPicUploadView:UICollectionViewDelegateFlowLayout,UICollectionViewDataSource,RepairImageCellDelegate{
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return self.roomWithImagesArray.count
     }
@@ -173,6 +173,8 @@ extension RepairPicUploadView:UICollectionViewDelegateFlowLayout,UICollectionVie
         if indexPath.row < arr.count {
             let cell:RepairImageCell = collectionView.dequeueReusableCell(withReuseIdentifier: identifierStr, for: indexPath) as! RepairImageCell
             cell.imageView.image = arr[indexPath.row]
+            cell.indexpath = indexPath as NSIndexPath
+            cell.delegate = self
             return cell
         }else{
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifierStrAdd, for: indexPath)
@@ -199,6 +201,15 @@ extension RepairPicUploadView:UICollectionViewDelegateFlowLayout,UICollectionVie
         
         
         
+    }
+    
+     //MARK: - RepairImageCellDelegate
+    func repairImageCell(_ cell: RepairImageCell, didClosedAtIndexPath indexPath: IndexPath) {
+        var arr = self.roomWithImagesArray[indexPath.section]
+        arr.remove(at: indexPath.row)
+        self.roomWithImagesArray[indexPath.section] = arr
+        
+        self.collectionView.reloadData()
     }
     
     

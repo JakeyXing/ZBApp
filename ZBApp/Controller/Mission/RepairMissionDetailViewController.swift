@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MobileCoreServices
 
 class RepairMissionDetailViewController: MissionDetailBaseViewController,RepairPicUploadViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate {
     var cameraPicker: UIImagePickerController!
@@ -94,6 +95,38 @@ class RepairMissionDetailViewController: MissionDetailBaseViewController,RepairP
     func repairPicUploadView(_ cleanPicUploadView: RepairPicUploadView, didSelectedAtIndexPath indexPath: IndexPath) {
         currentIndexpath = indexPath as NSIndexPath
         
+        
+        let alertController = UIAlertController(title: nil, message: nil, preferredStyle: UIAlertController.Style.actionSheet)
+        let uploadVideoAction = UIAlertAction(title: "上传视频", style:  .default) { (action) in
+            self.cameraPicker = UIImagePickerController()
+            self.cameraPicker.delegate = self
+            self.cameraPicker.sourceType = .camera
+            self.cameraPicker.mediaTypes = NSArray(objects: kUTTypeMovie) as! [String]
+            self.cameraPicker.videoMaximumDuration = 10.0
+
+  
+            
+            self.present(self.cameraPicker, animated: true, completion: nil)
+        
+        }
+        
+        let uploadAction = UIAlertAction(title: "上传图片", style:  .default) { (action) in
+            self.cameraPicker = UIImagePickerController()
+            self.cameraPicker.delegate = self
+            self.cameraPicker.sourceType = .camera
+            
+            self.present(self.cameraPicker, animated: true, completion: nil)
+            
+        }
+        
+        let cancelAction = UIAlertAction(title: "取消", style: .cancel, handler: nil)
+        
+        alertController.addAction(uploadVideoAction)
+        alertController.addAction(uploadAction)
+        alertController.addAction(cancelAction)
+        
+        self.present(alertController, animated: true, completion: nil)
+        
         self.cameraPicker = UIImagePickerController()
         self.cameraPicker.delegate = self
         self.cameraPicker.sourceType = .camera
@@ -106,6 +139,12 @@ class RepairMissionDetailViewController: MissionDetailBaseViewController,RepairP
         
         let image = info[UIImagePickerController.InfoKey.originalImage] as! UIImage
         self.uploadView.addAndUploadImage(img: image, atIndexPath: currentIndexpath!)
+        
+        self.uploadView.height = self.uploadView.viewHeight()
+        self.submitButton.top = self.uploadView.bottom + kResizedPoint(pt: 30)
+        
+        self.scrollview.contentSize = CGSize.init(width: DEVICE_WIDTH, height: self.submitButton.bottom + kResizedPoint(pt: 20))
+        
         
         self.dismiss(animated: true, completion: nil)
     }

@@ -9,7 +9,16 @@
 import UIKit
 import Masonry
 
+
+protocol RepairImageCellDelegate: class {
+    func repairImageCell(_ cell: RepairImageCell,didClosedAtIndexPath indexPath: IndexPath);
+
+}
 class RepairImageCell: UICollectionViewCell {
+    
+    var indexpath: NSIndexPath!
+    weak var delegate: RepairImageCellDelegate?
+    
     //MARK: - 控件
     lazy var imageView: UIImageView = {
         let img = UIImageView()
@@ -21,6 +30,13 @@ class RepairImageCell: UICollectionViewCell {
         let view = UIView()
         view.backgroundColor = UIColor.yellow
         return view
+    }()
+    
+    lazy var closeButton: UIButton = {
+        let back = UIButton(type: UIButton.ButtonType.custom)
+        back.setImage(UIImage(named: "close"), for: UIControl.State.normal)
+        back.addTarget(self, action: #selector(closeAction), for: UIControl.Event.touchUpInside)
+        return back
     }()
     
     //MARK: - lifeCyele
@@ -35,12 +51,17 @@ class RepairImageCell: UICollectionViewCell {
         self.subViewsLayout()
     }
     
-    
+    //MARK: - actions
+    @objc private func closeAction(){
+        self.delegate?.repairImageCell(self, didClosedAtIndexPath: self.indexpath as IndexPath)
+        
+    }
     
     
     //MARK: - private method
     func setUpUI(){
         self.addSubview(imageView)
+        self.addSubview(closeButton)
         self.addSubview(progressView)
     }
     
@@ -50,6 +71,12 @@ class RepairImageCell: UICollectionViewCell {
             make.top.equalTo()(self.mas_top)?.offset()(kResizedPoint(pt: 0))
             make.left.right().equalTo()(self)
             make.height.equalTo()(kResizedPoint(pt: 90))
+        }
+        
+        self.closeButton.mas_makeConstraints { (make:MASConstraintMaker!) in
+            make.right.equalTo()(self.imageView.mas_right)
+            make.top.equalTo()(self.imageView.mas_top)
+            make.width.height().equalTo()(kResizedPoint(pt: 32))
         }
         
         self.progressView.mas_makeConstraints { (make:MASConstraintMaker!) in

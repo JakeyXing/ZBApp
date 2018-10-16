@@ -2,6 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>需要访问你的麦克风录制视频</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>需要访问相册上传图片</string>
 	<key>NSCameraUsageDescription</key>
