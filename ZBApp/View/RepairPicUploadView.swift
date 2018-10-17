@@ -103,6 +103,25 @@ class RepairPicUploadView: UIView {
         
     }
     
+    func addAndUploadVideo(url: NSURL, atIndexPath indexpath: NSIndexPath) {
+//        let videoName = "repa_v_" + CommonMethod.timestamp() + ".mp4"
+//        let videoURLStr = NSHomeDirectory() + "/Documents/" + videoName
+//        let newVideoURL: NSURL = NSURL(fileURLWithPath: videoURLStr)
+//        CommonMethod.convertVideoQuailty(withInputURL: url as URL, outputURL: newVideoURL as URL) { (aa) in
+//
+//        }
+        
+        
+        var arr = self.roomWithImagesArray[indexpath.section]
+        let videoImg = CommonMethod.getVideoPreViewImage(url as URL)
+        
+        arr.append(videoImg!)
+        self.roomWithImagesArray[indexpath.section] = arr
+        
+        self.collectionView.reloadData()
+        
+    }
+    
     
 }
 

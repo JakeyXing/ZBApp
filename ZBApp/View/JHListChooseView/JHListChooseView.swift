@@ -58,7 +58,14 @@ class JHListChooseView: UIView {
         return table
     }()
     
-    
+    func configOrigin(origin:CGPoint) {
+        var bgframe = self.tabelBgView.frame
+        bgframe.origin.x = origin.x
+        bgframe.origin.y = origin.y
+        
+        self.tabelBgView.frame = bgframe
+        
+    }
     
     //MARK: - lifeCycle
     override init(frame: CGRect) {

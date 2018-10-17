@@ -73,7 +73,7 @@ class CleanImageCell: UICollectionViewCell {
         }
         
         self.progressView.mas_makeConstraints { (make:MASConstraintMaker!) in
-            make.top.equalTo()(self.imageView.mas_bottom)?.offset()(kResizedPoint(pt: 2))
+            make.top.equalTo()(self.imageView.mas_bottom)?.offset()(kResizedPoint(pt: 0))
             make.left.right().equalTo()(self)
             make.height.equalTo()(kResizedPoint(pt: 10))
         }

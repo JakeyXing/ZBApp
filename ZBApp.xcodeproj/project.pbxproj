@@ -38,6 +38,7 @@
 		99425B552174648B00A18E45 /* CleanImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99425B542174648B00A18E45 /* CleanImageCell.swift */; };
 		99425B572174763300A18E45 /* ClaenCollectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99425B562174763300A18E45 /* ClaenCollectionHeaderView.swift */; };
 		9944ABBE21735C6B00B4CB08 /* CleanPicUploadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9944ABBD21735C6B00B4CB08 /* CleanPicUploadView.swift */; };
+		9945BECF217705780001593F /* CertifApplyController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9945BECE217705780001593F /* CertifApplyController.swift */; };
 		994EE460216DDC3700EB86DD /* MissionTypeTopBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 994EE45F216DDC3700EB86DD /* MissionTypeTopBar.swift */; };
 		994EE463216DF6A300EB86DD /* ListChooseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 994EE462216DF6A300EB86DD /* ListChooseCell.swift */; };
 		994EE465216DF7F500EB86DD /* JHListChooseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 994EE464216DF7F500EB86DD /* JHListChooseView.swift */; };
@@ -56,13 +57,17 @@
 		994F6348216C78F20063044B /* UIColor+CZAddition.m in Sources */ = {isa = PBXBuildFile; fileRef = 994F633C216C78F20063044B /* UIColor+CZAddition.m */; };
 		994F634B216C822C0063044B /* StarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 994F634A216C822C0063044B /* StarView.swift */; };
 		994F6355216C9C480063044B /* JHNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 994F6354216C9C480063044B /* JHNavigationBar.swift */; };
+		99C2C31E2177084A00C0B94A /* DemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99C2C31C2177084A00C0B94A /* DemoViewController.swift */; };
+		99C2C31F2177084A00C0B94A /* DemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 99C2C31D2177084A00C0B94A /* DemoViewController.xib */; };
+		99C2C3212177109A00C0B94A /* JHDropdownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99C2C3202177109A00C0B94A /* JHDropdownView.swift */; };
+		99C2C32321772FAD00C0B94A /* QueFeedbackController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99C2C32221772FAD00C0B94A /* QueFeedbackController.swift */; };
+		99C2C3252177390400C0B94A /* BankAccountController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99C2C3242177390400C0B94A /* BankAccountController.swift */; };
 		99D69A222175CCC400A5DC09 /* CommonMethod.m in Sources */ = {isa = PBXBuildFile; fileRef = 99D69A212175CCC400A5DC09 /* CommonMethod.m */; };
 		99D69A242175E69400A5DC09 /* repairAddCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99D69A232175E69400A5DC09 /* repairAddCell.swift */; };
 		99F1FD232174E12B002699FE /* RepairPicUploadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99F1FD222174E12B002699FE /* RepairPicUploadView.swift */; };
 		99F1FD252174E156002699FE /* RepairImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99F1FD242174E156002699FE /* RepairImageCell.swift */; };
 		99F1FD272174E17E002699FE /* RepairHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99F1FD262174E17E002699FE /* RepairHeaderView.swift */; };
 		99F43AD721606EB400A84EBD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99F43AD621606EB400A84EBD /* AppDelegate.swift */; };
-		99F43AD921606EB400A84EBD /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99F43AD821606EB400A84EBD /* ViewController.swift */; };
 		99F43ADC21606EB400A84EBD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 99F43ADA21606EB400A84EBD /* Main.storyboard */; };
 		99F43ADE21606EB600A84EBD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 99F43ADD21606EB600A84EBD /* Assets.xcassets */; };
 		99F43AE121606EB600A84EBD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 99F43ADF21606EB600A84EBD /* LaunchScreen.storyboard */; };
@@ -103,6 +108,7 @@
 		99425B542174648B00A18E45 /* CleanImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CleanImageCell.swift; sourceTree = "<group>"; };
 		99425B562174763300A18E45 /* ClaenCollectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClaenCollectionHeaderView.swift; sourceTree = "<group>"; };
 		9944ABBD21735C6B00B4CB08 /* CleanPicUploadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CleanPicUploadView.swift; sourceTree = "<group>"; };
+		9945BECE217705780001593F /* CertifApplyController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertifApplyController.swift; sourceTree = "<group>"; };
 		994EE45F216DDC3700EB86DD /* MissionTypeTopBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MissionTypeTopBar.swift; sourceTree = "<group>"; };
 		994EE462216DF6A300EB86DD /* ListChooseCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListChooseCell.swift; sourceTree = "<group>"; };
 		994EE464216DF7F500EB86DD /* JHListChooseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JHListChooseView.swift; sourceTree = "<group>"; };
@@ -135,6 +141,11 @@
 		994F6349216C7ADA0063044B /* ZBApp_Bridge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZBApp_Bridge.h; sourceTree = "<group>"; };
 		994F634A216C822C0063044B /* StarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarView.swift; sourceTree = "<group>"; };
 		994F6354216C9C480063044B /* JHNavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JHNavigationBar.swift; sourceTree = "<group>"; };
+		99C2C31C2177084A00C0B94A /* DemoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoViewController.swift; sourceTree = "<group>"; };
+		99C2C31D2177084A00C0B94A /* DemoViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DemoViewController.xib; sourceTree = "<group>"; };
+		99C2C3202177109A00C0B94A /* JHDropdownView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JHDropdownView.swift; sourceTree = "<group>"; };
+		99C2C32221772FAD00C0B94A /* QueFeedbackController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueFeedbackController.swift; sourceTree = "<group>"; };
+		99C2C3242177390400C0B94A /* BankAccountController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankAccountController.swift; sourceTree = "<group>"; };
 		99D69A202175CCC400A5DC09 /* CommonMethod.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommonMethod.h; sourceTree = "<group>"; };
 		99D69A212175CCC400A5DC09 /* CommonMethod.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CommonMethod.m; sourceTree = "<group>"; };
 		99D69A232175E69400A5DC09 /* repairAddCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = repairAddCell.swift; sourceTree = "<group>"; };
@@ -143,7 +154,6 @@
 		99F1FD262174E17E002699FE /* RepairHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepairHeaderView.swift; sourceTree = "<group>"; };
 		99F43AD321606EB400A84EBD /* ZBApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZBApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		99F43AD621606EB400A84EBD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		99F43AD821606EB400A84EBD /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		99F43ADB21606EB400A84EBD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		99F43ADD21606EB600A84EBD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		99F43AE021606EB600A84EBD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -176,6 +186,7 @@
 			isa = PBXGroup;
 			children = (
 				9921CE2B2160AB37005DC836 /* PersonalViewController.swift */,
+				99C2C3242177390400C0B94A /* BankAccountController.swift */,
 			);
 			path = Mine;
 			sourceTree = "<group>";
@@ -188,6 +199,7 @@
 				99017C1C2170889500155724 /* CarryMissionDetailViewController.swift */,
 				990F7B022171D8D80075A04C /* CleanMissionDetailViewController.swift */,
 				990F7B06217205490075A04C /* RepairMissionDetailViewController.swift */,
+				99C2C32221772FAD00C0B94A /* QueFeedbackController.swift */,
 			);
 			path = Mission;
 			sourceTree = "<group>";
@@ -205,9 +217,10 @@
 			children = (
 				99F43ADF21606EB600A84EBD /* LaunchScreen.storyboard */,
 				99F43ADA21606EB400A84EBD /* Main.storyboard */,
-				99F43AD821606EB400A84EBD /* ViewController.swift */,
 				9923CBAF216B014100EDCA7A /* MainTabBarController.swift */,
 				99F43AD621606EB400A84EBD /* AppDelegate.swift */,
+				99C2C31C2177084A00C0B94A /* DemoViewController.swift */,
+				99C2C31D2177084A00C0B94A /* DemoViewController.xib */,
 			);
 			path = Other;
 			sourceTree = "<group>";
@@ -221,6 +234,7 @@
 				99017C1321706C5700155724 /* RegisterViewController.xib */,
 				99017C16217077CE00155724 /* ResetPasswordViewController.swift */,
 				99017C17217077CE00155724 /* ResetPasswordViewController.xib */,
+				9945BECE217705780001593F /* CertifApplyController.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -230,6 +244,7 @@
 			children = (
 				994EE462216DF6A300EB86DD /* ListChooseCell.swift */,
 				994EE464216DF7F500EB86DD /* JHListChooseView.swift */,
+				99C2C3202177109A00C0B94A /* JHDropdownView.swift */,
 			);
 			path = JHListChooseView;
 			sourceTree = "<group>";
@@ -441,6 +456,7 @@
 				9932153621703F2100CAB18B /* LoginViewController.xib in Resources */,
 				99F43AE121606EB600A84EBD /* LaunchScreen.storyboard in Resources */,
 				99017C19217077CE00155724 /* ResetPasswordViewController.xib in Resources */,
+				99C2C31F2177084A00C0B94A /* DemoViewController.xib in Resources */,
 				99F43ADE21606EB600A84EBD /* Assets.xcassets in Resources */,
 				9921CE262160A2D3005DC836 /* Podfile in Resources */,
 				99F43ADC21606EB400A84EBD /* Main.storyboard in Resources */,
@@ -538,9 +554,9 @@
 				994F6344216C78F20063044B /* NSString+CZHash.m in Sources */,
 				994F633D216C78F20063044B /* UILabel+CZAddition.m in Sources */,
 				990F7B0D21723B380075A04C /* RepairInfoTextView.swift in Sources */,
+				99C2C31E2177084A00C0B94A /* DemoViewController.swift in Sources */,
 				994F6341216C78F20063044B /* NSString+CZBase64.m in Sources */,
 				990F7B0B217226030075A04C /* RoomRuteCell.swift in Sources */,
-				99F43AD921606EB400A84EBD /* ViewController.swift in Sources */,
 				990F7AFB217197C40075A04C /* CarryMissonImageAndFlieView.swift in Sources */,
 				9923CBB5216B56F900EDCA7A /* MissionCell.swift in Sources */,
 				99D69A222175CCC400A5DC09 /* CommonMethod.m in Sources */,
@@ -570,13 +586,17 @@
 				99425B572174763300A18E45 /* ClaenCollectionHeaderView.swift in Sources */,
 				99017C232170A8E900155724 /* CarryMissionInfoView.swift in Sources */,
 				990F7AFD2171B3700075A04C /* FlieItem.swift in Sources */,
+				99C2C32321772FAD00C0B94A /* QueFeedbackController.swift in Sources */,
 				990F7AFF2171C5E80075A04C /* FeedbackView.swift in Sources */,
 				994F6347216C78F20063044B /* UIScreen+CZAddition.m in Sources */,
 				99017C1421706C5700155724 /* RegisterViewController.swift in Sources */,
+				99C2C3252177390400C0B94A /* BankAccountController.swift in Sources */,
 				99D69A242175E69400A5DC09 /* repairAddCell.swift in Sources */,
 				994EE463216DF6A300EB86DD /* ListChooseCell.swift in Sources */,
 				99017C1D2170889500155724 /* CarryMissionDetailViewController.swift in Sources */,
+				99C2C3212177109A00C0B94A /* JHDropdownView.swift in Sources */,
 				9921CE302160AB70005DC836 /* UnTakeMissionViewController.swift in Sources */,
+				9945BECF217705780001593F /* CertifApplyController.swift in Sources */,
 				990F7B012171D2010075A04C /* CheckView.swift in Sources */,
 				990F7B032171D8D80075A04C /* CleanMissionDetailViewController.swift in Sources */,
 				990F7B07217205490075A04C /* RepairMissionDetailViewController.swift in Sources */,
@@ -739,9 +759,9 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = AskParents.com.cn;
+				PRODUCT_BUNDLE_IDENTIFIER = com.elitestalk.ZBApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = PPfile1;
+				PROVISIONING_PROFILE_SPECIFIER = wildElitestalk;
 				SWIFT_OBJC_BRIDGING_HEADER = ZBApp/ZBApp_Bridge.h;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.2;
@@ -764,9 +784,9 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = AskParents.com.cn;
+				PRODUCT_BUNDLE_IDENTIFIER = com.elitestalk.ZBApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = PPfile1;
+				PROVISIONING_PROFILE_SPECIFIER = wildElitestalk;
 				SWIFT_OBJC_BRIDGING_HEADER = ZBApp/ZBApp_Bridge.h;
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = 1;

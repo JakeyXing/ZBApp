@@ -136,15 +136,36 @@ class RepairMissionDetailViewController: MissionDetailBaseViewController,RepairP
     
     //MARK: - 相机代理
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        let mediaType:AnyObject? = info[UIImagePickerController.InfoKey.mediaType] as AnyObject
         
-        let image = info[UIImagePickerController.InfoKey.originalImage] as! UIImage
-        self.uploadView.addAndUploadImage(img: image, atIndexPath: currentIndexpath!)
-        
-        self.uploadView.height = self.uploadView.viewHeight()
-        self.submitButton.top = self.uploadView.bottom + kResizedPoint(pt: 30)
-        
-        self.scrollview.contentSize = CGSize.init(width: DEVICE_WIDTH, height: self.submitButton.bottom + kResizedPoint(pt: 20))
-        
+        if let type:AnyObject = mediaType {
+            if type is String {
+                let stringType = type as! String
+                if stringType == kUTTypeMovie as String {
+                    let urlOfVideo = info[UIImagePickerController.InfoKey.mediaURL] as? NSURL
+                    if let url = urlOfVideo {
+                        print("视频地址: " + url.absoluteString!)
+                        self.uploadView.addAndUploadVideo(url: url, atIndexPath: currentIndexpath!)
+                        
+                        self.uploadView.height = self.uploadView.viewHeight()
+                        self.submitButton.top = self.uploadView.bottom + kResizedPoint(pt: 30)
+                        
+                        self.scrollview.contentSize = CGSize.init(width: DEVICE_WIDTH, height: self.submitButton.bottom + kResizedPoint(pt: 20))
+                        
+                    }
+                }else{
+                    let image = info[UIImagePickerController.InfoKey.originalImage] as! UIImage
+                    self.uploadView.addAndUploadImage(img: image, atIndexPath: currentIndexpath!)
+                    
+                    self.uploadView.height = self.uploadView.viewHeight()
+                    self.submitButton.top = self.uploadView.bottom + kResizedPoint(pt: 30)
+                    
+                    self.scrollview.contentSize = CGSize.init(width: DEVICE_WIDTH, height: self.submitButton.bottom + kResizedPoint(pt: 20))
+                    
+                }
+            }
+        }
+
         
         self.dismiss(animated: true, completion: nil)
     }

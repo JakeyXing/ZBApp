@@ -7,7 +7,6 @@
 //
 
 #import "CommonMethod.h"
-
 @implementation CommonMethod
 //照片获取本地路径转换
 + (NSString *)getImagePath:(UIImage *)Image imageName:(NSString *)imageName{
@@ -47,5 +46,64 @@
     formater.dateFormat = @"YYYYMMddHHmmssSSS";
     NSString *result = [formater stringFromDate:date];
     return result;
+}
+
++ (void) convertVideoQuailtyWithInputURL:(NSURL*)inputURL
+                               outputURL:(NSURL*)outputURL
+                         completeHandler:(void (^)(AVAssetExportSession*))handler{
+    AVURLAsset *avAsset = [AVURLAsset URLAssetWithURL:inputURL options:nil];
+    
+    AVAssetExportSession *exportSession = [[AVAssetExportSession alloc] initWithAsset:avAsset presetName:AVAssetExportPresetMediumQuality];
+    //  NSLog(resultPath);
+    exportSession.outputURL = outputURL;
+    exportSession.outputFileType = AVFileTypeMPEG4;
+    exportSession.shouldOptimizeForNetworkUse= YES;
+    [exportSession exportAsynchronouslyWithCompletionHandler:^(void)
+     {
+         switch (exportSession.status) {
+             case AVAssetExportSessionStatusCancelled:
+                 NSLog(@"AVAssetExportSessionStatusCancelled");
+                 break;
+             case AVAssetExportSessionStatusUnknown:
+                 NSLog(@"AVAssetExportSessionStatusUnknown");
+                 break;
+             case AVAssetExportSessionStatusWaiting:
+                 NSLog(@"AVAssetExportSessionStatusWaiting");
+                 break;
+             case AVAssetExportSessionStatusExporting:
+                 NSLog(@"AVAssetExportSessionStatusExporting");
+                 break;
+             case AVAssetExportSessionStatusCompleted:
+                 NSLog(@"AVAssetExportSessionStatusCompleted");
+                 
+                 if (handler) {
+                     handler(exportSession);
+                 }
+                 //UISaveVideoAtPathToSavedPhotosAlbum([outputURL path], self, nil, NULL);//这个是保存到手机相册
+                 
+                 break;
+             case AVAssetExportSessionStatusFailed:
+                 NSLog(@"AVAssetExportSessionStatusFailed");
+                 break;
+         }
+         
+     }];
+    
+    
+}
+
+// 获取视频第一帧
++ (UIImage*) getVideoPreViewImage:(NSURL *)path{
+    AVURLAsset *asset = [[AVURLAsset alloc] initWithURL:path options:nil];
+    AVAssetImageGenerator *assetGen = [[AVAssetImageGenerator alloc] initWithAsset:asset];
+    
+    assetGen.appliesPreferredTrackTransform = YES;
+    CMTime time = CMTimeMakeWithSeconds(0.0, 600);
+    NSError *error = nil;
+    CMTime actualTime;
+    CGImageRef image = [assetGen copyCGImageAtTime:time actualTime:&actualTime error:&error];
+    UIImage *videoImage = [[UIImage alloc] initWithCGImage:image];
+    CGImageRelease(image);
+    return videoImage;
 }
 @end
