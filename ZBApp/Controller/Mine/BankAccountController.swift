@@ -37,6 +37,79 @@ class BankAccountController: UIViewController,JHNavigationBarDelegate {
         view.backgroundColor = UIColor.white
         return view
     }()
+    ///
+    private lazy var hanNameLabel: UILabel = UILabel.cz_label(withText: "受取人名（汉字）", fontSize: kResizedFont(ft: 15), color: kFontColorGray)
+    
+    private lazy var hanNameTextField: UITextField = {
+        let textField = UITextField(frame: CGRect.init(x: 0, y: 0, width: 300, height: 30))
+        textField.borderStyle = UITextField.BorderStyle.roundedRect
+        textField.placeholder  = ""
+        textField.font = kFont(size: 15)
+        //        textField.keyboardType = UIKeyboardType.numberPad
+        //        textField.delegate = self
+        return textField
+    }()
+    
+    private lazy var riNameLabel: UILabel = UILabel.cz_label(withText: "受取人名（日文）", fontSize: kResizedFont(ft: 15), color: kFontColorGray)
+    
+    private lazy var riNameTextField: UITextField = {
+        let textField = UITextField(frame: CGRect.init(x: 0, y: 0, width: 300, height: 30))
+        textField.borderStyle = UITextField.BorderStyle.roundedRect
+        textField.placeholder  = ""
+        textField.font = kFont(size: 15)
+        //        textField.keyboardType = UIKeyboardType.numberPad
+        //        textField.delegate = self
+        return textField
+    }()
+    
+    private lazy var bankNameLabel: UILabel = UILabel.cz_label(withText: "银行名", fontSize: kResizedFont(ft: 15), color: kFontColorGray)
+    
+    private lazy var bankNameTextField: UITextField = {
+        let textField = UITextField(frame: CGRect.init(x: 0, y: 0, width: 300, height: 30))
+        textField.borderStyle = UITextField.BorderStyle.roundedRect
+        textField.placeholder  = ""
+        textField.font = kFont(size: 15)
+        //        textField.keyboardType = UIKeyboardType.numberPad
+        //        textField.delegate = self
+        return textField
+    }()
+    
+    private lazy var branchNameLabel: UILabel = UILabel.cz_label(withText: "支店名", fontSize: kResizedFont(ft: 15), color: kFontColorGray)
+    
+    private lazy var branchNameTextField: UITextField = {
+        let textField = UITextField(frame: CGRect.init(x: 0, y: 0, width: 300, height: 30))
+        textField.borderStyle = UITextField.BorderStyle.roundedRect
+        textField.placeholder  = ""
+        textField.font = kFont(size: 15)
+        //        textField.keyboardType = UIKeyboardType.numberPad
+        //        textField.delegate = self
+        return textField
+    }()
+    
+    private lazy var branchCodeLabel: UILabel = UILabel.cz_label(withText: "支店代码", fontSize: kResizedFont(ft: 15), color: kFontColorGray)
+    
+    private lazy var branchCodeTextField: UITextField = {
+        let textField = UITextField(frame: CGRect.init(x: 0, y: 0, width: 300, height: 30))
+        textField.borderStyle = UITextField.BorderStyle.roundedRect
+        textField.placeholder  = ""
+        textField.font = kFont(size: 15)
+        //        textField.keyboardType = UIKeyboardType.numberPad
+        //        textField.delegate = self
+        return textField
+    }()
+    
+    private lazy var fanCodeLabel: UILabel = UILabel.cz_label(withText: "口座番号", fontSize: kResizedFont(ft: 15), color: kFontColorGray)
+    
+    private lazy var fanCodeTextField: UITextField = {
+        let textField = UITextField(frame: CGRect.init(x: 0, y: 0, width: 300, height: 30))
+        textField.borderStyle = UITextField.BorderStyle.roundedRect
+        textField.placeholder  = ""
+        textField.font = kFont(size: 15)
+        //        textField.keyboardType = UIKeyboardType.numberPad
+        //        textField.delegate = self
+        return textField
+    }()
+    ///
     
     lazy var savedButton: UIButton = {
         let btn = UIButton(type: UIButton.ButtonType.custom)
@@ -60,6 +133,20 @@ class BankAccountController: UIViewController,JHNavigationBarDelegate {
         self.view.addSubview(self.savedButton)
         self.localBgView.isHidden = false
         self.chinaBgView.isHidden = true
+        
+        self.localBgView.addSubview(self.hanNameLabel)
+        self.localBgView.addSubview(self.hanNameTextField)
+        self.localBgView.addSubview(self.riNameLabel)
+        self.localBgView.addSubview(self.riNameTextField)
+        self.localBgView.addSubview(self.bankNameLabel)
+        self.localBgView.addSubview(self.bankNameTextField)
+        self.localBgView.addSubview(self.branchNameLabel)
+        self.localBgView.addSubview(self.branchNameTextField)
+        self.localBgView.addSubview(self.branchCodeLabel)
+        self.localBgView.addSubview(self.branchCodeTextField)
+        
+        self.localBgView.addSubview(self.fanCodeLabel)
+        self.localBgView.addSubview(self.fanCodeTextField)
         
         self.subViewsLayout()
     }
