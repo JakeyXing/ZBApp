@@ -8,6 +8,7 @@
 
 import UIKit
 import Masonry
+
 class BankAccountController: UIViewController,JHNavigationBarDelegate {
 
     private lazy var navigationBar: JHNavigationBar = {
@@ -44,7 +45,7 @@ class BankAccountController: UIViewController,JHNavigationBarDelegate {
         view.backgroundColor = UIColor.white
         return view
     }()
-    ///
+    ///当地///
     private lazy var hanNameLabel: UILabel = UILabel.cz_label(withText: "受取人名(汉字)", fontSize: kResizedFont(ft: 15), color: kFontColorGray)
     
     private lazy var hanNameTextField: UITextField = {
@@ -126,6 +127,7 @@ class BankAccountController: UIViewController,JHNavigationBarDelegate {
     }()
     
     private lazy var subjectLabel: UILabel = UILabel.cz_label(withText: "科目", fontSize: kResizedFont(ft: 15), color: kFontColorGray)
+    ///当地///
     
     private lazy var accountBankLabel: UILabel = UILabel.cz_label(withText: "开户行", fontSize: kResizedFont(ft: 15), color: kFontColorGray)
     
@@ -190,7 +192,7 @@ class BankAccountController: UIViewController,JHNavigationBarDelegate {
         self.chinaBgView.isHidden = true
         
 //        self.localBgView.backgroundColor = UIColor.gray
-        self.chinaBgView.backgroundColor = UIColor.purple
+//        self.chinaBgView.backgroundColor = UIColor.purple
         
         self.localBgView.addSubview(self.hanNameLabel)
         self.localBgView.addSubview(self.hanNameTextField)
@@ -206,12 +208,14 @@ class BankAccountController: UIViewController,JHNavigationBarDelegate {
         self.localBgView.addSubview(self.fanCodeTextField)
         self.localBgView.addSubview(self.subjectLabel)
         self.localBgView.addSubview(self.subjectDropdownView)
-        self.localBgView.addSubview(self.accountBankLabel)
-        self.localBgView.addSubview(self.accountBankTextField)
-        self.localBgView.addSubview(self.bankUserLabel)
-        self.localBgView.addSubview(self.bankUserTextField)
-        self.localBgView.addSubview(self.bankAccountLabel)
-        self.localBgView.addSubview(self.bankAccountTextField)
+        
+        
+        self.chinaBgView.addSubview(self.accountBankLabel)
+        self.chinaBgView.addSubview(self.accountBankTextField)
+        self.chinaBgView.addSubview(self.bankUserLabel)
+        self.chinaBgView.addSubview(self.bankUserTextField)
+        self.chinaBgView.addSubview(self.bankAccountLabel)
+        self.chinaBgView.addSubview(self.bankAccountTextField)
 
         self.subViewsLayout()
     }
@@ -222,20 +226,20 @@ class BankAccountController: UIViewController,JHNavigationBarDelegate {
         self.seSegment.mas_makeConstraints { (make:MASConstraintMaker!) in
             make.top.equalTo()(self.scrollview.mas_top)?.offset()(kResizedPoint(pt: 20))
             make.centerX.equalTo()(self.view.mas_centerX)
-            make.width.equalTo()(kResizedPoint(pt: 280))
+            make.width.equalTo()(kResizedPoint(pt: 260))
             make.height.equalTo()(kResizedPoint(pt: 28))
         }
         
         self.localBgView.mas_makeConstraints { (make:MASConstraintMaker!) in
             make.top.equalTo()(self.seSegment.mas_bottom)?.offset()(kResizedPoint(pt: 20))
             make.left.right().equalTo()(self.view)
-            make.height.equalTo()(kResizedPoint(pt: 421))
+            make.height.equalTo()(kResizedPoint(pt: 288))
         }
         
         self.chinaBgView.mas_makeConstraints { (make:MASConstraintMaker!) in
             make.top.equalTo()(self.seSegment.mas_bottom)?.offset()(kResizedPoint(pt: 20))
             make.left.right().equalTo()(self.view)
-            make.height.equalTo()(kResizedPoint(pt: 300))
+            make.height.equalTo()(kResizedPoint(pt: 116))
         }
         
         self.savedButton.mas_makeConstraints { (make:MASConstraintMaker!) in
@@ -335,10 +339,10 @@ class BankAccountController: UIViewController,JHNavigationBarDelegate {
             make.right.equalTo()(self.subjectDropdownView.mas_left)?.offset()(kResizedPoint(pt: -10))
             make.height.equalTo()(kResizedPoint(pt: 17))
         }
-        
+        ///////
         self.accountBankTextField.mas_makeConstraints { (make:MASConstraintMaker!) in
-            make.right.equalTo()(self.hanNameTextField.mas_right)
-            make.top.equalTo()(self.subjectDropdownView.mas_bottom)?.offset()(kResizedPoint(pt: 16))
+            make.right.equalTo()(self.chinaBgView.mas_right)?.offset()(kResizedPoint(pt: -20))
+            make.top.equalTo()(self.chinaBgView.mas_top)
             make.width.equalTo()(kResizedPoint(pt: 220))
             make.height.equalTo()(kResizedPoint(pt: 28))
         }
@@ -350,7 +354,7 @@ class BankAccountController: UIViewController,JHNavigationBarDelegate {
         }
         
         self.bankUserTextField.mas_makeConstraints { (make:MASConstraintMaker!) in
-            make.right.equalTo()(self.hanNameTextField.mas_right)
+            make.right.equalTo()(self.accountBankTextField.mas_right)
             make.top.equalTo()(self.accountBankTextField.mas_bottom)?.offset()(kResizedPoint(pt: 16))
             make.width.equalTo()(kResizedPoint(pt: 220))
             make.height.equalTo()(kResizedPoint(pt: 28))
@@ -363,7 +367,7 @@ class BankAccountController: UIViewController,JHNavigationBarDelegate {
         }
         
         self.bankAccountTextField.mas_makeConstraints { (make:MASConstraintMaker!) in
-            make.right.equalTo()(self.hanNameTextField.mas_right)
+            make.right.equalTo()(self.accountBankTextField.mas_right)
             make.top.equalTo()(self.bankUserTextField.mas_bottom)?.offset()(kResizedPoint(pt: 16))
             make.width.equalTo()(kResizedPoint(pt: 220))
             make.height.equalTo()(kResizedPoint(pt: 28))

@@ -62,6 +62,8 @@
 		99C2C3212177109A00C0B94A /* JHDropdownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99C2C3202177109A00C0B94A /* JHDropdownView.swift */; };
 		99C2C32321772FAD00C0B94A /* QueFeedbackController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99C2C32221772FAD00C0B94A /* QueFeedbackController.swift */; };
 		99C2C3252177390400C0B94A /* BankAccountController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99C2C3242177390400C0B94A /* BankAccountController.swift */; };
+		99D556F821785996006C92A3 /* PersonalInfoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99D556F721785996006C92A3 /* PersonalInfoController.swift */; };
+		99D556FA21788A7E006C92A3 /* MissionSegmentBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99D556F921788A7E006C92A3 /* MissionSegmentBar.swift */; };
 		99D69A222175CCC400A5DC09 /* CommonMethod.m in Sources */ = {isa = PBXBuildFile; fileRef = 99D69A212175CCC400A5DC09 /* CommonMethod.m */; };
 		99D69A242175E69400A5DC09 /* repairAddCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99D69A232175E69400A5DC09 /* repairAddCell.swift */; };
 		99F1FD232174E12B002699FE /* RepairPicUploadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99F1FD222174E12B002699FE /* RepairPicUploadView.swift */; };
@@ -146,6 +148,8 @@
 		99C2C3202177109A00C0B94A /* JHDropdownView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JHDropdownView.swift; sourceTree = "<group>"; };
 		99C2C32221772FAD00C0B94A /* QueFeedbackController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueFeedbackController.swift; sourceTree = "<group>"; };
 		99C2C3242177390400C0B94A /* BankAccountController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankAccountController.swift; sourceTree = "<group>"; };
+		99D556F721785996006C92A3 /* PersonalInfoController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalInfoController.swift; sourceTree = "<group>"; };
+		99D556F921788A7E006C92A3 /* MissionSegmentBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MissionSegmentBar.swift; sourceTree = "<group>"; };
 		99D69A202175CCC400A5DC09 /* CommonMethod.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommonMethod.h; sourceTree = "<group>"; };
 		99D69A212175CCC400A5DC09 /* CommonMethod.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CommonMethod.m; sourceTree = "<group>"; };
 		99D69A232175E69400A5DC09 /* repairAddCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = repairAddCell.swift; sourceTree = "<group>"; };
@@ -187,6 +191,7 @@
 			children = (
 				9921CE2B2160AB37005DC836 /* PersonalViewController.swift */,
 				99C2C3242177390400C0B94A /* BankAccountController.swift */,
+				99D556F721785996006C92A3 /* PersonalInfoController.swift */,
 			);
 			path = Mine;
 			sourceTree = "<group>";
@@ -285,6 +290,7 @@
 				99F1FD262174E17E002699FE /* RepairHeaderView.swift */,
 				99F1FD242174E156002699FE /* RepairImageCell.swift */,
 				99D69A232175E69400A5DC09 /* repairAddCell.swift */,
+				99D556F921788A7E006C92A3 /* MissionSegmentBar.swift */,
 				994EE461216DEDDE00EB86DD /* JHListChooseView */,
 			);
 			path = View;
@@ -513,7 +519,9 @@
 				"${BUILT_PRODUCTS_DIR}/AWSCore/AWSCore.framework",
 				"${BUILT_PRODUCTS_DIR}/AWSMobileClient/AWSMobileClient.framework",
 				"${BUILT_PRODUCTS_DIR}/AWSS3/AWSS3.framework",
+				"${BUILT_PRODUCTS_DIR}/BEMCheckBox/BEMCheckBox.framework",
 				"${BUILT_PRODUCTS_DIR}/CYLTabBarController/CYLTabBarController.framework",
+				"${BUILT_PRODUCTS_DIR}/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/JXPhotoBrowser/JXPhotoBrowser.framework",
 				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
 				"${BUILT_PRODUCTS_DIR}/Masonry/Masonry.framework",
@@ -528,7 +536,9 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AWSCore.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AWSMobileClient.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AWSS3.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BEMCheckBox.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CYLTabBarController.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManagerSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JXPhotoBrowser.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Masonry.framework",
@@ -567,6 +577,7 @@
 				994EE465216DF7F500EB86DD /* JHListChooseView.swift in Sources */,
 				994F633F216C78F20063044B /* UIButton+CZAddition.m in Sources */,
 				9944ABBE21735C6B00B4CB08 /* CleanPicUploadView.swift in Sources */,
+				99D556FA21788A7E006C92A3 /* MissionSegmentBar.swift in Sources */,
 				99F1FD232174E12B002699FE /* RepairPicUploadView.swift in Sources */,
 				9923CBB0216B014100EDCA7A /* MainTabBarController.swift in Sources */,
 				99F1FD252174E156002699FE /* RepairImageCell.swift in Sources */,
@@ -577,6 +588,7 @@
 				99017C1F217088AF00155724 /* MissionDetailBaseViewController.swift in Sources */,
 				99425B552174648B00A18E45 /* CleanImageCell.swift in Sources */,
 				994F6343216C78F20063044B /* UIView+CZAddition.m in Sources */,
+				99D556F821785996006C92A3 /* PersonalInfoController.swift in Sources */,
 				994EE460216DDC3700EB86DD /* MissionTypeTopBar.swift in Sources */,
 				9921CE2E2160AB56005DC836 /* HomeViewController.swift in Sources */,
 				994F6340216C78F20063044B /* UIViewController+CZAddition.m in Sources */,

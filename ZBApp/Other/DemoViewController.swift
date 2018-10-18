@@ -60,4 +60,20 @@ class DemoViewController: UIViewController {
         bank.hidesBottomBarWhenPushed = true
         self.navigationController?.pushViewController(bank, animated: true)
     }
+    
+    
+    @IBAction func m9action(_ sender: Any) {
+        let info=PersonalInfoController()
+        info.hidesBottomBarWhenPushed = true
+        self.navigationController?.pushViewController(info, animated: true)
+    }
+    
+    @IBAction func m10action(_ sender: Any) {
+        let loginVC = LoginViewController()
+        let naviVC = UINavigationController(rootViewController: loginVC)
+        
+        let sharedAppdelegate:AppDelegate = UIApplication.shared.delegate as! AppDelegate
+        sharedAppdelegate.window?.rootViewController = naviVC
+
+    }
 }

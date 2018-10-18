@@ -8,6 +8,7 @@
 
 import UIKit
 import CYLTabBarController
+import IQKeyboardManagerSwift
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -40,6 +41,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UITabBar.appearance().backgroundColor = UIColor.white
         //tabbar字体颜色
         UITabBar.appearance().tintColor = UIColor(red: 255, green: 102, blue: 0, alpha: 1)
+        IQKeyboardManager.shared.enable = true
         return true
     }
 

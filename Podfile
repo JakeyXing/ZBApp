@@ -15,5 +15,7 @@ target 'ZBApp' do
   pod 'AWSCognito', '~> 2.6.13'       # For data sync
   
   pod 'JXPhotoBrowser'
+  pod 'IQKeyboardManagerSwift'
+  pod 'BEMCheckBox'
 
 end
