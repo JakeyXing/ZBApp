@@ -10,13 +10,14 @@ import UIKit
 import Masonry
 import JXPhotoBrowser
 
-
 protocol RepairPicUploadViewDelegate: class {
     func repairPicUploadView(_ cleanPicUploadView: RepairPicUploadView,didSelectedAtIndexPath indexPath: IndexPath);
 }
 
 class RepairPicUploadView: UIView {
     
+    
+    var currentUploadmediaType: UploadMediaType = .image
     weak var delegate: RepairPicUploadViewDelegate?
     
     var roomWithImagesArray:[[UIImage]] = []
@@ -29,10 +30,11 @@ class RepairPicUploadView: UIView {
     
     private lazy var collectionView: UICollectionView = {
         let flowLayout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
-        flowLayout.itemSize = CGSize.init(width: kResizedPoint(pt: 96), height: kResizedPoint(pt: 90+10+5))
+        flowLayout.itemSize = CGSize.init(width: kResizedPoint(pt: 102), height: kResizedPoint(pt: 90+15+5))
         let collectionV = UICollectionView(frame: CGRect.init(), collectionViewLayout: flowLayout)
-        flowLayout.minimumInteritemSpacing = kResizedPoint(pt: 10)
+        flowLayout.minimumInteritemSpacing = kResizedPoint(pt: 5)
         flowLayout.minimumLineSpacing = kResizedPoint(pt: 10)
+        flowLayout.sectionInset = UIEdgeInsets.init(top: 0, left: 5, bottom: 0, right: 5)
         
         collectionV.backgroundColor = RGBCOLOR(r: 216, 216, 216)
         collectionV.isScrollEnabled = false
@@ -65,7 +67,7 @@ class RepairPicUploadView: UIView {
     
     func viewHeight() -> CGFloat {
         let headerH = kResizedPoint(pt: 10+10+19+5+17+10)
-        let itemH = kResizedPoint(pt: 90+10+5)
+        let itemH = kResizedPoint(pt: 90+15+5)
         let cap:CGFloat = kResizedPoint(pt: 10)
         
         let count = self.roomWithImagesArray.count
@@ -95,6 +97,8 @@ class RepairPicUploadView: UIView {
     }
     
     func addAndUploadImage(img: UIImage, atIndexPath indexpath: NSIndexPath) {
+        currentUploadmediaType = .video
+        
         var arr = self.roomWithImagesArray[indexpath.section]
         arr.append(img)
         self.roomWithImagesArray[indexpath.section] = arr
@@ -110,7 +114,7 @@ class RepairPicUploadView: UIView {
 //        CommonMethod.convertVideoQuailty(withInputURL: url as URL, outputURL: newVideoURL as URL) { (aa) in
 //
 //        }
-        
+        currentUploadmediaType = .video
         
         var arr = self.roomWithImagesArray[indexpath.section]
         let videoImg = CommonMethod.getVideoPreViewImage(url as URL)
@@ -194,6 +198,9 @@ extension RepairPicUploadView:UICollectionViewDelegateFlowLayout,UICollectionVie
             cell.imageView.image = arr[indexPath.row]
             cell.indexpath = indexPath as NSIndexPath
             cell.delegate = self
+            if (indexPath.row == arr.count - 1){
+                cell.mediaType = currentUploadmediaType
+            }
             return cell
         }else{
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifierStrAdd, for: indexPath)
@@ -204,7 +211,7 @@ extension RepairPicUploadView:UICollectionViewDelegateFlowLayout,UICollectionVie
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        return CGSize.init(width: DEVICE_WIDTH-kResizedPoint(pt: 20), height: kResizedPoint(pt: 10+10+19+5+17+10))
+        return CGSize.init(width: DEVICE_WIDTH, height: kResizedPoint(pt: 10+10+19+5+17+10))
     }
     
     
@@ -216,9 +223,6 @@ extension RepairPicUploadView:UICollectionViewDelegateFlowLayout,UICollectionVie
         }else{
             self.delegate?.repairPicUploadView(self, didSelectedAtIndexPath: indexPath)
         }
-     
-        
-        
         
     }
     

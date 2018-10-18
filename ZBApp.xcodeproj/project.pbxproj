@@ -38,6 +38,8 @@
 		99425B552174648B00A18E45 /* CleanImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99425B542174648B00A18E45 /* CleanImageCell.swift */; };
 		99425B572174763300A18E45 /* ClaenCollectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99425B562174763300A18E45 /* ClaenCollectionHeaderView.swift */; };
 		9944ABBE21735C6B00B4CB08 /* CleanPicUploadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9944ABBD21735C6B00B4CB08 /* CleanPicUploadView.swift */; };
+		9945A2B72178DB1200240437 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9945A2B62178DB1200240437 /* MapViewController.swift */; };
+		9945A2B92178DB2400240437 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9945A2B82178DB2400240437 /* WebViewController.swift */; };
 		9945BECF217705780001593F /* CertifApplyController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9945BECE217705780001593F /* CertifApplyController.swift */; };
 		994EE460216DDC3700EB86DD /* MissionTypeTopBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 994EE45F216DDC3700EB86DD /* MissionTypeTopBar.swift */; };
 		994EE463216DF6A300EB86DD /* ListChooseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 994EE462216DF6A300EB86DD /* ListChooseCell.swift */; };
@@ -110,6 +112,8 @@
 		99425B542174648B00A18E45 /* CleanImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CleanImageCell.swift; sourceTree = "<group>"; };
 		99425B562174763300A18E45 /* ClaenCollectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClaenCollectionHeaderView.swift; sourceTree = "<group>"; };
 		9944ABBD21735C6B00B4CB08 /* CleanPicUploadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CleanPicUploadView.swift; sourceTree = "<group>"; };
+		9945A2B62178DB1200240437 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		9945A2B82178DB2400240437 /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		9945BECE217705780001593F /* CertifApplyController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertifApplyController.swift; sourceTree = "<group>"; };
 		994EE45F216DDC3700EB86DD /* MissionTypeTopBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MissionTypeTopBar.swift; sourceTree = "<group>"; };
 		994EE462216DF6A300EB86DD /* ListChooseCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListChooseCell.swift; sourceTree = "<group>"; };
@@ -213,6 +217,8 @@
 			isa = PBXGroup;
 			children = (
 				9921CE2D2160AB56005DC836 /* HomeViewController.swift */,
+				9945A2B62178DB1200240437 /* MapViewController.swift */,
+				9945A2B82178DB2400240437 /* WebViewController.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -595,10 +601,12 @@
 				994F6355216C9C480063044B /* JHNavigationBar.swift in Sources */,
 				994F6342216C78F20063044B /* NSString+CZPath.m in Sources */,
 				99017C2121708A6B00155724 /* MissionBaseInfoView.swift in Sources */,
+				9945A2B72178DB1200240437 /* MapViewController.swift in Sources */,
 				99425B572174763300A18E45 /* ClaenCollectionHeaderView.swift in Sources */,
 				99017C232170A8E900155724 /* CarryMissionInfoView.swift in Sources */,
 				990F7AFD2171B3700075A04C /* FlieItem.swift in Sources */,
 				99C2C32321772FAD00C0B94A /* QueFeedbackController.swift in Sources */,
+				9945A2B92178DB2400240437 /* WebViewController.swift in Sources */,
 				990F7AFF2171C5E80075A04C /* FeedbackView.swift in Sources */,
 				994F6347216C78F20063044B /* UIScreen+CZAddition.m in Sources */,
 				99017C1421706C5700155724 /* RegisterViewController.swift in Sources */,

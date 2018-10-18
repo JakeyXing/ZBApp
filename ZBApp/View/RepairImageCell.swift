@@ -9,12 +9,17 @@
 import UIKit
 import Masonry
 
+enum UploadMediaType {
+    case image, video
+}
 
 protocol RepairImageCellDelegate: class {
     func repairImageCell(_ cell: RepairImageCell,didClosedAtIndexPath indexPath: IndexPath);
 
 }
 class RepairImageCell: UICollectionViewCell {
+    
+    var mediaType = UploadMediaType.image
     
     var indexpath: NSIndexPath!
     weak var delegate: RepairImageCellDelegate?
@@ -74,15 +79,16 @@ class RepairImageCell: UICollectionViewCell {
         }
         
         self.closeButton.mas_makeConstraints { (make:MASConstraintMaker!) in
-            make.right.equalTo()(self.imageView.mas_right)
-            make.top.equalTo()(self.imageView.mas_top)
-            make.width.height().equalTo()(kResizedPoint(pt: 32))
+            make.right.equalTo()(self.imageView.mas_right)?.offset()(kResizedPoint(pt: 6))
+            make.top.equalTo()(self.imageView.mas_top)?.offset()(kResizedPoint(pt: -4))
+            make.width.equalTo()(kResizedPoint(pt: 35))
+            make.height.equalTo()(kResizedPoint(pt: 32))
         }
         
         self.progressView.mas_makeConstraints { (make:MASConstraintMaker!) in
             make.top.equalTo()(self.imageView.mas_bottom)?.offset()(kResizedPoint(pt: 0))
             make.left.right().equalTo()(self)
-            make.height.equalTo()(kResizedPoint(pt: 10))
+            make.height.equalTo()(kResizedPoint(pt: 15))
         }
 
         

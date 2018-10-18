@@ -10,6 +10,7 @@ import UIKit
 import MobileCoreServices
 
 class RepairMissionDetailViewController: MissionDetailBaseViewController,RepairPicUploadViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate {
+    
     var cameraPicker: UIImagePickerController!
     var currentIndexpath: NSIndexPath?
     

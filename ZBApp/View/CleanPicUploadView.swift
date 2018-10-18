@@ -32,10 +32,11 @@ class CleanPicUploadView: UIView {
     
     private lazy var collectionView: UICollectionView = {
         let flowLayout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
-        flowLayout.itemSize = CGSize.init(width: kResizedPoint(pt: 96), height: kResizedPoint(pt: 96+10+36))
+        flowLayout.itemSize = CGSize.init(width: kResizedPoint(pt: 100), height: kResizedPoint(pt: 96+10+36))
         let collectionV = UICollectionView(frame: CGRect.init(), collectionViewLayout: flowLayout)
-        flowLayout.minimumInteritemSpacing = kResizedPoint(pt: 10)
+        flowLayout.minimumInteritemSpacing = kResizedPoint(pt: 5)
         flowLayout.minimumLineSpacing = kResizedPoint(pt: 10)
+        flowLayout.sectionInset = UIEdgeInsets.init(top: 0, left: 5, bottom: 0, right: 5)
         
         collectionV.backgroundColor = RGBCOLOR(r: 216, 216, 216)
         collectionV.isScrollEnabled = false

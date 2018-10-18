@@ -39,7 +39,9 @@ class CertifApplyController: UIViewController,JHNavigationBarDelegate,UIImagePic
     lazy var headImageView: UIImageView = {
         let img = UIImageView()
         img.image = UIImage(named: "defaultHear")
-        
+        img.contentMode = .scaleAspectFill
+        img.layer.cornerRadius = kResizedPoint(pt: 24)
+        img.clipsToBounds = true
         img.isUserInteractionEnabled = true
         let tap1 = UITapGestureRecognizer(target: self, action: #selector(headImageViewTapped))
         img.addGestureRecognizer(tap1)
