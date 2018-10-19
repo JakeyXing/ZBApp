@@ -11,5 +11,10 @@ import UIKit
 class ZB_User: NSObject {
     @objc var accessToken:String?
     @objc var refreshToken:String?
+    
+    
+    
+    
+    
 
 }
