@@ -59,11 +59,14 @@
 		994F6348216C78F20063044B /* UIColor+CZAddition.m in Sources */ = {isa = PBXBuildFile; fileRef = 994F633C216C78F20063044B /* UIColor+CZAddition.m */; };
 		994F634B216C822C0063044B /* StarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 994F634A216C822C0063044B /* StarView.swift */; };
 		994F6355216C9C480063044B /* JHNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 994F6354216C9C480063044B /* JHNavigationBar.swift */; };
+		99A8C46B21797CB5009509B8 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99A8C46A21797CB5009509B8 /* SettingViewController.swift */; };
 		99C2C31E2177084A00C0B94A /* DemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99C2C31C2177084A00C0B94A /* DemoViewController.swift */; };
 		99C2C31F2177084A00C0B94A /* DemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 99C2C31D2177084A00C0B94A /* DemoViewController.xib */; };
 		99C2C3212177109A00C0B94A /* JHDropdownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99C2C3202177109A00C0B94A /* JHDropdownView.swift */; };
 		99C2C32321772FAD00C0B94A /* QueFeedbackController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99C2C32221772FAD00C0B94A /* QueFeedbackController.swift */; };
 		99C2C3252177390400C0B94A /* BankAccountController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99C2C3242177390400C0B94A /* BankAccountController.swift */; };
+		99D104712179CD7700713884 /* ZB_User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99D104702179CD7700713884 /* ZB_User.swift */; };
+		99D104742179CDE500713884 /* NetWorkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99D104732179CDE500713884 /* NetWorkManager.swift */; };
 		99D556F821785996006C92A3 /* PersonalInfoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99D556F721785996006C92A3 /* PersonalInfoController.swift */; };
 		99D556FA21788A7E006C92A3 /* MissionSegmentBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99D556F921788A7E006C92A3 /* MissionSegmentBar.swift */; };
 		99D69A222175CCC400A5DC09 /* CommonMethod.m in Sources */ = {isa = PBXBuildFile; fileRef = 99D69A212175CCC400A5DC09 /* CommonMethod.m */; };
@@ -147,11 +150,14 @@
 		994F6349216C7ADA0063044B /* ZBApp_Bridge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZBApp_Bridge.h; sourceTree = "<group>"; };
 		994F634A216C822C0063044B /* StarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarView.swift; sourceTree = "<group>"; };
 		994F6354216C9C480063044B /* JHNavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JHNavigationBar.swift; sourceTree = "<group>"; };
+		99A8C46A21797CB5009509B8 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		99C2C31C2177084A00C0B94A /* DemoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoViewController.swift; sourceTree = "<group>"; };
 		99C2C31D2177084A00C0B94A /* DemoViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DemoViewController.xib; sourceTree = "<group>"; };
 		99C2C3202177109A00C0B94A /* JHDropdownView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JHDropdownView.swift; sourceTree = "<group>"; };
 		99C2C32221772FAD00C0B94A /* QueFeedbackController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueFeedbackController.swift; sourceTree = "<group>"; };
 		99C2C3242177390400C0B94A /* BankAccountController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankAccountController.swift; sourceTree = "<group>"; };
+		99D104702179CD7700713884 /* ZB_User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZB_User.swift; sourceTree = "<group>"; };
+		99D104732179CDE500713884 /* NetWorkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetWorkManager.swift; sourceTree = "<group>"; };
 		99D556F721785996006C92A3 /* PersonalInfoController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalInfoController.swift; sourceTree = "<group>"; };
 		99D556F921788A7E006C92A3 /* MissionSegmentBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MissionSegmentBar.swift; sourceTree = "<group>"; };
 		99D69A202175CCC400A5DC09 /* CommonMethod.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommonMethod.h; sourceTree = "<group>"; };
@@ -196,6 +202,7 @@
 				9921CE2B2160AB37005DC836 /* PersonalViewController.swift */,
 				99C2C3242177390400C0B94A /* BankAccountController.swift */,
 				99D556F721785996006C92A3 /* PersonalInfoController.swift */,
+				99A8C46A21797CB5009509B8 /* SettingViewController.swift */,
 			);
 			path = Mine;
 			sourceTree = "<group>";
@@ -302,16 +309,10 @@
 			path = View;
 			sourceTree = "<group>";
 		};
-		994F631D216C56C30063044B /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
 		994F631E216C56CE0063044B /* Tools */ = {
 			isa = PBXGroup;
 			children = (
+				99D104722179CDD300713884 /* Network */,
 				994F6322216C78080063044B /* Additions */,
 				994F631F216C57110063044B /* Common */,
 			);
@@ -361,6 +362,22 @@
 			path = Additions;
 			sourceTree = "<group>";
 		};
+		99D1046F2179CD4A00713884 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				99D104702179CD7700713884 /* ZB_User.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		99D104722179CDD300713884 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				99D104732179CDE500713884 /* NetWorkManager.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
 		99F43ACA21606EB400A84EBD = {
 			isa = PBXGroup;
 			children = (
@@ -382,9 +399,9 @@
 		99F43AD521606EB400A84EBD /* ZBApp */ = {
 			isa = PBXGroup;
 			children = (
+				99D1046F2179CD4A00713884 /* Model */,
 				994F631B216C55FA0063044B /* Controller */,
 				994F631C216C56470063044B /* View */,
-				994F631D216C56C30063044B /* Model */,
 				994F631E216C56CE0063044B /* Tools */,
 				9921CE2A2160A4CA005DC836 /* Other */,
 				99F43ADD21606EB600A84EBD /* Assets.xcassets */,
@@ -564,6 +581,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9932153521703F2100CAB18B /* LoginViewController.swift in Sources */,
+				99A8C46B21797CB5009509B8 /* SettingViewController.swift in Sources */,
 				990F7B092172068D0075A04C /* ListRoomInfoView.swift in Sources */,
 				994F6348216C78F20063044B /* UIColor+CZAddition.m in Sources */,
 				99017C18217077CE00155724 /* ResetPasswordViewController.swift in Sources */,
@@ -584,6 +602,7 @@
 				994F633F216C78F20063044B /* UIButton+CZAddition.m in Sources */,
 				9944ABBE21735C6B00B4CB08 /* CleanPicUploadView.swift in Sources */,
 				99D556FA21788A7E006C92A3 /* MissionSegmentBar.swift in Sources */,
+				99D104712179CD7700713884 /* ZB_User.swift in Sources */,
 				99F1FD232174E12B002699FE /* RepairPicUploadView.swift in Sources */,
 				9923CBB0216B014100EDCA7A /* MainTabBarController.swift in Sources */,
 				99F1FD252174E156002699FE /* RepairImageCell.swift in Sources */,
@@ -593,6 +612,7 @@
 				994F634B216C822C0063044B /* StarView.swift in Sources */,
 				99017C1F217088AF00155724 /* MissionDetailBaseViewController.swift in Sources */,
 				99425B552174648B00A18E45 /* CleanImageCell.swift in Sources */,
+				99D104742179CDE500713884 /* NetWorkManager.swift in Sources */,
 				994F6343216C78F20063044B /* UIView+CZAddition.m in Sources */,
 				99D556F821785996006C92A3 /* PersonalInfoController.swift in Sources */,
 				994EE460216DDC3700EB86DD /* MissionTypeTopBar.swift in Sources */,

@@ -76,4 +76,11 @@ class DemoViewController: UIViewController {
         sharedAppdelegate.window?.rootViewController = naviVC
 
     }
+    
+    @IBAction func m11action(_ sender: Any) {
+        let set = SettingViewController()
+        set.hidesBottomBarWhenPushed = true
+        self.navigationController?.pushViewController(set, animated: true)
+    }
+    
 }
