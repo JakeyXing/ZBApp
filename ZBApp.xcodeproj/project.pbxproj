@@ -78,6 +78,7 @@
 		99F43ADC21606EB400A84EBD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 99F43ADA21606EB400A84EBD /* Main.storyboard */; };
 		99F43ADE21606EB600A84EBD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 99F43ADD21606EB600A84EBD /* Assets.xcassets */; };
 		99F43AE121606EB600A84EBD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 99F43ADF21606EB600A84EBD /* LaunchScreen.storyboard */; };
+		ADB1322D217AED2A002B811B /* ZBUrl.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB1322C217AED2A002B811B /* ZBUrl.swift */; };
 		DF5A20FCEA8F2510D0D85C15 /* Pods_ZBApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B6E88C85390293304321D12 /* Pods_ZBApp.framework */; };
 /* End PBXBuildFile section */
 
@@ -172,6 +173,7 @@
 		99F43ADD21606EB600A84EBD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		99F43AE021606EB600A84EBD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		99F43AE221606EB600A84EBD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		ADB1322C217AED2A002B811B /* ZBUrl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZBUrl.swift; sourceTree = "<group>"; };
 		DA329A7677E706280A3A015B /* Pods-ZBApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZBApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-ZBApp/Pods-ZBApp.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -374,6 +376,7 @@
 			isa = PBXGroup;
 			children = (
 				99D104732179CDE500713884 /* NetWorkManager.swift */,
+				ADB1322C217AED2A002B811B /* ZBUrl.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -633,6 +636,7 @@
 				99C2C3252177390400C0B94A /* BankAccountController.swift in Sources */,
 				99D69A242175E69400A5DC09 /* repairAddCell.swift in Sources */,
 				994EE463216DF6A300EB86DD /* ListChooseCell.swift in Sources */,
+				ADB1322D217AED2A002B811B /* ZBUrl.swift in Sources */,
 				99017C1D2170889500155724 /* CarryMissionDetailViewController.swift in Sources */,
 				99C2C3212177109A00C0B94A /* JHDropdownView.swift in Sources */,
 				9921CE302160AB70005DC836 /* UnTakeMissionViewController.swift in Sources */,

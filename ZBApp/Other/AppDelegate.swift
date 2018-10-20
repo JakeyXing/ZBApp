@@ -14,7 +14,10 @@ import IQKeyboardManagerSwift
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    
     var mainTabBarVc: MainTabBarController!
+    var usermodel: ZB_User?
+    
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         mainTabBarVc = MainTabBarController(viewControllers: self.viewControllers(), tabBarItemsAttributes: self.tabBarItemsAttributesForController())
@@ -42,8 +45,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //tabbar字体颜色
         UITabBar.appearance().tintColor = UIColor(red: 255, green: 102, blue: 0, alpha: 1)
         IQKeyboardManager.shared.enable = true
+        
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(reLogin), name: NSNotification.Name(rawValue: kRefreshTokenInvalidNoti), object: nil)
+        
         return true
     }
+    
 
     func applicationWillResignActive(_ application: UIApplication) {
         
@@ -91,6 +99,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                               CYLTabBarItemSelectedImage:"account_highlight"]
         let tabBarItemsAttributes = [tabBarItemOne,tabBarItemTwo,tabBarItemThree]
         return tabBarItemsAttributes
+    }
+    
+    
+    //MARK: - actions
+    @objc private func reLogin(){
+        
+        self.usermodel = nil
+        
+        let loginVC = LoginViewController()
+        let naviVC = UINavigationController(rootViewController: loginVC)
+        
+        self.window?.rootViewController = naviVC
+        
     }
 
 

@@ -60,3 +60,8 @@ let kStateBarColorYellow = RGBCOLOR(r: 254, 153, 0)
 let kBgColorGray_221 = RGBCOLOR(r: 221, 221, 221)
 let kBgColorGray_238_235_220 = RGBCOLOR(r: 238, 235, 220)
 let kFontColorBlack = RGBCOLOR(r: 32, 32, 32)
+
+func m_AppDelegate() -> AppDelegate {
+    return (UIApplication.shared.delegate as! AppDelegate)
+}
+
