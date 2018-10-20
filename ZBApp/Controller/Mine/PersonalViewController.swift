@@ -100,14 +100,14 @@ class PersonalViewController: UIViewController {
         self.beseInfoButton.mas_makeConstraints { (make:MASConstraintMaker!) in
             make.left.equalTo()(self.view.mas_left)?.offset()(kResizedPoint(pt: 26))
             make.top.equalTo()(self.star.mas_bottom)?.offset()(kResizedPoint(pt: 30))
-            make.width.equalTo()(kResizedPoint(pt: 60))
+            make.width.equalTo()(kResizedPoint(pt: 65))
             make.height.equalTo()(kResizedPoint(pt: 32+17+10))
         }
         
         self.bankInfoButton.mas_makeConstraints { (make:MASConstraintMaker!) in
             make.left.equalTo()(self.beseInfoButton.mas_right)?.offset()(kResizedPoint(pt: 15))
             make.centerY.equalTo()(self.beseInfoButton.mas_centerY)
-            make.width.equalTo()(kResizedPoint(pt: 70))
+            make.width.equalTo()(kResizedPoint(pt: 65))
             make.height.equalTo()(kResizedPoint(pt: 32+17+10))
         }
         

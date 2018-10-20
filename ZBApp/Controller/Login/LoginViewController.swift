@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import BEMCheckBox
 class LoginViewController: UIViewController {
 
     @IBOutlet weak var areaCodeLabel: UILabel!
@@ -15,7 +15,8 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var phoneTextfield: UITextField!
     
     @IBOutlet weak var passwordTextfield: UITextField!
-    @IBOutlet weak var showPasswordSwitch: UISwitch!
+    
+    @IBOutlet weak var checkbox: BEMCheckBox!
     
     @IBOutlet weak var loginButton: UIButton!
     
@@ -26,7 +27,10 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.navigationBar.isHidden = true
-        self.showPasswordSwitch.transform = CGAffineTransform(scaleX: 0.5, y: 0.5)
+        self.checkbox.boxType = BEMBoxType.square
+        self.checkbox.onFillColor = kTintColorYellow
+        self.checkbox.onTintColor = kTintColorYellow
+        self.checkbox.onCheckColor = UIColor.white
     }
 
     @IBAction func loginAction(_ sender: Any) {

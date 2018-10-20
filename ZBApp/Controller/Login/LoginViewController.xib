@@ -13,12 +13,12 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LoginViewController" customModule="ZBApp" customModuleProvider="target">
             <connections>
                 <outlet property="areaCodeLabel" destination="VhA-yj-nHf" id="z9u-ID-uLd"/>
+                <outlet property="checkbox" destination="mgp-kb-vw9" id="S6G-GX-T83"/>
                 <outlet property="loginButton" destination="2sA-fd-ZiR" id="fKY-dA-rTe"/>
                 <outlet property="passwordTextfield" destination="PDB-7t-tuK" id="NAC-sJ-574"/>
                 <outlet property="phoneTextfield" destination="4Y9-rg-HbH" id="627-0w-pyj"/>
                 <outlet property="registerButton" destination="hCG-TI-i8m" id="DRT-yd-v5f"/>
                 <outlet property="resetPasswordButton" destination="s9t-P3-5sl" id="kU7-Ig-w9h"/>
-                <outlet property="showPasswordSwitch" destination="0we-9l-usV" id="YW8-f2-hY8"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -83,14 +83,6 @@
                         <constraint firstAttribute="height" constant="0.5" id="X6w-6a-Ab2"/>
                     </constraints>
                 </view>
-                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0we-9l-usV">
-                    <rect key="frame" x="243.5" y="265" width="26" height="16"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="24" id="Pcx-B4-9Zw"/>
-                        <constraint firstAttribute="height" constant="16" id="uCe-pf-aa1"/>
-                    </constraints>
-                    <color key="onTintColor" red="0.99607843137254903" green="0.59999999999999998" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                </switch>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="显示密码" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qjt-ae-UyN">
                     <rect key="frame" x="279.5" y="266" width="65.5" height="19.5"/>
                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
@@ -126,6 +118,14 @@
                         <action selector="resetpasswordAction:" destination="-1" eventType="touchUpInside" id="Kbj-C0-XJ9"/>
                     </connections>
                 </button>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mgp-kb-vw9" customClass="BEMCheckBox">
+                    <rect key="frame" x="249.5" y="266" width="20" height="20"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="20" id="NQF-DY-8bu"/>
+                        <constraint firstAttribute="width" constant="20" id="d3u-IU-fhv"/>
+                    </constraints>
+                </view>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
@@ -144,9 +144,10 @@
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="s9t-P3-5sl" secondAttribute="trailing" constant="30" id="LXH-7n-jya"/>
                 <constraint firstItem="gVe-yu-m67" firstAttribute="leading" secondItem="4Y9-rg-HbH" secondAttribute="leading" id="Lnn-nm-p9D"/>
                 <constraint firstItem="Jvn-tZ-hn9" firstAttribute="leading" secondItem="eRM-jM-KXe" secondAttribute="trailing" constant="10" id="Lpt-T3-vdU"/>
+                <constraint firstItem="Qjt-ae-UyN" firstAttribute="centerY" secondItem="mgp-kb-vw9" secondAttribute="centerY" id="LqU-yU-KoE"/>
                 <constraint firstItem="VhA-yj-nHf" firstAttribute="centerX" secondItem="eRM-jM-KXe" secondAttribute="centerX" id="MUb-B5-fLt"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="2sA-fd-ZiR" secondAttribute="trailing" constant="35" id="OQw-Pi-rvZ"/>
-                <constraint firstItem="Qjt-ae-UyN" firstAttribute="centerY" secondItem="0we-9l-usV" secondAttribute="centerY" constant="3" id="QcY-zH-lPN"/>
+                <constraint firstItem="Qjt-ae-UyN" firstAttribute="leading" secondItem="mgp-kb-vw9" secondAttribute="trailing" constant="10" id="Ovn-MP-RM2"/>
                 <constraint firstItem="4Y9-rg-HbH" firstAttribute="leading" secondItem="Jvn-tZ-hn9" secondAttribute="trailing" constant="20" id="QzW-4b-Lpj"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Qjt-ae-UyN" secondAttribute="trailing" constant="30" id="S3b-tR-I8U"/>
                 <constraint firstItem="PDB-7t-tuK" firstAttribute="top" secondItem="gVe-yu-m67" secondAttribute="bottom" constant="5" id="TIZ-16-tDj"/>
@@ -158,7 +159,6 @@
                 <constraint firstItem="2sA-fd-ZiR" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="35" id="mnS-0a-SaG"/>
                 <constraint firstItem="s9t-P3-5sl" firstAttribute="centerY" secondItem="hCG-TI-i8m" secondAttribute="centerY" id="pU7-YD-N5q"/>
                 <constraint firstItem="hCG-TI-i8m" firstAttribute="top" secondItem="2sA-fd-ZiR" secondAttribute="bottom" constant="60" id="tl5-Rz-ZZz"/>
-                <constraint firstItem="Qjt-ae-UyN" firstAttribute="leading" secondItem="0we-9l-usV" secondAttribute="trailing" constant="12" id="u3C-qg-yVM"/>
                 <constraint firstItem="gVe-yu-m67" firstAttribute="trailing" secondItem="4Y9-rg-HbH" secondAttribute="trailing" id="xgy-bV-WYe"/>
                 <constraint firstItem="PDB-7t-tuK" firstAttribute="trailing" secondItem="4Y9-rg-HbH" secondAttribute="trailing" id="ytu-4d-Ufo"/>
             </constraints>
@@ -167,6 +167,6 @@
         </view>
     </objects>
     <resources>
-        <image name="school_icon01" width="12" height="7.5"/>
+        <image name="school_icon01" width="12" height="7"/>
     </resources>
 </document>
