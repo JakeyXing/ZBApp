@@ -7,9 +7,13 @@
 //
 
 import UIKit
+import MBProgressHUD
+import Toast
 
 class MissionDetailBaseViewController: UIViewController {
 
+    var taskExecuteId: Int64 = 0
+    lazy var task: ZB_Task = ZB_Task()
     lazy var navigationBar: JHNavigationBar = {
         let view = JHNavigationBar(frame: CGRect.init(x: 0, y: 0, width: 0, height: 0))
         view.backgroundColor = UIColor.white
@@ -27,6 +31,10 @@ class MissionDetailBaseViewController: UIViewController {
     
     lazy var missionBaseInfoView: MissionBaseInfoView = {
         let view = MissionBaseInfoView(frame: CGRect.init(x: 0, y: 0, width: DEVICE_WIDTH, height: kResizedPoint(pt: 164)))
+        view.addressLabel.isUserInteractionEnabled = true
+       
+        let tap = UITapGestureRecognizer(target: self, action: #selector(addressTapped))
+        view.addressLabel.addGestureRecognizer(tap)
         return view
     }()
     
@@ -38,18 +46,52 @@ class MissionDetailBaseViewController: UIViewController {
         self.navigationBar.delegate = self
         self.view.addSubview(self.scrollview)
         self.scrollview.addSubview(self.missionBaseInfoView)
+        self.loadNewData()
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    //MARK: - actions
+    
+    @objc private func addressTapped(){
+        let map=MapViewController()
+        map.hidesBottomBarWhenPushed = true
+        self.navigationController?.pushViewController(map, animated: true)
     }
-    */
+    
+    
+    func loadNewData() {
+        
+        let params = ["taskExecuteId":self.taskExecuteId] as [String : Any]
+        
+        MBProgressHUD.showAdded(to: self.view, animated: true)
+        NetWorkManager.shared.loadRequest(method: .post, url: TaskDetailUrl, parameters: params as [String : Any], success: { (data) in
+            MBProgressHUD.hide(for: self.view, animated: true)
+            
+            
+            let resultDic = data as! Dictionary<String,AnyObject>
+            let dic = resultDic["data"]
+            if dic == nil {
+                return
+            }
+            
+            let model: ZB_Task = (NSObject.yy_model(withJSON: dic as Any) as? ZB_Task)!
+            
+            self.task = model
+            
+            self.configData()
+        }) { (data, errMsg) in
+            MBProgressHUD.hide(for: self.view, animated: true)
+            self.view.makeToast(errMsg, duration: 2, position: CSToastPositionCenter)
+            
+            
+        }
+        
+    }
+    
+    
+
+    func configData() {
+        
+    }
 
 }
 

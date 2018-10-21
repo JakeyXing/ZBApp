@@ -8,9 +8,12 @@
 
 import UIKit
 import BEMCheckBox
-class LoginViewController: UIViewController {
+import Toast
+import MBProgressHUD
 
-    @IBOutlet weak var areaCodeLabel: UILabel!
+class LoginViewController: UIViewController,BEMCheckBoxDelegate {
+
+    @IBOutlet weak var areaDropdownView: JHDropdownView!
     
     @IBOutlet weak var phoneTextfield: UITextField!
     
@@ -31,11 +34,43 @@ class LoginViewController: UIViewController {
         self.checkbox.onFillColor = kTintColorYellow
         self.checkbox.onTintColor = kTintColorYellow
         self.checkbox.onCheckColor = UIColor.white
+        self.checkbox.delegate = self
+        
+        self.areaDropdownView.contentLabel.text = "+86"
+        self.areaDropdownView.contentLabel.textColor = kFontColorBlack
+        self.areaDropdownView.dataArray = ["+86","+81"]
+        self.areaDropdownView.extraTop = 0
     }
 
     @IBAction func loginAction(_ sender: Any) {
-        let sharedAppdelegate:AppDelegate = UIApplication.shared.delegate as! AppDelegate
-        sharedAppdelegate.window?.rootViewController = sharedAppdelegate.mainTabBarVc
+        if self.phoneTextfield.text?.count == 0 {
+            self.view.makeToast("请输入手机号", duration: 2, position: CSToastPositionCenter)
+            return
+            
+        }
+        
+        if self.passwordTextfield.text?.count == 0 {
+            self.view.makeToast("请输入密码", duration: 2, position: CSToastPositionCenter)
+            return
+            
+        }
+        
+        let params = ["countryCode":self.areaDropdownView.contentLabel.text,"phone":self.phoneTextfield.text,"password":self.passwordTextfield.text,]
+        
+        MBProgressHUD.showAdded(to: self.view, animated: true)
+        NetWorkManager.shared.loadNoTokenRequest(method: .post, url: LoginUrl, parameters: params as [String : Any], success: { (data) in
+            
+             MBProgressHUD.hide(for: self.view, animated: true)
+            
+        }) { (data, errMsg) in
+            MBProgressHUD.hide(for: self.view, animated: true)
+            self.view.makeToast(errMsg, duration: 2, position: CSToastPositionCenter)
+            
+            
+        }
+        
+//        let sharedAppdelegate:AppDelegate = UIApplication.shared.delegate as! AppDelegate
+//        sharedAppdelegate.window?.rootViewController = sharedAppdelegate.mainTabBarVc
     }
     
     @IBAction func registerAction(_ sender: Any) {
@@ -45,5 +80,10 @@ class LoginViewController: UIViewController {
     @IBAction func resetpasswordAction(_ sender: Any) {
         let resetVC = ResetPasswordViewController()
         self.navigationController?.pushViewController(resetVC, animated: true)
+    }
+    
+    
+    func didTap(_ checkBox: BEMCheckBox) {
+        self.passwordTextfield.isSecureTextEntry = !self.checkbox.on
     }
 }

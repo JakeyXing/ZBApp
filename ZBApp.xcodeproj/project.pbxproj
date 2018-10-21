@@ -71,6 +71,13 @@
 		99D556FA21788A7E006C92A3 /* MissionSegmentBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99D556F921788A7E006C92A3 /* MissionSegmentBar.swift */; };
 		99D69A222175CCC400A5DC09 /* CommonMethod.m in Sources */ = {isa = PBXBuildFile; fileRef = 99D69A212175CCC400A5DC09 /* CommonMethod.m */; };
 		99D69A242175E69400A5DC09 /* repairAddCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99D69A232175E69400A5DC09 /* repairAddCell.swift */; };
+		99D781AD217C6C1600611DE0 /* ZB_Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99D781AC217C6C1600611DE0 /* ZB_Task.swift */; };
+		99D781AF217C6F8A00611DE0 /* ZB_Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99D781AE217C6F8A00611DE0 /* ZB_Photo.swift */; };
+		99D781B1217C707D00611DE0 /* ZB_TaskPhotoItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99D781B0217C707D00611DE0 /* ZB_TaskPhotoItem.swift */; };
+		99D781B3217C723100611DE0 /* ZB_TaskInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99D781B2217C723100611DE0 /* ZB_TaskInfo.swift */; };
+		99D781B5217C724700611DE0 /* ZB_Address.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99D781B4217C724700611DE0 /* ZB_Address.swift */; };
+		99D781B7217C746E00611DE0 /* ZB_TaskProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99D781B6217C746E00611DE0 /* ZB_TaskProperty.swift */; };
+		99D781B9217C77E900611DE0 /* ZB_TaskLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99D781B8217C77E900611DE0 /* ZB_TaskLog.swift */; };
 		99F1FD232174E12B002699FE /* RepairPicUploadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99F1FD222174E12B002699FE /* RepairPicUploadView.swift */; };
 		99F1FD252174E156002699FE /* RepairImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99F1FD242174E156002699FE /* RepairImageCell.swift */; };
 		99F1FD272174E17E002699FE /* RepairHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99F1FD262174E17E002699FE /* RepairHeaderView.swift */; };
@@ -164,6 +171,13 @@
 		99D69A202175CCC400A5DC09 /* CommonMethod.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommonMethod.h; sourceTree = "<group>"; };
 		99D69A212175CCC400A5DC09 /* CommonMethod.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CommonMethod.m; sourceTree = "<group>"; };
 		99D69A232175E69400A5DC09 /* repairAddCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = repairAddCell.swift; sourceTree = "<group>"; };
+		99D781AC217C6C1600611DE0 /* ZB_Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZB_Task.swift; sourceTree = "<group>"; };
+		99D781AE217C6F8A00611DE0 /* ZB_Photo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZB_Photo.swift; sourceTree = "<group>"; };
+		99D781B0217C707D00611DE0 /* ZB_TaskPhotoItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZB_TaskPhotoItem.swift; sourceTree = "<group>"; };
+		99D781B2217C723100611DE0 /* ZB_TaskInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZB_TaskInfo.swift; sourceTree = "<group>"; };
+		99D781B4217C724700611DE0 /* ZB_Address.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZB_Address.swift; sourceTree = "<group>"; };
+		99D781B6217C746E00611DE0 /* ZB_TaskProperty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZB_TaskProperty.swift; sourceTree = "<group>"; };
+		99D781B8217C77E900611DE0 /* ZB_TaskLog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZB_TaskLog.swift; sourceTree = "<group>"; };
 		99F1FD222174E12B002699FE /* RepairPicUploadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepairPicUploadView.swift; sourceTree = "<group>"; };
 		99F1FD242174E156002699FE /* RepairImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepairImageCell.swift; sourceTree = "<group>"; };
 		99F1FD262174E17E002699FE /* RepairHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepairHeaderView.swift; sourceTree = "<group>"; };
@@ -368,6 +382,13 @@
 			isa = PBXGroup;
 			children = (
 				99D104702179CD7700713884 /* ZB_User.swift */,
+				99D781AC217C6C1600611DE0 /* ZB_Task.swift */,
+				99D781B0217C707D00611DE0 /* ZB_TaskPhotoItem.swift */,
+				99D781AE217C6F8A00611DE0 /* ZB_Photo.swift */,
+				99D781B2217C723100611DE0 /* ZB_TaskInfo.swift */,
+				99D781B4217C724700611DE0 /* ZB_Address.swift */,
+				99D781B6217C746E00611DE0 /* ZB_TaskProperty.swift */,
+				99D781B8217C77E900611DE0 /* ZB_TaskLog.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -550,8 +571,11 @@
 				"${BUILT_PRODUCTS_DIR}/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/JXPhotoBrowser/JXPhotoBrowser.framework",
 				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
+				"${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework",
+				"${BUILT_PRODUCTS_DIR}/MJRefresh/MJRefresh.framework",
 				"${BUILT_PRODUCTS_DIR}/Masonry/Masonry.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
+				"${BUILT_PRODUCTS_DIR}/Toast/Toast.framework",
 				"${BUILT_PRODUCTS_DIR}/YYModel/YYModel.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -567,8 +591,11 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManagerSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JXPhotoBrowser.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBProgressHUD.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MJRefresh.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Masonry.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Toast.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/YYModel.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -587,6 +614,7 @@
 				99A8C46B21797CB5009509B8 /* SettingViewController.swift in Sources */,
 				990F7B092172068D0075A04C /* ListRoomInfoView.swift in Sources */,
 				994F6348216C78F20063044B /* UIColor+CZAddition.m in Sources */,
+				99D781AF217C6F8A00611DE0 /* ZB_Photo.swift in Sources */,
 				99017C18217077CE00155724 /* ResetPasswordViewController.swift in Sources */,
 				994F6344216C78F20063044B /* NSString+CZHash.m in Sources */,
 				994F633D216C78F20063044B /* UILabel+CZAddition.m in Sources */,
@@ -596,6 +624,7 @@
 				990F7B0B217226030075A04C /* RoomRuteCell.swift in Sources */,
 				990F7AFB217197C40075A04C /* CarryMissonImageAndFlieView.swift in Sources */,
 				9923CBB5216B56F900EDCA7A /* MissionCell.swift in Sources */,
+				99D781B3217C723100611DE0 /* ZB_TaskInfo.swift in Sources */,
 				99D69A222175CCC400A5DC09 /* CommonMethod.m in Sources */,
 				990F7AF62170ED560075A04C /* ViewCategory.swift in Sources */,
 				994F6346216C78F20063044B /* NSObject+CZRuntime.m in Sources */,
@@ -616,11 +645,13 @@
 				99017C1F217088AF00155724 /* MissionDetailBaseViewController.swift in Sources */,
 				99425B552174648B00A18E45 /* CleanImageCell.swift in Sources */,
 				99D104742179CDE500713884 /* NetWorkManager.swift in Sources */,
+				99D781AD217C6C1600611DE0 /* ZB_Task.swift in Sources */,
 				994F6343216C78F20063044B /* UIView+CZAddition.m in Sources */,
 				99D556F821785996006C92A3 /* PersonalInfoController.swift in Sources */,
 				994EE460216DDC3700EB86DD /* MissionTypeTopBar.swift in Sources */,
 				9921CE2E2160AB56005DC836 /* HomeViewController.swift in Sources */,
 				994F6340216C78F20063044B /* UIViewController+CZAddition.m in Sources */,
+				99D781B7217C746E00611DE0 /* ZB_TaskProperty.swift in Sources */,
 				994F6355216C9C480063044B /* JHNavigationBar.swift in Sources */,
 				994F6342216C78F20063044B /* NSString+CZPath.m in Sources */,
 				99017C2121708A6B00155724 /* MissionBaseInfoView.swift in Sources */,
@@ -628,6 +659,7 @@
 				99425B572174763300A18E45 /* ClaenCollectionHeaderView.swift in Sources */,
 				99017C232170A8E900155724 /* CarryMissionInfoView.swift in Sources */,
 				990F7AFD2171B3700075A04C /* FlieItem.swift in Sources */,
+				99D781B1217C707D00611DE0 /* ZB_TaskPhotoItem.swift in Sources */,
 				99C2C32321772FAD00C0B94A /* QueFeedbackController.swift in Sources */,
 				9945A2B92178DB2400240437 /* WebViewController.swift in Sources */,
 				990F7AFF2171C5E80075A04C /* FeedbackView.swift in Sources */,
@@ -642,7 +674,9 @@
 				9921CE302160AB70005DC836 /* UnTakeMissionViewController.swift in Sources */,
 				9945BECF217705780001593F /* CertifApplyController.swift in Sources */,
 				990F7B012171D2010075A04C /* CheckView.swift in Sources */,
+				99D781B9217C77E900611DE0 /* ZB_TaskLog.swift in Sources */,
 				990F7B032171D8D80075A04C /* CleanMissionDetailViewController.swift in Sources */,
+				99D781B5217C724700611DE0 /* ZB_Address.swift in Sources */,
 				990F7B07217205490075A04C /* RepairMissionDetailViewController.swift in Sources */,
 				994F6321216C57640063044B /* Constants.swift in Sources */,
 				99F1FD272174E17E002699FE /* RepairHeaderView.swift in Sources */,

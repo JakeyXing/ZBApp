@@ -9,10 +9,21 @@
 import UIKit
 import Masonry
 
+protocol JHDropdownViewDelegate: class {
+    func dropdownView(_ dropdownView: JHDropdownView,didSelectedString selectedStr: String)
+}
+extension JHDropdownViewDelegate {
+    func dropdownView(_ dropdownView: JHDropdownView,didSelectedString selectedStr: String){
+        print("ccccc")
+    }
+}
+
 class JHDropdownView: UIView,JHListChooseViewDelegate {
+    //MARK: - delegate
+    weak var delegate: JHDropdownViewDelegate?
     var dataArray : [String]!
         
-    
+    var extraTop = navigationBarHeight
     lazy var typeListView: JHListChooseView = {
         let view = JHListChooseView(frame: CGRect.init(x: 0, y: 0, width: DEVICE_WIDTH, height: DEVICE_HEIGHT))
         view.delegate = self
@@ -29,6 +40,11 @@ class JHDropdownView: UIView,JHListChooseViewDelegate {
     //MARK: - lifeCycle
     override init(frame: CGRect) {
         super.init(frame: frame)
+        self.initView()
+        
+    }
+    
+    func initView() {
         self.backgroundColor = UIColor.white
         self.addSubview(iconImageView)
         self.addSubview(contentLabel)
@@ -54,11 +70,15 @@ class JHDropdownView: UIView,JHListChooseViewDelegate {
         
         let tap2 = UITapGestureRecognizer(target: self, action: #selector(imageTapped))
         self.iconImageView.addGestureRecognizer(tap2)
-        
     }
     
     required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        super.init(coder: aDecoder)
+        self.initView()
+    }
+    
+    override func awakeFromNib() {
+        self.initView()
     }
     
     //MARK: - actions
@@ -74,7 +94,7 @@ class JHDropdownView: UIView,JHListChooseViewDelegate {
     func showMenu(){
         self.typeListView.typeArray = self.dataArray
         
-        self.typeListView.configOrigin(origin: CGPoint.init(x: self.frame.origin.x, y: self.bottom+navigationBarHeight))
+        self.typeListView.configOrigin(origin: CGPoint.init(x: self.frame.origin.x, y: self.bottom+extraTop))
         UIApplication.shared.keyWindow?.addSubview(self.typeListView)
     }
     
@@ -86,6 +106,7 @@ class JHDropdownView: UIView,JHListChooseViewDelegate {
     }
     
     func listChooseView(_ listChooseView: JHListChooseView, didSelectedIndex index: NSInteger) {
+        self.delegate?.dropdownView(self, didSelectedString: self.dataArray[index])
         self.contentLabel.text = self.dataArray[index]
         self.typeListView.removeFromSuperview()
     }

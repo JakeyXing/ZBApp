@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import YYModel
 
 class ZB_User: NSObject {
     @objc var accessToken:String?
@@ -15,6 +16,10 @@ class ZB_User: NSObject {
     
     
     
-    
+
+    override var description: String {
+        return yy_modelDescription()
+    }
+
 
 }

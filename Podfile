@@ -17,5 +17,8 @@ target 'ZBApp' do
   pod 'JXPhotoBrowser'
   pod 'IQKeyboardManagerSwift'
   pod 'BEMCheckBox'
+  pod 'MBProgressHUD'
+  pod 'MJRefresh'
+  pod 'Toast'
 
 end

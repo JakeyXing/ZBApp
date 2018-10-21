@@ -13,7 +13,6 @@ class MissionBaseInfoView: UIView {
 
     //MARK: - 控件
     
-    
     private lazy var statusLabel: UILabel = UILabel.cz_label(withText: "已完成", fontSize: kResizedFont(ft: 15), color: kFontColorGray)
     
     lazy var contentView: UIView = {
@@ -53,7 +52,7 @@ class MissionBaseInfoView: UIView {
     
     private lazy var salaryLabel_2: UILabel = UILabel.cz_label(withText: "其他薪资 2000 JPY", fontSize: kResizedFont(ft: 16), color: kFontColorGray)
     
-    private lazy var addressLabel: UILabel = UILabel.cz_label(withText: "浪速区大国2-10-7 難波南", fontSize: kResizedFont(ft: 15), color: kFontColorGray)
+    lazy var addressLabel: UILabel = UILabel.cz_label(withText: "浪速区大国2-10-7 難波南", fontSize: kResizedFont(ft: 15), color: kFontColorGray)
     
     lazy var addressIcon: UIImageView = {
         let img = UIImageView()

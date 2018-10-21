@@ -7,6 +7,10 @@
 //
 
 import UIKit
+import MJRefresh
+import MBProgressHUD
+import Toast
+
 private let  kMissionCellID = "kMissionCellID"
 class HomeViewController: UIViewController {
     
@@ -19,10 +23,15 @@ class HomeViewController: UIViewController {
     
     private lazy var typeSelectBar: MissionTypeTopBar = {
         let view = MissionTypeTopBar(frame: CGRect.init(x: 0, y: 0, width: 0, height: 0))
+        view.taskTypeDropdownView.delegate = self
+        view.delegate = self
         return view
     }()
     
     var tableview:UITableView?
+    
+    lazy var taskList = [ZB_Task]()
+    var pagendex = 1
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,12 +49,107 @@ class HomeViewController: UIViewController {
         tableview?.dataSource = self;
         tableview?.delegate = self;
         tableview?.register(MissionCell.self, forCellReuseIdentifier: kMissionCellID)
+        
+        let header = MJRefreshNormalHeader(refreshingTarget: self, refreshingAction: #selector(refreshData))
+        header?.isAutomaticallyChangeAlpha = true
+        header?.lastUpdatedTimeLabel.isHidden = true
+        tableview?.mj_header = header
+        
+        let footer = MJRefreshBackNormalFooter(refreshingTarget: self, refreshingAction: #selector(loadMoreData))
+        tableview?.mj_footer = footer
+        
         self.view.addSubview(tableview!);
+        
+    }
+    
+    func loadNewData() {
+        
+        pagendex = 1
+        
+        let params = ["taskDate":"","taskType":"","page":pagendex] as [String : Any]
+        
+        MBProgressHUD.showAdded(to: self.view, animated: true)
+        NetWorkManager.shared.loadRequest(method: .post, url: LoginUrl, parameters: params as [String : Any], success: { (data) in
+            
+            MBProgressHUD.hide(for: self.view, animated: true)
+            
+            self.taskList.removeAll()
+            let resultDic = data as! Dictionary<String,AnyObject>
+            let dic = resultDic["data"] as! Dictionary<String,AnyObject>
+            let list = dic["list"]
+            guard let array = (NSArray.yy_modelArray(with: ZB_Task.self, json: (list ?? []))) as? [ZB_Task] else{
+                return
+            }
+            self.taskList.append(contentsOf: array)
+            
+        }) { (data, errMsg) in
+            MBProgressHUD.hide(for: self.view, animated: true)
+            self.view.makeToast(errMsg, duration: 2, position: CSToastPositionCenter)
+            
+            
+        }
+        
+    }
+    
+    @objc private func refreshData(){
+        pagendex = 1
+        self.tableview?.mj_footer.state = MJRefreshState.idle
+        let params = ["taskDate":"","taskType":"","page":pagendex] as [String : Any]
+        
+        NetWorkManager.shared.loadRequest(method: .post, url: LoginUrl, parameters: params as [String : Any], success: { (data) in
+            self.tableview?.mj_header.endRefreshing()
+            
+            self.taskList.removeAll()
+            let resultDic = data as! Dictionary<String,AnyObject>
+            let dic = resultDic["data"] as! Dictionary<String,AnyObject>
+            let list = dic["list"]
+            guard let array = (NSArray.yy_modelArray(with: ZB_Task.self, json: (list ?? []))) as? [ZB_Task] else{
+                return
+            }
+            self.taskList.append(contentsOf: array)
+            
+            
+        }) { (data, errMsg) in
+            self.tableview?.mj_header.endRefreshing()
+            self.view.makeToast(errMsg, duration: 2, position: CSToastPositionCenter)
+            
+            
+        }
+        
+        
+    }
+    
+    @objc private func loadMoreData(){
+        
+        pagendex  += 1
+        
+        let params = ["taskDate":"","taskType":"","page":pagendex] as [String : Any]
+        
+        NetWorkManager.shared.loadRequest(method: .post, url: LoginUrl, parameters: params as [String : Any], success: { (data) in
+            
+            self.tableview?.mj_footer.endRefreshing()
+          
+            let resultDic = data as! Dictionary<String,AnyObject>
+            let dic = resultDic["data"] as! Dictionary<String,AnyObject>
+            let list = dic["list"]
+            guard let array = (NSArray.yy_modelArray(with: ZB_Task.self, json: (list ?? []))) as? [ZB_Task] else{
+                return
+            }
+            self.taskList.append(contentsOf: array)
+            
+        }) { (data, errMsg) in
+            self.tableview?.mj_footer.endRefreshing()
+            self.view.makeToast(errMsg, duration: 2, position: CSToastPositionCenter)
+            
+            
+        }
+        
+        
     }
     
 }
 
-extension HomeViewController:UITableViewDelegate,UITableViewDataSource{
+extension HomeViewController:UITableViewDelegate,UITableViewDataSource,JHDropdownViewDelegate,MissionTypeTopBarDelegate{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 4
     }
@@ -77,6 +181,23 @@ extension HomeViewController:UITableViewDelegate,UITableViewDataSource{
             
         }
         
+    }
+    
+    //MARK: - JHDropdownViewDelegate
+    func dropdownView(_ dropdownView: JHDropdownView, didSelectedString selectedStr: String) {
+        
+        self.loadNewData()
+        
+    }
+    
+    func missionTypeTopBar(_ topBar: MissionTypeTopBar, didSelectedDate date: Date) {
+        let formatter = DateFormatter()
+        //日期样式
+        formatter.dateFormat = "yyyy-MM-dd"
+//        print(formatter.string(from: date))
+        
+        
+        self.loadNewData()
     }
     
 }

@@ -101,11 +101,19 @@ class NetWorkManager: AFHTTPSessionManager {
                  success : @escaping(_ json:Any?)->(),
                  fail : @escaping(_ errMsg:String)->() )  {
         
+        
+        print("\n\n\n**************************************\n\nURL    -> \(url)\n\nParams -> \(String(describing: parameters))\n\n**************************************\n\n\n")
+        
         let success = { (task:URLSessionDataTask , json : Any?)->() in
+           
+            print("\n\n\n**************************************\n\nURL-> \(url) \n\nResult -> \(String(describing: json))\n\n**************************************\n\n\n")
+            
             success(json)
         }
         
         let failure = { (task:URLSessionDataTask? , error : Error)->() in
+            
+            print("\n\n\n**************************************\n\nURL   -> \(url) \n\nError -> \(String(describing: error))\n\n**************************************\n\n\n")
             
             var errMsg = ""
             if (task?.response as? HTTPURLResponse)?.statusCode == 1001 {

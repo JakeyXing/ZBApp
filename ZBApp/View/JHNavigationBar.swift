@@ -13,6 +13,11 @@ protocol JHNavigationBarDelegate: class {
     func leftAction()
     func rightAction()
 }
+extension JHNavigationBarDelegate {
+    func rightAction() {
+        print("Called")
+    }
+}
 
 class JHNavigationBar: UIView {
     //MARK: - delegate
@@ -79,6 +84,7 @@ class JHNavigationBar: UIView {
     }
     
     @objc private func rightAction(){
+       
         self.delegate?.rightAction()
     }
     

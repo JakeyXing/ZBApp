@@ -8,14 +8,14 @@
 
 import UIKit
 
-class WebViewController: UIViewController {
+class WebViewController: UIViewController,JHNavigationBarDelegate {
 
     var titleStr: String?
     var urlStr: String?
     private lazy var navigationBar: JHNavigationBar = {
         let view = JHNavigationBar(frame: CGRect.init(x: 0, y: 0, width: 0, height: 0))
         view.backgroundColor = UIColor.white
-        view.backButton.isHidden = true
+        view.delegate = self
         return view
     }()
     
@@ -34,6 +34,11 @@ class WebViewController: UIViewController {
         self.navigationBar.titleLabel.text = self.titleStr;
         self.webview.loadRequest(URLRequest.init(url: URL.init(string: self.urlStr!)!))
 
+    }
+    
+    //MARK: - JHNavigationBarDelegate
+    func leftAction() {
+        self.navigationController?.popViewController(animated: true)
     }
 
 

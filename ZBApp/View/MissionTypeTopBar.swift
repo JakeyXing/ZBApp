@@ -9,18 +9,23 @@
 import UIKit
 import Masonry
 
+protocol MissionTypeTopBarDelegate: class {
+    func missionTypeTopBar(_ topBar: MissionTypeTopBar,didSelectedDate date: Date)
+}
+
 class MissionTypeTopBar: UIView {
-    //MARK: - 控件
-    private lazy var typeTitleButton: UIButton = {
-        let btn = UIButton(type: UIButton.ButtonType.custom)
-        btn.setTitleColor(kFontColorBlack, for: UIControl.State.normal)
-        btn.titleLabel?.font = kFont(size: 16)
-        btn.setTitle("摆场", for:  UIControl.State.normal)
-        btn.addTarget(self, action: #selector(typeAction), for: UIControl.Event.touchUpInside)
-        return btn
-    }()
     
-    private lazy var iconImageView: UIImageView = UIImageView(image: UIImage(named:"school_icon01"))
+    //MARK: - delegate
+    weak var delegate: MissionTypeTopBarDelegate?
+    //MARK: - 控件
+    lazy var taskTypeDropdownView: JHDropdownView = {
+        let view = JHDropdownView(frame: CGRect.init())
+        view.contentLabel.text = "全部类型"
+        view.contentLabel.textColor = kFontColorBlack
+        view.dataArray = ["全部类型","摆场","撤场","维修","清扫"]
+        view.extraTop = statusBarHeight
+        return view
+    }()
     
     private lazy var dateChooseButton: UIButton = {
         let btn = UIButton(type: UIButton.ButtonType.custom)
@@ -31,12 +36,6 @@ class MissionTypeTopBar: UIView {
         return btn
     }()
     
-    lazy var typeListView: JHListChooseView = {
-        let view = JHListChooseView(frame: CGRect.init(x: 0, y: 0, width: DEVICE_WIDTH, height: DEVICE_HEIGHT))
-        view.delegate = self
-       
-        return view
-    }()
     
     //MARK: - lifeCycle
     override init(frame: CGRect) {
@@ -50,12 +49,6 @@ class MissionTypeTopBar: UIView {
     }
     
     //MARK: - actions
-    @objc private func typeAction(){
-        self.typeListView.typeArray = ["qqqq","eeee"]
-        UIApplication.shared.keyWindow?.addSubview(self.typeListView)
-        
-    }
-    
     @objc private func dateAction(){
         let calendarBg = CalendarBgView(frame: CGRect.init())
         calendarBg.delegate = self;
@@ -65,23 +58,15 @@ class MissionTypeTopBar: UIView {
     
 }
 
-extension MissionTypeTopBar: JHListChooseViewDelegate,CalendarBgViewDelegate{
-    func listChooseViewDidClosed(_ listChooseView: JHListChooseView) {
-        self.typeListView.removeFromSuperview()
-    }
-    
-    func listChooseView(_ listChooseView: JHListChooseView, didSelectedIndex index: NSInteger) {
-        self.typeListView.removeFromSuperview()
-    }
-    
+extension MissionTypeTopBar: CalendarBgViewDelegate{
     func calendarDidChoosedDate(choosedDate: Date) {
-        //更新提醒时间文本框
         let formatter = DateFormatter()
         //日期样式
         formatter.dateFormat = "yyyy-MM-dd"
         print(formatter.string(from: choosedDate))
         
         self.dateChooseButton.setTitle(formatter.string(from: choosedDate), for: .normal)
+        self.delegate?.missionTypeTopBar(self, didSelectedDate: choosedDate)
     }
     
 }
@@ -91,31 +76,24 @@ extension MissionTypeTopBar{
     //MARK: - private methods
     
     func initView(){
-        self.addSubview(self.typeTitleButton)
-        self.addSubview(self.iconImageView)
+        self.addSubview(self.taskTypeDropdownView)
         self.addSubview(self.dateChooseButton)
     
         self.subViewsLayout()
     }
     
     func subViewsLayout(){
-        self.typeTitleButton.mas_makeConstraints { (make:MASConstraintMaker!) in
+        self.taskTypeDropdownView.mas_makeConstraints { (make:MASConstraintMaker!) in
             make.centerY.equalTo()(self.mas_centerY)
             make.left.equalTo()(self)?.offset()(kResizedPoint(pt: 20))
-            make.width.equalTo()(kResizedPoint(pt: 50))
-            make.height.equalTo()(30)
+            make.width.equalTo()(kResizedPoint(pt: 80))
+            make.height.equalTo()(28)
         }
         
-        self.iconImageView.mas_makeConstraints { (make:MASConstraintMaker!) in
-            make.centerY.equalTo()(self.mas_centerY)
-            make.left.equalTo()(self.typeTitleButton.mas_right)?.offset()(kResizedPoint(pt: 20))
-            make.width.equalTo()(kResizedPoint(pt: 9))
-            make.height.equalTo()(kResizedPoint(pt: 6))
-        }
         
         self.dateChooseButton.mas_makeConstraints { (make:MASConstraintMaker!) in
             make.centerY.equalTo()(self.mas_centerY)
-            make.left.equalTo()(self.iconImageView.mas_right)?.offset()(kResizedPoint(pt: 20))
+            make.left.equalTo()(self.taskTypeDropdownView.mas_right)?.offset()(kResizedPoint(pt: 20))
             make.width.equalTo()(kResizedPoint(pt: 90))
             make.height.equalTo()(kResizedPoint(pt: 30))
         }

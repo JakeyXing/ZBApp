@@ -70,6 +70,10 @@ class CarryMissionDetailViewController: MissionDetailBaseViewController {
     
     }
     
+    override func configData() {
+        
+    }
+    
     
     //MARK: - actions
     @objc private func takeAction(){
