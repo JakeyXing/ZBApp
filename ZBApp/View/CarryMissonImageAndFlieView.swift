@@ -10,7 +10,14 @@ import UIKit
 import Masonry
 import SDWebImage
 
+protocol CarryMissonImageAndFlieViewDelegate: class {
+    func carryMissonImageAndFlieView(_ view: CarryMissonImageAndFlieView,didSelectedImageAtIndex index: NSInteger)
+    func carryMissonImageAndFlieView(_ view: CarryMissonImageAndFlieView,didSelectedFileAtIndex index: NSInteger)
+    
+}
 class CarryMissonImageAndFlieView: UIView {
+    
+    weak var delegate: CarryMissonImageAndFlieViewDelegate?
     
     lazy var contentView: UIView = {
         let content = UIView()
@@ -149,21 +156,21 @@ extension CarryMissonImageAndFlieView{
         let width:CGFloat = 98
         let cap:CGFloat = 8
         for i in 0..<count {
-//            let btn = UIButton(type: <#T##UIButton.ButtonType#>)
-            let imageView = UIImageView(frame: CGRect.init(x: 0, y: 0, width: kResizedPoint(pt: width), height: kResizedPoint(pt: width)))
-            self.picBgView.addSubview(imageView)
-            imageView.tag = 100 + i
+            let btn = UIButton(type: .custom)
+            btn.frame = CGRect.init(x: 0, y: 0, width: kResizedPoint(pt: width), height: kResizedPoint(pt: width))
+            self.picBgView.addSubview(btn)
+            btn.tag = 100 + i
            
-            imageView.left = CGFloat(i%3)*kResizedPoint(pt: width+cap)
-            imageView.top = CGFloat(i/3)*kResizedPoint(pt: width+cap)
+            btn.left = CGFloat(i%3)*kResizedPoint(pt: width+cap)
+            btn.top = CGFloat(i/3)*kResizedPoint(pt: width+cap)
             
             guard let urlString = self.imageArray?[i],
                 let url = URL(string: urlString) else {
                     return
             }
             
-            imageView.sd_setImage(with: url, placeholderImage: UIImage(named: ""))
-            
+            btn.sd_setImage(with: url, for: .normal, completed: nil)
+            btn.addTarget(self, action: #selector(tappedImageAction), for: UIControl.Event.touchUpInside)
         }
         
         let nex = count%3
@@ -204,6 +211,7 @@ extension CarryMissonImageAndFlieView{
             }
             
             flieItem.fielImageView.sd_setImage(with: url, placeholderImage: UIImage(named: ""))
+            flieItem.addTarget(self, action: #selector(tappedFileAction), for: UIControl.Event.touchUpInside)
             
         }
         
@@ -227,11 +235,15 @@ extension CarryMissonImageAndFlieView{
     
     //MARK: - actions
     @objc private func tappedFileAction(item: FlieItem){
+        let index = item.tag - 200
+        self.delegate?.carryMissonImageAndFlieView(self, didSelectedFileAtIndex: index)
    
         
     }
     
     @objc private func tappedImageAction(btn: UIButton){
+        let index = btn.tag - 100
+        self.delegate?.carryMissonImageAndFlieView(self, didSelectedImageAtIndex: index)
         
         
     }

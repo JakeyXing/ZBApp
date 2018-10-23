@@ -7,8 +7,8 @@
 //搬场详情
 
 import UIKit
-
-class CarryMissionDetailViewController: MissionDetailBaseViewController {
+import SKPhotoBrowser
+class CarryMissionDetailViewController: MissionDetailBaseViewController,CarryMissonImageAndFlieViewDelegate,FeedbackViewDelegate {
 
     lazy var carryMissionInfoView: CarryMissionInfoView = {
         let view = CarryMissionInfoView(frame: CGRect.init(x: 0, y: self.missionBaseInfoView.bottom+kResizedPoint(pt: 10), width: DEVICE_WIDTH, height: kResizedPoint(pt: 350)))
@@ -17,11 +17,13 @@ class CarryMissionDetailViewController: MissionDetailBaseViewController {
     
     lazy var carryImageView: CarryMissonImageAndFlieView = {
         let view = CarryMissonImageAndFlieView(frame: CGRect.init(x: 0, y: self.carryMissionInfoView.bottom+kResizedPoint(pt: 10), width: DEVICE_WIDTH, height: kResizedPoint(pt: 600)))
+        view.delegate = self
         return view
     }()
     
     lazy var feedbackView: FeedbackView = {
         let view = FeedbackView(frame: CGRect.init(x: 0, y: self.carryImageView.bottom+kResizedPoint(pt: 10), width: DEVICE_WIDTH, height: kResizedPoint(pt: 600)))
+        view.delegate = self
         return view
     }()
     
@@ -81,6 +83,60 @@ class CarryMissionDetailViewController: MissionDetailBaseViewController {
     }
     
 
-   
+    // MARK: - CarryMissonImageAndFlieViewDelegate
+    func carryMissonImageAndFlieView(_ view: CarryMissonImageAndFlieView, didSelectedImageAtIndex index: NSInteger) {
+        let count = self.carryImageView.imageArray!.count
+        
+        var images = [SKPhoto]()
+        for i in 0..<count{
+            let photo = SKPhoto.photoWithImageURL(self.carryImageView.imageArray![i])
+            photo.shouldCachePhotoURLImage = false // you can use image cache by true(NSCache)
+            images.append(photo)
+        }
+        
+        // 2. create PhotoBrowser Instance, and present from your viewController.
+        let browser = SKPhotoBrowser(photos: images)
+        browser.initializePageIndex(index)
+        self.present(browser, animated: true, completion: {})
+        
+       
+        
+    }
+    
+    func carryMissonImageAndFlieView(_ view: CarryMissonImageAndFlieView, didSelectedFileAtIndex index: NSInteger) {
+        let web=WebViewController()
+        web.hidesBottomBarWhenPushed = true
+        web.urlStr = "https://www.baidu.com"
+        web.titleStr = "文件名"
+        self.navigationController?.pushViewController(web, animated: true)
+    }
+    
+    //MARK:- FeedbackViewDelegate
+    func feedbackView(_ view: FeedbackView, lookoverImages images: Array<String>) {
+        
+        let imageArr = ["https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1540296447089&di=8f6fa210da7498a6fefafe93179ef6be&imgtype=0&src=http%3A%2F%2Fp0.ifengimg.com%2Fcmpp%2F2016%2F11%2F04%2F17%2Fe4f9adfd-e00e-4a2f-9c93-e5014330281e_size31_w347_h500.jpg","https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1540296447089&di=8f6fa210da7498a6fefafe93179ef6be&imgtype=0&src=http%3A%2F%2Fp0.ifengimg.com%2Fcmpp%2F2016%2F11%2F04%2F17%2Fe4f9adfd-e00e-4a2f-9c93-e5014330281e_size31_w347_h500.jpg","https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1540296447089&di=8f6fa210da7498a6fefafe93179ef6be&imgtype=0&src=http%3A%2F%2Fp0.ifengimg.com%2Fcmpp%2F2016%2F11%2F04%2F17%2Fe4f9adfd-e00e-4a2f-9c93-e5014330281e_size31_w347_h500.jpg"]
+        let count = imageArr.count
+        
+        var images = [SKPhoto]()
+        for i in 0..<count{
+            let photo = SKPhoto.photoWithImageURL(imageArr[i])
+            photo.shouldCachePhotoURLImage = false
+            images.append(photo)
+        }
+        
+        let browser = SKPhotoBrowser(photos: images)
+        browser.initializePageIndex(0)
+        self.present(browser, animated: true, completion: {})
+        
+    }
+    
+    func feedbackViewMoreAction(_ view: FeedbackView) {
+        let feedback = FeedbackListViewController()
+        feedback.hidesBottomBarWhenPushed = true
+        self.navigationController?.pushViewController(feedback, animated: true)
+        
+    }
+    
+    
 
 }

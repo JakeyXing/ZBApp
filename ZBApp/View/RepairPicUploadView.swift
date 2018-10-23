@@ -8,7 +8,7 @@
 
 import UIKit
 import Masonry
-import JXPhotoBrowser
+import SKPhotoBrowser
 
 protocol RepairPicUploadViewDelegate: class {
     func repairPicUploadView(_ cleanPicUploadView: RepairPicUploadView,didSelectedAtIndexPath indexPath: IndexPath);
@@ -219,7 +219,18 @@ extension RepairPicUploadView:UICollectionViewDelegateFlowLayout,UICollectionVie
         
         let arr = self.roomWithImagesArray[indexPath.section]
         if indexPath.row < arr.count {
-            PhotoBrowser.show(localImages: arr, originPageIndex: indexPath.row)
+            let count = arr.count
+
+            var images = [SKPhoto]()
+            for i in 0..<count{
+                let photo = SKPhoto.photoWithImage(arr[i])// add some UIImage
+                images.append(photo)
+            }
+            
+            // 2. create PhotoBrowser Instance, and present from your viewController.
+            let browser = SKPhotoBrowser(photos: images)
+            browser.initializePageIndex(indexPath.row)
+            self.viewContainingController()!.present(browser, animated: true, completion: {})
         }else{
             self.delegate?.repairPicUploadView(self, didSelectedAtIndexPath: indexPath)
         }

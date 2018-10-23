@@ -9,7 +9,13 @@
 import UIKit
 import Masonry
 
+protocol RoomInfoViewDelegate: class {
+    func roomInfoViewDidTappedRoute(_ view: RoomInfoView, routeUrl routeUrlStr:String)
+    func roomInfoViewDidTappedUploadFeedback(_ view: RoomInfoView)
+    
+}
 class RoomInfoView: UIView {
+    weak var delegate: RoomInfoViewDelegate?
     
     lazy var contentView: UIView = {
         let content = UIView()
@@ -78,11 +84,6 @@ class RoomInfoView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    //MARK: - actions
-    
-    @objc private func infoUploadAction(){
-    }
-    
     func congfigData() {
         
         let size = CGSize.init(width: DEVICE_WIDTH-kResizedPoint(pt: 20)*2, height: CGFloat(HUGE))
@@ -134,6 +135,13 @@ extension RoomInfoView{
         self.contentView.addSubview(self.checkinNoteNameLabel)
         self.contentView.addSubview(self.checkinNoteLabel)
         self.addSubview(self.infoUploadButton)
+        
+        let tap1 = UITapGestureRecognizer(target: self, action: #selector(routeAction))
+        self.roadRuteImageView.isUserInteractionEnabled = true
+        self.roadRuteImageView.addGestureRecognizer(tap1)
+        let tap2 = UITapGestureRecognizer(target: self, action: #selector(routeAction))
+        self.roadRuteLabel.isUserInteractionEnabled = true
+        self.roadRuteLabel.addGestureRecognizer(tap2)
         
         self.subViewsLayout()
     }
@@ -208,9 +216,16 @@ extension RoomInfoView{
             make.height.equalTo()(kResizedPoint(pt: 26))
         }
         
-        
+    }
+    
+    //MARK: - actions
+    @objc private func routeAction(){
+        self.delegate?.roomInfoViewDidTappedRoute(self,routeUrl: "")
         
     }
     
+    @objc private func infoUploadAction(){
+        self.delegate?.roomInfoViewDidTappedUploadFeedback(self)
+    }
 }
 

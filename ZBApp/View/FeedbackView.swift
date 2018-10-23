@@ -9,7 +9,14 @@
 import UIKit
 import Masonry
 
+protocol FeedbackViewDelegate: class {
+    func feedbackView(_ view: FeedbackView,lookoverImages images: Array<String>)
+    func feedbackViewMoreAction(_ view: FeedbackView)
+    
+}
+
 class FeedbackView: UIView {
+     weak var delegate: FeedbackViewDelegate?
     
     lazy var contentView: UIView = {
         let content = UIView()
@@ -23,7 +30,7 @@ class FeedbackView: UIView {
         let lab = UILabel()
         lab.textColor = kFontColorGray
         lab.font = kFont(size: 15)
-        lab.text = "海外网10月12日电当地时间10月12日，2018年“新学院奖”在瑞典斯德哥尔摩公共图书馆揭晓，玛丽斯·孔戴(Maryse Condé)获得此奖项"
+        lab.text = "反馈-海外网10月12日电当地时间10月12日，2018年“新学院奖”在瑞典斯德哥尔摩公共图书馆揭晓，玛丽斯·孔戴(Maryse Condé)获得此奖项"
         lab.numberOfLines = 0
         return lab
         
@@ -72,11 +79,12 @@ class FeedbackView: UIView {
     
     //MARK: - actions
     @objc private func picAction(){
+        self.delegate?.feedbackView(self, lookoverImages: [""])
         
     }
     
     @objc private func moreAction(){
-
+        self.delegate?.feedbackViewMoreAction(self)
     }
     
     

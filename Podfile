@@ -10,11 +10,12 @@ target 'ZBApp' do
   pod 'AFNetworking'
   pod 'YYModel'
   pod 'SDWebImage'
+  
   pod 'AWSMobileClient', '~> 2.6.13'  # For AWSMobileClient
   pod 'AWSS3', '~> 2.6.13'            # For file transfers
   pod 'AWSCognito', '~> 2.6.13'       # For data sync
   
-  pod 'JXPhotoBrowser'
+  pod 'SKPhotoBrowser'
   pod 'IQKeyboardManagerSwift'
   pod 'BEMCheckBox'
   pod 'MBProgressHUD'

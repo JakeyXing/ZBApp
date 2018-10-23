@@ -11,8 +11,14 @@ import Masonry
 
 private let  kRoomRuteCellID = "kRoomRuteCellID"
 
-class ListRoomInfoView: UIView {
+
+protocol ListRoomInfoViewDelegate: class {
+    func listRoomInfoViewDidTappedRoute(_ view: ListRoomInfoView, routeUrl routeUrlStr:String)
+    func listRoomInfoViewDidTappedUploadFeedback(_ view: ListRoomInfoView)
     
+}
+class ListRoomInfoView: UIView {
+    weak var delegate: ListRoomInfoViewDelegate?
     lazy var contentView: UIView = {
         let content = UIView()
         content.backgroundColor = kBgColorGray_238_235_220
@@ -60,6 +66,14 @@ class ListRoomInfoView: UIView {
     //MARK: - actions
     
     @objc private func infoUploadAction(){
+        self.delegate?.listRoomInfoViewDidTappedUploadFeedback(self)
+        
+    }
+    
+    @objc private func routeAction(btn: UIButton){
+        let index = btn.tag - 100
+        self.delegate?.listRoomInfoViewDidTappedRoute(self, routeUrl: "")
+        
     }
     
     func congfigData() {
@@ -162,7 +176,10 @@ extension ListRoomInfoView:UITableViewDelegate,UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: kRoomRuteCellID, for: indexPath)
+        let cell: RoomRuteCell = tableView.dequeueReusableCell(withIdentifier: kRoomRuteCellID, for: indexPath) as! RoomRuteCell
+        cell.routeButton.tag = 100 + indexPath.row
+        cell.routeButton.addTarget(self, action: #selector(routeAction(btn:)), for: UIControl.Event.touchUpInside)
+        
         return cell
     }
     

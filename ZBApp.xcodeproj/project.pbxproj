@@ -35,6 +35,8 @@
 		9923CBB5216B56F900EDCA7A /* MissionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9923CBB4216B56F900EDCA7A /* MissionCell.swift */; };
 		9932153521703F2100CAB18B /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9932153321703F2100CAB18B /* LoginViewController.swift */; };
 		9932153621703F2100CAB18B /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9932153421703F2100CAB18B /* LoginViewController.xib */; };
+		9936F3AD217F1F7F00642697 /* FeedbackListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9936F3AC217F1F7F00642697 /* FeedbackListViewController.swift */; };
+		9936F3AF217F20A400642697 /* FeedbackItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9936F3AE217F20A400642697 /* FeedbackItemCell.swift */; };
 		99425B552174648B00A18E45 /* CleanImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99425B542174648B00A18E45 /* CleanImageCell.swift */; };
 		99425B572174763300A18E45 /* ClaenCollectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99425B562174763300A18E45 /* ClaenCollectionHeaderView.swift */; };
 		9944ABBE21735C6B00B4CB08 /* CleanPicUploadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9944ABBD21735C6B00B4CB08 /* CleanPicUploadView.swift */; };
@@ -120,6 +122,8 @@
 		9923CBB4216B56F900EDCA7A /* MissionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MissionCell.swift; sourceTree = "<group>"; };
 		9932153321703F2100CAB18B /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		9932153421703F2100CAB18B /* LoginViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
+		9936F3AC217F1F7F00642697 /* FeedbackListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackListViewController.swift; sourceTree = "<group>"; };
+		9936F3AE217F20A400642697 /* FeedbackItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackItemCell.swift; sourceTree = "<group>"; };
 		99425B542174648B00A18E45 /* CleanImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CleanImageCell.swift; sourceTree = "<group>"; };
 		99425B562174763300A18E45 /* ClaenCollectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClaenCollectionHeaderView.swift; sourceTree = "<group>"; };
 		9944ABBD21735C6B00B4CB08 /* CleanPicUploadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CleanPicUploadView.swift; sourceTree = "<group>"; };
@@ -232,6 +236,7 @@
 				990F7B022171D8D80075A04C /* CleanMissionDetailViewController.swift */,
 				990F7B06217205490075A04C /* RepairMissionDetailViewController.swift */,
 				99C2C32221772FAD00C0B94A /* QueFeedbackController.swift */,
+				9936F3AC217F1F7F00642697 /* FeedbackListViewController.swift */,
 			);
 			path = Mission;
 			sourceTree = "<group>";
@@ -320,6 +325,7 @@
 				99F1FD242174E156002699FE /* RepairImageCell.swift */,
 				99D69A232175E69400A5DC09 /* repairAddCell.swift */,
 				99D556F921788A7E006C92A3 /* MissionSegmentBar.swift */,
+				9936F3AE217F20A400642697 /* FeedbackItemCell.swift */,
 				994EE461216DEDDE00EB86DD /* JHListChooseView */,
 			);
 			path = View;
@@ -569,12 +575,11 @@
 				"${BUILT_PRODUCTS_DIR}/BEMCheckBox/BEMCheckBox.framework",
 				"${BUILT_PRODUCTS_DIR}/CYLTabBarController/CYLTabBarController.framework",
 				"${BUILT_PRODUCTS_DIR}/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework",
-				"${BUILT_PRODUCTS_DIR}/JXPhotoBrowser/JXPhotoBrowser.framework",
-				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
 				"${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/MJRefresh/MJRefresh.framework",
 				"${BUILT_PRODUCTS_DIR}/Masonry/Masonry.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
+				"${BUILT_PRODUCTS_DIR}/SKPhotoBrowser/SKPhotoBrowser.framework",
 				"${BUILT_PRODUCTS_DIR}/Toast/Toast.framework",
 				"${BUILT_PRODUCTS_DIR}/YYModel/YYModel.framework",
 			);
@@ -589,12 +594,11 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BEMCheckBox.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CYLTabBarController.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManagerSwift.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JXPhotoBrowser.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MJRefresh.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Masonry.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SKPhotoBrowser.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Toast.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/YYModel.framework",
 			);
@@ -616,6 +620,7 @@
 				994F6348216C78F20063044B /* UIColor+CZAddition.m in Sources */,
 				99D781AF217C6F8A00611DE0 /* ZB_Photo.swift in Sources */,
 				99017C18217077CE00155724 /* ResetPasswordViewController.swift in Sources */,
+				9936F3AD217F1F7F00642697 /* FeedbackListViewController.swift in Sources */,
 				994F6344216C78F20063044B /* NSString+CZHash.m in Sources */,
 				994F633D216C78F20063044B /* UILabel+CZAddition.m in Sources */,
 				990F7B0D21723B380075A04C /* RepairInfoTextView.swift in Sources */,
@@ -658,6 +663,7 @@
 				9945A2B72178DB1200240437 /* MapViewController.swift in Sources */,
 				99425B572174763300A18E45 /* ClaenCollectionHeaderView.swift in Sources */,
 				99017C232170A8E900155724 /* CarryMissionInfoView.swift in Sources */,
+				9936F3AF217F20A400642697 /* FeedbackItemCell.swift in Sources */,
 				990F7AFD2171B3700075A04C /* FlieItem.swift in Sources */,
 				99D781B1217C707D00611DE0 /* ZB_TaskPhotoItem.swift in Sources */,
 				99C2C32321772FAD00C0B94A /* QueFeedbackController.swift in Sources */,

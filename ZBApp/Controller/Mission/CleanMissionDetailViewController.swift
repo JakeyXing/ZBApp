@@ -7,9 +7,8 @@
 //清扫详情
 
 import UIKit
-import JXPhotoBrowser
-
-class CleanMissionDetailViewController: MissionDetailBaseViewController,CleanPicUploadViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate {
+import SKPhotoBrowser
+class CleanMissionDetailViewController: MissionDetailBaseViewController,CleanPicUploadViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,RoomInfoViewDelegate,FeedbackViewDelegate {
 
     var cameraPicker: UIImagePickerController!
     var currentImageCell: CleanImageCell?
@@ -17,11 +16,13 @@ class CleanMissionDetailViewController: MissionDetailBaseViewController,CleanPic
     
     lazy var roomInfoView: RoomInfoView = {
         let view = RoomInfoView(frame: CGRect.init(x: 0, y: self.missionBaseInfoView.bottom+kResizedPoint(pt: 10), width: DEVICE_WIDTH, height: kResizedPoint(pt: 300)))
+        view.delegate = self
         return view
     }()
     
     lazy var feedbackView: FeedbackView = {
         let view = FeedbackView(frame: CGRect.init(x: 0, y: self.missionBaseInfoView.bottom+kResizedPoint(pt: 10), width: DEVICE_WIDTH, height: kResizedPoint(pt: 300)))
+        view.delegate = self
         return view
     }()
     
@@ -87,7 +88,14 @@ class CleanMissionDetailViewController: MissionDetailBaseViewController,CleanPic
                 return
             }
 
-            PhotoBrowser.show(localImages: [cell.imageView.image!], originPageIndex: 0)
+            var images = [SKPhoto]()
+            let photo = SKPhoto.photoWithImage(cell.oriImage!)// add some UIImage
+            images.append(photo)
+            
+            // 2. create PhotoBrowser Instance, and present from your viewController.
+            let browser = SKPhotoBrowser(photos: images)
+            browser.initializePageIndex(0)
+            self.present(browser, animated: true, completion: {})
         }
         
         let uploadAction = UIAlertAction(title: "上传图片", style:  .default) { (action) in
@@ -117,6 +125,50 @@ class CleanMissionDetailViewController: MissionDetailBaseViewController,CleanPic
         
         self.dismiss(animated: true, completion: nil)
     }
+    
+    
+    //MARK:- RoomInfoViewDelegate
+    func roomInfoViewDidTappedRoute(_ view: RoomInfoView, routeUrl routeUrlStr: String) {
+        let web=WebViewController()
+        web.hidesBottomBarWhenPushed = true
+        web.urlStr = "https://www.baidu.com"
+        web.titleStr = "文件名"
+        self.navigationController?.pushViewController(web, animated: true)
+    }
+    
+    func roomInfoViewDidTappedUploadFeedback(_ view: RoomInfoView) {
+        let feedback=QueFeedbackController()
+        feedback.hidesBottomBarWhenPushed = true
+        self.navigationController?.pushViewController(feedback, animated: true)
+        
+    }
+    
+    //MARK:- FeedbackViewDelegate
+    func feedbackView(_ view: FeedbackView, lookoverImages images: Array<String>) {
+        
+        let imageArr = ["https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1540296447089&di=8f6fa210da7498a6fefafe93179ef6be&imgtype=0&src=http%3A%2F%2Fp0.ifengimg.com%2Fcmpp%2F2016%2F11%2F04%2F17%2Fe4f9adfd-e00e-4a2f-9c93-e5014330281e_size31_w347_h500.jpg","https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1540296447089&di=8f6fa210da7498a6fefafe93179ef6be&imgtype=0&src=http%3A%2F%2Fp0.ifengimg.com%2Fcmpp%2F2016%2F11%2F04%2F17%2Fe4f9adfd-e00e-4a2f-9c93-e5014330281e_size31_w347_h500.jpg","https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1540296447089&di=8f6fa210da7498a6fefafe93179ef6be&imgtype=0&src=http%3A%2F%2Fp0.ifengimg.com%2Fcmpp%2F2016%2F11%2F04%2F17%2Fe4f9adfd-e00e-4a2f-9c93-e5014330281e_size31_w347_h500.jpg"]
+        let count = imageArr.count
+        
+        var images = [SKPhoto]()
+        for i in 0..<count{
+            let photo = SKPhoto.photoWithImageURL(imageArr[i])
+            photo.shouldCachePhotoURLImage = false
+            images.append(photo)
+        }
+        
+        let browser = SKPhotoBrowser(photos: images)
+        browser.initializePageIndex(0)
+        self.present(browser, animated: true, completion: {})
+        
+    }
+    
+    func feedbackViewMoreAction(_ view: FeedbackView) {
+        let feedback = FeedbackListViewController()
+        feedback.hidesBottomBarWhenPushed = true
+        self.navigationController?.pushViewController(feedback, animated: true)
+        
+    }
+    
 
 }
 
