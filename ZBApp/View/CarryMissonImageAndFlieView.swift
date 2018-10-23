@@ -149,6 +149,7 @@ extension CarryMissonImageAndFlieView{
         let width:CGFloat = 98
         let cap:CGFloat = 8
         for i in 0..<count {
+//            let btn = UIButton(type: <#T##UIButton.ButtonType#>)
             let imageView = UIImageView(frame: CGRect.init(x: 0, y: 0, width: kResizedPoint(pt: width), height: kResizedPoint(pt: width)))
             self.picBgView.addSubview(imageView)
             imageView.tag = 100 + i
@@ -192,6 +193,7 @@ extension CarryMissonImageAndFlieView{
         for i in 0..<count {
             let flieItem = FlieItem(frame: CGRect.init(x: 0, y: 0, width: kResizedPoint(pt: width), height: kResizedPoint(pt: height)))
             self.fileBgView.addSubview(flieItem)
+            flieItem.addTarget(self, action: #selector(tappedFileAction), for: UIControl.Event.touchUpInside)
             flieItem.tag = 200 + i
             flieItem.left = CGFloat(i%3)*kResizedPoint(pt: width+cap)
             flieItem.top = CGFloat(i/3)*kResizedPoint(pt: height+cap)
@@ -219,6 +221,18 @@ extension CarryMissonImageAndFlieView{
         self.fileBgView.mas_updateConstraints { (make:MASConstraintMaker!) in
             make.height.equalTo()(h)
         }
+        
+    }
+    
+    
+    //MARK: - actions
+    @objc private func tappedFileAction(item: FlieItem){
+   
+        
+    }
+    
+    @objc private func tappedImageAction(btn: UIButton){
+        
         
     }
     

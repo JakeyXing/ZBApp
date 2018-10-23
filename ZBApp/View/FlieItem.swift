@@ -9,7 +9,7 @@
 import UIKit
 import Masonry
 
-class FlieItem: UIView {
+class FlieItem: UIControl {
     
     //MARK: - 控件
     
