@@ -47,7 +47,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         IQKeyboardManager.shared.enable = true
         
         self.usermodel?.accessToken = "Cjz8B5QlomOIdLFe3OcgxRm6KRmZhVxXXgy-U-mpruY5WtB8V3lSHNZFCe4i8Op-Ob6ugL2Pt4Rur1cvJgSqYjLwnC5Zw5nx"
-        
+        LanguageHelper.shareInstance.initUserLanguage()
         NotificationCenter.default.addObserver(self, selector: #selector(reLogin), name: NSNotification.Name(rawValue: kRefreshTokenInvalidNoti), object: nil)
         
         return true
@@ -113,6 +113,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         self.window?.rootViewController = naviVC
         
+    }
+    
+    public func resetRootController() {
+        mainTabBarVc = MainTabBarController(viewControllers: self.viewControllers(), tabBarItemsAttributes: self.tabBarItemsAttributesForController())
+        self.window?.rootViewController = mainTabBarVc
     }
 
 

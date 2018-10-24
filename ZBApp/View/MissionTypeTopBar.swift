@@ -31,7 +31,7 @@ class MissionTypeTopBar: UIView {
         let btn = UIButton(type: UIButton.ButtonType.custom)
         btn.setTitleColor(kFontColorGray, for: UIControl.State.normal)
         btn.titleLabel?.font = kFont(size: 16)
-        btn.setTitle("选择日期", for:  UIControl.State.normal)
+        btn.setTitle(LanguageHelper.getString(key: "home.navi.time"), for:  UIControl.State.normal)
         btn.addTarget(self, action: #selector(dateAction), for: UIControl.Event.touchUpInside)
         return btn
     }()
