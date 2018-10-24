@@ -64,16 +64,16 @@ class NetWorkManager: AFHTTPSessionManager {
                  success : @escaping(_ json:Any?)->(),
                  fail : @escaping(_ json:Any?,_ errMsg:String)->())  {
         
-        guard let token = m_AppDelegate().usermodel?.accessToken else {
-            print("token 为空")
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: kNoRefreshTokenNoti), object: nil)
-            
-            fail(nil,"you need login first")
-            return
-        }
+//        guard let token = m_AppDelegate().usermodel?.accessToken else {
+//            print("token 为空")
+//            NotificationCenter.default.post(name: NSNotification.Name(rawValue: kNoRefreshTokenNoti), object: nil)
+//
+//            fail(nil,"you need login first")
+//            return
+//        }
+       let token = "4cl00Io2vYlMInLN7XSk44kdfbYa1hNf9CIA9nZBVWvuvy2EtiMHS441lrhJLDGOFFRTJCuhxiSpgsuGMQMZXktGXlyZkDpH"
         
-        NetWorkManager.shared.requestSerializer.setValue(token, forHTTPHeaderField: "x-access-token")
-        
+        NetWorkManager.shared.requestSerializer.setValue(token, forHTTPHeaderField: "accessToken")
         request(method: method, url: url, parameters: parameters, success: { (json) in
             guard let jsonData = json else {
                 fail(nil,"response data is nil")

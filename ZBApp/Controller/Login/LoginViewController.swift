@@ -55,7 +55,10 @@ class LoginViewController: UIViewController,BEMCheckBoxDelegate {
             
         }
         
-        let params = ["countryCode":self.areaDropdownView.contentLabel.text,"phone":self.phoneTextfield.text,"password":self.passwordTextfield.text,]
+        let passMd5 = self.passwordTextfield.text?.md5WithSalt(salt: self.phoneTextfield.text!)
+        
+        self.areaDropdownView.contentLabel.text = "86"
+        let params = ["countryCode":self.areaDropdownView.contentLabel.text,"phone":self.phoneTextfield.text,"password":passMd5]
         
         MBProgressHUD.showAdded(to: self.view, animated: true)
         NetWorkManager.shared.loadNoTokenRequest(method: .post, url: LoginUrl, parameters: params as [String : Any], success: { (data) in

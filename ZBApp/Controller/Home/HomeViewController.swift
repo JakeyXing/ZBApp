@@ -11,7 +11,7 @@ import MJRefresh
 import MBProgressHUD
 import Toast
 
-private let  kMissionCellID = "kMissionCellID"
+private let  kHomeMissionCell = "kHomeMissionCell"
 class HomeViewController: UIViewController {
     
     private lazy var navigationBar: JHNavigationBar = {
@@ -30,7 +30,7 @@ class HomeViewController: UIViewController {
     
     var tableview:UITableView?
     
-    lazy var taskList = [ZB_Task]()
+    lazy var taskList = [ZB_TaskInfo]()
     var pagendex = 1
     
     override func viewDidLoad() {
@@ -40,6 +40,8 @@ class HomeViewController: UIViewController {
         self.view.addSubview(self.navigationBar)
         self.navigationBar.contentView.addSubview(self.typeSelectBar)
         self.setTableView()
+        
+        self.loadNewData()
     }
     
     func setTableView(){
@@ -48,7 +50,7 @@ class HomeViewController: UIViewController {
         tableview?.backgroundColor = kBgColorGray_221
         tableview?.dataSource = self;
         tableview?.delegate = self;
-        tableview?.register(MissionCell.self, forCellReuseIdentifier: kMissionCellID)
+        tableview?.register(HomeMissionCell.self, forCellReuseIdentifier: kHomeMissionCell)
         
         let header = MJRefreshNormalHeader(refreshingTarget: self, refreshingAction: #selector(refreshData))
         header?.isAutomaticallyChangeAlpha = true
@@ -69,7 +71,7 @@ class HomeViewController: UIViewController {
         let params = ["taskDate":"","taskType":"","page":pagendex] as [String : Any]
         
         MBProgressHUD.showAdded(to: self.view, animated: true)
-        NetWorkManager.shared.loadRequest(method: .post, url: LoginUrl, parameters: params as [String : Any], success: { (data) in
+        NetWorkManager.shared.loadRequest(method: .get, url: PendingTaskListUrl, parameters: params as [String : Any], success: { (data) in
             
             MBProgressHUD.hide(for: self.view, animated: true)
             
@@ -77,10 +79,11 @@ class HomeViewController: UIViewController {
             let resultDic = data as! Dictionary<String,AnyObject>
             let dic = resultDic["data"] as! Dictionary<String,AnyObject>
             let list = dic["list"]
-            guard let array = (NSArray.yy_modelArray(with: ZB_Task.self, json: (list ?? []))) as? [ZB_Task] else{
+            guard let array = (NSArray.yy_modelArray(with: ZB_TaskInfo.self, json: (list ?? []))) as? [ZB_TaskInfo] else{
                 return
             }
             self.taskList.append(contentsOf: array)
+            self.tableview?.reloadData()
             
         }) { (data, errMsg) in
             MBProgressHUD.hide(for: self.view, animated: true)
@@ -96,17 +99,18 @@ class HomeViewController: UIViewController {
         self.tableview?.mj_footer.state = MJRefreshState.idle
         let params = ["taskDate":"","taskType":"","page":pagendex] as [String : Any]
         
-        NetWorkManager.shared.loadRequest(method: .post, url: LoginUrl, parameters: params as [String : Any], success: { (data) in
+        NetWorkManager.shared.loadRequest(method: .get, url: PendingTaskListUrl, parameters: params as [String : Any], success: { (data) in
             self.tableview?.mj_header.endRefreshing()
             
             self.taskList.removeAll()
             let resultDic = data as! Dictionary<String,AnyObject>
             let dic = resultDic["data"] as! Dictionary<String,AnyObject>
             let list = dic["list"]
-            guard let array = (NSArray.yy_modelArray(with: ZB_Task.self, json: (list ?? []))) as? [ZB_Task] else{
+            guard let array = (NSArray.yy_modelArray(with: ZB_TaskInfo.self, json: (list ?? []))) as? [ZB_TaskInfo] else{
                 return
             }
             self.taskList.append(contentsOf: array)
+            self.tableview?.reloadData()
             
             
         }) { (data, errMsg) in
@@ -125,17 +129,18 @@ class HomeViewController: UIViewController {
         
         let params = ["taskDate":"","taskType":"","page":pagendex] as [String : Any]
         
-        NetWorkManager.shared.loadRequest(method: .post, url: LoginUrl, parameters: params as [String : Any], success: { (data) in
+        NetWorkManager.shared.loadRequest(method: .get, url: PendingTaskListUrl, parameters: params as [String : Any], success: { (data) in
             
             self.tableview?.mj_footer.endRefreshing()
           
             let resultDic = data as! Dictionary<String,AnyObject>
             let dic = resultDic["data"] as! Dictionary<String,AnyObject>
             let list = dic["list"]
-            guard let array = (NSArray.yy_modelArray(with: ZB_Task.self, json: (list ?? []))) as? [ZB_Task] else{
+            guard let array = (NSArray.yy_modelArray(with: ZB_TaskInfo.self, json: (list ?? []))) as? [ZB_TaskInfo] else{
                 return
             }
             self.taskList.append(contentsOf: array)
+            self.tableview?.reloadData()
             
         }) { (data, errMsg) in
             self.tableview?.mj_footer.endRefreshing()
@@ -144,18 +149,20 @@ class HomeViewController: UIViewController {
             
         }
         
-        
     }
     
 }
 
 extension HomeViewController:UITableViewDelegate,UITableViewDataSource,JHDropdownViewDelegate,MissionTypeTopBarDelegate{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+//        return self.taskList.count
         return 4
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: kMissionCellID, for: indexPath)
+        let cell: HomeMissionCell = tableView.dequeueReusableCell(withIdentifier: kHomeMissionCell, for: indexPath) as! HomeMissionCell
+//        let model = self.taskList[indexPath.row]
+//        cell.setUpData(model: model)
         return cell
     }
     

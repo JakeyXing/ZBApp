@@ -46,6 +46,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UITabBar.appearance().tintColor = UIColor(red: 255, green: 102, blue: 0, alpha: 1)
         IQKeyboardManager.shared.enable = true
         
+        self.usermodel?.accessToken = "Cjz8B5QlomOIdLFe3OcgxRm6KRmZhVxXXgy-U-mpruY5WtB8V3lSHNZFCe4i8Op-Ob6ugL2Pt4Rur1cvJgSqYjLwnC5Zw5nx"
         
         NotificationCenter.default.addObserver(self, selector: #selector(reLogin), name: NSNotification.Name(rawValue: kRefreshTokenInvalidNoti), object: nil)
         

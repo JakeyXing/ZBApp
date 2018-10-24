@@ -13,6 +13,8 @@ import Toast
 class MissionDetailBaseViewController: UIViewController {
 
     var taskExecuteId: Int64 = 0
+    
+    var model: ZB_TaskInfo?
     lazy var task: ZB_Task = ZB_Task()
     lazy var navigationBar: JHNavigationBar = {
         let view = JHNavigationBar(frame: CGRect.init(x: 0, y: 0, width: 0, height: 0))
@@ -63,7 +65,7 @@ class MissionDetailBaseViewController: UIViewController {
         let params = ["taskExecuteId":self.taskExecuteId] as [String : Any]
         
         MBProgressHUD.showAdded(to: self.view, animated: true)
-        NetWorkManager.shared.loadRequest(method: .post, url: TaskDetailUrl, parameters: params as [String : Any], success: { (data) in
+        NetWorkManager.shared.loadRequest(method: .get, url: TaskDetailUrl, parameters: params as [String : Any], success: { (data) in
             MBProgressHUD.hide(for: self.view, animated: true)
             
             
@@ -73,9 +75,13 @@ class MissionDetailBaseViewController: UIViewController {
                 return
             }
             
-            let model: ZB_Task = (NSObject.yy_model(withJSON: dic as Any) as? ZB_Task)!
+            print(dic)
             
-            self.task = model
+//            let model: ZB_Task = (NSObject.yy_model(withJSON: dic as Any) as? ZB_Task)!
+            let model =  ZB_Task.yy_model(with: dic as! [AnyHashable : Any])
+            
+            
+            self.task = model ?? ZB_Task()
             
             self.configData()
         }) { (data, errMsg) in

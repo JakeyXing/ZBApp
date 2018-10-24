@@ -15,6 +15,7 @@
 		99017C1F217088AF00155724 /* MissionDetailBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99017C1E217088AF00155724 /* MissionDetailBaseViewController.swift */; };
 		99017C2121708A6B00155724 /* MissionBaseInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99017C2021708A6B00155724 /* MissionBaseInfoView.swift */; };
 		99017C232170A8E900155724 /* CarryMissionInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99017C222170A8E900155724 /* CarryMissionInfoView.swift */; };
+		9906B15A2180C0700095E1DD /* HomeMissionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9906B1592180C0700095E1DD /* HomeMissionCell.swift */; };
 		990F7AF4216FAF490075A04C /* CalendarBgView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 990F7AF3216FAF490075A04C /* CalendarBgView.swift */; };
 		990F7AF62170ED560075A04C /* ViewCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 990F7AF52170ED560075A04C /* ViewCategory.swift */; };
 		990F7AFB217197C40075A04C /* CarryMissonImageAndFlieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 990F7AFA217197C40075A04C /* CarryMissonImageAndFlieView.swift */; };
@@ -31,6 +32,7 @@
 		9921CE2C2160AB37005DC836 /* PersonalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9921CE2B2160AB37005DC836 /* PersonalViewController.swift */; };
 		9921CE2E2160AB56005DC836 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9921CE2D2160AB56005DC836 /* HomeViewController.swift */; };
 		9921CE302160AB70005DC836 /* UnTakeMissionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9921CE2F2160AB70005DC836 /* UnTakeMissionViewController.swift */; };
+		992349F02180A24300D92120 /* ZB_UploadImageItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 992349EF2180A24300D92120 /* ZB_UploadImageItem.swift */; };
 		9923CBB0216B014100EDCA7A /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9923CBAF216B014100EDCA7A /* MainTabBarController.swift */; };
 		9923CBB5216B56F900EDCA7A /* MissionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9923CBB4216B56F900EDCA7A /* MissionCell.swift */; };
 		9932153521703F2100CAB18B /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9932153321703F2100CAB18B /* LoginViewController.swift */; };
@@ -102,6 +104,7 @@
 		99017C1E217088AF00155724 /* MissionDetailBaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MissionDetailBaseViewController.swift; sourceTree = "<group>"; };
 		99017C2021708A6B00155724 /* MissionBaseInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MissionBaseInfoView.swift; sourceTree = "<group>"; };
 		99017C222170A8E900155724 /* CarryMissionInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarryMissionInfoView.swift; sourceTree = "<group>"; };
+		9906B1592180C0700095E1DD /* HomeMissionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeMissionCell.swift; sourceTree = "<group>"; };
 		990F7AF3216FAF490075A04C /* CalendarBgView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarBgView.swift; sourceTree = "<group>"; };
 		990F7AF52170ED560075A04C /* ViewCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewCategory.swift; sourceTree = "<group>"; };
 		990F7AFA217197C40075A04C /* CarryMissonImageAndFlieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarryMissonImageAndFlieView.swift; sourceTree = "<group>"; };
@@ -118,6 +121,7 @@
 		9921CE2B2160AB37005DC836 /* PersonalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalViewController.swift; sourceTree = "<group>"; };
 		9921CE2D2160AB56005DC836 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		9921CE2F2160AB70005DC836 /* UnTakeMissionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnTakeMissionViewController.swift; sourceTree = "<group>"; };
+		992349EF2180A24300D92120 /* ZB_UploadImageItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZB_UploadImageItem.swift; sourceTree = "<group>"; };
 		9923CBAF216B014100EDCA7A /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		9923CBB4216B56F900EDCA7A /* MissionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MissionCell.swift; sourceTree = "<group>"; };
 		9932153321703F2100CAB18B /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -303,6 +307,7 @@
 			isa = PBXGroup;
 			children = (
 				9923CBB4216B56F900EDCA7A /* MissionCell.swift */,
+				9906B1592180C0700095E1DD /* HomeMissionCell.swift */,
 				994F634A216C822C0063044B /* StarView.swift */,
 				994F6354216C9C480063044B /* JHNavigationBar.swift */,
 				994EE45F216DDC3700EB86DD /* MissionTypeTopBar.swift */,
@@ -390,6 +395,7 @@
 				99D104702179CD7700713884 /* ZB_User.swift */,
 				99D781AC217C6C1600611DE0 /* ZB_Task.swift */,
 				99D781B0217C707D00611DE0 /* ZB_TaskPhotoItem.swift */,
+				992349EF2180A24300D92120 /* ZB_UploadImageItem.swift */,
 				99D781AE217C6F8A00611DE0 /* ZB_Photo.swift */,
 				99D781B2217C723100611DE0 /* ZB_TaskInfo.swift */,
 				99D781B4217C724700611DE0 /* ZB_Address.swift */,
@@ -636,6 +642,7 @@
 				990F7AF4216FAF490075A04C /* CalendarBgView.swift in Sources */,
 				9921CE2C2160AB37005DC836 /* PersonalViewController.swift in Sources */,
 				994EE465216DF7F500EB86DD /* JHListChooseView.swift in Sources */,
+				9906B15A2180C0700095E1DD /* HomeMissionCell.swift in Sources */,
 				994F633F216C78F20063044B /* UIButton+CZAddition.m in Sources */,
 				9944ABBE21735C6B00B4CB08 /* CleanPicUploadView.swift in Sources */,
 				99D556FA21788A7E006C92A3 /* MissionSegmentBar.swift in Sources */,
@@ -675,6 +682,7 @@
 				99D69A242175E69400A5DC09 /* repairAddCell.swift in Sources */,
 				994EE463216DF6A300EB86DD /* ListChooseCell.swift in Sources */,
 				ADB1322D217AED2A002B811B /* ZBUrl.swift in Sources */,
+				992349F02180A24300D92120 /* ZB_UploadImageItem.swift in Sources */,
 				99017C1D2170889500155724 /* CarryMissionDetailViewController.swift in Sources */,
 				99C2C3212177109A00C0B94A /* JHDropdownView.swift in Sources */,
 				9921CE302160AB70005DC836 /* UnTakeMissionViewController.swift in Sources */,
