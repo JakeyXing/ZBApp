@@ -7,4 +7,4 @@
 //
 
 #import "CZAdditions.h"
-
+#import <CommonCrypto/CommonCrypto.h>

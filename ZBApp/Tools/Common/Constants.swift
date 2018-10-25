@@ -65,3 +65,23 @@ func m_AppDelegate() -> AppDelegate {
     return (UIApplication.shared.delegate as! AppDelegate)
 }
 
+
+extension String {
+    
+    func md5WithSalt(salt:String) -> String {
+        let encStr = self + salt
+        let cStrl = encStr.cString(using: String.Encoding.utf8)
+        let buffer = UnsafeMutablePointer<UInt8>.allocate(capacity: 16);
+        CC_MD5(cStrl, CC_LONG(strlen(cStrl!)), buffer);
+        var md5String = "";
+        for idx in 0...15 {
+            let obcStrl = String.init(format: "%02x", buffer[idx]);
+            md5String.append(obcStrl);
+        }
+        free(buffer);
+        return md5String.uppercased();
+    }
+    
+
+    
+}

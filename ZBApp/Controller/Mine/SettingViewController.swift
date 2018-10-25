@@ -89,8 +89,18 @@ class SettingViewController: UIViewController,JHNavigationBarDelegate {
     }
     
     @objc private func sureAction(){
-   
-        
+        let lague = self.nDropdownView.contentLabel.text!
+        if lague == "中文繁体"{
+            LanguageHelper.shareInstance.setLanguage(langeuage: "zh-Hans")
+            
+        }else if lague == "日文"{
+            LanguageHelper.shareInstance.setLanguage(langeuage: "ja")
+            
+        }else{
+            LanguageHelper.shareInstance.setLanguage(langeuage: "en")
+            
+        }
+      
     }
 
 }

@@ -1,15 +1,15 @@
 //
-//  MissionCell.swift
+//  HomeMissionCell.swift
 //  ZBApp
 //
-//  Created by   xingjiehai on 2018/10/8.
-//  Copyright © 2018 ParentsChat. All rights reserved.
+//  Created by xingjiehai on 2018/10/24.
+//  Copyright © 2018年 ParentsChat. All rights reserved.
 //
 
 import UIKit
 import Masonry
 
-class MissionCell: UITableViewCell {
+class HomeMissionCell: UITableViewCell {
     //MARK: - 控件
     private var model: ZB_TaskInfo?
     private lazy var timeLabel: UILabel = UILabel.cz_label(withText: "2018-07-22", fontSize: kResizedFont(ft: 16), color: kFontColorGray)
@@ -55,7 +55,7 @@ class MissionCell: UITableViewCell {
         return view
     }()
     
-     //MARK: - lifeCyele
+    //MARK: - lifeCyele
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
@@ -146,5 +146,5 @@ class MissionCell: UITableViewCell {
         
     }
     
-
+    
 }
