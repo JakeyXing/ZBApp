@@ -76,6 +76,11 @@ class CarryMissionDetailViewController: MissionDetailBaseViewController,CarryMis
         
     }
     
+    override func setupDataWithHomeModel() {
+        self.missionBaseInfoView.congfigDataWithTaskInfo(info: self.model ?? ZB_TaskInfo())
+        
+    }
+    
     
     //MARK: - actions
     @objc private func takeAction(){

@@ -13,13 +13,15 @@ import Toast
 class MissionDetailBaseViewController: UIViewController {
 
     var taskExecuteId: Int64 = 0
+    var isTaked = false  //是否被自己抢了
     
     var model: ZB_TaskInfo?
-    lazy var task: ZB_Task = ZB_Task()
+    lazy var task: ZB_Task = ZB_Task()//自己请求的
+    
     lazy var navigationBar: JHNavigationBar = {
         let view = JHNavigationBar(frame: CGRect.init(x: 0, y: 0, width: 0, height: 0))
         view.backgroundColor = UIColor.white
-        view.titleLabel.text = "任务详情"
+        view.titleLabel.text = LanguageHelper.getString(key: "detail.nav.title")
 //        view.bottomLine.isHidden = true
         return view
     }()
@@ -48,7 +50,13 @@ class MissionDetailBaseViewController: UIViewController {
         self.navigationBar.delegate = self
         self.view.addSubview(self.scrollview)
         self.scrollview.addSubview(self.missionBaseInfoView)
-        self.loadNewData()
+        
+        if self.isTaked == false {
+            self.setupDataWithHomeModel()
+        }else{
+          self.loadNewData()
+        }
+        
     }
     
     //MARK: - actions
@@ -58,7 +66,6 @@ class MissionDetailBaseViewController: UIViewController {
         map.hidesBottomBarWhenPushed = true
         self.navigationController?.pushViewController(map, animated: true)
     }
-    
     
     func loadNewData() {
         
@@ -74,8 +81,6 @@ class MissionDetailBaseViewController: UIViewController {
             if dic == nil {
                 return
             }
-            
-            print(dic)
             
 //            let model: ZB_Task = (NSObject.yy_model(withJSON: dic as Any) as? ZB_Task)!
             let model =  ZB_Task.yy_model(with: dic as! [AnyHashable : Any])
@@ -93,9 +98,14 @@ class MissionDetailBaseViewController: UIViewController {
         
     }
     
-    
 
     func configData() {
+        print("子类必须实现")
+    }
+    
+    //从首页传过来的model
+    func setupDataWithHomeModel(){
+        print("子类必须实现")
         
     }
 

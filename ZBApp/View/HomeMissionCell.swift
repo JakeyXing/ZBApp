@@ -75,12 +75,16 @@ class HomeMissionCell: UITableViewCell {
     
     //MARK: - private method
     func setUpData(model:ZB_TaskInfo) {
+        let timeInterv = timeToTimeStamp(time: model.startDate!)
+        
         self.model = model;
-        self.timeLabel.text = model.startDate
+        self.timeLabel.text = timeStampToString(timeStamp: timeInterv)
         self.priceLabel.text = String(format: "%.1f", model.base)
         self.unitLabel.text = model.currency
         self.locaLabel.text = model.address?.address
-        self.requireLabel.text = LanguageHelper.getString(key: "home.cell.bonus") + String(format: "%.1f", model.bonus)
+        self.requireLabel.text = LanguageHelper.getString(key: "home.cell.bonus") + String(format: "%.1f", model.bonus) + model.currency!
+        self.typeLabel.text = typeNameWithStr(str: model.type ?? "")
+        self.remainTimeLabel.text = LanguageHelper.getString(key: "home.cell.remainTime") + getFormatRemainTime(secounds: timeInterv - 3600)
         
     }
     

@@ -19,12 +19,14 @@ class ZB_TaskInfo: NSObject,YYModel {
     @objc  var properties: [ZB_TaskProperty]?
     @objc  var remark: String?
     @objc  var restHoursPerPerson: Int = 0
+    @objc  var restHours: Int = 0
     @objc  var startDate: String?
     @objc  var title: String?
     @objc  var type: String?
     @objc  var base: Float = 0
     @objc  var bonus: Float = 0
     @objc  var currency: String?
+    @objc  var status: String?
     
     override var description: String {
         return yy_modelDescription()

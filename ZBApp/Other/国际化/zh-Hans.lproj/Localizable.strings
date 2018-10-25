@@ -17,5 +17,16 @@
 "home.dropDwon.all" = "全部类型";
 
 "home.cell.bonus" = "完成任务，经检查合格且无客诉，可额外获得";
+"home.cell.remainTime" = "截止抢单时间剩余:";
+
+"detail.nav.title" = "任务详情";
+"detail.base.rest" = "休息";
+"detail.base.base" = "基本薪资";
+"detail.base.bonus" = "奖金";
+
+"detail.status.ready" = "待开始";
+"detail.status.started" = "进行中";
+"detail.status.finished" = "已完成";
+"detail.status.canceled" = "已取消";
 
 

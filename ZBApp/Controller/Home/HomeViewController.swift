@@ -174,27 +174,59 @@ extension HomeViewController:UITableViewDelegate,UITableViewDataSource,JHDropdow
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView .deselectRow(at: indexPath, animated: false)
+//        let infoModel = self.taskList[indexPath.row]
+//        switch infoModel.type {
+//        case "LAUNCH","DISMANTLE":
+//            let carry = CarryMissionDetailViewController()
+//            carry.isTaked = false
+//            carry.model = infoModel
+//            carry.hidesBottomBarWhenPushed = true
+//            self.navigationController?.pushViewController(carry, animated: true)
+//
+//        case "MAINTAIN":
+//            let repair = RepairMissionDetailViewController()
+//            repair.isTaked = false
+//            repair.model = infoModel
+//            repair.hidesBottomBarWhenPushed = true
+//            self.navigationController?.pushViewController(repair, animated: true)
+//        case "CLEAN":
+//            let clean = CleanMissionDetailViewController()
+//            clean.isTaked = false
+//            clean.model = infoModel
+//            clean.hidesBottomBarWhenPushed = true
+//            self.navigationController?.pushViewController(clean, animated: true)
+//        default:
+//            print("未知类型")
+//        }
+        
         if indexPath.row == 0 {
             let carry = CarryMissionDetailViewController()
+            carry.isTaked = false
+//            carry.model = infoModel
             carry.hidesBottomBarWhenPushed = true
             self.navigationController?.pushViewController(carry, animated: true)
-            
+
         }else if indexPath.row == 1{
             let clean = CleanMissionDetailViewController()
+            clean.isTaked = false
+//            clean.model = infoModel
             clean.hidesBottomBarWhenPushed = true
             self.navigationController?.pushViewController(clean, animated: true)
         }else if indexPath.row == 2{
             let repair = RepairMissionDetailViewController()
+            repair.isTaked = false
+//            repair.model = infoModel
             repair.hidesBottomBarWhenPushed = true
             self.navigationController?.pushViewController(repair, animated: true)
-            
+
         }
         
     }
     
     //MARK: - JHDropdownViewDelegate
     func dropdownView(_ dropdownView: JHDropdownView, didSelectedString selectedStr: String) {
-        self.configTypeParamWithStr(typeStr: selectedStr)
+        
+        selectedType = configTypeParamWithStr(typeStr: selectedStr)
         
         self.loadNewData()
         
@@ -211,22 +243,5 @@ extension HomeViewController:UITableViewDelegate,UITableViewDataSource,JHDropdow
         self.loadNewData()
     }
     
-    func configTypeParamWithStr(typeStr: String) {
-        if typeStr == "摆场" {
-            selectedType = "LAUNCH"
-            
-        }else if typeStr == "撤场" {
-            selectedType = "DISMANTLE"
-            
-        }else if typeStr == "维修" {
-            selectedType = "MAINTAIN"
-            
-        }else if typeStr == "清扫" {
-            selectedType = "CLEAN"
-            
-        }else{
-            selectedType = ""
-        }
-    }
     
 }

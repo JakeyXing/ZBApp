@@ -26,7 +26,7 @@ class ZB_Task: NSObject,YYModel {
     @objc  var taskInfo: ZB_TaskInfo?
     @objc  var taskLogs: [ZB_TaskLog]?
     
-     @objc  var restHours: Float = 0
+    @objc  var restHours: Int = 0
     
   
     override var description: String {
