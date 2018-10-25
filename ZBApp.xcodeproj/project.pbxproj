@@ -37,6 +37,7 @@
 		9932153621703F2100CAB18B /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9932153421703F2100CAB18B /* LoginViewController.xib */; };
 		9936F3AD217F1F7F00642697 /* FeedbackListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9936F3AC217F1F7F00642697 /* FeedbackListViewController.swift */; };
 		9936F3AF217F20A400642697 /* FeedbackItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9936F3AE217F20A400642697 /* FeedbackItemCell.swift */; };
+		9936F3B1218010DE00642697 /* TaskStatusViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9936F3B0218010DE00642697 /* TaskStatusViewController.swift */; };
 		99425B552174648B00A18E45 /* CleanImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99425B542174648B00A18E45 /* CleanImageCell.swift */; };
 		99425B572174763300A18E45 /* ClaenCollectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99425B562174763300A18E45 /* ClaenCollectionHeaderView.swift */; };
 		9944ABBE21735C6B00B4CB08 /* CleanPicUploadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9944ABBD21735C6B00B4CB08 /* CleanPicUploadView.swift */; };
@@ -124,6 +125,7 @@
 		9932153421703F2100CAB18B /* LoginViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
 		9936F3AC217F1F7F00642697 /* FeedbackListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackListViewController.swift; sourceTree = "<group>"; };
 		9936F3AE217F20A400642697 /* FeedbackItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackItemCell.swift; sourceTree = "<group>"; };
+		9936F3B0218010DE00642697 /* TaskStatusViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskStatusViewController.swift; sourceTree = "<group>"; };
 		99425B542174648B00A18E45 /* CleanImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CleanImageCell.swift; sourceTree = "<group>"; };
 		99425B562174763300A18E45 /* ClaenCollectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClaenCollectionHeaderView.swift; sourceTree = "<group>"; };
 		9944ABBD21735C6B00B4CB08 /* CleanPicUploadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CleanPicUploadView.swift; sourceTree = "<group>"; };
@@ -231,6 +233,7 @@
 			isa = PBXGroup;
 			children = (
 				9921CE2F2160AB70005DC836 /* UnTakeMissionViewController.swift */,
+				9936F3B0218010DE00642697 /* TaskStatusViewController.swift */,
 				99017C1E217088AF00155724 /* MissionDetailBaseViewController.swift */,
 				99017C1C2170889500155724 /* CarryMissionDetailViewController.swift */,
 				990F7B022171D8D80075A04C /* CleanMissionDetailViewController.swift */,
@@ -631,6 +634,7 @@
 				9923CBB5216B56F900EDCA7A /* MissionCell.swift in Sources */,
 				99D781B3217C723100611DE0 /* ZB_TaskInfo.swift in Sources */,
 				99D69A222175CCC400A5DC09 /* CommonMethod.m in Sources */,
+				9936F3B1218010DE00642697 /* TaskStatusViewController.swift in Sources */,
 				990F7AF62170ED560075A04C /* ViewCategory.swift in Sources */,
 				994F6346216C78F20063044B /* NSObject+CZRuntime.m in Sources */,
 				990F7AF4216FAF490075A04C /* CalendarBgView.swift in Sources */,
