@@ -9,3 +9,13 @@
 //MARK:- 首页
 
 "home.navi.time" = "选择日期";
+
+"home.dropDwon.launch" = "摆场";
+"home.dropDwon.dismantle" = "撤场";
+"home.dropDwon.maintain" = "维修";
+"home.dropDwon.clean" = "清扫";
+"home.dropDwon.all" = "全部类型";
+
+"home.cell.bonus" = "完成任务，经检查合格且无客诉，可额外获得";
+
+

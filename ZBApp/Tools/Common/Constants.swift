@@ -66,6 +66,21 @@ func m_AppDelegate() -> AppDelegate {
 }
 
 
+func typeNameWithStr(str: String)-> String{
+    switch str {
+    case "a":
+    print("The letter A")
+    case "A":
+        print("The letter A")
+    default:
+        print("Not the letter A")
+    }
+    return ""
+
+    
+}
+
+
 extension String {
     
     func md5WithSalt(salt:String) -> String {

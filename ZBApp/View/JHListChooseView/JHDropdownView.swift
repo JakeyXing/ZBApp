@@ -106,8 +106,8 @@ class JHDropdownView: UIView,JHListChooseViewDelegate {
     }
     
     func listChooseView(_ listChooseView: JHListChooseView, didSelectedIndex index: NSInteger) {
-        self.delegate?.dropdownView(self, didSelectedString: self.dataArray[index])
-        self.contentLabel.text = self.dataArray[index]
+        self.delegate?.dropdownView(self, didSelectedString: LanguageHelper.getString(key: self.dataArray[index]))
+        self.contentLabel.text = LanguageHelper.getString(key: self.dataArray[index])
         self.typeListView.removeFromSuperview()
     }
     

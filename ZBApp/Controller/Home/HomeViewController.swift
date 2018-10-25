@@ -14,6 +14,8 @@ import Toast
 private let  kHomeMissionCell = "kHomeMissionCell"
 class HomeViewController: UIViewController {
     
+    var selectedDate = ""
+    var selectedType = ""
     private lazy var navigationBar: JHNavigationBar = {
         let view = JHNavigationBar(frame: CGRect.init(x: 0, y: 0, width: 0, height: 0))
         view.backgroundColor = UIColor.white
@@ -41,7 +43,7 @@ class HomeViewController: UIViewController {
         self.navigationBar.contentView.addSubview(self.typeSelectBar)
         self.setTableView()
         
-        self.loadNewData()
+//        self.loadNewData()
     }
     
     func setTableView(){
@@ -68,7 +70,7 @@ class HomeViewController: UIViewController {
         
         pagendex = 1
         
-        let params = ["taskDate":"","taskType":"","page":pagendex] as [String : Any]
+        let params = ["taskDate":selectedDate,"taskType":selectedType,"page":pagendex] as [String : Any]
         
         MBProgressHUD.showAdded(to: self.view, animated: true)
         NetWorkManager.shared.loadRequest(method: .get, url: PendingTaskListUrl, parameters: params as [String : Any], success: { (data) in
@@ -97,7 +99,7 @@ class HomeViewController: UIViewController {
     @objc private func refreshData(){
         pagendex = 1
         self.tableview?.mj_footer.state = MJRefreshState.idle
-        let params = ["taskDate":"","taskType":"","page":pagendex] as [String : Any]
+        let params = ["taskDate":selectedDate,"taskType":selectedType,"page":pagendex] as [String : Any]
         
         NetWorkManager.shared.loadRequest(method: .get, url: PendingTaskListUrl, parameters: params as [String : Any], success: { (data) in
             self.tableview?.mj_header.endRefreshing()
@@ -127,7 +129,7 @@ class HomeViewController: UIViewController {
         
         pagendex  += 1
         
-        let params = ["taskDate":"","taskType":"","page":pagendex] as [String : Any]
+        let params = ["taskDate":selectedDate,"taskType":selectedType,"page":pagendex] as [String : Any]
         
         NetWorkManager.shared.loadRequest(method: .get, url: PendingTaskListUrl, parameters: params as [String : Any], success: { (data) in
             
@@ -192,6 +194,7 @@ extension HomeViewController:UITableViewDelegate,UITableViewDataSource,JHDropdow
     
     //MARK: - JHDropdownViewDelegate
     func dropdownView(_ dropdownView: JHDropdownView, didSelectedString selectedStr: String) {
+        self.configTypeParamWithStr(typeStr: selectedStr)
         
         self.loadNewData()
         
@@ -202,9 +205,28 @@ extension HomeViewController:UITableViewDelegate,UITableViewDataSource,JHDropdow
         //日期样式
         formatter.dateFormat = "yyyy-MM-dd"
 //        print(formatter.string(from: date))
+        selectedDate = formatter.string(from: date)
         
         
         self.loadNewData()
+    }
+    
+    func configTypeParamWithStr(typeStr: String) {
+        if typeStr == "摆场" {
+            selectedType = "LAUNCH"
+            
+        }else if typeStr == "撤场" {
+            selectedType = "DISMANTLE"
+            
+        }else if typeStr == "维修" {
+            selectedType = "MAINTAIN"
+            
+        }else if typeStr == "清扫" {
+            selectedType = "CLEAN"
+            
+        }else{
+            selectedType = ""
+        }
     }
     
 }

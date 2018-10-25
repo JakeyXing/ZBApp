@@ -20,12 +20,13 @@ class MissionTypeTopBar: UIView {
     //MARK: - 控件
     lazy var taskTypeDropdownView: JHDropdownView = {
         let view = JHDropdownView(frame: CGRect.init())
-        view.contentLabel.text = "全部类型"
+        view.contentLabel.text = LanguageHelper.getString(key: "home.dropDwon.all")
         view.contentLabel.textColor = kFontColorBlack
-        view.dataArray = ["全部类型","摆场","撤场","维修","清扫"]
+        view.dataArray = ["home.dropDwon.all","home.dropDwon.launch","home.dropDwon.dismantle","home.dropDwon.maintain","home.dropDwon.clean"]
         view.extraTop = statusBarHeight
         return view
     }()
+    
     
     private lazy var dateChooseButton: UIButton = {
         let btn = UIButton(type: UIButton.ButtonType.custom)

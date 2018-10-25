@@ -22,6 +22,9 @@ class ZB_TaskInfo: NSObject,YYModel {
     @objc  var startDate: String?
     @objc  var title: String?
     @objc  var type: String?
+    @objc  var base: Float = 0
+    @objc  var bonus: Float = 0
+    @objc  var currency: String?
     
     override var description: String {
         return yy_modelDescription()

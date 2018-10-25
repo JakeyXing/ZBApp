@@ -20,10 +20,15 @@ class MissionCell: UITableViewCell {
     
     private lazy var locaLabel: UILabel = UILabel.cz_label(withText: "浪速区大国", fontSize: 16, color: kFontColorGray)
     
-    private lazy var starView: StarView = {
-        let view = StarView()
-        view.backgroundColor = kTintColorYellow
-        return view
+//    private lazy var starView: StarView = {
+//        let view = StarView()
+//        view.backgroundColor = kTintColorYellow
+//        return view
+//    }()
+    lazy var addressIcon: UIImageView = {
+        let img = UIImageView()
+        img.image = UIImage(named: "location")
+        return img
     }()
     
     private lazy var requireLabel: UILabel = {
@@ -80,7 +85,7 @@ class MissionCell: UITableViewCell {
         self.addSubview(priceLabel)
         self.addSubview(unitLabel)
         self.addSubview(locaLabel)
-        self.addSubview(starView)
+        self.addSubview(addressIcon)
         self.addSubview(requireLabel)
         self.addSubview(typeLabel)
         self.addSubview(numLabel)
@@ -104,7 +109,7 @@ class MissionCell: UITableViewCell {
             make.centerY.equalTo()(self.timeLabel.mas_centerY)
         }
         
-        self.starView.mas_makeConstraints { (make:MASConstraintMaker!) in
+        self.addressIcon.mas_makeConstraints { (make:MASConstraintMaker!) in
             make.right.equalTo()(self.mas_right)?.offset()(kResizedPoint(pt: -20))
             make.top.equalTo()(self.unitLabel.mas_bottom)?.offset()(kResizedPoint(pt: 15))
             make.width.equalTo()(kResizedPoint(pt: 20))
@@ -112,8 +117,8 @@ class MissionCell: UITableViewCell {
         }
         
         self.locaLabel.mas_makeConstraints { (make:MASConstraintMaker!) in
-            make.right.equalTo()(self.starView.mas_left)?.offset()(kResizedPoint(pt: -5))
-            make.centerY.equalTo()(self.starView.mas_centerY)
+            make.right.equalTo()(self.addressIcon.mas_left)?.offset()(kResizedPoint(pt: -5))
+            make.centerY.equalTo()(self.addressIcon.mas_centerY)
         }
         
         self.requireLabel.mas_makeConstraints { (make:MASConstraintMaker!) in

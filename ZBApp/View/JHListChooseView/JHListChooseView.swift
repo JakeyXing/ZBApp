@@ -96,7 +96,7 @@ extension JHListChooseView:UITableViewDelegate,UITableViewDataSource,UIGestureRe
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell:ListChooseCell = tableView.dequeueReusableCell(withIdentifier: kListCellID, for: indexPath) as! ListChooseCell
-        cell.itemLabel.text = self.typeArray?[indexPath.row]
+        cell.itemLabel.text = LanguageHelper.getString(key: (self.typeArray?[indexPath.row])!)
         return cell
     }
     
