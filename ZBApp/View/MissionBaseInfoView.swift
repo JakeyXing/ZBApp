@@ -105,29 +105,27 @@ extension MissionBaseInfoView{
     func congfigDataWithTaskInfo(info: ZB_TaskInfo){
        
         let timeInterv = timeToTimeStamp(time: info.startDate ?? "")
+        self.statusLabel.text = statusNameWithStr(str: info.status ?? "")
         self.dateLabel.text = timeStampToString(timeStamp: timeInterv)
         self.typeLabel.text = typeNameWithStr(str: info.type ?? "")
         
         let starTimeStr = timeStampShortTimeStr(timeStamp: timeInterv)
         let endTimeStr = timeStampShortTimeStr(timeStamp: (timeInterv + Double(info.restHours + info.hoursPerPerson)*3600))
         
-        self.timeLabel.text = starTimeStr + "-" + endTimeStr + String(format: "(%@%dh)", LanguageHelper.getString(key: "detail.base.rest"),info.restHours)
-        
-        
+        if info.type == "CLEAN" {
+            if info.properties?.count ?? 0 > 0 {
+                let taskProperty = info.properties?[0]
+                self.timeLabel.text = taskProperty?.doorplate
+            }
+            
+        }else{
+            self.timeLabel.text = starTimeStr + "-" + endTimeStr + String(format: "(%@%dh)", LanguageHelper.getString(key: "detail.base.rest"),info.restHours)
+        }
+    
         self.salaryLabel_1.text = String(format: "%@ %.0f %@", LanguageHelper.getString(key: "detail.base.base"),info.base,info.currency ?? "JPY")
         self.salaryLabel_2.text = String(format: "%@ %.0f %@", LanguageHelper.getString(key: "detail.base.bonus"),info.base,info.currency ?? "JPY")
         
-        self.addressLabel.text = info.address?.address
-        /*"detail.base.base" = "基本薪资";
-         "detail.base.bonus" = "奖金";*/
-        
-//        self.priceLabel.text = String(format: "%.1f", model.base)
-//        self.unitLabel.text = model.currency
-//        self.locaLabel.text = model.address?.address
-//        self.requireLabel.text = LanguageHelper.getString(key: "home.cell.bonus") + String(format: "%.1f", model.bonus) + model.currency!
-//        self.typeLabel.text = typeNameWithStr(str: model.type ?? "")
-//        self.remainTimeLabel.text = LanguageHelper.getString(key: "home.cell.remainTime") + getFormatRemainTime(secounds: timeInterv - 3600)
-        
+        self.addressLabel.text = info.address?.name
     }
     
     //

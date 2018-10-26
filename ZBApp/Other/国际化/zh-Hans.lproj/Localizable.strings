@@ -29,4 +29,26 @@
 "detail.status.finished" = "已完成";
 "detail.status.canceled" = "已取消";
 
+"detail.statusInfo.title" = "任务标题";
+"detail.statusInfo.describ" = "任务描述";
+"detail.statusInfo.remark" = "补充备注";
+"detail.statusInfo.imgs" = "图片";
+"detail.statusInfo.documents" = "文件";
 
+"detail.actionName.qiangdan" = "抢单";
+"detail.time.end" = "截止";
+
+"detail.roomInfo.route" = "路引查看";
+"detail.roomInfo.password" = "密码";
+"detail.roomInfo.maxGuests" = "最大入住人数";
+"detail.roomInfo.nextGuests" = "下次入住人数";
+"detail.roomInfo.nextCheckInNights" = "下次入住天数";
+"detail.roomInfo.checkinNote" = "入住人数说明";
+"detail.roomInfo.checkinNoteValue" = "按照最大入住人数准备备品，如果下次入住天数大于等于3天，则备品数量加倍； 按照下次入住人数摆放备品。";
+"detail.roomInfo.remark" = "备注";
+"detail.roomInfo.uploadInfo" = "信息上报";
+
+"detail.roomInfo.roomNum" = "房间号";
+"detail.roomInfo.ksPassword" = "开锁密码";
+"detail.roomInfo.kShortRoute" = "路引";
+"detail.roomInfo.lookRoute" = "查看";

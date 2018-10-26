@@ -9,14 +9,23 @@
 import UIKit
 import MobileCoreServices
 import SKPhotoBrowser
+import MBProgressHUD
+import Toast
 
-class RepairMissionDetailViewController: MissionDetailBaseViewController,RepairPicUploadViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,ListRoomInfoViewDelegate,FeedbackViewDelegate{
+class RepairMissionDetailViewController: MissionDetailBaseViewController,RepairPicUploadViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,CarryMissonImageAndFlieViewDelegate,ListRoomInfoViewDelegate,FeedbackViewDelegate{
+    
 
     var cameraPicker: UIImagePickerController!
     var currentIndexpath: NSIndexPath?
     
+    lazy var carryImageView: CarryMissonImageAndFlieView = {
+        let view = CarryMissonImageAndFlieView(frame: CGRect.init(x: 0, y: self.missionBaseInfoView.bottom+kResizedPoint(pt: 10), width: DEVICE_WIDTH, height: kResizedPoint(pt: 600)))
+        view.delegate = self
+        return view
+    }()
+    
     lazy var roomInfoView: ListRoomInfoView = {
-        let view = ListRoomInfoView(frame: CGRect.init(x: 0, y: self.missionBaseInfoView.bottom+kResizedPoint(pt: 10), width: DEVICE_WIDTH, height: kResizedPoint(pt: 300)))
+        let view = ListRoomInfoView(frame: CGRect.init(x: 0, y: self.carryImageView.bottom+kResizedPoint(pt: 10), width: DEVICE_WIDTH, height: kResizedPoint(pt: 300)))
         view.delegate = self;
         return view
     }()
@@ -51,16 +60,39 @@ class RepairMissionDetailViewController: MissionDetailBaseViewController,RepairP
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // MARK: - 键盘即将弹出
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(keyBoardWillShow(notification:)), name:UIResponder.keyboardWillShowNotification,
+                                               object: nil)
+        // MARK: - 键盘即将回收
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(keyBoardWillHide(notification:)), name: UIResponder.keyboardWillHideNotification,
+                                               object: nil)
+        
+    }
+    
+    override func addSubViews() {
+        super.addSubViews()
+        
+        self.scrollview.addSubview(self.carryImageView)
         self.scrollview.addSubview(self.roomInfoView)
         self.scrollview.addSubview(self.feedbackView)
         self.scrollview.addSubview(self.infoTextView)
         self.scrollview.addSubview(self.uploadView)
         self.scrollview.addSubview(self.submitButton)
         
+        self.carryImageView.imageArray = ["https://video.parentschat.com/pic_R3_720.jpg","https://video.parentschat.com/pic_R3_720.jpg","https://video.parentschat.com/pic_R3_720.jpg","https://video.parentschat.com/pic_R3_720.jpg"]
+
+        self.carryImageView.fileArray = ["https://video.parentschat.com/pic_R3_720.jpg","https://video.parentschat.com/pic_R3_720.jpg","https://video.parentschat.com/pic_R3_720.jpg","https://video.parentschat.com/pic_R3_720.jpg"]
+        
         self.feedbackView.congfigData()
-        self.roomInfoView.congfigData()
+        self.roomInfoView.roomArray = [ZB_TaskProperty(),ZB_TaskProperty()]
         self.uploadView.congfigData()
         self.uploadView.delegate = self
+        
+        self.carryImageView.height = self.carryImageView.viewHeight()
+        self.roomInfoView.top = self.carryImageView.bottom + kResizedPoint(pt: 10)
         
         self.roomInfoView.height = self.roomInfoView.viewHeight()
         self.feedbackView.top = self.roomInfoView.bottom + kResizedPoint(pt: 10)
@@ -75,23 +107,67 @@ class RepairMissionDetailViewController: MissionDetailBaseViewController,RepairP
         self.submitButton.top = self.uploadView.bottom + kResizedPoint(pt: 30)
         
         self.scrollview.contentSize = CGSize.init(width: DEVICE_WIDTH, height: self.submitButton.bottom + kResizedPoint(pt: 20))
+ 
+   
         
+    }
+    
+    override func configData() {
         
-        // MARK: - 键盘即将弹出
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(keyBoardWillShow(notification:)), name:UIResponder.keyboardWillShowNotification,
-                                               object: nil)
-        // MARK: - 键盘即将回收
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(keyBoardWillHide(notification:)), name: UIResponder.keyboardWillHideNotification,
-                                               object: nil)
+    }
+    
+    override func setupDataWithHomeModel() {
+        self.feedbackView.isHidden = true
+        self.infoTextView.isHidden = true
+        self.uploadView.isHidden = true
+        self.roomInfoView.infoUploadButton.isHidden = true
+
+        self.missionBaseInfoView.congfigDataWithTaskInfo(info: self.model ?? ZB_TaskInfo())
+        self.carryImageView.imageArray = self.model?.imgs
+        self.carryImageView.fileArray = self.model?.documents
+//        self.roomInfoView.roomArray = self.model?.properties
         
+        let timeInterv = timeToTimeStamp(time: (self.model?.startDate) ?? "")
+        self.submitButton.setTitle(String(format: "%@(%@%@)", LanguageHelper.getString(key: "detail.actionName.qiangdan"),timeStampShortHourStr(timeStamp: timeInterv - 3600),LanguageHelper.getString(key:"detail.time.end")), for: .normal)
         
+        self.carryImageView.height = self.carryImageView.viewHeight()
+        self.roomInfoView.top = self.carryImageView.bottom + kResizedPoint(pt: 10)
+        
+        self.roomInfoView.height = self.roomInfoView.viewHeight()
+        self.submitButton.top = self.roomInfoView.bottom + kResizedPoint(pt: 30)
+        
+        self.scrollview.contentSize = CGSize.init(width: DEVICE_WIDTH, height: self.submitButton.bottom + kResizedPoint(pt: 20))
+
     }
     
     
     //MARK: - actions
     @objc private func takeAction(){
+        if self.isTaked == false {
+            //抢单
+            let params = ["taskId":self.model?.id ?? 0] as [String : Any]
+            
+            MBProgressHUD.showAdded(to: self.view, animated: true)
+            NetWorkManager.shared.loadRequest(method: .post, url: ReceiveTaskUrl, parameters: params as [String : Any], success: { (data) in
+                MBProgressHUD.hide(for: self.view, animated: true)
+                
+                let resultDic = data as! Dictionary<String,AnyObject>
+                let dic = resultDic["data"]
+                if dic == nil {
+                    return
+                }
+                self.isTaked = true
+                self.loadNewDataWithId(taskId: self.model?.id ?? 0)
+                
+            }) { (data, errMsg) in
+                MBProgressHUD.hide(for: self.view, animated: true)
+                self.view.makeToast(errMsg, duration: 2, position: CSToastPositionCenter)
+                
+                
+            }
+        }else{
+            
+        }
         
     }
     
@@ -213,6 +289,35 @@ class RepairMissionDetailViewController: MissionDetailBaseViewController,RepairP
     }
     
     
+    // MARK: - CarryMissonImageAndFlieViewDelegate
+    func carryMissonImageAndFlieView(_ view: CarryMissonImageAndFlieView, didSelectedImageAtIndex index: NSInteger) {
+        let count = self.carryImageView.imageArray!.count
+        
+        var images = [SKPhoto]()
+        for i in 0..<count{
+            let photo = SKPhoto.photoWithImageURL(self.carryImageView.imageArray![i])
+            photo.shouldCachePhotoURLImage = false // you can use image cache by true(NSCache)
+            images.append(photo)
+        }
+        
+        // 2. create PhotoBrowser Instance, and present from your viewController.
+        let browser = SKPhotoBrowser(photos: images)
+        browser.initializePageIndex(index)
+        self.present(browser, animated: true, completion: {})
+        
+        
+        
+    }
+    
+    func carryMissonImageAndFlieView(_ view: CarryMissonImageAndFlieView, didSelectedFileAtIndex index: NSInteger) {
+        let web=WebViewController()
+        web.hidesBottomBarWhenPushed = true
+        web.urlStr = "https://www.baidu.com"
+        web.titleStr = "文件名"
+        self.navigationController?.pushViewController(web, animated: true)
+    }
+    
+    
     //MARK: - ListRoomInfoViewDelegate
     func listRoomInfoViewDidTappedRoute(_ view: ListRoomInfoView, routeUrl routeUrlStr: String) {
         let web=WebViewController()
@@ -220,6 +325,14 @@ class RepairMissionDetailViewController: MissionDetailBaseViewController,RepairP
         web.urlStr = "https://www.baidu.com"
         web.titleStr = "文件名"
         self.navigationController?.pushViewController(web, animated: true)
+    }
+    
+    func listRoomInfoViewDidTappedPassword(_ view: ListRoomInfoView, password passws: [ZB_PwdInfo]) {
+        let pass=PasswordViewController()
+        pass.hidesBottomBarWhenPushed = true
+        pass.passArr = passws
+        self.navigationController?.pushViewController(pass, animated: true)
+        
     }
     
     func listRoomInfoViewDidTappedUploadFeedback(_ view: ListRoomInfoView) {

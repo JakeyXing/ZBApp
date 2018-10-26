@@ -14,6 +14,7 @@ class ZB_TaskLog: NSObject,YYModel {
     @objc  var task_description: String?
     @objc  var id: Int64 = 0
     @objc  var imgs: [String]?
+    @objc  var reason: String?
     @objc  var type: String?
     @objc  var userId: Int64 = 0
     @objc  var userRole: String?

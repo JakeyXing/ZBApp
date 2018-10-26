@@ -46,16 +46,22 @@ class MissionDetailBaseViewController: UIViewController {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor .white
         self.navigationController?.navigationBar.isHidden = true
-        self.view.addSubview(self.navigationBar)
-        self.navigationBar.delegate = self
-        self.view.addSubview(self.scrollview)
-        self.scrollview.addSubview(self.missionBaseInfoView)
+        self.addSubViews()
         
         if self.isTaked == false {
             self.setupDataWithHomeModel()
         }else{
-          self.loadNewData()
+          self.loadNewDataWithId(taskId: self.taskExecuteId)
         }
+        
+    }
+    
+    func addSubViews() {
+        print("子类在这添加subview")
+        self.view.addSubview(self.navigationBar)
+        self.navigationBar.delegate = self
+        self.view.addSubview(self.scrollview)
+        self.scrollview.addSubview(self.missionBaseInfoView)
         
     }
     
@@ -67,9 +73,9 @@ class MissionDetailBaseViewController: UIViewController {
         self.navigationController?.pushViewController(map, animated: true)
     }
     
-    func loadNewData() {
+    func loadNewDataWithId(taskId: Int64) {
         
-        let params = ["taskExecuteId":self.taskExecuteId] as [String : Any]
+        let params = ["taskExecuteId":taskId] as [String : Any]
         
         MBProgressHUD.showAdded(to: self.view, animated: true)
         NetWorkManager.shared.loadRequest(method: .get, url: TaskDetailUrl, parameters: params as [String : Any], success: { (data) in

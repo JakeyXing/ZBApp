@@ -14,6 +14,7 @@ private let  kRoomRuteCellID = "kRoomRuteCellID"
 
 protocol ListRoomInfoViewDelegate: class {
     func listRoomInfoViewDidTappedRoute(_ view: ListRoomInfoView, routeUrl routeUrlStr:String)
+    func listRoomInfoViewDidTappedPassword(_ view: ListRoomInfoView, password passws:[ZB_PwdInfo])
     func listRoomInfoViewDidTappedUploadFeedback(_ view: ListRoomInfoView)
     
 }
@@ -24,10 +25,9 @@ class ListRoomInfoView: UIView {
         content.backgroundColor = kBgColorGray_238_235_220
         return content
     }()
-    
-    private lazy var roomNumLabel: UILabel = UILabel.cz_label(withText: "房间号", fontSize: kResizedFont(ft: 15), color: kFontColorGray)
-    private lazy var passwordTitleLabel: UILabel = UILabel.cz_label(withText: "开锁密码", fontSize: kResizedFont(ft: 15), color: kFontColorGray)
-    private lazy var roadRuteLabel: UILabel = UILabel.cz_label(withText: "路引", fontSize: kResizedFont(ft: 15), color: kFontColorGray)
+    private lazy var roomNumLabel: UILabel = UILabel.cz_label(withText: LanguageHelper.getString(key: "detail.roomInfo.roomNum"), fontSize: kResizedFont(ft: 15), color: kFontColorGray)
+    private lazy var passwordTitleLabel: UILabel = UILabel.cz_label(withText: LanguageHelper.getString(key: "detail.roomInfo.ksPassword"), fontSize: kResizedFont(ft: 15), color: kFontColorGray)
+    private lazy var roadRuteLabel: UILabel = UILabel.cz_label(withText: LanguageHelper.getString(key: "detail.roomInfo.kShortRoute"), fontSize: kResizedFont(ft: 15), color: kFontColorGray)
     private lazy var tableview: UITableView = {
         let tablev = UITableView(frame: CGRect.init(), style: UITableView.Style.plain)
         tablev.separatorStyle = UITableViewCell.SeparatorStyle.none
@@ -43,14 +43,19 @@ class ListRoomInfoView: UIView {
         let btn = UIButton(type: UIButton.ButtonType.custom)
         btn.setTitleColor(UIColor.white, for: UIControl.State.normal)
         btn.backgroundColor = UIColor.blue
-        btn.setTitle("信息上报", for: .normal)
+        btn.setTitle(LanguageHelper.getString(key: "detail.roomInfo.uploadInfo"), for: .normal)
         btn.titleLabel?.font = kFont(size: 15)
         btn.addTarget(self, action: #selector(infoUploadAction), for: UIControl.Event.touchUpInside)
         return btn
     }()
     
-    var roomArray: [String] = []
-    
+    var roomArray: [ZB_TaskProperty]? {
+        didSet{
+            self.tableview.reloadData()
+            self.congSubViewHeight()
+            
+        }
+    }
     
     //MARK: - lifeCycle
     override init(frame: CGRect) {
@@ -72,14 +77,24 @@ class ListRoomInfoView: UIView {
     
     @objc private func routeAction(btn: UIButton){
         let index = btn.tag - 100
-        self.delegate?.listRoomInfoViewDidTappedRoute(self, routeUrl: "")
+        let prop = self.roomArray?[index]
+        
+        self.delegate?.listRoomInfoViewDidTappedRoute(self, routeUrl: prop?.guideUrl ?? "")
         
     }
     
-    func congfigData() {
+    @objc private func passwordAction(btn: UIButton){
+        let index = btn.tag - 200
+        let prop = self.roomArray?[index]
+        
+        self.delegate?.listRoomInfoViewDidTappedPassword(self, password: prop?.pwdInfos ?? [])
+        
+    }
+    
+    func congSubViewHeight() {
 //
-        self.roomArray = ["","","",""]
-        let tabH = kResizedPoint(pt: 27)*CGFloat(self.roomArray.count)+kResizedPoint(pt: 10)
+//        self.roomArray = [ZB_TaskProperty()]
+        let tabH = kResizedPoint(pt: 27)*CGFloat(self.roomArray?.count ?? 0)+kResizedPoint(pt: 10)
         
         self.tableview.mas_updateConstraints() { (make:MASConstraintMaker!) in
             make.height.equalTo()(tabH)
@@ -96,7 +111,7 @@ class ListRoomInfoView: UIView {
     }
     
     func viewHeight() -> CGFloat {
-        let tabH = kResizedPoint(pt: 27)*CGFloat(self.roomArray.count)+kResizedPoint(pt: 10)
+        let tabH = kResizedPoint(pt: 27)*CGFloat(self.roomArray?.count ?? 0)+kResizedPoint(pt: 10)
         
         //10+17+10+h+10
         let contentH = kResizedPoint(pt: 47)+tabH
@@ -172,13 +187,19 @@ extension ListRoomInfoView{
 
 extension ListRoomInfoView:UITableViewDelegate,UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.roomArray.count
+        return self.roomArray?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: RoomRuteCell = tableView.dequeueReusableCell(withIdentifier: kRoomRuteCellID, for: indexPath) as! RoomRuteCell
+        let prop = self.roomArray?[indexPath.row]
+        cell.configData(model: prop ?? ZB_TaskProperty())
         cell.routeButton.tag = 100 + indexPath.row
         cell.routeButton.addTarget(self, action: #selector(routeAction(btn:)), for: UIControl.Event.touchUpInside)
+        
+        cell.passwordButton.tag = 200 + indexPath.row
+        cell.passwordButton.addTarget(self, action: #selector(passwordAction(btn:)), for: UIControl.Event.touchUpInside)
+        
         
         return cell
     }

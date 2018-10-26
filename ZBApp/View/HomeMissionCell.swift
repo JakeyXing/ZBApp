@@ -81,7 +81,7 @@ class HomeMissionCell: UITableViewCell {
         self.timeLabel.text = timeStampToString(timeStamp: timeInterv)
         self.priceLabel.text = String(format: "%.1f", model.base)
         self.unitLabel.text = model.currency
-        self.locaLabel.text = model.address?.address
+        self.locaLabel.text = model.address?.name
         self.requireLabel.text = LanguageHelper.getString(key: "home.cell.bonus") + String(format: "%.1f", model.bonus) + model.currency!
         self.typeLabel.text = typeNameWithStr(str: model.type ?? "")
         self.remainTimeLabel.text = LanguageHelper.getString(key: "home.cell.remainTime") + getFormatRemainTime(secounds: timeInterv - 3600)

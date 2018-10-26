@@ -22,7 +22,7 @@ class CarryMissionInfoView: UIView {
         let lab = UILabel()
         lab.textColor = kFontColorGray
         lab.font = kMediumFont(size: 15)
-        lab.text = "任务标题"
+        lab.text = LanguageHelper.getString(key: "detail.statusInfo.title")
         return lab
         
     }()
@@ -33,7 +33,7 @@ class CarryMissionInfoView: UIView {
         let lab = UILabel()
         lab.textColor = kFontColorGray
         lab.font = kMediumFont(size: 15)
-        lab.text = "任务描述"
+        lab.text = LanguageHelper.getString(key: "detail.statusInfo.describ")
         return lab
         
     }()
@@ -53,7 +53,7 @@ class CarryMissionInfoView: UIView {
         let lab = UILabel()
         lab.textColor = kFontColorGray
         lab.font = kMediumFont(size: 15)
-        lab.text = "补充备注"
+        lab.text = LanguageHelper.getString(key: "detail.statusInfo.remark")
         return lab
         
     }()
@@ -84,6 +84,19 @@ class CarryMissionInfoView: UIView {
     
     @objc private func starImageTapped(){
         //        self.delegate?.rightAction()
+    }
+    
+    //
+    func congfigDataWithTaskInfo(info: ZB_TaskInfo){
+        
+        self.missionTitleLabel.text = info.title
+        self.missionDescribLabel.text = info.desc
+        self.missionRemarkLabel.text = info.remark
+    }
+    
+    //
+    func congfigDataWithTask(info: ZB_Task){
+        
     }
     
     

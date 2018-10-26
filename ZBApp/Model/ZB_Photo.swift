@@ -9,11 +9,11 @@
 import UIKit
 import YYModel
 class ZB_Photo: NSObject {
-    @objc  var imgUrl: String?
-    @objc  var phIndex: Int = 0
+    @objc  var url: String?
+    @objc  var index: Int = 0
     @objc  var position: String?
-    @objc  var reason: String?
-    @objc  var refImgUrl: String?
+    @objc  var location: String?
+    @objc  var refUrl: String?
     
   
     override var description: String {

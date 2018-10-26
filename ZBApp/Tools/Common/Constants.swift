@@ -104,6 +104,45 @@ func configTypeParamWithStr(typeStr: String)-> String {
     return selectedType
 }
 
+func statusNameWithStr(str: String)-> String{
+    var typeName = ""
+    switch str {
+    case "READY":
+        typeName = LanguageHelper.getString(key: "detail.status.ready")
+    case "STARTED":
+        typeName = LanguageHelper.getString(key: "detail.status.started")
+    case "FINISHED":
+        typeName = LanguageHelper.getString(key: "detail.status.finished")
+    case "CANCELED":
+        typeName = LanguageHelper.getString(key: "detail.status.canceled")
+    default:
+        typeName = ""
+    }
+    return typeName
+    
+}
+
+
+func configStatusParamWithStr(typeStr: String)-> String {
+    var selectedType = ""
+    
+    if typeStr == "detail.status.ready" {
+        selectedType = "READY"
+        
+    }else if typeStr == "detail.status.started" {
+        selectedType = "STARTED"
+        
+    }else if typeStr == "detail.status.finished" {
+        selectedType = "FINISHED"
+        
+    }else if typeStr == "detail.status.canceled" {
+        selectedType = "CANCELED"
+        
+    }
+    return selectedType
+}
+
+
 //MARK: -时间转时间戳函数
 func timeToTimeStamp(time: String) -> Double {
     let dfmatter = DateFormatter()
@@ -134,6 +173,16 @@ func timeStampShortTimeStr(timeStamp: Double) -> String {
     let dfmatter = DateFormatter()
     //
     dfmatter.dateFormat="HH:mm"
+    return dfmatter.string(from: date as Date)
+}
+
+//MARK: -时间戳转“MM-dd 09：00”
+func timeStampShortHourStr(timeStamp: Double) -> String {
+    let timeSta:TimeInterval = TimeInterval(timeStamp)
+    let date = NSDate(timeIntervalSince1970: timeSta)
+    let dfmatter = DateFormatter()
+    //
+    dfmatter.dateFormat="MM-dd HH:mm"
     return dfmatter.string(from: date as Date)
 }
 

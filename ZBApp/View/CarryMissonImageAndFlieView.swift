@@ -4,7 +4,7 @@
 //
 //  Created by xingjiehai on 2018/10/13.
 //  Copyright © 2018年 ParentsChat. All rights reserved.
-//
+
 
 import UIKit
 import Masonry
@@ -29,7 +29,7 @@ class CarryMissonImageAndFlieView: UIView {
         let lab = UILabel()
         lab.textColor = kFontColorGray
         lab.font = kMediumFont(size: 15)
-        lab.text = "图片"
+        lab.text = LanguageHelper.getString(key: "detail.statusInfo.imgs")
         return lab
         
     }()
@@ -40,7 +40,7 @@ class CarryMissonImageAndFlieView: UIView {
         let lab = UILabel()
         lab.textColor = kFontColorGray
         lab.font = kMediumFont(size: 15)
-        lab.text = "文件"
+        lab.text = LanguageHelper.getString(key: "detail.statusInfo.documents")
         return lab
         
     }()
@@ -53,7 +53,11 @@ class CarryMissonImageAndFlieView: UIView {
             if (dateArray != nil) {
                 self.addImages()
             }else{
-                
+                self.picBgView.removeAllSubviews()
+                imageTotalH = 0;
+                self.picBgView.mas_updateConstraints { (make:MASConstraintMaker!) in
+                    make.height.equalTo()(imageTotalH)
+                }
             }
             
             
@@ -66,7 +70,11 @@ class CarryMissonImageAndFlieView: UIView {
             if (dateArray != nil) {
                 self.addfiles()
             }else{
-                
+                self.fileBgView.removeAllSubviews()
+                fileTotalH = 0;
+                self.fileBgView.mas_updateConstraints { (make:MASConstraintMaker!) in
+                    make.height.equalTo()(fileTotalH)
+                }
             }
             
         }

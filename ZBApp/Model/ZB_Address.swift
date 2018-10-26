@@ -9,13 +9,10 @@
 import UIKit
 import YYModel
 class ZB_Address: NSObject {
-    @objc  var address: String?
-    @objc  var addressEn: String?
-    @objc  var city: String?
-    @objc  var country: String?
     @objc  var id: Int64 = 0
     @objc  var latitude: Float = 0
     @objc  var longitude: Float = 0
+    @objc  var name: String?
     
     
     override var description: String {

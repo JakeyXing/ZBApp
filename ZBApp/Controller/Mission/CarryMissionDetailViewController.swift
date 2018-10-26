@@ -8,6 +8,9 @@
 
 import UIKit
 import SKPhotoBrowser
+import MBProgressHUD
+import Toast
+
 class CarryMissionDetailViewController: MissionDetailBaseViewController,CarryMissonImageAndFlieViewDelegate,FeedbackViewDelegate {
 
     lazy var carryMissionInfoView: CarryMissionInfoView = {
@@ -45,6 +48,10 @@ class CarryMissionDetailViewController: MissionDetailBaseViewController,CarryMis
     
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
+    
+    override func addSubViews() {
+        super.addSubViews()
         self.scrollview.addSubview(self.carryMissionInfoView)
         self.scrollview.addSubview(self.carryImageView)
         self.scrollview.addSubview(self.feedbackView)
@@ -69,7 +76,6 @@ class CarryMissionDetailViewController: MissionDetailBaseViewController,CarryMis
         self.takeButton.top = self.checkView.bottom+kResizedPoint(pt: 40)
         
         self.scrollview.contentSize = CGSize.init(width: DEVICE_WIDTH, height: self.missionBaseInfoView.height + kResizedPoint(pt: 10)+self.carryMissionInfoView.height + self.carryImageView.height + kResizedPoint(pt: 10) + self.feedbackView.height + kResizedPoint(pt: 20) + self.checkView.height + kResizedPoint(pt: 40+30))
-    
     }
     
     override func configData() {
@@ -77,13 +83,57 @@ class CarryMissionDetailViewController: MissionDetailBaseViewController,CarryMis
     }
     
     override func setupDataWithHomeModel() {
+        self.feedbackView.isHidden = true
+        self.checkView.isHidden = true
         self.missionBaseInfoView.congfigDataWithTaskInfo(info: self.model ?? ZB_TaskInfo())
+        self.carryMissionInfoView.congfigDataWithTaskInfo(info: self.model ?? ZB_TaskInfo())
+        self.carryImageView.imageArray = self.model?.imgs
+        self.carryImageView.fileArray = self.model?.documents
+        
+        let timeInterv = timeToTimeStamp(time: (self.model?.startDate) ?? "")
+      
+        self.takeButton.setTitle(String(format: "%@(%@%@)", LanguageHelper.getString(key: "detail.actionName.qiangdan"),timeStampShortHourStr(timeStamp: timeInterv - 3600),LanguageHelper.getString(key:"detail.time.end")), for: .normal)
+        
+        self.carryMissionInfoView.height = self.carryMissionInfoView.viewHeight()
+        self.carryImageView.top = self.carryMissionInfoView.bottom
+        
+        self.carryImageView.height = self.carryImageView.viewHeight()
+        
+        self.takeButton.top = self.carryImageView.bottom + kResizedPoint(pt: 30)
+
+        
+        self.scrollview.contentSize = CGSize.init(width: DEVICE_WIDTH, height: self.takeButton.bottom + kResizedPoint(pt: 20))
         
     }
     
     
     //MARK: - actions
     @objc private func takeAction(){
+        if self.isTaked == false {
+            //抢单
+            let params = ["taskId":self.model?.id ?? 0] as [String : Any]
+            
+            MBProgressHUD.showAdded(to: self.view, animated: true)
+            NetWorkManager.shared.loadRequest(method: .post, url: ReceiveTaskUrl, parameters: params as [String : Any], success: { (data) in
+                MBProgressHUD.hide(for: self.view, animated: true)
+                
+                let resultDic = data as! Dictionary<String,AnyObject>
+                let dic = resultDic["data"]
+                if dic == nil {
+                    return
+                }
+                self.isTaked = true
+                self.loadNewDataWithId(taskId: self.model?.id ?? 0)
+                
+            }) { (data, errMsg) in
+                MBProgressHUD.hide(for: self.view, animated: true)
+                self.view.makeToast(errMsg, duration: 2, position: CSToastPositionCenter)
+                
+                
+            }
+        }else{
+            
+        }
         
     }
     

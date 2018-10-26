@@ -26,4 +26,5 @@ let ResetPassUrl = BaseApiUrl + "/auth/phone/resetPwd"
 let PendingTaskListUrl = BaseApiUrl + "/task/pending"  //待抢任务list(首页)
 let ExecuteTaskListUrl = BaseApiUrl + "/task/execute/list"
 let TaskDetailUrl = BaseApiUrl + "/task/execute/detail"  //任务详情
+let ReceiveTaskUrl = BaseApiUrl + "/task/receive"  //抢单
 

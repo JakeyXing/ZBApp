@@ -72,6 +72,8 @@
 		99C2C3212177109A00C0B94A /* JHDropdownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99C2C3202177109A00C0B94A /* JHDropdownView.swift */; };
 		99C2C32321772FAD00C0B94A /* QueFeedbackController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99C2C32221772FAD00C0B94A /* QueFeedbackController.swift */; };
 		99C2C3252177390400C0B94A /* BankAccountController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99C2C3242177390400C0B94A /* BankAccountController.swift */; };
+		99CCEF782182F0BB0085610A /* ZB_PwdInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99CCEF772182F0BB0085610A /* ZB_PwdInfo.swift */; };
+		99CCEF7A2183104C0085610A /* PasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99CCEF792183104C0085610A /* PasswordViewController.swift */; };
 		99D104712179CD7700713884 /* ZB_User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99D104702179CD7700713884 /* ZB_User.swift */; };
 		99D104742179CDE500713884 /* NetWorkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99D104732179CDE500713884 /* NetWorkManager.swift */; };
 		99D556F821785996006C92A3 /* PersonalInfoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99D556F721785996006C92A3 /* PersonalInfoController.swift */; };
@@ -180,6 +182,8 @@
 		99C2C3202177109A00C0B94A /* JHDropdownView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JHDropdownView.swift; sourceTree = "<group>"; };
 		99C2C32221772FAD00C0B94A /* QueFeedbackController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueFeedbackController.swift; sourceTree = "<group>"; };
 		99C2C3242177390400C0B94A /* BankAccountController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankAccountController.swift; sourceTree = "<group>"; };
+		99CCEF772182F0BB0085610A /* ZB_PwdInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZB_PwdInfo.swift; sourceTree = "<group>"; };
+		99CCEF792183104C0085610A /* PasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordViewController.swift; sourceTree = "<group>"; };
 		99D104702179CD7700713884 /* ZB_User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZB_User.swift; sourceTree = "<group>"; };
 		99D104732179CDE500713884 /* NetWorkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetWorkManager.swift; sourceTree = "<group>"; };
 		99D556F721785996006C92A3 /* PersonalInfoController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalInfoController.swift; sourceTree = "<group>"; };
@@ -258,6 +262,7 @@
 				990F7B06217205490075A04C /* RepairMissionDetailViewController.swift */,
 				99C2C32221772FAD00C0B94A /* QueFeedbackController.swift */,
 				9936F3AC217F1F7F00642697 /* FeedbackListViewController.swift */,
+				99CCEF792183104C0085610A /* PasswordViewController.swift */,
 			);
 			path = Mission;
 			sourceTree = "<group>";
@@ -420,6 +425,7 @@
 				99D781B4217C724700611DE0 /* ZB_Address.swift */,
 				99D781B6217C746E00611DE0 /* ZB_TaskProperty.swift */,
 				99D781B8217C77E900611DE0 /* ZB_TaskLog.swift */,
+				99CCEF772182F0BB0085610A /* ZB_PwdInfo.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -701,6 +707,7 @@
 				990F7AFF2171C5E80075A04C /* FeedbackView.swift in Sources */,
 				994F6347216C78F20063044B /* UIScreen+CZAddition.m in Sources */,
 				99017C1421706C5700155724 /* RegisterViewController.swift in Sources */,
+				99CCEF782182F0BB0085610A /* ZB_PwdInfo.swift in Sources */,
 				99C2C3252177390400C0B94A /* BankAccountController.swift in Sources */,
 				99D69A242175E69400A5DC09 /* repairAddCell.swift in Sources */,
 				994EE463216DF6A300EB86DD /* ListChooseCell.swift in Sources */,
@@ -718,6 +725,7 @@
 				990F7B07217205490075A04C /* RepairMissionDetailViewController.swift in Sources */,
 				994F6321216C57640063044B /* Constants.swift in Sources */,
 				99F1FD272174E17E002699FE /* RepairHeaderView.swift in Sources */,
+				99CCEF7A2183104C0085610A /* PasswordViewController.swift in Sources */,
 				994F6345216C78F20063044B /* NSAttributedString+CZAdditon.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

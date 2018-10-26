@@ -21,6 +21,9 @@
 }
 
 + (CGFloat)cz_labelHeightWithText:(NSString *)text size:(CGSize)rectSize font:(UIFont *)font{
+    if (text == nil){
+        return 0.0f;
+    }
     
     NSMutableParagraphStyle *style = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
     style.lineBreakMode = NSLineBreakByWordWrapping;

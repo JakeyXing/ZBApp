@@ -25,7 +25,7 @@ class ZB_Task: NSObject,YYModel {
     @objc  var startDate: String?
     @objc  var taskInfo: ZB_TaskInfo?
     @objc  var taskLogs: [ZB_TaskLog]?
-    
+    @objc  var qualityIssueCount: Int = 0
     @objc  var restHours: Int = 0
     
   

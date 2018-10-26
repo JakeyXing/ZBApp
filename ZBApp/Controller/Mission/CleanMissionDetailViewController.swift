@@ -8,8 +8,11 @@
 
 import UIKit
 import SKPhotoBrowser
-class CleanMissionDetailViewController: MissionDetailBaseViewController,CleanPicUploadViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,RoomInfoViewDelegate,FeedbackViewDelegate {
+import MBProgressHUD
+import Toast
 
+class CleanMissionDetailViewController: MissionDetailBaseViewController,CleanPicUploadViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,RoomInfoViewDelegate,FeedbackViewDelegate {
+   
     var cameraPicker: UIImagePickerController!
     var currentImageCell: CleanImageCell?
     
@@ -45,6 +48,12 @@ class CleanMissionDetailViewController: MissionDetailBaseViewController,CleanPic
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
+    }
+    
+    override func addSubViews() {
+        super.addSubViews()
         self.scrollview.addSubview(self.roomInfoView)
         self.scrollview.addSubview(self.feedbackView)
         self.scrollview.addSubview(self.uploadView)
@@ -53,9 +62,9 @@ class CleanMissionDetailViewController: MissionDetailBaseViewController,CleanPic
         self.uploadView.delegate = self
         
         self.feedbackView.congfigData()
-        self.roomInfoView.congfigData()
+        self.roomInfoView.congfigSubViewHeight()
         self.uploadView.congfigData()
-
+        
         self.roomInfoView.height = self.roomInfoView.viewHeight()
         self.feedbackView.top = self.roomInfoView.bottom + kResizedPoint(pt: 10)
         
@@ -64,8 +73,30 @@ class CleanMissionDetailViewController: MissionDetailBaseViewController,CleanPic
         
         self.uploadView.height = self.uploadView.viewHeight()
         self.submitButton.top = self.uploadView.bottom + kResizedPoint(pt: 30)
+        
+        self.scrollview.contentSize = CGSize.init(width: DEVICE_WIDTH, height: self.submitButton.bottom + kResizedPoint(pt: 20))
+      
+    }
+    
+    override func configData() {
+        
+    }
+    
+    override func setupDataWithHomeModel() {
+        self.feedbackView.isHidden = true
+        self.uploadView.isHidden = true
+        
+        self.missionBaseInfoView.congfigDataWithTaskInfo(info: self.model ?? ZB_TaskInfo())
+        self.roomInfoView.congfigDataWithTaskInfo(info: self.model ?? ZB_TaskInfo())
+     
+        self.roomInfoView.height = self.roomInfoView.viewHeight()
+        let timeInterv = timeToTimeStamp(time: (self.model?.startDate) ?? "")
 
-//        self.scrollview.contentSize = CGSize.init(width: DEVICE_WIDTH, height: self.missionBaseInfoView.height + kResizedPoint(pt: 10)+self.roomInfoView.height + kResizedPoint(pt: 10) + self.feedbackView.height + kResizedPoint(pt: 10) + self.uploadView.height )
+        self.submitButton.setTitle(String(format: "%@(%@%@)", LanguageHelper.getString(key: "detail.actionName.qiangdan"),timeStampShortHourStr(timeStamp: timeInterv - 3600),LanguageHelper.getString(key:"detail.time.end")), for: .normal)
+
+        
+        self.submitButton.top = self.roomInfoView.bottom + kResizedPoint(pt: 30)
+        
         
         self.scrollview.contentSize = CGSize.init(width: DEVICE_WIDTH, height: self.submitButton.bottom + kResizedPoint(pt: 20))
         
@@ -74,6 +105,31 @@ class CleanMissionDetailViewController: MissionDetailBaseViewController,CleanPic
     
     //MARK: - actions
     @objc private func takeAction(){
+        if self.isTaked == false {
+            //抢单
+            let params = ["taskId":self.model?.id ?? 0] as [String : Any]
+            
+            MBProgressHUD.showAdded(to: self.view, animated: true)
+            NetWorkManager.shared.loadRequest(method: .post, url: ReceiveTaskUrl, parameters: params as [String : Any], success: { (data) in
+                MBProgressHUD.hide(for: self.view, animated: true)
+                
+                let resultDic = data as! Dictionary<String,AnyObject>
+                let dic = resultDic["data"]
+                if dic == nil {
+                    return
+                }
+                self.isTaked = true
+                self.loadNewDataWithId(taskId: self.model?.id ?? 0)
+                
+            }) { (data, errMsg) in
+                MBProgressHUD.hide(for: self.view, animated: true)
+                self.view.makeToast(errMsg, duration: 2, position: CSToastPositionCenter)
+                
+                
+            }
+        }else{
+            
+        }
         
     }
     
@@ -140,6 +196,15 @@ class CleanMissionDetailViewController: MissionDetailBaseViewController,CleanPic
         let feedback=QueFeedbackController()
         feedback.hidesBottomBarWhenPushed = true
         self.navigationController?.pushViewController(feedback, animated: true)
+        
+    }
+    
+    func roomInfoViewDidTappedPassword(_ view: RoomInfoView, password passws: [ZB_PwdInfo]) {
+        
+        let pass=PasswordViewController()
+        pass.hidesBottomBarWhenPushed = true
+        pass.passArr = passws
+        self.navigationController?.pushViewController(pass, animated: true)
         
     }
     
