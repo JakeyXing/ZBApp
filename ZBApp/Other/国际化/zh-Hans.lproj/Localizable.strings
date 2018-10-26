@@ -52,3 +52,7 @@
 "detail.roomInfo.ksPassword" = "开锁密码";
 "detail.roomInfo.kShortRoute" = "路引";
 "detail.roomInfo.lookRoute" = "查看";
+
+"mission.select.time" = "任务日期";
+"mission.select.invalid" = "仅无效订单";
+

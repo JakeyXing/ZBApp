@@ -15,11 +15,13 @@ import Toast
 
 private let  kMissionCellID = "kMissionCellID"
 class TaskStatusViewController: UIViewController {
-
-    var statusType: String!
-    lazy var taskList = [ZB_Task]()
-    var pagendex = 1
     
+    var selectedDate = ""
+    var selectedType = ""
+    var onlyInValid = false
+    
+    var settedType:String!
+
     private lazy var topBarBg: UIView = {
         let view = UIView(frame: CGRect.init(x: 0, y: 0, width: DEVICE_WIDTH, height: kResizedPoint(pt: 40)))
         return view
@@ -27,10 +29,11 @@ class TaskStatusViewController: UIViewController {
     
     private lazy var typeDropdownView: JHDropdownView = {
         let view = JHDropdownView(frame: CGRect.init())
-        view.contentLabel.text = "全部类型"
+        view.contentLabel.text = LanguageHelper.getString(key: "home.dropDwon.all")
         view.contentLabel.textColor = kFontColorBlack
-        view.contentLabel.font = kFont(size: 15)
-        view.dataArray = ["全部类型","摆场","撤场","维修","清扫"]
+        view.dataArray = ["home.dropDwon.all","home.dropDwon.launch","home.dropDwon.dismantle","home.dropDwon.maintain","home.dropDwon.clean"]
+        view.extraTop = statusBarHeight
+        view.delegate = self
         return view
     }()
     
@@ -38,7 +41,7 @@ class TaskStatusViewController: UIViewController {
         let btn = UIButton(type: UIButton.ButtonType.custom)
         btn.setTitleColor(kFontColorGray, for: UIControl.State.normal)
         btn.titleLabel?.font = kFont(size: 15)
-        btn.setTitle("任务日期", for: .normal)
+        btn.setTitle(LanguageHelper.getString(key: "mission.select.time"), for: .normal)
         btn.addTarget(self, action: #selector(timeAction), for: UIControl.Event.touchUpInside)
         return btn
     }()
@@ -49,11 +52,15 @@ class TaskStatusViewController: UIViewController {
         box.onFillColor = kTintColorYellow
         box.onTintColor = kTintColorYellow
         box.onCheckColor = UIColor.white
+        box.delegate = self
         return box
     }()
     
-    private lazy var onlyuselessLabel: UILabel = UILabel.cz_label(withText: "仅无效订单", fontSize: kResizedFont(ft: 15), color: kFontColorGray)
+    private lazy var onlyuselessLabel: UILabel = UILabel.cz_label(withText: LanguageHelper.getString(key: "mission.select.invalid"), fontSize: kResizedFont(ft: 15), color: kFontColorGray)
     
+    var pagendex = 1
+    
+    lazy var taskList = [ZB_Task]()
     
     var tableview:UITableView?
     
@@ -61,6 +68,9 @@ class TaskStatusViewController: UIViewController {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor .white
         self.navigationController?.navigationBar.isHidden = true
+        if self.settedType == "STARTED" {
+            self.view.backgroundColor = UIColor .red
+        }
         self.view.addSubview(self.topBarBg)
         
         self.topBarBg.addSubview(self.typeDropdownView)
@@ -105,7 +115,106 @@ class TaskStatusViewController: UIViewController {
         tableview?.delegate = self;
         tableview?.register(MissionCell.self, forCellReuseIdentifier: kMissionCellID)
         self.view.addSubview(tableview!);
+        
+        let header = MJRefreshNormalHeader(refreshingTarget: self, refreshingAction: #selector(refreshData))
+        header?.isAutomaticallyChangeAlpha = true
+        header?.lastUpdatedTimeLabel.isHidden = true
+        tableview?.mj_header = header
+        
+        let footer = MJRefreshBackNormalFooter(refreshingTarget: self, refreshingAction: #selector(loadMoreData))
+        tableview?.mj_footer = footer
+        
+        self.view.addSubview(tableview!);
     }
+    
+    func loadNewData() {
+        
+        pagendex = 1
+        
+        let params = ["taskDate":selectedDate,"taskType":selectedType,"page":pagendex,"taskProgress":self.settedType] as [String : Any]
+        
+        
+        MBProgressHUD.showAdded(to: self.view, animated: true)
+        NetWorkManager.shared.loadRequest(method: .get, url: ExecuteTaskListUrl, parameters: params as [String : Any], success: { (data) in
+            
+            MBProgressHUD.hide(for: self.view, animated: true)
+            
+            self.taskList.removeAll()
+            let resultDic = data as! Dictionary<String,AnyObject>
+            let dic = resultDic["data"] as! Dictionary<String,AnyObject>
+            let list = dic["list"]
+            guard let array = (NSArray.yy_modelArray(with: ZB_Task.self, json: (list ?? []))) as? [ZB_Task] else{
+                return
+            }
+            self.taskList.append(contentsOf: array)
+            self.tableview?.reloadData()
+            
+        }) { (data, errMsg) in
+            MBProgressHUD.hide(for: self.view, animated: true)
+            self.view.makeToast(errMsg, duration: 2, position: CSToastPositionCenter)
+            
+            
+        }
+        
+    }
+    
+    @objc private func refreshData(){
+        pagendex = 1
+        self.tableview?.mj_footer.state = MJRefreshState.idle
+        let params = ["taskDate":selectedDate,"taskType":selectedType,"page":pagendex,"taskProgress":self.settedType] as [String : Any]
+        
+        NetWorkManager.shared.loadRequest(method: .get, url: ExecuteTaskListUrl, parameters: params as [String : Any], success: { (data) in
+            self.tableview?.mj_header.endRefreshing()
+            
+            self.taskList.removeAll()
+            let resultDic = data as! Dictionary<String,AnyObject>
+            let dic = resultDic["data"] as! Dictionary<String,AnyObject>
+            let list = dic["list"]
+            guard let array = (NSArray.yy_modelArray(with: ZB_Task.self, json: (list ?? []))) as? [ZB_Task] else{
+                return
+            }
+            self.taskList.append(contentsOf: array)
+            self.tableview?.reloadData()
+            
+            
+        }) { (data, errMsg) in
+            self.tableview?.mj_header.endRefreshing()
+            self.view.makeToast(errMsg, duration: 2, position: CSToastPositionCenter)
+            
+            
+        }
+        
+        
+    }
+    
+    @objc private func loadMoreData(){
+        
+        pagendex  += 1
+        
+        let params = ["taskDate":selectedDate,"taskType":selectedType,"page":pagendex,"taskProgress":self.settedType] as [String : Any]
+        
+        NetWorkManager.shared.loadRequest(method: .get, url: ExecuteTaskListUrl, parameters: params as [String : Any], success: { (data) in
+            
+            self.tableview?.mj_footer.endRefreshing()
+            
+            let resultDic = data as! Dictionary<String,AnyObject>
+            let dic = resultDic["data"] as! Dictionary<String,AnyObject>
+            let list = dic["list"]
+            guard let array = (NSArray.yy_modelArray(with: ZB_Task.self, json: (list ?? []))) as? [ZB_Task] else{
+                return
+            }
+            self.taskList.append(contentsOf: array)
+            self.tableview?.reloadData()
+            
+        }) { (data, errMsg) in
+            self.tableview?.mj_footer.endRefreshing()
+            self.view.makeToast(errMsg, duration: 2, position: CSToastPositionCenter)
+            
+            
+        }
+        
+    }
+    
     
     //MARK: - actions
     @objc private func timeAction(){
@@ -118,8 +227,9 @@ class TaskStatusViewController: UIViewController {
     
 }
 
-extension TaskStatusViewController:UITableViewDelegate,UITableViewDataSource,CalendarBgViewDelegate{
+extension TaskStatusViewController:UITableViewDelegate,UITableViewDataSource,CalendarBgViewDelegate,JHDropdownViewDelegate,BEMCheckBoxDelegate{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+//        return self.taskList.count
         return 4
     }
     
@@ -132,6 +242,39 @@ extension TaskStatusViewController:UITableViewDelegate,UITableViewDataSource,Cal
         return kResizedPoint(pt: 160)
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView .deselectRow(at: indexPath, animated: false)
+        let model = self.taskList[indexPath.row]
+        
+        
+        if indexPath.row == 0 {
+            let carry = CarryMissionDetailViewController()
+            carry.taskExecuteId = model.id
+            carry.hidesBottomBarWhenPushed = true
+            self.navigationController?.pushViewController(carry, animated: true)
+            
+        }else if indexPath.row == 1{
+            let clean = CleanMissionDetailViewController()
+            clean.hidesBottomBarWhenPushed = true
+            self.navigationController?.pushViewController(clean, animated: true)
+        }else if indexPath.row == 2{
+            let repair = RepairMissionDetailViewController()
+            repair.hidesBottomBarWhenPushed = true
+            self.navigationController?.pushViewController(repair, animated: true)
+            
+        }
+        
+    }
+    
+    //MARK: - JHDropdownViewDelegate
+    func dropdownView(_ dropdownView: JHDropdownView, didSelectedString selectedStr: String) {
+        
+        selectedType = configTypeParamWithStr(typeStr: selectedStr)
+        
+        self.loadNewData()
+        
+    }
+    
     func calendarDidChoosedDate(choosedDate: Date) {
         //更新提醒时间文本框
         let formatter = DateFormatter()
@@ -140,6 +283,15 @@ extension TaskStatusViewController:UITableViewDelegate,UITableViewDataSource,Cal
         print(formatter.string(from: choosedDate))
         
         self.timeButton.setTitle(formatter.string(from: choosedDate), for: .normal)
+        
+        selectedDate = formatter.string(from: choosedDate)
+        
+        self.loadNewData()
+    }
+    
+    func didTap(_ checkBox: BEMCheckBox) {
+        //        onlyInValid = self.checkBox.on
+        //        self.loadNewData()
     }
     
 }

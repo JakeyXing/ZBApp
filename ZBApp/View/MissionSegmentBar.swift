@@ -84,6 +84,9 @@ extension MissionSegmentBar{
             left = left + (btnW + btnSpace)
             
         }
+        
+        let firSleBtn: UIButton = self.viewWithTag(100) as! UIButton
+        self.btnAction(btn: firSleBtn)
      
     }
     
