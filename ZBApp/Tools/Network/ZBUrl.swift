@@ -27,4 +27,10 @@ let PendingTaskListUrl = BaseApiUrl + "/task/pending"  //待抢任务list(首页
 let ExecuteTaskListUrl = BaseApiUrl + "/task/execute/list"
 let TaskDetailUrl = BaseApiUrl + "/task/execute/detail"  //任务详情
 let ReceiveTaskUrl = BaseApiUrl + "/task/receive"  //抢单
+let TransferTaskUrl = BaseApiUrl + "/task/execute/transfer"  //转单
+let StartTaskUrl = BaseApiUrl + "/task/execute/start"  //开始执行任务
+let ApproveTaskUrl = BaseApiUrl + "/task/execute/approve"  //提交审核
+
+
+
 

@@ -21,7 +21,7 @@ class TaskStatusViewController: UIViewController {
     var onlyInValid = false
     
     var settedType:String!
-
+   
     private lazy var topBarBg: UIView = {
         let view = UIView(frame: CGRect.init(x: 0, y: 0, width: DEVICE_WIDTH, height: kResizedPoint(pt: 40)))
         return view
@@ -244,21 +244,47 @@ extension TaskStatusViewController:UITableViewDelegate,UITableViewDataSource,Cal
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView .deselectRow(at: indexPath, animated: false)
-        let model = self.taskList[indexPath.row]
+//        let model = self.taskList[indexPath.row]
+//        switch model.taskInfo?.type {
+//        case "LAUNCH","DISMANTLE":
+//            let carry = CarryMissionDetailViewController()
+//            carry.isTaked = true
+//            carry.taskExecuteId = model.id
+//            carry.hidesBottomBarWhenPushed = true
+//            self.navigationController?.pushViewController(carry, animated: true)
+//
+//        case "MAINTAIN":
+//            let repair = RepairMissionDetailViewController()
+//            repair.isTaked = true
+//            repair.taskExecuteId = model.id
+//            repair.hidesBottomBarWhenPushed = true
+//            self.navigationController?.pushViewController(repair, animated: true)
+//        case "CLEAN":
+//            let clean = CleanMissionDetailViewController()
+//            clean.isTaked = true
+//            clean.taskExecuteId = model.id
+//            clean.hidesBottomBarWhenPushed = true
+//            self.navigationController?.pushViewController(clean, animated: true)
+//        default:
+//            print("未知类型")
+//        }
         
         
         if indexPath.row == 0 {
             let carry = CarryMissionDetailViewController()
-            carry.taskExecuteId = model.id
+            carry.isTaked = true
+//            carry.taskExecuteId = model.id
             carry.hidesBottomBarWhenPushed = true
             self.navigationController?.pushViewController(carry, animated: true)
             
         }else if indexPath.row == 1{
             let clean = CleanMissionDetailViewController()
+            clean.isTaked = true
             clean.hidesBottomBarWhenPushed = true
             self.navigationController?.pushViewController(clean, animated: true)
         }else if indexPath.row == 2{
             let repair = RepairMissionDetailViewController()
+            repair.isTaked = true
             repair.hidesBottomBarWhenPushed = true
             self.navigationController?.pushViewController(repair, animated: true)
             

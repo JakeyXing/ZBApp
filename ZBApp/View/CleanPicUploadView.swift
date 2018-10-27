@@ -18,9 +18,9 @@ class CleanPicUploadView: UIView {
     
     weak var delegate: CleanPicUploadViewDelegate?
     
-    var roomWithImagesArray:[[String]] = []
+    var roomWithImagesArray:[ZB_TaskPhotoItem] = []
     
-    private lazy var resultNameLabel: UILabel = UILabel.cz_label(withText: "清扫图片上传", fontSize: kResizedFont(ft: 15), color: kFontColorGray)
+    private lazy var resultNameLabel: UILabel = UILabel.cz_label(withText: LanguageHelper.getString(key: "detail.cleanPic.uploadDes"), fontSize: kResizedFont(ft: 15), color: kFontColorGray)
     
     private lazy var resultLabel: UILabel = UILabel.cz_label(withText: "上传失败", fontSize: kResizedFont(ft: 15), color: RGBCOLOR(r: 254, 0, 5))
     
@@ -63,7 +63,13 @@ class CleanPicUploadView: UIView {
     
     
     func congfigData() {
-        roomWithImagesArray = [["","","","","",""],["","","","","",""]]
+        let p1 = ZB_TaskPhotoItem()
+        p1.location = "sddd344"
+        p1.photos = [ZB_Photo(),ZB_Photo(),ZB_Photo(),ZB_Photo()]
+        let p2 = ZB_TaskPhotoItem()
+        p2.location = "wwwwee23"
+        p2.photos = [ZB_Photo(),ZB_Photo(),ZB_Photo(),ZB_Photo()]
+        roomWithImagesArray = [p1,p2]
         
     }
     
@@ -76,9 +82,10 @@ class CleanPicUploadView: UIView {
         var viewH:CGFloat = 0
         
         for i in 0..<count {
-            let arr = self.roomWithImagesArray[i]
+            let photoItem = self.roomWithImagesArray[i]
             
-            let arrCount = arr.count
+            var arrCount = 0
+            arrCount = photoItem.photos?.count ?? 0
             
             let nex = arrCount%3
             var h: CGFloat = 0
@@ -157,14 +164,14 @@ extension CleanPicUploadView:UICollectionViewDelegateFlowLayout,UICollectionView
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        let arr = self.roomWithImagesArray[section]
+        let photoItem = self.roomWithImagesArray[section]
         
-        return arr.count
+        return photoItem.photos?.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         if (kind == UICollectionView.elementKindSectionHeader){
-            let header = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "ClaenCollectionHeaderView", for: indexPath)
+            let header:ClaenCollectionHeaderView = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "ClaenCollectionHeaderView", for: indexPath) as! ClaenCollectionHeaderView
             return header
         }
         

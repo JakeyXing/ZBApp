@@ -48,6 +48,7 @@
 		9945A2B72178DB1200240437 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9945A2B62178DB1200240437 /* MapViewController.swift */; };
 		9945A2B92178DB2400240437 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9945A2B82178DB2400240437 /* WebViewController.swift */; };
 		9945BECF217705780001593F /* CertifApplyController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9945BECE217705780001593F /* CertifApplyController.swift */; };
+		994BCD8921843EB000A3A734 /* awsconfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = 994BCD8821843EB000A3A734 /* awsconfiguration.json */; };
 		994EE460216DDC3700EB86DD /* MissionTypeTopBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 994EE45F216DDC3700EB86DD /* MissionTypeTopBar.swift */; };
 		994EE463216DF6A300EB86DD /* ListChooseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 994EE462216DF6A300EB86DD /* ListChooseCell.swift */; };
 		994EE465216DF7F500EB86DD /* JHListChooseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 994EE464216DF7F500EB86DD /* JHListChooseView.swift */; };
@@ -144,6 +145,7 @@
 		9945A2B62178DB1200240437 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		9945A2B82178DB2400240437 /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		9945BECE217705780001593F /* CertifApplyController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertifApplyController.swift; sourceTree = "<group>"; };
+		994BCD8821843EB000A3A734 /* awsconfiguration.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = awsconfiguration.json; sourceTree = "<group>"; };
 		994EE45F216DDC3700EB86DD /* MissionTypeTopBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MissionTypeTopBar.swift; sourceTree = "<group>"; };
 		994EE462216DF6A300EB86DD /* ListChooseCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListChooseCell.swift; sourceTree = "<group>"; };
 		994EE464216DF7F500EB86DD /* JHListChooseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JHListChooseView.swift; sourceTree = "<group>"; };
@@ -467,6 +469,7 @@
 				9921CE2A2160A4CA005DC836 /* Other */,
 				99F43ADD21606EB600A84EBD /* Assets.xcassets */,
 				99F43AE221606EB600A84EBD /* Info.plist */,
+				994BCD8821843EB000A3A734 /* awsconfiguration.json */,
 				994F6349216C7ADA0063044B /* ZBApp_Bridge.h */,
 				9921CE252160A2D3005DC836 /* Podfile */,
 			);
@@ -545,6 +548,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				994BCD8921843EB000A3A734 /* awsconfiguration.json in Resources */,
 				9932153621703F2100CAB18B /* LoginViewController.xib in Resources */,
 				99F43AE121606EB600A84EBD /* LaunchScreen.storyboard in Resources */,
 				99017C19217077CE00155724 /* ResetPasswordViewController.xib in Resources */,

@@ -24,7 +24,7 @@ class CleanMissionDetailViewController: MissionDetailBaseViewController,CleanPic
     }()
     
     lazy var feedbackView: FeedbackView = {
-        let view = FeedbackView(frame: CGRect.init(x: 0, y: self.missionBaseInfoView.bottom+kResizedPoint(pt: 10), width: DEVICE_WIDTH, height: kResizedPoint(pt: 300)))
+        let view = FeedbackView(frame: CGRect.init(x: 0, y: self.roomInfoView.bottom+kResizedPoint(pt: 10), width: DEVICE_WIDTH, height: kResizedPoint(pt: 300)))
         view.delegate = self
         return view
     }()
@@ -61,7 +61,7 @@ class CleanMissionDetailViewController: MissionDetailBaseViewController,CleanPic
         
         self.uploadView.delegate = self
         
-        self.feedbackView.congfigData()
+        self.feedbackView.congfigSubViewHeight()
         self.roomInfoView.congfigSubViewHeight()
         self.uploadView.congfigData()
         
@@ -79,6 +79,69 @@ class CleanMissionDetailViewController: MissionDetailBaseViewController,CleanPic
     }
     
     override func configData() {
+        let progress:String = self.task.progress ?? "READY"
+        self.currentProgress = ZB_ProgressType(rawValue: progress) ?? .ready
+        
+        //基础
+        self.missionBaseInfoView.congfigDataWithTaskInfo(info: self.task.taskInfo ?? ZB_TaskInfo())
+        self.roomInfoView.congfigDataWithTaskInfo(info: self.model ?? ZB_TaskInfo())
+        self.roomInfoView.height = self.roomInfoView.viewHeight()
+        
+        
+        //“信息上报”按钮
+        if (self.currentProgress == .started || self.currentProgress == .ready){
+            self.roomInfoView.infoUploadButton.isHidden = false
+            
+        }else{
+            self.roomInfoView.infoUploadButton.isHidden = true
+            self.roomInfoView.height = self.roomInfoView.viewHeight()-kResizedPoint(pt: 36)
+        }
+        
+        //logs
+        self.feedbackView.congfigDataWithTask(model: self.task)
+        self.feedbackView.height = self.feedbackView.viewHeight()
+        let cout = self.task.taskLogs?.count ?? 0
+        if cout == 0 {
+            self.feedbackView.clipsToBounds = true;
+            self.feedbackView.top = self.roomInfoView.bottom
+        }else{
+            self.feedbackView.top = self.roomInfoView.bottom + kResizedPoint(pt: 10)
+        }
+        
+        //房间位置图片上传
+        if (self.currentProgress == .started || self.currentProgress == .approve_failed) {
+            self.uploadView.isHidden = false
+            self.uploadView.top = self.feedbackView.bottom + kResizedPoint(pt: 10)
+            self.uploadView.height = self.uploadView.viewHeight()
+          
+        }else{
+            self.uploadView.isHidden = true
+            self.uploadView.top = self.feedbackView.bottom
+            self.uploadView.height = 0
+           
+        
+        }
+        
+        //提交按钮
+        if self.currentProgress == .ready || self.currentProgress == .started{
+            self.submitButton.isHidden = false
+            self.submitButton.top = self.uploadView.bottom + kResizedPoint(pt: 30)
+            self.submitButton.height = kResizedFont(ft: 30)
+            
+            if self.currentProgress == .ready {
+                self.submitButton.setTitle(LanguageHelper.getString(key: "detail.submitBtnTit.startMission"), for: .normal)
+                
+            }else{
+                self.submitButton.setTitle(LanguageHelper.getString(key: "detail.submitBtnTit.approveCheck"), for: .normal)
+                
+            }
+            
+        }else{
+            self.submitButton.isHidden = true
+            self.submitButton.top = self.uploadView.bottom
+            self.submitButton.height = 0
+        }
+        self.scrollview.contentSize = CGSize.init(width: DEVICE_WIDTH, height: self.submitButton.bottom + kResizedPoint(pt: 40))
         
     }
     
@@ -128,6 +191,50 @@ class CleanMissionDetailViewController: MissionDetailBaseViewController,CleanPic
                 
             }
         }else{
+            
+            if self.currentProgress == .ready {
+                //我已到达，开始任务
+                let params = ["taskId":self.task.id ] as [String : Any]
+                
+                MBProgressHUD.showAdded(to: self.view, animated: true)
+                NetWorkManager.shared.loadRequest(method: .post, url: StartTaskUrl, parameters: params as [String : Any], success: { (data) in
+                    MBProgressHUD.hide(for: self.view, animated: true)
+                    
+                    let resultDic = data as! Dictionary<String,AnyObject>
+                    let dic = resultDic["data"]
+                    if dic == nil {
+                        return
+                    }
+                    self.loadNewDataWithId(taskId: self.task.id)
+                    
+                }) { (data, errMsg) in
+                    MBProgressHUD.hide(for: self.view, animated: true)
+                    self.view.makeToast(errMsg, duration: 2, position: CSToastPositionCenter)
+                    
+                }
+                
+            }else if(self.currentProgress == .started){
+                //提交审核
+                let params = ["taskId":self.task.id ] as [String : Any]
+                
+                MBProgressHUD.showAdded(to: self.view, animated: true)
+                NetWorkManager.shared.loadRequest(method: .post, url: ApproveTaskUrl, parameters: params as [String : Any], success: { (data) in
+                    MBProgressHUD.hide(for: self.view, animated: true)
+                    
+                    let resultDic = data as! Dictionary<String,AnyObject>
+                    let dic = resultDic["data"]
+                    if dic == nil {
+                        return
+                    }
+                    self.loadNewDataWithId(taskId: self.task.id)
+                    
+                }) { (data, errMsg) in
+                    MBProgressHUD.hide(for: self.view, animated: true)
+                    self.view.makeToast(errMsg, duration: 2, position: CSToastPositionCenter)
+                    
+                }
+                
+            }
             
         }
         
@@ -179,8 +286,13 @@ class CleanMissionDetailViewController: MissionDetailBaseViewController,CleanPic
         let image = info[UIImagePickerController.InfoKey.originalImage] as! UIImage
         currentImageCell?.uploadImage(img: image)
         
+        
+    
+        
         self.dismiss(animated: true, completion: nil)
     }
+    
+    
     
     
     //MARK:- RoomInfoViewDelegate

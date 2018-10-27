@@ -10,9 +10,7 @@ import UIKit
 import YYModel
 
 class ZB_User: NSObject {
-    @objc var accessToken:String?//自己用
-    @objc var refreshToken:String?//自己用
-    
+
     @objc  var id: Int64 = 0
     @objc  var isDel: Bool = false
     @objc var nationality:String?

@@ -14,7 +14,7 @@ enum RequestType {
     case post
 }
 
-let kDefaultTimeout:TimeInterval = 15
+let kDefaultTimeout:TimeInterval = 10
 
 class NetWorkManager: AFHTTPSessionManager {
 
@@ -64,16 +64,19 @@ class NetWorkManager: AFHTTPSessionManager {
                  success : @escaping(_ json:Any?)->(),
                  fail : @escaping(_ json:Any?,_ errMsg:String)->())  {
         
-//        guard let token = m_AppDelegate().usermodel?.accessToken else {
-//            print("token 为空")
-//            NotificationCenter.default.post(name: NSNotification.Name(rawValue: kNoRefreshTokenNoti), object: nil)
-//
-//            fail(nil,"you need login first")
-//            return
-//        }
-       let token = "4cl00Io2vYlMInLN7XSk44kdfbYa1hNf9CIA9nZBVWvuvy2EtiMHS441lrhJLDGOFFRTJCuhxiSpgsuGMQMZXktGXlyZkDpH"
+        let accessToken = getAccessToken()
+        if accessToken.count == 0 {
+            print("token 为空")
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: kNoRefreshTokenNoti), object: nil)
+            
+            fail(nil,"you need login first")
+            return
+            
+        }
+      
+//       let token = "4cl00Io2vYlMInLN7XSk44kdfbYa1hNf9CIA9nZBVWvuvy2EtiMHS441lrhJLDGOFFRTJCuhxiSpgsuGMQMZXktGXlyZkDpH"
         
-        NetWorkManager.shared.requestSerializer.setValue(token, forHTTPHeaderField: "accessToken")
+        NetWorkManager.shared.requestSerializer.setValue(accessToken, forHTTPHeaderField: "accessToken")
         request(method: method, url: url, parameters: parameters, success: { (json) in
             guard let jsonData = json else {
                 fail(nil,"response data is nil")
@@ -137,8 +140,9 @@ class NetWorkManager: AFHTTPSessionManager {
                         
                         //accessToken 更新成功 刷新数据
                         errMsg = refreshData_msg
-                        m_AppDelegate().usermodel?.accessToken = (resultDic["accessToken"] as! String)
-                        m_AppDelegate().usermodel?.refreshToken = (resultDic["refreshToken"] as! String)
+                        setAccessToken(token: resultDic["accessToken"] as! String)
+                        setRefreshToken(token: resultDic["refreshToken"] as! String)
+                      
                        
                     }else{
                         //其他错误默认 refresh token 失效
@@ -179,7 +183,5 @@ class NetWorkManager: AFHTTPSessionManager {
         }
     }
     
-    
 
-    
 }

@@ -39,7 +39,8 @@ class UnTakeMissionViewController: UIViewController {
     let finishedListController:TaskStatusViewController = TaskStatusViewController()
     let canceledListController:TaskStatusViewController = TaskStatusViewController()
     
-    var currentVC:TaskStatusViewController!
+    private var currentVC:TaskStatusViewController!
+    private var currentIndex = 0
   
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,8 +57,8 @@ class UnTakeMissionViewController: UIViewController {
         self.addChild(readyListController)
         self.view.addSubview(readyListController.view)
         readyListController.didMove(toParent: self)
-        readyListController.view.frame = CGRect.init(x: 0, y: navigationBar.bottom, width: DEVICE_WIDTH, height: DEVICE_HEIGHT-navigationBarHeight-tabbarHeight)
         
+        readyListController.view.frame = CGRect.init(x: 0, y: navigationBar.bottom, width: DEVICE_WIDTH, height: DEVICE_HEIGHT-navigationBarHeight-tabbarHeight)
         startedListController.view.frame = CGRect.init(x: 0, y: navigationBar.bottom, width: DEVICE_WIDTH, height: DEVICE_HEIGHT-navigationBarHeight-tabbarHeight)
         finishedListController.view.frame = CGRect.init(x: 0, y: navigationBar.bottom, width: DEVICE_WIDTH, height: DEVICE_HEIGHT-navigationBarHeight-tabbarHeight)
         canceledListController.view.frame = CGRect.init(x: 0, y: navigationBar.bottom, width: DEVICE_WIDTH, height: DEVICE_HEIGHT-navigationBarHeight-tabbarHeight)
@@ -77,10 +78,12 @@ class UnTakeMissionViewController: UIViewController {
         self.transition(from: fromVC, to: toVC, duration: 0.3, options: .curveEaseIn, animations: {
             
         }) { (finished) in
-            if finished{
+            if finished {
                 toVC.didMove(toParent: self)
                 fromVC.willMove(toParent: self)
                 fromVC.removeFromParent()
+                
+                self.currentVC = toVC
             }else{
                 self.currentVC = fromVC
             }
@@ -120,6 +123,26 @@ class UnTakeMissionViewController: UIViewController {
 
 extension UnTakeMissionViewController:MissionSegmentBarDelegate{
     func missionSegmentBar(_ segmentBar: MissionSegmentBar, didSelectedIndex index: NSInteger) {
+        if currentIndex == index {
+            return
+        }
+        
+        currentIndex = index
+        
+        switch index {
+        case 0:
+            self.changeController(fromVC: currentVC, toViewController: readyListController)
+        case 1:
+            self.changeController(fromVC: currentVC, toViewController: startedListController)
+        case 2:
+            self.changeController(fromVC: currentVC, toViewController: finishedListController)
+        case 3:
+            self.changeController(fromVC: currentVC, toViewController: canceledListController)
+        default:
+            print("")
+        }
+        
+        
         
     }
     

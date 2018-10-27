@@ -9,6 +9,19 @@
 import Foundation
 import UIKit
 
+enum ZB_ProgressType: String {
+    case ready = "READY"
+    case transfer = "TRANSFER"
+    case started = "STARTED"
+    case wail_approve = "WAIT_APPROVE"
+    case approve_failed = "APPROVE_FAILED"
+    case finished = "FINISHED"
+    case abandon_transfer = "ABANDON_TRANSFER"
+    case abandon_operate = "ABANDON_OPERATE"
+    case finished_noshow = "FINISHED_NOSHOW"
+    
+}
+
 let DEVICE_WIDTH = UIScreen.main.bounds.size.width
 let DEVICE_HEIGHT = UIScreen.main.bounds.size.height
 
@@ -16,6 +29,42 @@ let navigationBarHeight:CGFloat = IS_IPHONE_X() ? 88:64
 let statusBarHeight:CGFloat = IS_IPHONE_X() ? 44:20
 let tabbarExtraHeight:CGFloat = IS_IPHONE_X() ? 34 : 0
 let tabbarHeight:CGFloat = IS_IPHONE_X() ? 83 : 49
+
+let kAccessTokenKey:String = "accessToken"
+let krefreshTokenKey:String = "refreshToken"
+
+func setAccessToken(token:String){
+    let defaults = UserDefaults.standard
+    defaults.set(token, forKey: kAccessTokenKey)
+}
+
+func getAccessToken() -> String{
+    let defaults = UserDefaults.standard
+    let accessToken:String = defaults.value(forKey: kAccessTokenKey) as! String
+    if accessToken.isEmpty {
+        return ""
+    }else{
+        return accessToken
+    }
+    
+}
+
+func setRefreshToken(token:String){
+    let defaults = UserDefaults.standard
+    defaults.set(token, forKey: krefreshTokenKey)
+    
+}
+
+func getRefreshToken() -> String{
+    let defaults = UserDefaults.standard
+    let refreshToken:String = defaults.value(forKey: krefreshTokenKey) as! String
+    if refreshToken.isEmpty {
+        return ""
+    }else{
+        return refreshToken
+    }
+    
+}
 
 //按iPhone6尺寸来
 let kWidthRate = UIScreen.main.bounds.size.width/375.0

@@ -18,6 +18,7 @@ protocol FeedbackViewDelegate: class {
 class FeedbackView: UIView {
      weak var delegate: FeedbackViewDelegate?
     
+    var model: ZB_Task?
     lazy var contentView: UIView = {
         let content = UIView()
         content.backgroundColor = kBgColorGray_238_235_220
@@ -39,7 +40,7 @@ class FeedbackView: UIView {
     lazy var picButton: UIButton = {
         let btn = UIButton(type: UIButton.ButtonType.custom)
         btn.setTitleColor(RGBCOLOR(r: 254, 0, 5), for: UIControl.State.normal)
-        btn.setTitle("查看图片", for: .normal)
+        btn.setTitle(LanguageHelper.getString(key: "detail.feedback.morePic"), for: .normal)
         btn.titleLabel?.font = kFont(size: 16)
         btn.addTarget(self, action: #selector(picAction), for: UIControl.Event.touchUpInside)
         return btn
@@ -48,7 +49,7 @@ class FeedbackView: UIView {
     lazy var moreButton: UIButton = {
         let btn = UIButton(type: UIButton.ButtonType.custom)
         btn.setTitleColor(RGBCOLOR(r: 115, 115, 115), for: UIControl.State.normal)
-        btn.setTitle("查看更多日志", for: .normal)
+        btn.setTitle(LanguageHelper.getString(key: "detail.feedback.moreFeedback"), for: .normal)
         btn.titleLabel?.font = kFont(size: 15)
         btn.addTarget(self, action: #selector(moreAction), for: UIControl.Event.touchUpInside)
         return btn
@@ -65,7 +66,7 @@ class FeedbackView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func congfigData() {
+    func congfigSubViewHeight() {
         let size = CGSize.init(width: DEVICE_WIDTH-kResizedPoint(pt: 20)*2, height: CGFloat(HUGE))
         let fbH = UILabel.cz_labelHeight(withText: self.feebackLabel.text, size: size, font: self.feebackLabel.font)
         //10+17+10+h+10+20+10
@@ -73,7 +74,27 @@ class FeedbackView: UIView {
         self.contentView.mas_updateConstraints{ (make:MASConstraintMaker!) in
             make.height.equalTo()(contentH)
         }
+    }
+    
+    func congfigDataWithTask(model: ZB_Task){
+        self.model = model
+        let cout = model.taskLogs?.count ?? 0
+        if cout == 0 {
+            return
+        }
         
+        let log = model.taskLogs![0]
+        
+        self.timeLabel.text = log.date
+        self.feebackLabel.text = log.log_description
+        
+        self.congfigSubViewHeight()
+        
+        if cout>1{
+            self.moreButton.isHidden = false
+        }else{
+            self.moreButton.isHidden = true
+        }
         
     }
     
@@ -96,7 +117,16 @@ class FeedbackView: UIView {
         let contentH = kResizedPoint(pt: 77)+fbH
         
         //10 +17+10+h+
-        return contentH+kResizedPoint(pt: 10+18)
+        let cout = self.model?.taskLogs?.count ?? 0
+        if cout == 0 {
+            return 0
+        }
+        if cout>1{
+            return contentH+kResizedPoint(pt: 10+18)
+        }else{
+            return contentH+kResizedPoint(pt: 5)
+        }
+        
     }
     
     

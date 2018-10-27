@@ -11,7 +11,7 @@ import YYModel
 class ZB_TaskLog: NSObject,YYModel {
     
     @objc  var date: String?
-    @objc  var task_description: String?
+    @objc  var log_description: String?
     @objc  var id: Int64 = 0
     @objc  var imgs: [String]?
     @objc  var reason: String?
@@ -21,7 +21,7 @@ class ZB_TaskLog: NSObject,YYModel {
     @objc  var username: String?
 
     private func modelCustomPropertyMapper() -> [String : Any]? {
-        return ["task_description":"description"]
+        return ["log_description":"description"]
     }
     
     override var description: String {

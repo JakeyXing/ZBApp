@@ -63,7 +63,13 @@ class LoginViewController: UIViewController,BEMCheckBoxDelegate {
         MBProgressHUD.showAdded(to: self.view, animated: true)
         NetWorkManager.shared.loadNoTokenRequest(method: .post, url: LoginUrl, parameters: params as [String : Any], success: { (data) in
             
-             MBProgressHUD.hide(for: self.view, animated: true)
+            MBProgressHUD.hide(for: self.view, animated: true)
+            let resultDic = data as! Dictionary<String,AnyObject>
+            let  accessToken = resultDic["accessToken"]
+            let  refreshToken = resultDic["refreshToken"]
+            setAccessToken(token: accessToken as! String)
+            setRefreshToken(token: refreshToken as! String)
+          
             
         }) { (data, errMsg) in
             MBProgressHUD.hide(for: self.view, animated: true)

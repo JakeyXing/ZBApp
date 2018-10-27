@@ -8,12 +8,22 @@
 
 import UIKit
 import Masonry
+import AWSCore
+import AWSS3
 
+protocol CleanImageCellDelegate: class {
+    func cleanImageCell(_ cell: CleanImageCell,imageUploadSucceed imageUrl: String,atIndex index:NSInteger)
+    
+    func cleanImageCell(_ cell: CleanImageCell,imageUploadFailedIndex index:NSInteger)
+    
+}
 class CleanImageCell: UICollectionViewCell {
+    weak var delegate: CleanImageCellDelegate?
+    
     //MARK: - 图片相关
     var oriImage: UIImage?
     var savedImagePath: String?
-    var uploaddImageUrl: String?
+    var uploadedImageUrl: String?
     
     
     var indexpath: NSIndexPath!
@@ -91,8 +101,64 @@ class CleanImageCell: UICollectionViewCell {
         let imgName = "clen_pic_" + CommonMethod.timestamp()
         
         self.savedImagePath = CommonMethod.getImagePath(img, imageName: imgName)
+        self.uploadData(fileName: imgName)
+        
         
     }
+    
+    
+    func uploadData(fileName: String) {
+        var data = Data()
+        do {
+            try data =  Data(contentsOf: URL(fileURLWithPath: self.savedImagePath ?? ""))
+        } catch  {
+            print("yichang")
+        }
+        
+        
+        let expression = AWSS3TransferUtilityUploadExpression()
+        expression.progressBlock = {(task, progress) in
+            DispatchQueue.main.async(execute: {
+                // Do something e.g. Update a progress bar.
+            })
+        }
+        
+        var completionHandler: AWSS3TransferUtilityUploadCompletionHandlerBlock?
+        completionHandler = { (task, error) -> Void in
+            DispatchQueue.main.async(execute: {
+                // Do something e.g. Alert a user for transfer completion.
+                // On failed uploads, `error` contains the error object.
+                
+                self.delegate?.cleanImageCell(self, imageUploadSucceed: "", atIndex: self.indexpath.row)
+            })
+        }
+        
+        let transferUtility = AWSS3TransferUtility.default()
+//        transferUtility.accessibilityCustomActions
+        
+        transferUtility.uploadData(data,
+                                   bucket: "ostay-clean",
+                                   key: fileName,
+                                   contentType: "text/plain",
+                                   expression: expression,
+                                   completionHandler: completionHandler).continueWith {
+                                    (task) -> AnyObject? in
+                                    if let error = task.error {
+                                        print("Error: \(error.localizedDescription)")
+                                    }
+                                    if let _ = task.result {
+                                        print("ssss success:result:\(String(describing: task.result))")
+                                        
+                                        
+                                        
+//                                        task.result.
+//                                        self.uploadedImageUrl
+                                        // Do something with uploadTask.
+                                    }
+                                    return nil;
+        }
+    }
+    
     
     
 }

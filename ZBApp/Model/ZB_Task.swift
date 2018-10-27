@@ -8,7 +8,6 @@
 
 import UIKit
 import YYModel
-
 class ZB_Task: NSObject,YYModel {
     @objc  var acceptance: String?
     @objc  var base: Float = 0

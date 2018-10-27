@@ -53,6 +53,17 @@
 "detail.roomInfo.kShortRoute" = "路引";
 "detail.roomInfo.lookRoute" = "查看";
 
+"detail.feedback.morePic" = "查看图片";
+"detail.feedback.moreFeedback" = "查看更多日志";
+"detail.check.title" = "验收结果";
+
+"detail.submitBtnTit.transfer" = "申请转单";
+"detail.submitBtnTit.startMission" = "我已到达，开始任务";
+"detail.submitBtnTit.approveCheck" = "提交审核";
+
+"detail.cleanPic.uploadDes" = "清扫图片上传";
+"detail.PicUploadStatus.failed" = "上传失败";
+
 "mission.select.time" = "任务日期";
 "mission.select.invalid" = "仅无效订单";
 

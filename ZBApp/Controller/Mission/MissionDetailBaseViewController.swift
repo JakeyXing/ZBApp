@@ -15,6 +15,8 @@ class MissionDetailBaseViewController: UIViewController {
     var taskExecuteId: Int64 = 0
     var isTaked = false  //是否被自己抢了
     
+    var currentProgress:ZB_ProgressType = .ready
+    
     var model: ZB_TaskInfo?
     lazy var task: ZB_Task = ZB_Task()//自己请求的
     
