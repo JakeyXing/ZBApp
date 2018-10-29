@@ -12,11 +12,11 @@ import CoreLocation
 
 class MapViewController: UIViewController,JHNavigationBarDelegate {
     
-    
+    var address:ZB_Address?
     lazy var navigationBar: JHNavigationBar = {
         let view = JHNavigationBar(frame: CGRect.init(x: 0, y: 0, width: 0, height: 0))
         view.backgroundColor = UIColor.white
-        view.titleLabel.text = "位置"
+        view.titleLabel.text = LanguageHelper.getString(key: "detail.address.pageTitle")
         view.delegate = self
         return view
     }()
@@ -47,12 +47,13 @@ extension MapViewController{
         self.view.addSubview(self.mapView)
         self.mapView.mapType = .standard
         
-        self.mapView.setRegion(MKCoordinateRegion(center: CLLocationCoordinate2DMake(30.67, 104.06), span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)), animated: true)
+        self.mapView.setRegion(MKCoordinateRegion(center: CLLocationCoordinate2DMake(address?.latitude ?? 0, address?.longitude ?? 0), span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)), animated: true)
         
         let annotattion = MKPointAnnotation.init()
-        annotattion.coordinate = CLLocationCoordinate2DMake(30.67, 104.06)
-        annotattion.title = "alalall"
-        annotattion.subtitle = "opppp"
+        //latitude, CLLocationDegrees longitude) AP
+        annotattion.coordinate = CLLocationCoordinate2DMake(address?.latitude ?? 0, address?.longitude ?? 0)
+        annotattion.title = address?.name
+        annotattion.subtitle = ""
     
         self.mapView.addAnnotation(annotattion)
 

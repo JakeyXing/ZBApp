@@ -8,8 +8,13 @@
 
 import UIKit
 import Masonry
+import MBProgressHUD
+import Toast
+import ObjectMapper
+
 class PersonalViewController: UIViewController {
 
+    var user: ZB_User?
     lazy var headImageView: UIImageView = {
         let img = UIImageView()
         img.image = UIImage(named: "defaultHear")
@@ -29,7 +34,7 @@ class PersonalViewController: UIViewController {
     lazy var beseInfoButton: UIButton = {
         let btn = UIButton(type: UIButton.ButtonType.custom)
         btn.setTitleColor(kFontColorGray, for: UIControl.State.normal)
-        btn.setTitle("基础信息", for: UIControl.State.normal)
+        btn.setTitle(LanguageHelper.getString(key: "mine.btns.baseInfo"), for: UIControl.State.normal)
         btn.setImage(UIImage(named: "func"), for: .normal)
         btn.titleLabel?.font = kFont(size: 15)
         
@@ -43,7 +48,7 @@ class PersonalViewController: UIViewController {
         btn.setTitle("银行账户", for: UIControl.State.normal)
         btn.setImage(UIImage(named: "func"), for: .normal)
         btn.titleLabel?.font = kFont(size: 15)
-        
+        btn.isHidden = true
         btn.addTarget(self, action: #selector(bankAction), for: UIControl.Event.touchUpInside)
         return btn
     }()
@@ -51,7 +56,7 @@ class PersonalViewController: UIViewController {
     lazy var settingButton: UIButton = {
         let btn = UIButton(type: UIButton.ButtonType.custom)
         btn.setTitleColor(kFontColorGray, for: UIControl.State.normal)
-        btn.setTitle("设置", for: UIControl.State.normal)
+        btn.setTitle(LanguageHelper.getString(key: "mine.btns.setting"), for: UIControl.State.normal)
         btn.setImage(UIImage(named: "func"), for: .normal)
         btn.titleLabel?.font = kFont(size: 15)
         
@@ -72,9 +77,6 @@ class PersonalViewController: UIViewController {
         self.view.addSubview(self.beseInfoButton)
         self.view.addSubview(self.bankInfoButton)
         self.view.addSubview(self.settingButton)
-        
-        self.star.backgroundColor = kTintColorYellow
-        
         
         self.headImageView.mas_makeConstraints { (make:MASConstraintMaker!) in
             make.left.equalTo()(self.view.mas_left)?.offset()(kResizedPoint(pt: 26))
@@ -120,12 +122,51 @@ class PersonalViewController: UIViewController {
         self.beseInfoButton.layoutButton(with: MKButtonEdgeInsetsStyle.top, imageTitleSpace: kResizedPoint(pt: 3))
         self.bankInfoButton.layoutButton(with: MKButtonEdgeInsetsStyle.top, imageTitleSpace: kResizedPoint(pt: 3))
         self.settingButton.layoutButton(with: MKButtonEdgeInsetsStyle.top, imageTitleSpace: kResizedPoint(pt: 3))
+        
+        self.loadData()
+        
+    }
+    
+    func loadData(){
+        
+        let params = [:] as [String : Any]
+        
+        MBProgressHUD.showAdded(to: self.view, animated: true)
+        NetWorkManager.shared.loadRequest(method: .get, url: UserInfoUrl, parameters: params as [String : Any], success: { (data) in
+            MBProgressHUD.hide(for: self.view, animated: true)
+            
+            
+            let resultDic = data as! Dictionary<String,AnyObject>
+            let dic = resultDic["data"]
+            if dic == nil {
+                return
+            }
+            
+            let user = Mapper<ZB_User>().map(JSON: dic as! [String : Any])
+            self.user = user
+            self.configData()
+            
+        }) { (data, errMsg) in
+            MBProgressHUD.hide(for: self.view, animated: true)
+            self.view.makeToast(errMsg, duration: 2, position: CSToastPositionCenter)
+            
+            
+        }
+        
+    }
+    
+    func configData() {
+        self.nameLabel.text = self.user?.userName
+        self.headImageView.sd_setImage(with: URL(fileURLWithPath: user?.userImgUrl ?? ""), placeholderImage: UIImage(named: "defaultHear"), options: [], completed: nil)
+        
+        
     }
     
     //MARK: - actions
     @objc private func baseAction(){
         let info=PersonalInfoController()
         info.hidesBottomBarWhenPushed = true
+        info.user = self.user
         self.navigationController?.pushViewController(info, animated: true)
         
     }
@@ -142,7 +183,5 @@ class PersonalViewController: UIViewController {
         set.hidesBottomBarWhenPushed = true
         self.navigationController?.pushViewController(set, animated: true)
     }
-    
- 
 
 }

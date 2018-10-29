@@ -72,6 +72,11 @@ class MissionDetailBaseViewController: UIViewController {
     
     @objc private func addressTapped(){
         let map=MapViewController()
+        if self.isTaked {
+          map.address = task?.address
+        }else{
+           map.address = model?.address
+        }
         map.hidesBottomBarWhenPushed = true
         self.navigationController?.pushViewController(map, animated: true)
     }

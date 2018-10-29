@@ -23,7 +23,8 @@ class CleanPicUploadView: UIView {
     
     private lazy var resultNameLabel: UILabel = UILabel.cz_label(withText: LanguageHelper.getString(key: "detail.cleanPic.uploadDes"), fontSize: kResizedFont(ft: 15), color: kFontColorGray)
     
-    private lazy var resultLabel: UILabel = UILabel.cz_label(withText: LanguageHelper.getString(key: "detail.PicUpload.roomNo"), fontSize: kResizedFont(ft: 15), color: RGBCOLOR(r: 254, 0, 5))
+    
+    private lazy var resultLabel: UILabel = UILabel.cz_label(withText: LanguageHelper.getString(key: "detail.PicUploadStatus.failed"), fontSize: kResizedFont(ft: 15), color: RGBCOLOR(r: 254, 0, 5))
     
     lazy var contentView: UIView = {
         let content = UIView()

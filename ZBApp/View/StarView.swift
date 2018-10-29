@@ -7,15 +7,38 @@
 //
 
 import UIKit
+import Masonry
 
 class StarView: UIView {
-
-    /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
+    //MARK: - 控件
+    lazy var levelLabel: UILabel = UILabel.cz_label(withText: "当前等级:C", fontSize: kResizedFont(ft: 15), color: kFontColorGray)
+    
+    //MARK: - lifeCyele
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
     }
-    */
-
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        self.backgroundColor = UIColor.clear
+        self.setUpUI()
+        self.subViewsLayout()
+    }
+    
+    
+    
+    
+    //MARK: - private method
+    func setUpUI(){
+        self.addSubview(levelLabel)
+    }
+    
+    func subViewsLayout(){
+        self.levelLabel.mas_makeConstraints { (make:MASConstraintMaker!) in
+            make.centerY.equalTo()(self.mas_centerY)
+            make.right.equalTo()(self.mas_right)
+        }
+    }
+    
+    
 }

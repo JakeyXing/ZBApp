@@ -11,12 +11,13 @@ import Masonry
 
 class PersonalInfoController: UIViewController,JHNavigationBarDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate {
     
+    var user: ZB_User?
     var cameraPicker: UIImagePickerController!
     
     private lazy var navigationBar: JHNavigationBar = {
         let view = JHNavigationBar(frame: CGRect.init(x: 0, y: 0, width: 0, height: 0))
         view.backgroundColor = UIColor.white
-        view.titleLabel.text = "个人信息"
+        view.titleLabel.text = LanguageHelper.getString(key: "personal.nav.title")
         view.delegate = self
         return view
     }()
@@ -32,7 +33,7 @@ class PersonalInfoController: UIViewController,JHNavigationBarDelegate,UIImagePi
         let type = UILabel()
         type.font = kMediumFont(size: 16)
         type.textColor = kFontColorBlack;
-        type.text = "基础信息"
+        type.text = LanguageHelper.getString(key: "mine.btns.baseInfo")
         return type
     }()
     private lazy var infoLineView: UIView = {
@@ -41,24 +42,22 @@ class PersonalInfoController: UIViewController,JHNavigationBarDelegate,UIImagePi
         return view
     }()
     
-    private lazy var nameTitleLabel: UILabel = UILabel.cz_label(withText: "真实姓名:", fontSize: kResizedFont(ft: 15), color: kFontColorGray)
+    private lazy var nameTitleLabel: UILabel = UILabel.cz_label(withText: LanguageHelper.getString(key: "personal.base.name"), fontSize: kResizedFont(ft: 15), color: kFontColorGray)
     private lazy var nameLabel: UILabel = UILabel.cz_label(withText: "岸谷雄一", fontSize: kResizedFont(ft: 15), color: kFontColorGray)
     
-    private lazy var sexTitleLabel: UILabel = UILabel.cz_label(withText: "性别:", fontSize: kResizedFont(ft: 15), color: kFontColorGray)
+    private lazy var sexTitleLabel: UILabel = UILabel.cz_label(withText: LanguageHelper.getString(key: "personal.base.sex"), fontSize: kResizedFont(ft: 15), color: kFontColorGray)
     private lazy var sexLabel: UILabel = UILabel.cz_label(withText: "男", fontSize: kResizedFont(ft: 15), color: kFontColorGray)
     
-    private lazy var nationTitleLabel: UILabel = UILabel.cz_label(withText: "国籍:", fontSize: kResizedFont(ft: 15), color: kFontColorGray)
+    private lazy var nationTitleLabel: UILabel = UILabel.cz_label(withText: LanguageHelper.getString(key: "personal.base.natonalty"), fontSize: kResizedFont(ft: 15), color: kFontColorGray)
     private lazy var nationLabel: UILabel = UILabel.cz_label(withText: "日本", fontSize: kResizedFont(ft: 15), color: kFontColorGray)
     
-    private lazy var cityTitleLabel: UILabel = UILabel.cz_label(withText: "所在城市:", fontSize: kResizedFont(ft: 15), color: kFontColorGray)
+    private lazy var cityTitleLabel: UILabel = UILabel.cz_label(withText: LanguageHelper.getString(key: "personal.base.city"), fontSize: kResizedFont(ft: 15), color: kFontColorGray)
     private lazy var cityLabel: UILabel = UILabel.cz_label(withText: "东京", fontSize: kResizedFont(ft: 15), color: kFontColorGray)
-    
-    
     private lazy var cerTitleLabel: UILabel = {
         let type = UILabel()
         type.font = kMediumFont(size: 16)
         type.textColor = kFontColorBlack;
-        type.text = "身份证件"
+        type.text = LanguageHelper.getString(key: "personal.ideti.title")
         return type
     }()
     private lazy var cerLineView: UIView = {
@@ -67,13 +66,13 @@ class PersonalInfoController: UIViewController,JHNavigationBarDelegate,UIImagePi
         return view
     }()
     
-    private lazy var cerTypeTitleLabel: UILabel = UILabel.cz_label(withText: "证件类型:", fontSize: kResizedFont(ft: 15), color: kFontColorGray)
+    private lazy var cerTypeTitleLabel: UILabel = UILabel.cz_label(withText: LanguageHelper.getString(key: "personal.ideti.idType"), fontSize: kResizedFont(ft: 15), color: kFontColorGray)
     private lazy var cerTypeLabel: UILabel = UILabel.cz_label(withText: "身份证", fontSize: kResizedFont(ft: 15), color: kFontColorGray)
     
-    private lazy var cerNumTitleLabel: UILabel = UILabel.cz_label(withText: "证件号码:", fontSize: kResizedFont(ft: 15), color: kFontColorGray)
+    private lazy var cerNumTitleLabel: UILabel = UILabel.cz_label(withText: LanguageHelper.getString(key: "personal.ideti.idNum"), fontSize: kResizedFont(ft: 15), color: kFontColorGray)
     private lazy var cerNumLabel: UILabel = UILabel.cz_label(withText: "2356778900", fontSize: kResizedFont(ft: 15), color: kFontColorGray)
     
-    private lazy var cerPicLabel: UILabel = UILabel.cz_label(withText: "证件图片:", fontSize: kResizedFont(ft: 15), color: kFontColorGray)
+    private lazy var cerPicLabel: UILabel = UILabel.cz_label(withText: LanguageHelper.getString(key: "personal.ideti.idPic"), fontSize: kResizedFont(ft: 15), color: kFontColorGray)
     
     lazy var cerPicImageView: UIImageView = {
         let img = UIImageView()
@@ -125,6 +124,40 @@ class PersonalInfoController: UIViewController,JHNavigationBarDelegate,UIImagePi
         self.scrollview.addSubview(self.passPicImageView)
         
         self.subViewsLayout()
+        
+        self.configData()
+    }
+    
+    func configData() {
+        self.nameLabel.text = self.user?.userName
+        self.sexLabel.text = self.user?.sex
+        self.nationLabel.text = self.user?.nationality
+        self.cityLabel.text = self.user?.workCity
+        
+        self.cerTypeLabel.text = self.user?.validType
+        self.cerNumLabel.text = self.user?.validNo
+        
+        if self.user?.visaImgUrl != nil {
+            self.passPicImageView.sd_setImage(with: URL(fileURLWithPath: self.user?.visaImgUrl ?? ""), completed: nil)
+            self.passPicImageView.mas_updateConstraints { (make:MASConstraintMaker!) in
+                make.width.equalTo()(kResizedPoint(pt: 330))
+                make.height.equalTo()(kResizedPoint(pt: 330))
+            }
+            self.scrollview.contentSize = CGSize.init(width: DEVICE_WIDTH, height: DEVICE_HEIGHT+kResizedPoint(pt: 450))
+            
+        }
+        
+        if self.user?.validNoImgUrl != nil {
+            self.cerPicImageView.sd_setImage(with: URL(fileURLWithPath: self.user?.validNoImgUrl ?? ""), completed: nil)
+            self.cerPicImageView.mas_updateConstraints { (make:MASConstraintMaker!) in
+                make.width.equalTo()(kResizedPoint(pt: 330))
+                make.height.equalTo()(kResizedPoint(pt: 330))
+            }
+            self.scrollview.contentSize = CGSize.init(width: DEVICE_WIDTH, height: DEVICE_HEIGHT+kResizedPoint(pt: 450))
+            
+            
+        }
+        
     }
     
     func subViewsLayout(){

@@ -135,7 +135,7 @@ class CleanImageCell: UICollectionViewCell {
         
         let transferUtility = AWSS3TransferUtility.default()
 //        transferUtility.accessibilityCustomActions
-        let key = "product/" + fileName
+        let key = "product/" + fileName + ".png"
         transferUtility.uploadData(data,
                                    bucket: "ostay-clean",
                                    key: key,

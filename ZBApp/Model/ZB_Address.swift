@@ -10,8 +10,8 @@ import UIKit
 import ObjectMapper
 class ZB_Address: Mappable {
     var id: Int64 = 0
-    var latitude: Float = 0
-    var longitude: Float = 0
+    var latitude: Double = 0
+    var longitude: Double = 0
     var name: String?
     
     required init?(map: Map) {

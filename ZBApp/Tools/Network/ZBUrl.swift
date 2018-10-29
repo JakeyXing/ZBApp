@@ -30,6 +30,7 @@ let ReceiveTaskUrl = BaseApiUrl + "/task/receive"  //抢单
 let TransferTaskUrl = BaseApiUrl + "/task/execute/transfer"  //转单
 let StartTaskUrl = BaseApiUrl + "/task/execute/start"  //开始执行任务
 let ApproveTaskUrl = BaseApiUrl + "/task/execute/approve"  //提交审核
+let UserInfoUrl = BaseApiUrl + "/userInfo/myInfo"  //个人信息
 
 
 

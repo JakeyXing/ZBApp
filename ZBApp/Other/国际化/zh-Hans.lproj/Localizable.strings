@@ -40,9 +40,9 @@
 
 "detail.roomInfo.route" = "路引查看";
 "detail.roomInfo.password" = "密码";
-"detail.roomInfo.maxGuests" = "最大入住人数";
-"detail.roomInfo.nextGuests" = "下次入住人数";
-"detail.roomInfo.nextCheckInNights" = "下次入住天数";
+"detail.roomInfo.maxGuests" = "最大入住人数 ";
+"detail.roomInfo.nextGuests" = "下次入住人数 ";
+"detail.roomInfo.nextCheckInNights" = "下次入住天数 ";
 "detail.roomInfo.checkinNote" = "入住人数说明";
 "detail.roomInfo.checkinNoteValue" = "按照最大入住人数准备备品，如果下次入住天数大于等于3天，则备品数量加倍； 按照下次入住人数摆放备品。";
 "detail.roomInfo.remark" = "备注";
@@ -64,8 +64,27 @@
 "detail.cleanPic.uploadDes" = "清扫图片上传";
 "detail.PicUploadStatus.failed" = "上传失败";
 
-"detail.PicUpload.roomNo" = "房间号";
+"detail.PicUpload.roomNo" = "房间号:";
+"detail.address.pageTitle" = "位置";
+
+"detail.route.pageTitle" = "路引";
 
 "mission.select.time" = "任务日期";
 "mission.select.invalid" = "仅无效订单";
+
+"mine.btns.baseInfo" = "基础信息";
+"mine.btns.setting" = "设置";
+
+"personal.nav.title" = "个人信息:";
+"personal.base.name" = "真实姓名:";
+"personal.base.sex" = "性别:";
+"personal.base.natonalty" = "国籍:";
+"personal.base.city" = "所在城市:";
+
+"personal.ideti.title" = "身份证件";
+"personal.ideti.idType" = "证件类型:";
+"personal.ideti.idNum" = "证件号码:";
+"personal.ideti.idPic" = "证件图片:";
+
+
 

@@ -25,7 +25,4 @@ class ZB_TaskPhotoItem: Mappable {
         
     }
     
-//    private class func modelContainerPropertyGenericClass() -> [String: AnyClass] {
-//        return ["photos": ZB_Photo.self]
-//    }
 }

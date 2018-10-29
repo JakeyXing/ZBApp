@@ -108,11 +108,78 @@ class NetWorkManager: AFHTTPSessionManager {
         print("\n\n\n**************************************\n\nURL    -> \(url)\n\nParams -> \(String(describing: parameters))\n\n**************************************\n\n\n")
         
         let success = { (task:URLSessionDataTask , json : Any?)->() in
-           
+            let resultDic = json as! Dictionary<String,AnyObject>
             print("\n\n\n**************************************\n\nURL-> \(url) \n\nResult -> \(String(describing: json))\n\n**************************************\n\n\n")
+            let code:String = resultDic["code"] as! String
+            var errMsg = ""
+            if (code == "1001" ){
+                print("access token expired")
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: kAccessTokenTokenInvalidNoti), object: "access token expired")
+                fail(errMsg)
+                //重新获取access token
+                let mana = AFHTTPSessionManager()
+                let refreshToken = getRefreshToken()
+                mana.get(refreshAccessTokenApiUrl, parameters: ["refreshToken":refreshToken], progress: nil, success: { (dataTask, jsonData) in
+                    
+                    guard let jsonDa = jsonData else {
+                        //无数据默认 refresh token 失效
+                        print("refresh token expired")
+                        errMsg = "refresh token expired"
+                        NotificationCenter.default.post(name: NSNotification.Name(rawValue: kRefreshTokenInvalidNoti), object: "refresh token expired")
+                        fail(errMsg)
+                        return
+                    }
+                    let resultDic = jsonDa as! Dictionary<String,AnyObject>
+                    let code:String = resultDic["code"] as! String
+                    if code == "200" {
+                        
+                        //accessToken 更新成功 刷新数据
+                        errMsg = refreshData_msg
+                        setAccessToken(token: resultDic["accessToken"] as! String)
+                        setRefreshToken(token: resultDic["refreshToken"] as! String)
+                        
+                        //重新加载请求
+                        task.resume()
+                        
+                        
+                    }else{
+                        //其他错误默认 refresh token 失效
+                        errMsg = "refresh token expired"
+                        print("refresh token expired")
+                        NotificationCenter.default.post(name: NSNotification.Name(rawValue: kRefreshTokenInvalidNoti), object: "refresh token expired")
+                        fail(errMsg)
+                        
+                        return
+                    }
+                    
+                }, failure: { (dataTask, err) in
+                    
+                    //请求失败默认 refresh token 失效
+                    print("refresh token expired")
+                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: kRefreshTokenInvalidNoti), object: "refresh token expired")
+                    fail(errMsg)
+                    
+                    return
+                    
+                    
+                })
+                
+                
+            }else if (code == "1002") {
+                print("refresh token expired")
+                errMsg = "refresh token expired"
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: kRefreshTokenInvalidNoti), object: "refresh token expired")
+                
+                fail(errMsg)
+
+                return;
+                
+            }
             
             success(json)
         }
+        
+        
         
         let failure = { (task:URLSessionDataTask? , error : Error)->() in
             

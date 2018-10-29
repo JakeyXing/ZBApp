@@ -299,8 +299,8 @@ class CleanMissionDetailViewController: MissionDetailBaseViewController,CleanPic
     func roomInfoViewDidTappedRoute(_ view: RoomInfoView, routeUrl routeUrlStr: String) {
         let web=WebViewController()
         web.hidesBottomBarWhenPushed = true
-        web.urlStr = "https://www.baidu.com"
-        web.titleStr = "文件名"
+        web.urlStr = routeUrlStr
+        web.titleStr = LanguageHelper.getString(key: "detail.route.pageTitle")
         self.navigationController?.pushViewController(web, animated: true)
     }
     
