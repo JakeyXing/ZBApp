@@ -10,12 +10,12 @@
 @implementation CommonMethod
 //照片获取本地路径转换
 + (NSString *)getImagePath:(UIImage *)Image imageName:(NSString *)imageName{
-    //    UIImage *sizedImage = [self imageWithImageSimple:Image scaledToSize:CGSizeMake(1080, 1080)];
+    UIImage *sizedImage = [self imageWithImageSimple:Image scaledToSize:CGSizeMake(1080, 1080)];
     
     NSString *filePath = nil;
     NSData *data = nil;
     
-    data = UIImageJPEGRepresentation(Image, 0.7);
+    data = UIImageJPEGRepresentation(sizedImage, 0.7);
     //    if (UIImagePNGRepresentation(Image) == nil) {
     //        data = UIImageJPEGRepresentation(Image, 0.6);
     //    } else {
@@ -37,6 +37,17 @@
     //得到选择后沙盒中图片的完整路径
     filePath = [[NSString alloc] initWithFormat:@"%@%@", DocumentsPath, ImagePath];
     return filePath;
+}
+
+//修改图片大小
++ (UIImage *)imageWithImageSimple:(UIImage*)image scaledToSize:(CGSize)newSize{
+    newSize.height=image.size.height*(newSize.width/image.size.width);
+    UIGraphicsBeginImageContext(newSize);
+    [image drawInRect:CGRectMake(0, 0, newSize.width, newSize.height)];
+    UIImage *newImage=UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return  newImage;
+    
 }
 
 //生成时间戳
@@ -89,6 +100,42 @@
          
      }];
     
+    
+}
+
++ (void) convertVideoWithFileName:(NSString *)filename assetFilePath:(NSURL*)assetFilePath completeHandler:(void (^)(NSString*))handler{
+   
+    //保存至沙盒路径
+    NSString *pathDocuments = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString *videoPath = [NSString stringWithFormat:@"%@/Image", pathDocuments];
+    NSString *sandBoxFilePath = [videoPath stringByAppendingPathComponent:filename];
+    
+    //转码配置
+    AVURLAsset *asset = [AVURLAsset URLAssetWithURL:assetFilePath options:nil];
+    AVAssetExportSession *exportSession= [[AVAssetExportSession alloc] initWithAsset:asset presetName:AVAssetExportPresetMediumQuality];
+    exportSession.shouldOptimizeForNetworkUse = YES;
+    exportSession.outputURL = [NSURL fileURLWithPath:sandBoxFilePath];
+    exportSession.outputFileType = AVFileTypeMPEG4;
+    [exportSession exportAsynchronouslyWithCompletionHandler:^{
+        int exportStatus = exportSession.status;
+      
+        switch (exportStatus)
+        {
+            case AVAssetExportSessionStatusFailed:
+            {
+                // log error to text view
+                NSError *exportError = exportSession.error;
+                NSLog (@"AVAssetExportSessionStatusFailed: %@", exportError);
+                break;
+            }
+            case AVAssetExportSessionStatusCompleted:
+            {
+                NSLog(@"视频转码成功");
+//                NSData *data = [NSData dataWithContentsOfFile:sandBoxFilePath];
+                handler(sandBoxFilePath);
+            }
+        }
+    }];
     
 }
 

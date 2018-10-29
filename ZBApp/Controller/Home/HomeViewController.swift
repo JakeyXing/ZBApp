@@ -10,6 +10,7 @@ import UIKit
 import MJRefresh
 import MBProgressHUD
 import Toast
+import  
 
 private let  kHomeMissionCell = "kHomeMissionCell"
 class HomeViewController: UIViewController {
@@ -43,7 +44,7 @@ class HomeViewController: UIViewController {
         self.navigationBar.contentView.addSubview(self.typeSelectBar)
         self.setTableView()
         
-//        self.loadNewData()
+        self.loadNewData()
     }
     
     func setTableView(){
@@ -81,10 +82,16 @@ class HomeViewController: UIViewController {
             let resultDic = data as! Dictionary<String,AnyObject>
             let dic = resultDic["data"] as! Dictionary<String,AnyObject>
             let list = dic["list"]
-            guard let array = (NSArray.yy_modelArray(with: ZB_TaskInfo.self, json: (list ?? []))) as? [ZB_TaskInfo] else{
-                return
-            }
-            self.taskList.append(contentsOf: array)
+            
+            
+            let array = [ZB_TaskInfo].deserialize(from: list)
+            print(array)
+//            guard let array = (NSArray.yy_modelArray(with: ZB_TaskInfo.self, json: (list ?? []))) as? [ZB_TaskInfo] else{
+//                return
+//            }
+           
+            
+//            self.taskList.append(contentsOf: <#T##Sequence#>)
             self.tableview?.reloadData()
             
         }) { (data, errMsg) in
@@ -157,14 +164,14 @@ class HomeViewController: UIViewController {
 
 extension HomeViewController:UITableViewDelegate,UITableViewDataSource,JHDropdownViewDelegate,MissionTypeTopBarDelegate{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        return self.taskList.count
-        return 4
+        return self.taskList.count
+//        return 4
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: HomeMissionCell = tableView.dequeueReusableCell(withIdentifier: kHomeMissionCell, for: indexPath) as! HomeMissionCell
-//        let model = self.taskList[indexPath.row]
-//        cell.setUpData(model: model)
+        let model = self.taskList[indexPath.row]
+        cell.setUpData(model: model)
         return cell
     }
     
@@ -174,52 +181,52 @@ extension HomeViewController:UITableViewDelegate,UITableViewDataSource,JHDropdow
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView .deselectRow(at: indexPath, animated: false)
-//        let infoModel = self.taskList[indexPath.row]
-//        switch infoModel.type {
-//        case "LAUNCH","DISMANTLE":
-//            let carry = CarryMissionDetailViewController()
-//            carry.isTaked = false
-//            carry.model = infoModel
-//            carry.hidesBottomBarWhenPushed = true
-//            self.navigationController?.pushViewController(carry, animated: true)
-//
-//        case "MAINTAIN":
-//            let repair = RepairMissionDetailViewController()
-//            repair.isTaked = false
-//            repair.model = infoModel
-//            repair.hidesBottomBarWhenPushed = true
-//            self.navigationController?.pushViewController(repair, animated: true)
-//        case "CLEAN":
-//            let clean = CleanMissionDetailViewController()
-//            clean.isTaked = false
-//            clean.model = infoModel
-//            clean.hidesBottomBarWhenPushed = true
-//            self.navigationController?.pushViewController(clean, animated: true)
-//        default:
-//            print("未知类型")
-//        }
-        
-        if indexPath.row == 0 {
+        let infoModel = self.taskList[indexPath.row]
+        switch infoModel.type {
+        case "LAUNCH","DISMANTLE":
             let carry = CarryMissionDetailViewController()
             carry.isTaked = false
-//            carry.model = infoModel
+            carry.model = infoModel
             carry.hidesBottomBarWhenPushed = true
             self.navigationController?.pushViewController(carry, animated: true)
 
-        }else if indexPath.row == 1{
-            let clean = CleanMissionDetailViewController()
-            clean.isTaked = false
-//            clean.model = infoModel
-            clean.hidesBottomBarWhenPushed = true
-            self.navigationController?.pushViewController(clean, animated: true)
-        }else if indexPath.row == 2{
+        case "MAINTAIN":
             let repair = RepairMissionDetailViewController()
             repair.isTaked = false
-//            repair.model = infoModel
+            repair.model = infoModel
             repair.hidesBottomBarWhenPushed = true
             self.navigationController?.pushViewController(repair, animated: true)
-
+        case "CLEAN":
+            let clean = CleanMissionDetailViewController()
+            clean.isTaked = false
+            clean.model = infoModel
+            clean.hidesBottomBarWhenPushed = true
+            self.navigationController?.pushViewController(clean, animated: true)
+        default:
+            print("未知类型")
         }
+        
+//        if indexPath.row == 0 {
+//            let carry = CarryMissionDetailViewController()
+//            carry.isTaked = false
+////            carry.model = infoModel
+//            carry.hidesBottomBarWhenPushed = true
+//            self.navigationController?.pushViewController(carry, animated: true)
+//
+//        }else if indexPath.row == 1{
+//            let clean = CleanMissionDetailViewController()
+//            clean.isTaked = false
+////            clean.model = infoModel
+//            clean.hidesBottomBarWhenPushed = true
+//            self.navigationController?.pushViewController(clean, animated: true)
+//        }else if indexPath.row == 2{
+//            let repair = RepairMissionDetailViewController()
+//            repair.isTaked = false
+////            repair.model = infoModel
+//            repair.hidesBottomBarWhenPushed = true
+//            self.navigationController?.pushViewController(repair, animated: true)
+//
+//        }
         
     }
     

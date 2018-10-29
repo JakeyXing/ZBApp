@@ -78,7 +78,9 @@ class RegisterViewController: UIViewController,BEMCheckBoxDelegate {
             return
         }
         
-        let params = ["countryCode":self.areaDropdownView.contentLabel.text,"phone":self.phoneTextfield.text]
+        let str:String = self.areaDropdownView.contentLabel.text ?? ""
+        let countryCode :String = String(str[str.index(str.startIndex, offsetBy: 1)..<str.endIndex])
+        let params = ["countryCode":countryCode,"phone":self.phoneTextfield.text] as [String : Any]
         
         MBProgressHUD.showAdded(to: self.view, animated: true)
         NetWorkManager.shared.loadNoTokenRequest(method: .get, url: PhoneCodeUrl, parameters: params as [String : Any], success: { (data) in
@@ -118,13 +120,22 @@ class RegisterViewController: UIViewController,BEMCheckBoxDelegate {
             return
             
         }
-        
-        let params = ["countryCode":self.areaDropdownView.contentLabel.text,"phone":self.phoneTextfield.text,"password":self.passwordTextfield.text,"vertyCode":self.vertyCodeTextfield.text]
+        let str:String = self.areaDropdownView.contentLabel.text ?? ""
+        let countryCode :String = String(str[str.index(str.startIndex, offsetBy: 1)..<str.endIndex])
+        let params = ["countryCode":countryCode,"phone":self.phoneTextfield.text,"password":self.passwordTextfield.text,"vertyCode":self.vertyCodeTextfield.text,"code":Int(self.vertyCodeTextfield.text ?? "0")] as [String : Any]
         
         MBProgressHUD.showAdded(to: self.view, animated: true)
         NetWorkManager.shared.loadNoTokenRequest(method: .post, url: RegisterUrl, parameters: params as [String : Any], success: { (data) in
             
             MBProgressHUD.hide(for: self.view, animated: true)
+            let resultDic = data as! Dictionary<String,AnyObject>
+            let  accessToken = resultDic["accessToken"]
+            let  refreshToken = resultDic["refreshToken"]
+            setAccessToken(token: accessToken as! String)
+            setRefreshToken(token: refreshToken as! String)
+            
+            let sharedAppdelegate:AppDelegate = UIApplication.shared.delegate as! AppDelegate
+            sharedAppdelegate.window?.rootViewController = sharedAppdelegate.mainTabBarVc
             
         }) { (data, errMsg) in
             MBProgressHUD.hide(for: self.view, animated: true)

@@ -7,24 +7,37 @@
 //
 
 import UIKit
-import YYModel
-class ZB_TaskProperty: NSObject {
-    @objc  var doorplate: String?
-    @objc  var id: Int64 = 0
-    @objc  var guideUrl: String?
-    @objc  var maxGuests: Int = 0
-    @objc  var nextCheckInDate: String?
-    @objc  var nextCheckInNights: Int = 0
-    @objc  var nextGuests: Int = 0
-    @objc  var propertyName: String?
-    @objc  var pwdInfos: [ZB_PwdInfo]?
-
+import HandyJSON
+class ZB_TaskProperty: HandyJSON {
+    var doorplate: String?
+    var id: Int64 = 0
+    var guideUrl: String?
+    var maxGuests: Int = 0
+    var nextCheckInDate: String?
+    var nextCheckInNights: Int = 0
+    var nextGuests: Int = 0
+    var propertyName: String?
+    var pwdInfos: [ZB_PwdInfo]?
     
-
-    override var description: String {
-        return yy_modelDescription()
-    }
-    private class func modelContainerPropertyGenericClass() -> [String: AnyClass] {
-        return ["pwdInfos": ZB_PwdInfo.self]
-    }
+    
+//    @objc  var doorplate: String?
+//    @objc  var id: Int64 = 0
+//    @objc  var guideUrl: String?
+//    @objc  var maxGuests: Int = 0
+//    @objc  var nextCheckInDate: String?
+//    @objc  var nextCheckInNights: Int = 0
+//    @objc  var nextGuests: Int = 0
+//    @objc  var propertyName: String?
+//    @objc  var pwdInfos: [ZB_PwdInfo]?
+//
+//
+//
+//    override var description: String {
+//        return yy_modelDescription()
+//    }
+//    @objc private func modelContainerPropertyGenericClass() -> [String: AnyClass] {
+//        return ["pwdInfos": ZB_PwdInfo.self]
+//    }
+    
+    required init() {}
 }

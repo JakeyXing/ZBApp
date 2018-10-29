@@ -128,6 +128,7 @@ class CleanImageCell: UICollectionViewCell {
             DispatchQueue.main.async(execute: {
                 // Do something e.g. Alert a user for transfer completion.
                 // On failed uploads, `error` contains the error object.
+                //
                 
                 self.delegate?.cleanImageCell(self, imageUploadSucceed: "", atIndex: self.indexpath.row)
             })
@@ -135,10 +136,10 @@ class CleanImageCell: UICollectionViewCell {
         
         let transferUtility = AWSS3TransferUtility.default()
 //        transferUtility.accessibilityCustomActions
-        
+        let key = "product/" + fileName
         transferUtility.uploadData(data,
                                    bucket: "ostay-clean",
-                                   key: fileName,
+                                   key: key,
                                    contentType: "text/plain",
                                    expression: expression,
                                    completionHandler: completionHandler).continueWith {

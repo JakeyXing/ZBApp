@@ -246,7 +246,7 @@ func getFormatRemainTime(secounds:TimeInterval)->String{
     if day == 0 {
         return String(format: "%02dh%02m", hour, minutes)
     }else{
-        return String(format: "%02dd%02dh%02m", day, hour, minutes)
+        return String(format: "%dd%02dh%02m", day, hour, minutes)
     }
     
 }

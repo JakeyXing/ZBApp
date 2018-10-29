@@ -69,6 +69,9 @@ class LoginViewController: UIViewController,BEMCheckBoxDelegate {
             let  refreshToken = resultDic["refreshToken"]
             setAccessToken(token: accessToken as! String)
             setRefreshToken(token: refreshToken as! String)
+            
+            let sharedAppdelegate:AppDelegate = UIApplication.shared.delegate as! AppDelegate
+            sharedAppdelegate.window?.rootViewController = sharedAppdelegate.mainTabBarVc
           
             
         }) { (data, errMsg) in
@@ -78,8 +81,7 @@ class LoginViewController: UIViewController,BEMCheckBoxDelegate {
             
         }
         
-//        let sharedAppdelegate:AppDelegate = UIApplication.shared.delegate as! AppDelegate
-//        sharedAppdelegate.window?.rootViewController = sharedAppdelegate.mainTabBarVc
+
     }
     
     @IBAction func registerAction(_ sender: Any) {

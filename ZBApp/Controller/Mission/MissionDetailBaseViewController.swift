@@ -90,11 +90,12 @@ class MissionDetailBaseViewController: UIViewController {
                 return
             }
             
-//            let model: ZB_Task = (NSObject.yy_model(withJSON: dic as Any) as? ZB_Task)!
-            let model =  ZB_Task.yy_model(with: dic as! [AnyHashable : Any])
-            
-            
-            self.task = model ?? ZB_Task()
+
+//            let model =  ZB_Task.yy_model(with: dic as! [AnyHashable : Any])
+//            let model = ZB_Task()
+//            model.yy_modelSet(with: dic as! [AnyHashable : Any])
+//     
+//            self.task = model ?? ZB_Task()
             
             self.configData()
         }) { (data, errMsg) in

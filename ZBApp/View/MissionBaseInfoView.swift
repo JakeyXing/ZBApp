@@ -114,8 +114,8 @@ extension MissionBaseInfoView{
         
         if info.type == "CLEAN" {
             if info.properties?.count ?? 0 > 0 {
-                let taskProperty = info.properties?[0]
-                self.timeLabel.text = taskProperty?.doorplate
+//                let taskProperty = info.properties?[0]
+//                self.timeLabel.text = taskProperty?.doorplate
             }
             
         }else{
