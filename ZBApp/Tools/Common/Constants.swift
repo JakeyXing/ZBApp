@@ -119,7 +119,7 @@ func typeNameWithStr(str: String)-> String{
     switch str {
     case "LAUNCH":
         typeName = LanguageHelper.getString(key: "home.dropDwon.launch")
-    case "DISMANTLE":
+    case "WITHDRAWAL":
         typeName = LanguageHelper.getString(key: "home.dropDwon.dismantle")
     case "MAINTAIN":
         typeName = LanguageHelper.getString(key: "home.dropDwon.maintain")
@@ -141,7 +141,7 @@ func configTypeParamWithStr(typeStr: String)-> String {
         selectedType = "LAUNCH"
         
     }else if typeStr == "home.dropDwon.dismantle" {
-        selectedType = "DISMANTLE"
+        selectedType = "WITHDRAWAL"
         
     }else if typeStr == "home.dropDwon.maintain" {
         selectedType = "MAINTAIN"

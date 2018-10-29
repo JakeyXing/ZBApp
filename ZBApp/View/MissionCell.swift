@@ -11,7 +11,7 @@ import Masonry
 
 class MissionCell: UITableViewCell {
     //MARK: - 控件
-    private var model: ZB_TaskInfo?
+    private var model: ZB_Task?
     private lazy var timeLabel: UILabel = UILabel.cz_label(withText: "2018-07-22", fontSize: kResizedFont(ft: 16), color: kFontColorGray)
     
     private lazy var priceLabel: UILabel = UILabel.cz_label(withText: "2300~3500", fontSize: kResizedFont(ft: 16), color: kTintColorYellow)
@@ -74,13 +74,22 @@ class MissionCell: UITableViewCell {
     
     
     //MARK: - private method
-    func setUpData(model:ZB_TaskInfo) {
+    func setUpData(model:ZB_Task) {
+        let timeInterv = timeToTimeStamp(time: model.startDate!)
+        
         self.model = model;
-        self.timeLabel.text = model.startDate
+        self.timeLabel.text = timeStampToString(timeStamp: timeInterv)
+        self.priceLabel.text = String(format: "%.1f", model.base)
+        self.unitLabel.text = model.currency
+        self.locaLabel.text = model.address?.name
+        self.requireLabel.text = LanguageHelper.getString(key: "home.cell.bonus") + String(format: "%.1f", model.bonus) + model.currency!
+        self.typeLabel.text = typeNameWithStr(str: model.type ?? "")
+        self.stateLabel.text = statusNameWithStr(str: model.progress ?? "")
         
     }
     
     func setUpUI(){
+        self.numLabel.isHidden = true
         self.addSubview(timeLabel)
         self.addSubview(priceLabel)
         self.addSubview(unitLabel)

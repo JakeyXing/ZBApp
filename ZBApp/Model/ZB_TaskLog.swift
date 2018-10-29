@@ -7,24 +7,42 @@
 //
 
 import UIKit
-import YYModel
-class ZB_TaskLog: NSObject,YYModel {
+import ObjectMapper
+class ZB_TaskLog: Mappable {
     
-    @objc  var date: String?
-    @objc  var log_description: String?
-    @objc  var id: Int64 = 0
-    @objc  var imgs: [String]?
-    @objc  var reason: String?
-    @objc  var type: String?
-    @objc  var userId: Int64 = 0
-    @objc  var userRole: String?
-    @objc  var username: String?
-
-    private func modelCustomPropertyMapper() -> [String : Any]? {
-        return ["log_description":"description"]
+    var date: String?
+    var log_description: String?
+    var id: Int64 = 0
+    var imgs: [String]?
+    var reason: String?
+    var type: String?
+    var userId: Int64 = 0
+    var userRole: String?
+    var username: String?
+    
+    required init?(map: Map) {
+        
     }
     
-    override var description: String {
-        return yy_modelDescription()
+    // Mappable
+    func mapping(map: Map) {
+        date          <- map["date"]
+        log_description       <- map["description"]
+        id <- map["id"]
+        imgs  <- map["imgs"]
+        reason   <- map["reason"]
+        type  <- map["type"]
+        userId     <- map["userId"]
+        userRole  <- map["userRole"]
+        username      <- map["username"]
+        
     }
+//
+//    private func modelCustomPropertyMapper() -> [String : Any]? {
+//        return ["log_description":"description"]
+//    }
+//
+//    override var description: String {
+//        return yy_modelDescription()
+//    }
 }

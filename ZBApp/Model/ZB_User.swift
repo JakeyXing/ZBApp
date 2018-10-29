@@ -7,28 +7,50 @@
 //
 
 import UIKit
-import YYModel
+import ObjectMapper
+class ZB_User: Mappable {
 
-class ZB_User: NSObject {
-
-    @objc  var id: Int64 = 0
-    @objc  var isDel: Bool = false
-    @objc var nationality:String?
-    @objc var password:String?
-    @objc var phoneNo:String?
-    @objc var sex:String?
-    @objc var userImgUrl:String?
-    @objc var userLevel:String?
-    @objc var userName:String?
-    @objc var userScore:Int = 0
-    @objc var userStatus:String?
-    @objc var validNo:String?
-    @objc var validNoImgUrl:String?
-    @objc var validType:String?
-    @objc var visaImgUrl:String?
-    @objc var workCity:String?
-
-    override var description: String {
-        return yy_modelDescription()
+   var id: Int64 = 0
+   var isDel: Bool = false
+   var nationality:String?
+   var password:String?
+   var phoneNo:String?
+   var sex:String?
+   var userImgUrl:String?
+   var userLevel:String?
+   var userName:String?
+   var userScore:Int = 0
+   var userStatus:String?
+   var validNo:String?
+   var validNoImgUrl:String?
+   var validType:String?
+   var visaImgUrl:String?
+   var workCity:String?
+    
+    
+    required init?(map: Map) {
+        
     }
+    
+    // Mappable
+    func mapping(map: Map) {
+        id          <- map["id"]
+        isDel       <- map["isDel"]
+        nationality <- map["nationality"]
+        password    <- map["password"]
+        phoneNo     <- map["phoneNo"]
+        sex         <- map["sex"]
+        userImgUrl  <- map["userImgUrl"]
+        userLevel   <- map["userLevel"]
+        userName    <- map["userName"]
+        userScore   <- map["userScore"]
+        userStatus  <- map["userStatus"]
+        validNo     <- map["validNo"]
+        validNoImgUrl  <- map["validNoImgUrl"]
+        validType      <- map["validType"]
+        visaImgUrl     <- map["visaImgUrl"]
+        workCity       <- map["workCity"]
+    
+    }
+
 }

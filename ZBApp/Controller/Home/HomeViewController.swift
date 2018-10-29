@@ -10,7 +10,7 @@ import UIKit
 import MJRefresh
 import MBProgressHUD
 import Toast
-import  
+import ObjectMapper
 
 private let  kHomeMissionCell = "kHomeMissionCell"
 class HomeViewController: UIViewController {
@@ -82,16 +82,11 @@ class HomeViewController: UIViewController {
             let resultDic = data as! Dictionary<String,AnyObject>
             let dic = resultDic["data"] as! Dictionary<String,AnyObject>
             let list = dic["list"]
-            
-            
-            let array = [ZB_TaskInfo].deserialize(from: list)
+        
+            let array: [ZB_TaskInfo] =  Mapper<ZB_TaskInfo>().mapArray(JSONArray: list as! [[String : Any]])
             print(array)
-//            guard let array = (NSArray.yy_modelArray(with: ZB_TaskInfo.self, json: (list ?? []))) as? [ZB_TaskInfo] else{
-//                return
-//            }
-           
-            
-//            self.taskList.append(contentsOf: <#T##Sequence#>)
+            self.taskList.append(contentsOf: array)
+
             self.tableview?.reloadData()
             
         }) { (data, errMsg) in
@@ -115,9 +110,7 @@ class HomeViewController: UIViewController {
             let resultDic = data as! Dictionary<String,AnyObject>
             let dic = resultDic["data"] as! Dictionary<String,AnyObject>
             let list = dic["list"]
-            guard let array = (NSArray.yy_modelArray(with: ZB_TaskInfo.self, json: (list ?? []))) as? [ZB_TaskInfo] else{
-                return
-            }
+            let array: [ZB_TaskInfo] =  Mapper<ZB_TaskInfo>().mapArray(JSONArray: list as! [[String : Any]])
             self.taskList.append(contentsOf: array)
             self.tableview?.reloadData()
             
@@ -145,9 +138,7 @@ class HomeViewController: UIViewController {
             let resultDic = data as! Dictionary<String,AnyObject>
             let dic = resultDic["data"] as! Dictionary<String,AnyObject>
             let list = dic["list"]
-            guard let array = (NSArray.yy_modelArray(with: ZB_TaskInfo.self, json: (list ?? []))) as? [ZB_TaskInfo] else{
-                return
-            }
+            let array: [ZB_TaskInfo] =  Mapper<ZB_TaskInfo>().mapArray(JSONArray: list as! [[String : Any]])
             self.taskList.append(contentsOf: array)
             self.tableview?.reloadData()
             
@@ -183,7 +174,7 @@ extension HomeViewController:UITableViewDelegate,UITableViewDataSource,JHDropdow
         tableView .deselectRow(at: indexPath, animated: false)
         let infoModel = self.taskList[indexPath.row]
         switch infoModel.type {
-        case "LAUNCH","DISMANTLE":
+        case "LAUNCH","WITHDRAWAL":
             let carry = CarryMissionDetailViewController()
             carry.isTaked = false
             carry.model = infoModel

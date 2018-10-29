@@ -18,8 +18,13 @@ class RepairMissionDetailViewController: MissionDetailBaseViewController,RepairP
     var cameraPicker: UIImagePickerController!
     var currentIndexpath: NSIndexPath?
     
+    lazy var carryMissionInfoView: CarryMissionInfoView = {
+        let view = CarryMissionInfoView(frame: CGRect.init(x: 0, y: self.missionBaseInfoView.bottom+kResizedPoint(pt: 10), width: DEVICE_WIDTH, height: kResizedPoint(pt: 350)))
+        return view
+    }()
+    
     lazy var carryImageView: CarryMissonImageAndFlieView = {
-        let view = CarryMissonImageAndFlieView(frame: CGRect.init(x: 0, y: self.missionBaseInfoView.bottom+kResizedPoint(pt: 10), width: DEVICE_WIDTH, height: kResizedPoint(pt: 600)))
+        let view = CarryMissonImageAndFlieView(frame: CGRect.init(x: 0, y: self.carryMissionInfoView.bottom+kResizedPoint(pt: 10), width: DEVICE_WIDTH, height: kResizedPoint(pt: 600)))
         view.delegate = self
         return view
     }()
@@ -74,7 +79,7 @@ class RepairMissionDetailViewController: MissionDetailBaseViewController,RepairP
     
     override func addSubViews() {
         super.addSubViews()
-        
+        self.scrollview.addSubview(self.carryMissionInfoView)
         self.scrollview.addSubview(self.carryImageView)
         self.scrollview.addSubview(self.roomInfoView)
         self.scrollview.addSubview(self.feedbackView)
@@ -87,7 +92,7 @@ class RepairMissionDetailViewController: MissionDetailBaseViewController,RepairP
         self.carryImageView.fileArray = ["https://video.parentschat.com/pic_R3_720.jpg","https://video.parentschat.com/pic_R3_720.jpg","https://video.parentschat.com/pic_R3_720.jpg","https://video.parentschat.com/pic_R3_720.jpg"]
         
 //        self.feedbackView.congfigData()
-        self.roomInfoView.roomArray = [ZB_TaskProperty(),ZB_TaskProperty()]
+        self.roomInfoView.roomArray = [] as [ZB_TaskProperty]
         self.uploadView.congfigData()
         self.uploadView.delegate = self
         
@@ -114,7 +119,7 @@ class RepairMissionDetailViewController: MissionDetailBaseViewController,RepairP
     
     override func configData() {
         
-        let progress:String = self.task.progress ?? "READY"
+        let progress:String = self.task?.progress ?? "READY"
         self.currentProgress = ZB_ProgressType(rawValue: progress) ?? .ready
         
         self.feedbackView.isHidden = false
@@ -123,20 +128,28 @@ class RepairMissionDetailViewController: MissionDetailBaseViewController,RepairP
         
         //基础
         self.roomInfoView.infoUploadButton.isHidden = true
-        self.missionBaseInfoView.congfigDataWithTaskInfo(info: self.model ?? ZB_TaskInfo())
-        self.carryImageView.imageArray = self.model?.imgs
-        self.carryImageView.fileArray = self.model?.documents
-        self.roomInfoView.roomArray = self.model?.properties
+        self.missionBaseInfoView.congfigDataWithTask(info: self.task!)
+        self.carryMissionInfoView.congfigDataWithTask(info: self.task!)
+        self.roomInfoView.roomArray = self.task?.taskInfo?.properties
+        self.roomInfoView.height = self.roomInfoView.viewHeight()
+        
+        self.carryImageView.imageArray = self.task?.taskInfo?.imgs
+        self.carryImageView.fileArray = self.task?.taskInfo?.documents
+        self.roomInfoView.roomArray = self.task?.taskInfo?.properties
+        
+        self.carryMissionInfoView.height = self.carryMissionInfoView.viewHeight()
+        self.carryImageView.top = self.carryMissionInfoView.bottom
+        self.carryImageView.height = self.carryImageView.viewHeight()
+        self.roomInfoView.top = self.carryImageView.bottom + kResizedPoint(pt: 10)
         
         self.carryImageView.height = self.carryImageView.viewHeight()
         self.roomInfoView.top = self.carryImageView.bottom + kResizedPoint(pt: 10)
         
-        self.roomInfoView.height = self.roomInfoView.viewHeight()
-        
-        
+    
         //“信息上报”按钮
         if (self.currentProgress == .started || self.currentProgress == .ready){
             self.roomInfoView.infoUploadButton.isHidden = false
+            self.roomInfoView.height = self.roomInfoView.viewHeight()
             
         }else{
             self.roomInfoView.infoUploadButton.isHidden = true
@@ -144,9 +157,9 @@ class RepairMissionDetailViewController: MissionDetailBaseViewController,RepairP
         }
         
         //logs
-        self.feedbackView.congfigDataWithTask(model: self.task)
+        self.feedbackView.congfigDataWithTask(model: self.task!)
         self.feedbackView.height = self.feedbackView.viewHeight()
-        let cout = self.task.taskLogs?.count ?? 0
+        let cout = self.task!.taskLogs?.count ?? 0
         if cout == 0 {
             self.feedbackView.clipsToBounds = true;
             self.feedbackView.top = self.roomInfoView.bottom
@@ -154,15 +167,20 @@ class RepairMissionDetailViewController: MissionDetailBaseViewController,RepairP
             self.feedbackView.top = self.roomInfoView.bottom + kResizedPoint(pt: 10)
         }
         
+        
+        //
+        self.infoTextView.top = self.feedbackView.bottom + kResizedPoint(pt: 10)
+        self.infoTextView.height = self.infoTextView.viewHeight()
+        
         //房间位置图片上传
         if (self.currentProgress == .started || self.currentProgress == .approve_failed) {
             self.uploadView.isHidden = false
-            self.uploadView.top = self.feedbackView.bottom + kResizedPoint(pt: 10)
+            self.uploadView.top = self.infoTextView.bottom + kResizedPoint(pt: 10)
             self.uploadView.height = self.uploadView.viewHeight()
             
         }else{
             self.uploadView.isHidden = true
-            self.uploadView.top = self.feedbackView.bottom
+            self.uploadView.top = self.infoTextView.bottom
             self.uploadView.height = 0
             
             
@@ -197,7 +215,7 @@ class RepairMissionDetailViewController: MissionDetailBaseViewController,RepairP
         self.uploadView.isHidden = true
         self.roomInfoView.infoUploadButton.isHidden = true
 
-        self.missionBaseInfoView.congfigDataWithTaskInfo(info: self.model ?? ZB_TaskInfo())
+        self.missionBaseInfoView.congfigDataWithTaskInfo(info: self.model!)
         self.carryImageView.imageArray = self.model?.imgs
         self.carryImageView.fileArray = self.model?.documents
 //        self.roomInfoView.roomArray = self.model?.properties
@@ -244,7 +262,7 @@ class RepairMissionDetailViewController: MissionDetailBaseViewController,RepairP
             
             if self.currentProgress == .ready {
                 //我已到达，开始任务
-                let params = ["taskId":self.task.id ] as [String : Any]
+                let params = ["taskId":self.task?.id ?? 0 ] as [String : Any]
                 
                 MBProgressHUD.showAdded(to: self.view, animated: true)
                 NetWorkManager.shared.loadRequest(method: .post, url: StartTaskUrl, parameters: params as [String : Any], success: { (data) in
@@ -255,7 +273,7 @@ class RepairMissionDetailViewController: MissionDetailBaseViewController,RepairP
                     if dic == nil {
                         return
                     }
-                    self.loadNewDataWithId(taskId: self.task.id)
+                    self.loadNewDataWithId(taskId: self.task?.id ?? 0)
                     
                 }) { (data, errMsg) in
                     MBProgressHUD.hide(for: self.view, animated: true)
@@ -265,7 +283,7 @@ class RepairMissionDetailViewController: MissionDetailBaseViewController,RepairP
                 
             }else if(self.currentProgress == .started){
                 //提交审核
-                let params = ["taskId":self.task.id ] as [String : Any]
+                let params = ["taskId":self.task?.id ?? 0 ] as [String : Any]
                 
                 MBProgressHUD.showAdded(to: self.view, animated: true)
                 NetWorkManager.shared.loadRequest(method: .post, url: ApproveTaskUrl, parameters: params as [String : Any], success: { (data) in
@@ -276,7 +294,7 @@ class RepairMissionDetailViewController: MissionDetailBaseViewController,RepairP
                     if dic == nil {
                         return
                     }
-                    self.loadNewDataWithId(taskId: self.task.id)
+                    self.loadNewDataWithId(taskId: self.task?.id ?? 0)
                     
                 }) { (data, errMsg) in
                     MBProgressHUD.hide(for: self.view, animated: true)

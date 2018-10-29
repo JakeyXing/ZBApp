@@ -114,8 +114,8 @@ extension MissionBaseInfoView{
         
         if info.type == "CLEAN" {
             if info.properties?.count ?? 0 > 0 {
-//                let taskProperty = info.properties?[0]
-//                self.timeLabel.text = taskProperty?.doorplate
+                let taskProperty = info.properties?[0]
+                self.timeLabel.text = taskProperty?.doorplate
             }
             
         }else{
@@ -130,6 +130,31 @@ extension MissionBaseInfoView{
     
     //
     func congfigDataWithTask(info: ZB_Task){
+        
+        self.statusLabel.text = statusNameWithStr(str: info.progress ?? "")
+        
+        let taskInfo = info.taskInfo
+        let timeInterv = timeToTimeStamp(time: taskInfo?.startDate ?? "")
+        self.dateLabel.text = timeStampToString(timeStamp: timeInterv)
+        self.typeLabel.text = typeNameWithStr(str: taskInfo?.type ?? "")
+        
+        let starTimeStr = timeStampShortTimeStr(timeStamp: timeInterv)
+        let endTimeStr = timeStampShortTimeStr(timeStamp: (timeInterv + Double(taskInfo?.restHours ?? 0 + (taskInfo?.hoursPerPerson ?? 0) )*3600))
+        
+        if taskInfo?.type == "CLEAN" {
+            if taskInfo?.properties?.count ?? 0 > 0 {
+                let taskProperty = taskInfo?.properties?[0]
+                self.timeLabel.text = taskProperty?.doorplate
+            }
+            
+        }else{
+            self.timeLabel.text = starTimeStr + "-" + endTimeStr + String(format: "(%@%dh)", LanguageHelper.getString(key: "detail.base.rest"),info.restHours)
+        }
+        
+        self.salaryLabel_1.text = String(format: "%@ %.0f %@", LanguageHelper.getString(key: "detail.base.base"),taskInfo?.base ?? 0,taskInfo?.currency ?? "JPY")
+        self.salaryLabel_2.text = String(format: "%@ %.0f %@", LanguageHelper.getString(key: "detail.base.bonus"),taskInfo?.bonus ?? 0,taskInfo?.currency ?? "JPY")
+        
+        self.addressLabel.text = taskInfo?.address?.name
         
     }
     

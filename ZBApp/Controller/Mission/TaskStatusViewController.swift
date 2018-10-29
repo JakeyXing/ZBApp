@@ -12,6 +12,7 @@ import BEMCheckBox
 import MJRefresh
 import MBProgressHUD
 import Toast
+import ObjectMapper
 
 private let  kMissionCellID = "kMissionCellID"
 class TaskStatusViewController: UIViewController {
@@ -68,9 +69,6 @@ class TaskStatusViewController: UIViewController {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor .white
         self.navigationController?.navigationBar.isHidden = true
-        if self.settedType == "STARTED" {
-            self.view.backgroundColor = UIColor .red
-        }
         self.view.addSubview(self.topBarBg)
         
         self.topBarBg.addSubview(self.typeDropdownView)
@@ -105,6 +103,8 @@ class TaskStatusViewController: UIViewController {
             make.width.equalTo()(kResizedPoint(pt: 20))
             make.height.equalTo()(kResizedPoint(pt: 20))
         }
+        
+        self.loadNewData()
     }
     
     func setTableView(){
@@ -143,9 +143,7 @@ class TaskStatusViewController: UIViewController {
             let resultDic = data as! Dictionary<String,AnyObject>
             let dic = resultDic["data"] as! Dictionary<String,AnyObject>
             let list = dic["list"]
-            guard let array = (NSArray.yy_modelArray(with: ZB_Task.self, json: (list ?? []))) as? [ZB_Task] else{
-                return
-            }
+            let array: [ZB_Task] =  Mapper<ZB_Task>().mapArray(JSONArray: list as! [[String : Any]])
             self.taskList.append(contentsOf: array)
             self.tableview?.reloadData()
             
@@ -170,9 +168,7 @@ class TaskStatusViewController: UIViewController {
             let resultDic = data as! Dictionary<String,AnyObject>
             let dic = resultDic["data"] as! Dictionary<String,AnyObject>
             let list = dic["list"]
-            guard let array = (NSArray.yy_modelArray(with: ZB_Task.self, json: (list ?? []))) as? [ZB_Task] else{
-                return
-            }
+            let array: [ZB_Task] =  Mapper<ZB_Task>().mapArray(JSONArray: list as! [[String : Any]])
             self.taskList.append(contentsOf: array)
             self.tableview?.reloadData()
             
@@ -200,9 +196,7 @@ class TaskStatusViewController: UIViewController {
             let resultDic = data as! Dictionary<String,AnyObject>
             let dic = resultDic["data"] as! Dictionary<String,AnyObject>
             let list = dic["list"]
-            guard let array = (NSArray.yy_modelArray(with: ZB_Task.self, json: (list ?? []))) as? [ZB_Task] else{
-                return
-            }
+            let array: [ZB_Task] =  Mapper<ZB_Task>().mapArray(JSONArray: list as! [[String : Any]])
             self.taskList.append(contentsOf: array)
             self.tableview?.reloadData()
             
@@ -229,12 +223,14 @@ class TaskStatusViewController: UIViewController {
 
 extension TaskStatusViewController:UITableViewDelegate,UITableViewDataSource,CalendarBgViewDelegate,JHDropdownViewDelegate,BEMCheckBoxDelegate{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        return self.taskList.count
-        return 4
+        return self.taskList.count
+   
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: kMissionCellID, for: indexPath)
+        let cell:MissionCell = tableView.dequeueReusableCell(withIdentifier: kMissionCellID, for: indexPath) as! MissionCell
+        let model = self.taskList[indexPath.row]
+        cell.setUpData(model: model)
         return cell
     }
     
@@ -244,51 +240,51 @@ extension TaskStatusViewController:UITableViewDelegate,UITableViewDataSource,Cal
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView .deselectRow(at: indexPath, animated: false)
-//        let model = self.taskList[indexPath.row]
-//        switch model.taskInfo?.type {
-//        case "LAUNCH","DISMANTLE":
+        let model = self.taskList[indexPath.row]
+        switch model.type {
+        case "LAUNCH","WITHDRAWAL":
+            let carry = CarryMissionDetailViewController()
+            carry.isTaked = true
+            carry.taskExecuteId = model.id
+            carry.hidesBottomBarWhenPushed = true
+            self.navigationController?.pushViewController(carry, animated: true)
+
+        case "MAINTAIN":
+            let repair = RepairMissionDetailViewController()
+            repair.isTaked = true
+            repair.taskExecuteId = model.id
+            repair.hidesBottomBarWhenPushed = true
+            self.navigationController?.pushViewController(repair, animated: true)
+        case "CLEAN":
+            let clean = CleanMissionDetailViewController()
+            clean.isTaked = true
+            clean.taskExecuteId = model.id
+            clean.hidesBottomBarWhenPushed = true
+            self.navigationController?.pushViewController(clean, animated: true)
+        default:
+            print("未知类型")
+        }
+        
+        
+//        if indexPath.row == 0 {
 //            let carry = CarryMissionDetailViewController()
 //            carry.isTaked = true
-//            carry.taskExecuteId = model.id
+////            carry.taskExecuteId = model.id
 //            carry.hidesBottomBarWhenPushed = true
 //            self.navigationController?.pushViewController(carry, animated: true)
 //
-//        case "MAINTAIN":
-//            let repair = RepairMissionDetailViewController()
-//            repair.isTaked = true
-//            repair.taskExecuteId = model.id
-//            repair.hidesBottomBarWhenPushed = true
-//            self.navigationController?.pushViewController(repair, animated: true)
-//        case "CLEAN":
+//        }else if indexPath.row == 1{
 //            let clean = CleanMissionDetailViewController()
 //            clean.isTaked = true
-//            clean.taskExecuteId = model.id
 //            clean.hidesBottomBarWhenPushed = true
 //            self.navigationController?.pushViewController(clean, animated: true)
-//        default:
-//            print("未知类型")
+//        }else if indexPath.row == 2{
+//            let repair = RepairMissionDetailViewController()
+//            repair.isTaked = true
+//            repair.hidesBottomBarWhenPushed = true
+//            self.navigationController?.pushViewController(repair, animated: true)
+//
 //        }
-        
-        
-        if indexPath.row == 0 {
-            let carry = CarryMissionDetailViewController()
-            carry.isTaked = true
-//            carry.taskExecuteId = model.id
-            carry.hidesBottomBarWhenPushed = true
-            self.navigationController?.pushViewController(carry, animated: true)
-            
-        }else if indexPath.row == 1{
-            let clean = CleanMissionDetailViewController()
-            clean.isTaked = true
-            clean.hidesBottomBarWhenPushed = true
-            self.navigationController?.pushViewController(clean, animated: true)
-        }else if indexPath.row == 2{
-            let repair = RepairMissionDetailViewController()
-            repair.isTaked = true
-            repair.hidesBottomBarWhenPushed = true
-            self.navigationController?.pushViewController(repair, animated: true)
-            
-        }
         
     }
     

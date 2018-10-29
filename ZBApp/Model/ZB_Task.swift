@@ -7,28 +7,10 @@
 //
 
 import UIKit
-import YYModel
-import HandyJSON
-class ZB_Task: HandyJSON {
-//    @objc  var acceptance: String?
-//    @objc  var base: Float = 0
-//    @objc  var bonus: Float = 0
-//    @objc  var currency: String?
-//    @objc  var endDate: String?
-//    @objc  var durationFromDeadline: Float = 0
-//    @objc  var fine: Float = 0
-//    @objc  var id: Int64 = 0
-//    @objc  var imgs: [String]?
-//    @objc  var cleanPhotos: [ZB_TaskPhotoItem]?
-//    @objc  var maintainPhotos: [ZB_UploadImageItem]?
-//    @objc  var progress: String?
-//    @objc  var startDate: String?
-//    @objc  var taskInfo: ZB_TaskInfo?
-//    @objc  var taskLogs: [ZB_TaskLog]?
-//    @objc  var qualityIssueCount: Int = 0
-//    @objc  var restHours: Int = 0
+import ObjectMapper
 
-    var acceptance: String?
+class ZB_Task: Mappable {
+var acceptance: String?
     var base: Float = 0
     var bonus: Float = 0
     var currency: String?
@@ -46,18 +28,36 @@ class ZB_Task: HandyJSON {
     var qualityIssueCount: Int = 0
     var restHours: Int = 0
     
-    required init() {}
-
+    //我的任务列表使用
+    var address: ZB_Address?
+    var type: String?
     
+    required init?(map: Map) {
+        
+    }
     
-    
-  
-//    override var description: String {
-//        return yy_modelDescription()
-//    }
-//
-//    private class func modelContainerPropertyGenericClass() -> [String: AnyClass] {
-//        return ["photos": ZB_TaskPhotoItem.self,"taskLogs": ZB_TaskLog.self,"maintainPhotos": ZB_UploadImageItem.self]
-//    }
+    // Mappable
+    func mapping(map: Map) {
+        acceptance          <- map["acceptance"]
+        base       <- map["base"]
+        bonus <- map["bonus"]
+        currency <- map["currency"]
+        endDate  <- map["endDate"]
+        durationFromDeadline <- map["durationFromDeadline"]
+        fine  <- map["fine"]
+        id   <- map["id"]
+        imgs    <- map["imgs"]
+        cleanPhotos   <- map["cleanPhotos"]
+        maintainPhotos  <- map["maintainPhotos"]
+        progress     <- map["progress"]
+        startDate  <- map["startDate"]
+        taskInfo      <- map["taskInfo"]
+        taskLogs     <- map["taskLogs"]
+        qualityIssueCount       <- map["qualityIssueCount"]
+        restHours       <- map["restHours"]
+        address       <- map["address"]
+        type       <- map["type"]
+        
+    }
 
 }

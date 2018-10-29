@@ -7,9 +7,20 @@
 //
 
 import UIKit
-
-class ZB_PwdInfo: NSObject {
-    @objc  var desc: String?
-    @objc  var type: String?
+import ObjectMapper
+class ZB_PwdInfo: Mappable {
+    var desc: String?
+    var type: String?
+    
+    required init?(map: Map) {
+        
+    }
+    
+    // Mappable
+    func mapping(map: Map) {
+        desc          <- map["desc"]
+        type       <- map["type"]
+        
+    }
 
 }

@@ -7,8 +7,8 @@
 //
 
 import UIKit
-import HandyJSON
-class ZB_TaskProperty: HandyJSON {
+import ObjectMapper
+class ZB_TaskProperty: Mappable {
     var doorplate: String?
     var id: Int64 = 0
     var guideUrl: String?
@@ -19,16 +19,25 @@ class ZB_TaskProperty: HandyJSON {
     var propertyName: String?
     var pwdInfos: [ZB_PwdInfo]?
     
+    required init?(map: Map) {
+        
+    }
     
-//    @objc  var doorplate: String?
-//    @objc  var id: Int64 = 0
-//    @objc  var guideUrl: String?
-//    @objc  var maxGuests: Int = 0
-//    @objc  var nextCheckInDate: String?
-//    @objc  var nextCheckInNights: Int = 0
-//    @objc  var nextGuests: Int = 0
-//    @objc  var propertyName: String?
-//    @objc  var pwdInfos: [ZB_PwdInfo]?
+    // Mappable
+    func mapping(map: Map) {
+        doorplate          <- map["doorplate"]
+        id       <- map["id"]
+        guideUrl <- map["guideUrl"]
+        maxGuests <- map["maxGuests"]
+        nextCheckInDate  <- map["nextCheckInDate"]
+        nextCheckInNights <- map["nextCheckInNights"]
+        nextGuests  <- map["nextGuests"]
+        propertyName   <- map["propertyName"]
+        pwdInfos  <- map["pwdInfos"]
+
+        
+    }
+
 //
 //
 //
@@ -39,5 +48,5 @@ class ZB_TaskProperty: HandyJSON {
 //        return ["pwdInfos": ZB_PwdInfo.self]
 //    }
     
-    required init() {}
+ 
 }

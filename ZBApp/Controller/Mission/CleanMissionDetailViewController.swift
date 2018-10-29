@@ -63,7 +63,7 @@ class CleanMissionDetailViewController: MissionDetailBaseViewController,CleanPic
         
         self.feedbackView.congfigSubViewHeight()
         self.roomInfoView.congfigSubViewHeight()
-        self.uploadView.congfigData()
+//        self.uploadView.congfigData()
         
         self.roomInfoView.height = self.roomInfoView.viewHeight()
         self.feedbackView.top = self.roomInfoView.bottom + kResizedPoint(pt: 10)
@@ -79,12 +79,12 @@ class CleanMissionDetailViewController: MissionDetailBaseViewController,CleanPic
     }
     
     override func configData() {
-        let progress:String = self.task.progress ?? "READY"
+        let progress:String = self.task?.progress ?? "READY"
         self.currentProgress = ZB_ProgressType(rawValue: progress) ?? .ready
         
         //基础
-        self.missionBaseInfoView.congfigDataWithTaskInfo(info: self.task.taskInfo ?? ZB_TaskInfo())
-        self.roomInfoView.congfigDataWithTaskInfo(info: self.model ?? ZB_TaskInfo())
+        self.missionBaseInfoView.congfigDataWithTask(info: self.task!)
+        self.roomInfoView.congfigDataWithTaskInfo(info: (self.task?.taskInfo)!)
         self.roomInfoView.height = self.roomInfoView.viewHeight()
         
         
@@ -98,9 +98,9 @@ class CleanMissionDetailViewController: MissionDetailBaseViewController,CleanPic
         }
         
         //logs
-        self.feedbackView.congfigDataWithTask(model: self.task)
+        self.feedbackView.congfigDataWithTask(model: self.task!)
         self.feedbackView.height = self.feedbackView.viewHeight()
-        let cout = self.task.taskLogs?.count ?? 0
+        let cout = self.task?.taskLogs?.count ?? 0
         if cout == 0 {
             self.feedbackView.clipsToBounds = true;
             self.feedbackView.top = self.roomInfoView.bottom
@@ -110,6 +110,7 @@ class CleanMissionDetailViewController: MissionDetailBaseViewController,CleanPic
         
         //房间位置图片上传
         if (self.currentProgress == .started || self.currentProgress == .approve_failed) {
+            self.uploadView.congfigDataWithTask(model: self.task!)
             self.uploadView.isHidden = false
             self.uploadView.top = self.feedbackView.bottom + kResizedPoint(pt: 10)
             self.uploadView.height = self.uploadView.viewHeight()
@@ -149,8 +150,8 @@ class CleanMissionDetailViewController: MissionDetailBaseViewController,CleanPic
         self.feedbackView.isHidden = true
         self.uploadView.isHidden = true
         
-        self.missionBaseInfoView.congfigDataWithTaskInfo(info: self.model ?? ZB_TaskInfo())
-        self.roomInfoView.congfigDataWithTaskInfo(info: self.model ?? ZB_TaskInfo())
+        self.missionBaseInfoView.congfigDataWithTaskInfo(info: self.model!)
+        self.roomInfoView.congfigDataWithTaskInfo(info: self.model!)
      
         self.roomInfoView.height = self.roomInfoView.viewHeight()
         let timeInterv = timeToTimeStamp(time: (self.model?.startDate) ?? "")
@@ -194,7 +195,7 @@ class CleanMissionDetailViewController: MissionDetailBaseViewController,CleanPic
             
             if self.currentProgress == .ready {
                 //我已到达，开始任务
-                let params = ["taskId":self.task.id ] as [String : Any]
+                let params = ["taskId":self.task?.id ?? 0 ] as [String : Any]
                 
                 MBProgressHUD.showAdded(to: self.view, animated: true)
                 NetWorkManager.shared.loadRequest(method: .post, url: StartTaskUrl, parameters: params as [String : Any], success: { (data) in
@@ -205,7 +206,7 @@ class CleanMissionDetailViewController: MissionDetailBaseViewController,CleanPic
                     if dic == nil {
                         return
                     }
-                    self.loadNewDataWithId(taskId: self.task.id)
+                    self.loadNewDataWithId(taskId: self.task?.id ?? 0)
                     
                 }) { (data, errMsg) in
                     MBProgressHUD.hide(for: self.view, animated: true)
@@ -215,7 +216,7 @@ class CleanMissionDetailViewController: MissionDetailBaseViewController,CleanPic
                 
             }else if(self.currentProgress == .started){
                 //提交审核
-                let params = ["taskId":self.task.id ] as [String : Any]
+                let params = ["taskId":self.task?.id ?? 0 ] as [String : Any]
                 
                 MBProgressHUD.showAdded(to: self.view, animated: true)
                 NetWorkManager.shared.loadRequest(method: .post, url: ApproveTaskUrl, parameters: params as [String : Any], success: { (data) in
@@ -226,7 +227,7 @@ class CleanMissionDetailViewController: MissionDetailBaseViewController,CleanPic
                     if dic == nil {
                         return
                     }
-                    self.loadNewDataWithId(taskId: self.task.id)
+                    self.loadNewDataWithId(taskId: self.task?.id ?? 0)
                     
                 }) { (data, errMsg) in
                     MBProgressHUD.hide(for: self.view, animated: true)
@@ -255,7 +256,6 @@ class CleanMissionDetailViewController: MissionDetailBaseViewController,CleanPic
             let photo = SKPhoto.photoWithImage(cell.oriImage!)// add some UIImage
             images.append(photo)
             
-            // 2. create PhotoBrowser Instance, and present from your viewController.
             let browser = SKPhotoBrowser(photos: images)
             browser.initializePageIndex(0)
             self.present(browser, animated: true, completion: {})

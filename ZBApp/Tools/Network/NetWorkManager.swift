@@ -122,10 +122,11 @@ class NetWorkManager: AFHTTPSessionManager {
             if (task?.response as? HTTPURLResponse)?.statusCode == 1001 {
                 print("access token expired")
                 NotificationCenter.default.post(name: NSNotification.Name(rawValue: kAccessTokenTokenInvalidNoti), object: "access token expired")
-                
+        
                 //重新获取access token
                 let mana = AFHTTPSessionManager()
-                mana.get(refreshAccessTokenApiUrl, parameters: [], progress: nil, success: { (dataTask, jsonData) in
+                let refreshToken = getRefreshToken()
+                mana.get(refreshAccessTokenApiUrl, parameters: ["refreshToken":refreshToken], progress: nil, success: { (dataTask, jsonData) in
                     
                     guard let jsonDa = jsonData else {
                         //无数据默认 refresh token 失效
@@ -142,6 +143,9 @@ class NetWorkManager: AFHTTPSessionManager {
                         errMsg = refreshData_msg
                         setAccessToken(token: resultDic["accessToken"] as! String)
                         setRefreshToken(token: resultDic["refreshToken"] as! String)
+                        
+                        //重新加载请求
+                        task?.resume()
                       
                        
                     }else{

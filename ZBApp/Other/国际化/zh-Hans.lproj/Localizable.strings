@@ -64,6 +64,8 @@
 "detail.cleanPic.uploadDes" = "清扫图片上传";
 "detail.PicUploadStatus.failed" = "上传失败";
 
+"detail.PicUpload.roomNo" = "房间号";
+
 "mission.select.time" = "任务日期";
 "mission.select.invalid" = "仅无效订单";
 

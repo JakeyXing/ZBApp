@@ -16,7 +16,7 @@ protocol RoomInfoViewDelegate: class {
 class RoomInfoView: UIView {
     weak var delegate: RoomInfoViewDelegate?
     
-    var property: ZB_TaskProperty = ZB_TaskProperty()//
+    var property: ZB_TaskProperty?//
     lazy var contentView: UIView = {
         let content = UIView()
         content.backgroundColor = kBgColorGray_238_235_220
@@ -117,7 +117,7 @@ class RoomInfoView: UIView {
         
         
         if info.properties?.count ?? 0 > 0 {
-            self.property = info.properties?[0] ?? ZB_TaskProperty()
+            self.property = info.properties![0]
             let taskProperty = info.properties?[0]
             self.nextCheckinNumLabel.text = String(format: "%@%d", LanguageHelper.getString(key: "detail.roomInfo.nextGuests"),taskProperty?.nextGuests ?? 0)
             self.maxCheckinNumLabel.text = String(format: "%@%d", LanguageHelper.getString(key: "detail.roomInfo.maxGuests"),taskProperty?.maxGuests ?? 0)
@@ -275,7 +275,7 @@ extension RoomInfoView{
     
     //MARK: - actions
     @objc private func routeAction(){
-        self.delegate?.roomInfoViewDidTappedRoute(self,routeUrl: self.property.guideUrl ?? "")
+        self.delegate?.roomInfoViewDidTappedRoute(self,routeUrl: self.property?.guideUrl ?? "")
         
     }
     
@@ -284,7 +284,7 @@ extension RoomInfoView{
     }
     
     @objc private func passwordAction(){
-        self.delegate?.roomInfoViewDidTappedPassword(self, password: self.property.pwdInfos ?? [])
+        self.delegate?.roomInfoViewDidTappedPassword(self, password: self.property?.pwdInfos ?? [])
     }
 }
 

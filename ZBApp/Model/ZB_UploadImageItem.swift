@@ -7,11 +7,23 @@
 //
 
 import UIKit
-import YYModel
-class ZB_UploadImageItem: NSObject,YYModel {
-    @objc  var doorplate: String?
-    @objc  var propertyId: String?
-    @objc  var url: String?
+import ObjectMapper
+class ZB_UploadImageItem: Mappable{
+   var doorplate: String?
+   var propertyId: String?
+   var url: String?
   
+
+    required init?(map: Map) {
+        
+    }
+    
+    // Mappable
+    func mapping(map: Map) {
+        doorplate          <- map["doorplate"]
+        propertyId       <- map["propertyId"]
+        url <- map["url"]
+        
+    }
 
 }

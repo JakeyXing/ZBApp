@@ -92,8 +92,7 @@ class ListRoomInfoView: UIView {
     }
     
     func congSubViewHeight() {
-//
-//        self.roomArray = [ZB_TaskProperty()]
+
         let tabH = kResizedPoint(pt: 27)*CGFloat(self.roomArray?.count ?? 0)+kResizedPoint(pt: 10)
         
         self.tableview.mas_updateConstraints() { (make:MASConstraintMaker!) in
@@ -110,9 +109,16 @@ class ListRoomInfoView: UIView {
         
     }
     
+//    func congfigDataWithTask(info: ZB_Task){
+//        self.roomArray = self.model?.properties
+//       
+//    }
+    
     func viewHeight() -> CGFloat {
         let tabH = kResizedPoint(pt: 27)*CGFloat(self.roomArray?.count ?? 0)+kResizedPoint(pt: 10)
-        
+        self.tableview.mas_updateConstraints() { (make:MASConstraintMaker!) in
+            make.height.equalTo()(tabH)
+        }
         //10+17+10+h+10
         let contentH = kResizedPoint(pt: 47)+tabH
         return (contentH+kResizedPoint(pt: 36))
@@ -193,7 +199,7 @@ extension ListRoomInfoView:UITableViewDelegate,UITableViewDataSource{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: RoomRuteCell = tableView.dequeueReusableCell(withIdentifier: kRoomRuteCellID, for: indexPath) as! RoomRuteCell
         let prop = self.roomArray?[indexPath.row]
-        cell.configData(model: prop ?? ZB_TaskProperty())
+        cell.configData(model: prop!)
         cell.routeButton.tag = 100 + indexPath.row
         cell.routeButton.addTarget(self, action: #selector(routeAction(btn:)), for: UIControl.Event.touchUpInside)
         

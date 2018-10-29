@@ -7,28 +7,9 @@
 //
 
 import UIKit
-import HandyJSON
-class ZB_TaskInfo: HandyJSON {
-//    @objc  var address: ZB_Address?
-//    @objc  var associatedId: String?
-//    @objc  var desc: String?
-//    @objc  var documents: [String]?
-//    @objc  var hoursPerPerson: Int = 0
-//    @objc  var id: Int64 = 0
-//    @objc  var imgs: [String]?
-//    @objc  var properties: [ZB_TaskProperty]?
-//    @objc  var remark: String?
-//    @objc  var restHoursPerPerson: Int = 0
-//    @objc  var restHours: Int = 0
-//    @objc  var startDate: String?
-//    @objc  var title: String?
-//    @objc  var type: String?
-//    @objc  var base: Float = 0
-//    @objc  var bonus: Float = 0
-//    @objc  var currency: String?
-//    @objc  var status: String?
+import ObjectMapper
+class ZB_TaskInfo: Mappable {
     
-
     var address: ZB_Address?
     var associatedId: String?
     var desc: String?
@@ -48,7 +29,32 @@ class ZB_TaskInfo: HandyJSON {
     var currency: String?
     var status: String?
  
-   required init() {}
+    required init?(map: Map) {
+        
+    }
+    
+    // Mappable
+    func mapping(map: Map) {
+        address          <- map["address"]
+        associatedId       <- map["associatedId"]
+        desc <- map["desc"]
+        documents <- map["documents"]
+        hoursPerPerson  <- map["hoursPerPerson"]
+        id <- map["id"]
+        imgs  <- map["imgs"]
+        properties   <- map["properties"]
+        remark  <- map["remark"]
+        restHoursPerPerson     <- map["restHoursPerPerson"]
+        restHours  <- map["restHours"]
+        startDate      <- map["startDate"]
+        title     <- map["title"]
+        type       <- map["type"]
+        base       <- map["base"]
+        bonus       <- map["bonus"]
+        currency       <- map["currency"]
+        status       <- map["status"]
+        
+    }
 
     
 //    override var description: String {

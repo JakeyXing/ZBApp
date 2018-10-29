@@ -9,6 +9,7 @@
 import UIKit
 import MBProgressHUD
 import Toast
+import ObjectMapper
 
 class MissionDetailBaseViewController: UIViewController {
 
@@ -18,7 +19,7 @@ class MissionDetailBaseViewController: UIViewController {
     var currentProgress:ZB_ProgressType = .ready
     
     var model: ZB_TaskInfo?
-    lazy var task: ZB_Task = ZB_Task()//自己请求的
+    var task: ZB_Task?//自己请求的
     
     lazy var navigationBar: JHNavigationBar = {
         let view = JHNavigationBar(frame: CGRect.init(x: 0, y: 0, width: 0, height: 0))
@@ -90,12 +91,13 @@ class MissionDetailBaseViewController: UIViewController {
                 return
             }
             
+            let model = Mapper<ZB_Task>().map(JSON: dic as! [String : Any])
 
 //            let model =  ZB_Task.yy_model(with: dic as! [AnyHashable : Any])
 //            let model = ZB_Task()
 //            model.yy_modelSet(with: dic as! [AnyHashable : Any])
 //     
-//            self.task = model ?? ZB_Task()
+          self.task = model
             
             self.configData()
         }) { (data, errMsg) in

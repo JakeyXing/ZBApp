@@ -84,6 +84,7 @@ class FeedbackView: UIView {
         }
         
         let log = model.taskLogs![0]
+        let imgCount = log.imgs?.count ?? 0
         
         self.timeLabel.text = log.date
         self.feebackLabel.text = log.log_description
@@ -96,11 +97,24 @@ class FeedbackView: UIView {
             self.moreButton.isHidden = true
         }
         
+        if imgCount > 0{
+            self.picButton.isHidden = false
+        }else{
+            self.picButton.isHidden = true
+        }
+        
     }
     
     //MARK: - actions
     @objc private func picAction(){
-        self.delegate?.feedbackView(self, lookoverImages: [""])
+        let cout = self.model?.taskLogs?.count ?? 0
+        if cout == 0 {
+            return
+        }
+        
+        let log = self.model?.taskLogs![0]
+        
+        self.delegate?.feedbackView(self, lookoverImages: log?.imgs ?? [""])
         
     }
     

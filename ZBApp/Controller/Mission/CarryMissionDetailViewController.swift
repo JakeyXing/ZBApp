@@ -77,7 +77,7 @@ class CarryMissionDetailViewController: MissionDetailBaseViewController,CarryMis
         self.carryImageView.fileArray = ["https://video.parentschat.com/pic_R3_720.jpg","https://video.parentschat.com/pic_R3_720.jpg","https://video.parentschat.com/pic_R3_720.jpg","https://video.parentschat.com/pic_R3_720.jpg"]
         self.feedbackView.congfigSubViewHeight()
         
-        self.checkView.congfigDataWithTask(model: ZB_Task())
+//        self.checkView.congfigDataWithTask(model: ZB_Task(map:))
         
         self.carryMissionInfoView.height = self.carryMissionInfoView.viewHeight()
         self.carryImageView.top = self.carryMissionInfoView.bottom
@@ -95,14 +95,14 @@ class CarryMissionDetailViewController: MissionDetailBaseViewController,CarryMis
     }
     
     override func configData() {
-        let progress:String = self.task.progress ?? "READY"
+        let progress:String = self.task?.progress ?? "READY"
         self.currentProgress = ZB_ProgressType(rawValue: progress) ?? .ready
         
         //基础
-        self.missionBaseInfoView.congfigDataWithTaskInfo(info: self.task.taskInfo ?? ZB_TaskInfo())
-        self.carryMissionInfoView.congfigDataWithTaskInfo(info: self.task.taskInfo ?? ZB_TaskInfo())
-        self.carryImageView.imageArray = self.task.taskInfo?.imgs
-        self.carryImageView.fileArray = self.task.taskInfo?.documents
+        self.missionBaseInfoView.congfigDataWithTask(info: self.task!)
+        self.carryMissionInfoView.congfigDataWithTask(info: self.task!)
+        self.carryImageView.imageArray = self.task?.taskInfo?.imgs
+        self.carryImageView.fileArray = self.task?.taskInfo?.documents
         
         self.carryMissionInfoView.height = self.carryMissionInfoView.viewHeight()
         self.carryImageView.top = self.carryMissionInfoView.bottom
@@ -122,9 +122,9 @@ class CarryMissionDetailViewController: MissionDetailBaseViewController,CarryMis
         }
         
         //logs
-        self.feedbackView.congfigDataWithTask(model: self.task)
+        self.feedbackView.congfigDataWithTask(model: self.task!)
         self.feedbackView.height = self.feedbackView.viewHeight()
-        let cout = self.task.taskLogs?.count ?? 0
+        let cout = self.task!.taskLogs?.count ?? 0
         if cout == 0 {
             self.feedbackView.clipsToBounds = true;
             self.feedbackView.top = self.infoUploadButton.bottom
@@ -135,7 +135,7 @@ class CarryMissionDetailViewController: MissionDetailBaseViewController,CarryMis
         //验收结果
         if self.currentProgress == .finished {
             self.checkView.isHidden = false
-            self.checkView.congfigDataWithTask(model: self.task)
+            self.checkView.congfigDataWithTask(model: self.task!)
             self.checkView.top = self.feedbackView.bottom+kResizedPoint(pt: 20)
             self.checkView.height = self.checkView.viewHeight()
             
@@ -168,8 +168,8 @@ class CarryMissionDetailViewController: MissionDetailBaseViewController,CarryMis
         self.infoUploadButton.isHidden = true
         self.feedbackView.isHidden = true
         self.checkView.isHidden = true
-        self.missionBaseInfoView.congfigDataWithTaskInfo(info: self.model ?? ZB_TaskInfo())
-        self.carryMissionInfoView.congfigDataWithTaskInfo(info: self.model ?? ZB_TaskInfo())
+        self.missionBaseInfoView.congfigDataWithTaskInfo(info: self.model!)
+        self.carryMissionInfoView.congfigDataWithTaskInfo(info: self.model!)
         self.carryImageView.imageArray = self.model?.imgs
         self.carryImageView.fileArray = self.model?.documents
         
@@ -223,7 +223,7 @@ class CarryMissionDetailViewController: MissionDetailBaseViewController,CarryMis
             
             if self.currentProgress == .ready {
                 //申请转单
-                let params = ["taskId":self.task.id ] as [String : Any]
+                let params = ["taskId":self.task?.id ?? 0 ] as [String : Any]
                 
                 MBProgressHUD.showAdded(to: self.view, animated: true)
                 NetWorkManager.shared.loadRequest(method: .post, url: TransferTaskUrl, parameters: params as [String : Any], success: { (data) in
@@ -234,7 +234,7 @@ class CarryMissionDetailViewController: MissionDetailBaseViewController,CarryMis
                     if dic == nil {
                         return
                     }
-                    self.loadNewDataWithId(taskId: self.task.id)
+                    self.loadNewDataWithId(taskId: self.task?.id ?? 0)
                     
                 }) { (data, errMsg) in
                     MBProgressHUD.hide(for: self.view, animated: true)
@@ -298,17 +298,17 @@ class CarryMissionDetailViewController: MissionDetailBaseViewController,CarryMis
     //MARK:- FeedbackViewDelegate
     func feedbackView(_ view: FeedbackView, lookoverImages images: Array<String>) {
         
-        let imageArr = ["https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1540296447089&di=8f6fa210da7498a6fefafe93179ef6be&imgtype=0&src=http%3A%2F%2Fp0.ifengimg.com%2Fcmpp%2F2016%2F11%2F04%2F17%2Fe4f9adfd-e00e-4a2f-9c93-e5014330281e_size31_w347_h500.jpg","https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1540296447089&di=8f6fa210da7498a6fefafe93179ef6be&imgtype=0&src=http%3A%2F%2Fp0.ifengimg.com%2Fcmpp%2F2016%2F11%2F04%2F17%2Fe4f9adfd-e00e-4a2f-9c93-e5014330281e_size31_w347_h500.jpg","https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1540296447089&di=8f6fa210da7498a6fefafe93179ef6be&imgtype=0&src=http%3A%2F%2Fp0.ifengimg.com%2Fcmpp%2F2016%2F11%2F04%2F17%2Fe4f9adfd-e00e-4a2f-9c93-e5014330281e_size31_w347_h500.jpg"]
-        let count = imageArr.count
+//        let imageArr = ["https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1540296447089&di=8f6fa210da7498a6fefafe93179ef6be&imgtype=0&src=http%3A%2F%2Fp0.ifengimg.com%2Fcmpp%2F2016%2F11%2F04%2F17%2Fe4f9adfd-e00e-4a2f-9c93-e5014330281e_size31_w347_h500.jpg","https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1540296447089&di=8f6fa210da7498a6fefafe93179ef6be&imgtype=0&src=http%3A%2F%2Fp0.ifengimg.com%2Fcmpp%2F2016%2F11%2F04%2F17%2Fe4f9adfd-e00e-4a2f-9c93-e5014330281e_size31_w347_h500.jpg","https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1540296447089&di=8f6fa210da7498a6fefafe93179ef6be&imgtype=0&src=http%3A%2F%2Fp0.ifengimg.com%2Fcmpp%2F2016%2F11%2F04%2F17%2Fe4f9adfd-e00e-4a2f-9c93-e5014330281e_size31_w347_h500.jpg"]
+        let count = images.count
         
-        var images = [SKPhoto]()
+        var phoImages = [SKPhoto]()
         for i in 0..<count{
-            let photo = SKPhoto.photoWithImageURL(imageArr[i])
+            let photo = SKPhoto.photoWithImageURL(images[i])
             photo.shouldCachePhotoURLImage = false
-            images.append(photo)
+            phoImages.append(photo)
         }
         
-        let browser = SKPhotoBrowser(photos: images)
+        let browser = SKPhotoBrowser(photos: phoImages)
         browser.initializePageIndex(0)
         self.present(browser, animated: true, completion: {})
         

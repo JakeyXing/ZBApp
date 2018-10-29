@@ -8,9 +8,9 @@ target 'ZBApp' do
   pod 'CYLTabBarController', '~> 1.17.6'
   pod 'Masonry'
   pod 'AFNetworking'
-  pod 'YYModel'
+#  pod 'YYModel'
   pod 'SDWebImage'
-  pod 'HandyJSON', '~> 4.2.0'
+  pod 'ObjectMapper'
   
   pod 'AWSMobileClient', '~> 2.6.13'  # For AWSMobileClient
   pod 'AWSS3', '~> 2.6.13'            # For file transfers

@@ -96,7 +96,10 @@ class CarryMissionInfoView: UIView {
     
     //
     func congfigDataWithTask(info: ZB_Task){
-        
+        let taskInfo = info.taskInfo
+        self.missionTitleLabel.text = taskInfo?.title
+        self.missionDescribLabel.text = taskInfo?.desc
+        self.missionRemarkLabel.text = taskInfo?.remark
     }
     
     

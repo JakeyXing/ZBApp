@@ -12,9 +12,9 @@ import AWSCore
 import AWSS3
 
 protocol CleanImageCellDelegate: class {
-    func cleanImageCell(_ cell: CleanImageCell,imageUploadSucceed imageUrl: String,atIndex index:NSInteger)
+    func cleanImageCell(_ cell: CleanImageCell,imageUploadSucceed imageUrl: String,atIndex indexPath:IndexPath)
     
-    func cleanImageCell(_ cell: CleanImageCell,imageUploadFailedIndex index:NSInteger)
+    func cleanImageCell(_ cell: CleanImageCell,imageUploadFailedIndex indexPath:IndexPath)
     
 }
 class CleanImageCell: UICollectionViewCell {
@@ -26,7 +26,7 @@ class CleanImageCell: UICollectionViewCell {
     var uploadedImageUrl: String?
     
     
-    var indexpath: NSIndexPath!
+    var indexpath: IndexPath!
     
     
     //MARK: - 控件
@@ -103,16 +103,14 @@ class CleanImageCell: UICollectionViewCell {
         self.savedImagePath = CommonMethod.getImagePath(img, imageName: imgName)
         self.uploadData(fileName: imgName)
         
-        
     }
-    
     
     func uploadData(fileName: String) {
         var data = Data()
         do {
             try data =  Data(contentsOf: URL(fileURLWithPath: self.savedImagePath ?? ""))
         } catch  {
-            print("yichang")
+            print("异常--")
         }
         
         
@@ -129,8 +127,9 @@ class CleanImageCell: UICollectionViewCell {
                 // Do something e.g. Alert a user for transfer completion.
                 // On failed uploads, `error` contains the error object.
                 //
+                print("ssss success")
                 
-                self.delegate?.cleanImageCell(self, imageUploadSucceed: "", atIndex: self.indexpath.row)
+                self.delegate?.cleanImageCell(self, imageUploadSucceed: "", atIndex: self.indexpath)
             })
         }
         
@@ -148,12 +147,6 @@ class CleanImageCell: UICollectionViewCell {
                                         print("Error: \(error.localizedDescription)")
                                     }
                                     if let _ = task.result {
-                                        print("ssss success:result:\(String(describing: task.result))")
-                                        
-                                        
-                                        
-//                                        task.result.
-//                                        self.uploadedImageUrl
                                         // Do something with uploadTask.
                                     }
                                     return nil;

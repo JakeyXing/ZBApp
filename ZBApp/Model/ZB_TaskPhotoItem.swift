@@ -7,15 +7,25 @@
 //
 
 import UIKit
-import YYModel
-class ZB_TaskPhotoItem: NSObject,YYModel {
-    @objc  var location: String?
-    @objc  var photos: [ZB_Photo]?
-    @objc  var total: Int = 0
+import ObjectMapper
+class ZB_TaskPhotoItem: Mappable {
+    var location: String?
+    var photos: [ZB_Photo]?
+    var total: Int = 0
     
-    
-    
-    private class func modelContainerPropertyGenericClass() -> [String: AnyClass] {
-        return ["photos": ZB_Photo.self]
+    required init?(map: Map) {
+        
     }
+    
+    // Mappable
+    func mapping(map: Map) {
+        location          <- map["location"]
+        photos       <- map["photos"]
+        total <- map["total"]
+        
+    }
+    
+//    private class func modelContainerPropertyGenericClass() -> [String: AnyClass] {
+//        return ["photos": ZB_Photo.self]
+//    }
 }

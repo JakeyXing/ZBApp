@@ -7,17 +7,30 @@
 //
 
 import UIKit
-import YYModel
-class ZB_Address: NSObject {
-    @objc  var id: Int64 = 0
-    @objc  var latitude: Float = 0
-    @objc  var longitude: Float = 0
-    @objc  var name: String?
+import ObjectMapper
+class ZB_Address: Mappable {
+    var id: Int64 = 0
+    var latitude: Float = 0
+    var longitude: Float = 0
+    var name: String?
     
-    
-    override var description: String {
-        return yy_modelDescription()
+    required init?(map: Map) {
+        
     }
+    
+    // Mappable
+    func mapping(map: Map) {
+        id          <- map["id"]
+        latitude       <- map["latitude"]
+        longitude <- map["longitude"]
+        name <- map["name"]
+        
+    }
+    
+    
+//    override var description: String {
+//        return yy_modelDescription()
+//    }
     
     
 }

@@ -7,18 +7,32 @@
 //
 
 import UIKit
-import YYModel
-class ZB_Photo: NSObject {
-    @objc  var url: String?
-    @objc  var index: Int = 0
-    @objc  var position: String?
-    @objc  var location: String?
-    @objc  var refUrl: String?
+import ObjectMapper
+class ZB_Photo: Mappable {
+    var url: String?
+    var index: Int = 0
+    var position: String?
+    var location: String?
+    var refUrl: String?
     
-  
-    override var description: String {
-        return yy_modelDescription()
+    required init?(map: Map) {
+        
     }
+    
+    // Mappable
+    func mapping(map: Map) {
+        url          <- map["url"]
+        index       <- map["index"]
+        position <- map["position"]
+        location <- map["location"]
+        refUrl  <- map["refUrl"]
+        
+    }
+    
+//
+//    override var description: String {
+//        return yy_modelDescription()
+//    }
 
 
 }
