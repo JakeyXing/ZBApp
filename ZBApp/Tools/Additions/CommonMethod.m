@@ -24,19 +24,34 @@
     
     //图片保存的路径
     //这里将图片放在沙盒的documents文件夹中
-    NSString *DocumentsPath = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"];
-    
+    NSString *documentsPath = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"];
+    NSString *awsFilesPath = [documentsPath stringByAppendingPathComponent:@"awsFiles"];
     //文件管理器
     NSFileManager *fileManager = [NSFileManager defaultManager];
     
     //把刚刚图片转换的data对象拷贝至沙盒中
-    [fileManager createDirectoryAtPath:DocumentsPath withIntermediateDirectories:YES attributes:nil error:nil];
+    [fileManager createDirectoryAtPath:awsFilesPath withIntermediateDirectories:YES attributes:nil error:nil];
     NSString *ImagePath = [[NSString alloc] initWithFormat:@"/%@.png",imageName];
-    [fileManager createFileAtPath:[DocumentsPath stringByAppendingString:ImagePath] contents:data attributes:nil];
+    [fileManager createFileAtPath:[awsFilesPath stringByAppendingString:ImagePath] contents:data attributes:nil];
     
     //得到选择后沙盒中图片的完整路径
-    filePath = [[NSString alloc] initWithFormat:@"%@%@", DocumentsPath, ImagePath];
+    filePath = [[NSString alloc] initWithFormat:@"%@%@", awsFilesPath, ImagePath];
     return filePath;
+}
+    
++ (void)deleteAwsFiles{
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    NSString *document=[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString *folder =[document stringByAppendingPathComponent:@"awsFiles"];
+  
+    NSArray *fileList =[fileManager contentsOfDirectoryAtPath:folder error:NULL];
+    
+    for (NSString *file in fileList) {
+        NSLog(@"file=%@",file);
+        NSString *path =[folder stringByAppendingPathComponent:file];
+        NSLog(@"得到的路径=%@",path);
+        
+    }
 }
 
 //修改图片大小

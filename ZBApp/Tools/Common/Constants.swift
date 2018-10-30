@@ -8,6 +8,9 @@
 
 import Foundation
 import UIKit
+import AWSCore
+import AWSS3
+import AWSCognito
 
 enum ZB_ProgressType: String {
     case ready = "READY"
@@ -41,6 +44,9 @@ let tabbarHeight:CGFloat = IS_IPHONE_X() ? 83 : 49
 let kAccessTokenKey:String = "accessToken"
 let krefreshTokenKey:String = "refreshToken"
 let kUserInfoKey:String = "userInfoKey"
+
+//https://s3-ap-northeast-1.amazonaws.com/ostay-clean/product/P_20181027_220318_cmp.jpg
+let kAWSBaseUrl:String = "https://s3-ap-northeast-1.amazonaws.com/ostay-clean/"
 
 func setAccessToken(token:String){
     let defaults = UserDefaults.standard
@@ -316,6 +322,48 @@ func getFormatRemainTime(secounds:TimeInterval)->String{
         return String(format: "%02dh%02m", hour, minutes)
     }else{
         return String(format: "%dd%02dh%02m", day, hour, minutes)
+    }
+    
+}
+
+//上传文件
+func uploadDataToAWS(fileName : String,
+                 filePath : String,
+                 success : @escaping(_ fileUrl:String?)->(),
+                 fail : @escaping(_ errMsg:String)->()){
+    
+    let key = "product/" + fileName
+    
+    let fileUrl = URL(fileURLWithPath: filePath )
+    let uploadRequest = AWSS3TransferManagerUploadRequest()
+    uploadRequest?.bucket = "ostay-clean"
+    uploadRequest?.key = key
+    uploadRequest?.body = fileUrl
+    uploadRequest?.acl = AWSS3ObjectCannedACL.publicRead
+    uploadRequest?.uploadProgress = { (bytesSent, totalBytesSent, totalBytesExpectedToSend) -> Void in
+        DispatchQueue.main.async(execute: {
+            print("\(bytesSent)")
+        })
+    }
+    
+    let credentialsProvider = AWSCognitoCredentialsProvider(regionType: AWSRegionType.APNortheast1, identityPoolId:"us-east-1:4f288687-b535-414d-b9a3-abe2daf9b616")
+    let configuration = AWSServiceConfiguration(region: AWSRegionType.APNortheast1, credentialsProvider: credentialsProvider)
+    AWSServiceManager.default().defaultServiceConfiguration = configuration
+    let transferManager = AWSS3TransferManager.default()
+    
+    transferManager.upload(uploadRequest!).continueWith { (taskk: AWSTask) -> Any? in
+        if taskk.error != nil {
+            // Error.
+            print("failed\(taskk.error.debugDescription)")
+            fail(taskk.error.debugDescription)
+        } else {
+            
+            let url = kAWSBaseUrl + key
+            print("Success :\(url)")
+            success(url)
+        }
+        return nil
+        
     }
     
 }

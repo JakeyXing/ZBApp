@@ -8,6 +8,7 @@
 
 import UIKit
 import Masonry
+import MBProgressHUD
 class SettingViewController: UIViewController,JHNavigationBarDelegate {
     
     
@@ -36,6 +37,27 @@ class SettingViewController: UIViewController,JHNavigationBarDelegate {
         return view
     }()
     
+    
+    lazy var cleaneCacheButton: UIButton = {
+        let btn = UIButton(type: UIButton.ButtonType.custom)
+        btn.setTitleColor(UIColor.white, for: UIControl.State.normal)
+        btn.backgroundColor = kTintColorYellow
+        btn.setTitle("清除缓存", for: .normal)
+        btn.titleLabel?.font = kFont(size: 16)
+        btn.addTarget(self, action: #selector(cleanAction), for: UIControl.Event.touchUpInside)
+        return btn
+    }()
+    
+    lazy var loginoutButton: UIButton = {
+        let btn = UIButton(type: UIButton.ButtonType.custom)
+        btn.setTitleColor(UIColor.white, for: UIControl.State.normal)
+        btn.backgroundColor = kTintColorYellow
+        btn.setTitle("退出应用", for: .normal)
+        btn.titleLabel?.font = kFont(size: 16)
+        btn.addTarget(self, action: #selector(loginoutAction), for: UIControl.Event.touchUpInside)
+        return btn
+    }()
+    
     lazy var savedButton: UIButton = {
         let btn = UIButton(type: UIButton.ButtonType.custom)
         btn.setTitleColor(UIColor.white, for: UIControl.State.normal)
@@ -55,6 +77,8 @@ class SettingViewController: UIViewController,JHNavigationBarDelegate {
         self.bgViewView.addSubview(self.nLabel)
         self.bgViewView.addSubview(self.nDropdownView)
         self.bgViewView.addSubview(self.savedButton)
+        self.bgViewView.addSubview(self.cleaneCacheButton)
+        self.bgViewView.addSubview(self.loginoutButton)
         
         self.nLabel.mas_makeConstraints { (make:MASConstraintMaker!) in
             make.top.equalTo()(self.bgViewView.mas_top)?.offset()(kResizedPoint(pt: 30))
@@ -72,6 +96,20 @@ class SettingViewController: UIViewController,JHNavigationBarDelegate {
         self.savedButton.mas_makeConstraints { (make:MASConstraintMaker!) in
             make.centerX.equalTo()(self.view.mas_centerX)
             make.top.equalTo()(self.nDropdownView.mas_bottom)?.offset()(kResizedPoint(pt: 40))
+            make.width.equalTo()(kResizedPoint(pt: 260))
+            make.height.equalTo()(kResizedPoint(pt: 30))
+        }
+        
+        self.cleaneCacheButton.mas_makeConstraints { (make:MASConstraintMaker!) in
+            make.centerX.equalTo()(self.view.mas_centerX)
+            make.top.equalTo()(self.savedButton.mas_bottom)?.offset()(kResizedPoint(pt: 20))
+            make.width.equalTo()(kResizedPoint(pt: 260))
+            make.height.equalTo()(kResizedPoint(pt: 30))
+        }
+        
+        self.loginoutButton.mas_makeConstraints { (make:MASConstraintMaker!) in
+            make.centerX.equalTo()(self.view.mas_centerX)
+            make.top.equalTo()(self.cleaneCacheButton.mas_bottom)?.offset()(kResizedPoint(pt: 50))
             make.width.equalTo()(kResizedPoint(pt: 260))
             make.height.equalTo()(kResizedPoint(pt: 30))
         }
@@ -101,6 +139,29 @@ class SettingViewController: UIViewController,JHNavigationBarDelegate {
             
         }
       
+    }
+    
+    @objc private func cleanAction(){
+        MBProgressHUD.showAdded(to: self.view, animated: true)
+        CommonMethod.deleteAwsFiles()
+        MBProgressHUD.hide(for: self.view, animated: true)
+        
+        
+    }
+    
+    @objc private func loginoutAction(){
+        
+        setUserInfo(info: [:])
+        setAccessToken(token: "")
+        setRefreshToken(token: "")
+        
+        let loginVC = LoginViewController()
+        let naviVC = UINavigationController(rootViewController: loginVC)
+        
+        let sharedAppdelegate:AppDelegate = UIApplication.shared.delegate as! AppDelegate
+        sharedAppdelegate.window?.rootViewController = naviVC
+
+        
     }
 
 }

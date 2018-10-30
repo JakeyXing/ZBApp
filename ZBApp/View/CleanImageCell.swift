@@ -102,8 +102,16 @@ class CleanImageCell: UICollectionViewCell {
         let imgName = "clen_pic_" + CommonMethod.timestamp()
         
         self.savedImagePath = CommonMethod.getImagePath(img, imageName: imgName)
-        self.uploadData(fileName: imgName)
         
+        let fileNa = imgName + ".png"
+        
+        uploadDataToAWS(fileName: fileNa, filePath: self.savedImagePath!, success: { (url) in
+        
+        }) { (errMsg) in
+
+        }
+//        self.uploadData(fileName: imgName)
+    
     }
     
     

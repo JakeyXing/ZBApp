@@ -11,6 +11,8 @@ import Masonry
 import MBProgressHUD
 import Toast
 import ObjectMapper
+import Toast
+import MBProgressHUD
 
 class CertifApplyController: UIViewController,JHNavigationBarDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate {
     var user: ZB_User?
@@ -18,6 +20,11 @@ class CertifApplyController: UIViewController,JHNavigationBarDelegate,UIImagePic
     enum UploadImageType {
         case headIcon, certiPic, passPortPic
     }
+    
+    var userIconUrl = ""
+    var certiPicUrl = ""
+    var passPortPicUrl = ""
+    
     var cameraPicker: UIImagePickerController!
     
     var uploadImageType = UploadImageType.headIcon
@@ -385,22 +392,82 @@ class CertifApplyController: UIViewController,JHNavigationBarDelegate,UIImagePic
        
         switch uploadImageType {
         case .headIcon:
-            self.headImageView.image = image
-        case .certiPic:
-            self.cerPicImageView.image = image
-            self.cerPicImageView.mas_updateConstraints { (make:MASConstraintMaker!) in
-                make.width.equalTo()(kResizedPoint(pt: 330))
-                make.height.equalTo()(kResizedPoint(pt: 330))
+            
+            let imgName = "userIcon_pic_" + CommonMethod.timestamp()
+            
+            let savedImagePath = CommonMethod.getImagePath(image, imageName: imgName)
+            
+            let fileNa = imgName + ".png"
+            
+            uploadDataToAWS(fileName: fileNa, filePath: savedImagePath!, success: { (url) in
+                
+                DispatchQueue.main.async(execute: {
+                    self.headImageView.image = image
+                    
+                    self.userIconUrl = url ?? ""
+                  
+                })
+                
+            }) { (errMsg) in
+                
             }
-            self.scrollview.contentSize = CGSize.init(width: DEVICE_WIDTH, height: DEVICE_HEIGHT+kResizedPoint(pt: 450))
+            
+        case .certiPic:
+            
+            let imgName = "cer_pic_" + CommonMethod.timestamp()
+            let savedImagePath = CommonMethod.getImagePath(image, imageName: imgName)
+            let fileNa = imgName + ".png"
+            uploadDataToAWS(fileName: fileNa, filePath: savedImagePath!, success: { (url) in
+                
+                DispatchQueue.main.async(execute: {
+                    self.cerPicImageView.image = image
+                    
+                    self.certiPicUrl = url ?? ""
+                    
+                    self.cerPicImageView.mas_updateConstraints { (make:MASConstraintMaker!) in
+                        make.width.equalTo()(kResizedPoint(pt: 330))
+                        make.height.equalTo()(kResizedPoint(pt: 330))
+                    }
+                    self.scrollview.contentSize = CGSize.init(width: DEVICE_WIDTH, height: DEVICE_HEIGHT+kResizedPoint(pt: 450))
+                })
+                
+                
+                
+            }) { (errMsg) in
+                self.view.makeToast("upload failed")
+                
+            }
+            
+            
             
         case .passPortPic:
-            self.passPicImageView.image = image
-            self.passPicImageView.mas_updateConstraints { (make:MASConstraintMaker!) in
-                make.width.equalTo()(kResizedPoint(pt: 330))
-                make.height.equalTo()(kResizedPoint(pt: 330))
+            
+            let imgName = "passport_pic_" + CommonMethod.timestamp()
+            let savedImagePath = CommonMethod.getImagePath(image, imageName: imgName)
+            let fileNa = imgName + ".png"
+            uploadDataToAWS(fileName: fileNa, filePath: savedImagePath!, success: { (url) in
+                
+                DispatchQueue.main.async(execute: {
+                    
+                    self.passPicImageView.image = image
+                    
+                    self.passPortPicUrl = url ?? ""
+                    
+                    self.passPicImageView.mas_updateConstraints { (make:MASConstraintMaker!) in
+                        make.width.equalTo()(kResizedPoint(pt: 330))
+                        make.height.equalTo()(kResizedPoint(pt: 330))
+                    }
+                    self.scrollview.contentSize = CGSize.init(width: DEVICE_WIDTH, height: DEVICE_HEIGHT+kResizedPoint(pt: 450))
+                   
+                })
+                
+                
+            }) { (errMsg) in
+                self.view.makeToast("upload failed")
+                
             }
-            self.scrollview.contentSize = CGSize.init(width: DEVICE_WIDTH, height: DEVICE_HEIGHT+kResizedPoint(pt: 450))
+    
+            
         }
         
         
