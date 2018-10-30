@@ -80,11 +80,15 @@
 "personal.base.sex" = "性别:";
 "personal.base.natonalty" = "国籍:";
 "personal.base.city" = "所在城市:";
+"personal.base.userLevel" = "当前等级:";
 
 "personal.ideti.title" = "身份证件";
 "personal.ideti.idType" = "证件类型:";
 "personal.ideti.idNum" = "证件号码:";
 "personal.ideti.idPic" = "证件图片:";
+
+"login.apply.failed" = "审核失败";
+"login.apply.wait" = "正在审核，请耐心等待";
 
 
 

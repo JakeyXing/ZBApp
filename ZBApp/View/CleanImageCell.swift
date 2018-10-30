@@ -10,6 +10,7 @@ import UIKit
 import Masonry
 import AWSCore
 import AWSS3
+import AWSCognito
 
 protocol CleanImageCellDelegate: class {
     func cleanImageCell(_ cell: CleanImageCell,imageUploadSucceed imageUrl: String,atIndex indexPath:IndexPath)
@@ -105,51 +106,45 @@ class CleanImageCell: UICollectionViewCell {
         
     }
     
+    
     func uploadData(fileName: String) {
-        var data = Data()
-        do {
-            try data =  Data(contentsOf: URL(fileURLWithPath: self.savedImagePath ?? ""))
-        } catch  {
-            print("异常--")
-        }
+//        var data = Data()
+//        do {
+//            try data =  Data(contentsOf: URL(fileURLWithPath: self.savedImagePath ?? ""))
+//        } catch  {
+//            print("异常--")
+//        }
         
-        
-        let expression = AWSS3TransferUtilityUploadExpression()
-        expression.progressBlock = {(task, progress) in
-            DispatchQueue.main.async(execute: {
-                // Do something e.g. Update a progress bar.
-            })
-        }
-        
-        var completionHandler: AWSS3TransferUtilityUploadCompletionHandlerBlock?
-        completionHandler = { (task, error) -> Void in
-            DispatchQueue.main.async(execute: {
-                // Do something e.g. Alert a user for transfer completion.
-                // On failed uploads, `error` contains the error object.
-                //
-                print("ssss success")
-                
-                self.delegate?.cleanImageCell(self, imageUploadSucceed: "", atIndex: self.indexpath)
-            })
-        }
-        
-        let transferUtility = AWSS3TransferUtility.default()
-//        transferUtility.accessibilityCustomActions
         let key = "product/" + fileName + ".png"
-        transferUtility.uploadData(data,
-                                   bucket: "ostay-clean",
-                                   key: key,
-                                   contentType: "text/plain",
-                                   expression: expression,
-                                   completionHandler: completionHandler).continueWith {
-                                    (task) -> AnyObject? in
-                                    if let error = task.error {
-                                        print("Error: \(error.localizedDescription)")
-                                    }
-                                    if let _ = task.result {
-                                        // Do something with uploadTask.
-                                    }
-                                    return nil;
+      
+        print("\(String(describing: self.savedImagePath))")
+        let fileUrl = URL(fileURLWithPath: self.savedImagePath ?? "")
+        let uploadRequest = AWSS3TransferManagerUploadRequest()
+        uploadRequest?.bucket = "ostay-clean"
+        uploadRequest?.key = key
+        uploadRequest?.body = fileUrl
+        uploadRequest?.acl = AWSS3ObjectCannedACL.publicRead
+        uploadRequest?.uploadProgress = { (bytesSent, totalBytesSent, totalBytesExpectedToSend) -> Void in
+            DispatchQueue.main.async(execute: {
+                print("\(bytesSent)")
+            })
+        }
+        
+        let credentialsProvider = AWSCognitoCredentialsProvider(regionType: AWSRegionType.APNortheast1, identityPoolId:"us-east-1:4f288687-b535-414d-b9a3-abe2daf9b616")
+        let configuration = AWSServiceConfiguration(region: AWSRegionType.APNortheast1, credentialsProvider: credentialsProvider)
+        AWSServiceManager.default().defaultServiceConfiguration = configuration
+        let transferManager = AWSS3TransferManager.default()
+
+        transferManager.upload(uploadRequest!).continueWith { (taskk: AWSTask) -> Any? in
+            if taskk.error != nil {
+                // Error.
+                print("failed\(taskk.error.debugDescription)")
+            } else {
+                print("SSSSSuccess")
+                self.delegate?.cleanImageCell(self, imageUploadSucceed: "", atIndex: self.indexpath)
+            }
+            return nil
+            
         }
     }
     

@@ -22,6 +22,14 @@ enum ZB_ProgressType: String {
     
 }
 
+enum ZB_UserStatus: String {
+    case registred = "REGISTERED"
+    case review_wait = "REVIEW_WAIT"
+    case review_fail = "REVIEW_FAIL"
+    case review_pass = "REVIEW_PASS"
+    
+}
+
 let DEVICE_WIDTH = UIScreen.main.bounds.size.width
 let DEVICE_HEIGHT = UIScreen.main.bounds.size.height
 
@@ -32,6 +40,7 @@ let tabbarHeight:CGFloat = IS_IPHONE_X() ? 83 : 49
 
 let kAccessTokenKey:String = "accessToken"
 let krefreshTokenKey:String = "refreshToken"
+let kUserInfoKey:String = "userInfoKey"
 
 func setAccessToken(token:String){
     let defaults = UserDefaults.standard
@@ -40,7 +49,12 @@ func setAccessToken(token:String){
 
 func getAccessToken() -> String{
     let defaults = UserDefaults.standard
-    let accessToken:String = defaults.value(forKey: kAccessTokenKey) as! String
+    
+    guard let accessToken: String = defaults.value(forKey: kAccessTokenKey) as? String else {
+        print("没这个key")
+        return ""
+    }
+    
     if accessToken.isEmpty {
         return ""
     }else{
@@ -57,12 +71,67 @@ func setRefreshToken(token:String){
 
 func getRefreshToken() -> String{
     let defaults = UserDefaults.standard
-    let refreshToken:String = defaults.value(forKey: krefreshTokenKey) as! String
+    guard let refreshToken: String = defaults.value(forKey: krefreshTokenKey) as? String else {
+        print("没这个key")
+        return ""
+    }
     if refreshToken.isEmpty {
         return ""
     }else{
         return refreshToken
     }
+    
+}
+
+func setUserInfo(info:Dictionary<String, Any>){
+    let defaults = UserDefaults.standard
+    defaults.set(info, forKey: kUserInfoKey)
+}
+
+func getUserInfo() -> [String:Any]{
+    let defaults = UserDefaults.standard
+    
+    guard let info: Dictionary = defaults.value(forKey: kUserInfoKey) as? [String:Any] else {
+        print("没这个key")
+        return [:]
+    }
+    
+    if info.isEmpty {
+        return [:]
+    }else{
+        return info
+    }
+    
+}
+
+
+func setUserStatus(status:String){
+    let defaults = UserDefaults.standard
+    
+    guard let info: Dictionary = defaults.value(forKey: kUserInfoKey) as? [String:Any] else {
+        print("没这个key")
+       return
+    }
+    
+    var userInfo = info
+    userInfo["userStatus"] = status
+    defaults.set(userInfo, forKey: kUserInfoKey)
+    
+}
+
+func getUserStatus() -> ZB_UserStatus{
+    let defaults = UserDefaults.standard
+    guard let info: Dictionary = defaults.value(forKey: kUserInfoKey) as? [String:Any] else {
+        print("没这个key")
+        return .registred
+    }
+    
+    guard let status:String = info["userStatus"] as? String else {
+        return .registred
+    }
+    
+    let userStaus = ZB_UserStatus(rawValue: status)
+    return userStaus ?? .registred
     
 }
 

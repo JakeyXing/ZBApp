@@ -11,7 +11,7 @@ import Masonry
 
 class StarView: UIView {
     //MARK: - 控件
-    lazy var levelLabel: UILabel = UILabel.cz_label(withText: "当前等级:C", fontSize: kResizedFont(ft: 15), color: kFontColorGray)
+    lazy var levelLabel: UILabel = UILabel.cz_label(withText: "", fontSize: kResizedFont(ft: 15), color: kFontColorGray)
     
     //MARK: - lifeCyele
     required init?(coder aDecoder: NSCoder) {

@@ -20,7 +20,7 @@ class ZB_User: Mappable {
    var userLevel:String?
    var userName:String?
    var userScore:Int = 0
-   var userStatus:String?
+   var userStatus:ZB_UserStatus?
    var validNo:String?
    var validNoImgUrl:String?
    var validType:String?

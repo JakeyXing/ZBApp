@@ -8,8 +8,12 @@
 
 import UIKit
 import Masonry
+import MBProgressHUD
+import Toast
+import ObjectMapper
 
 class CertifApplyController: UIViewController,JHNavigationBarDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate {
+    var user: ZB_User?
     
     enum UploadImageType {
         case headIcon, certiPic, passPortPic
@@ -28,6 +32,8 @@ class CertifApplyController: UIViewController,JHNavigationBarDelegate,UIImagePic
         view.delegate = self
         return view
     }()
+    
+     private lazy var otherStatusLabel: UILabel = UILabel.cz_label(withText: "", fontSize: kResizedFont(ft: 15), color: kFontColorGray)
     
     lazy var scrollview: UIScrollView = {
         let view = UIScrollView(frame: CGRect.init(x: 0, y: navigationBarHeight, width: DEVICE_WIDTH, height: DEVICE_HEIGHT-navigationBarHeight))
@@ -148,6 +154,7 @@ class CertifApplyController: UIViewController,JHNavigationBarDelegate,UIImagePic
         self.navigationController?.navigationBar.isHidden = true
         self.view.addSubview(self.navigationBar)
         self.view.addSubview(self.scrollview)
+        self.view.addSubview(self.otherStatusLabel)
         
         self.scrollview.addSubview(self.headImageView)
         self.scrollview.addSubview(self.nameTextField)
@@ -169,7 +176,60 @@ class CertifApplyController: UIViewController,JHNavigationBarDelegate,UIImagePic
         self.subViewsLayout()
     }
     
+    func loadData(){
+        
+        let params = [:] as [String : Any]
+        
+        MBProgressHUD.showAdded(to: self.view, animated: true)
+        NetWorkManager.shared.loadRequest(method: .get, url: UserInfoUrl, parameters: params as [String : Any], success: { (data) in
+            MBProgressHUD.hide(for: self.view, animated: true)
+            
+            
+            let resultDic = data as! Dictionary<String,AnyObject>
+            let dic = resultDic["data"]
+            if dic == nil {
+                return
+            }
+            
+            let user = Mapper<ZB_User>().map(JSON: dic as! [String : Any])
+            self.user = user
+            self.configData()
+            
+        }) { (data, errMsg) in
+            MBProgressHUD.hide(for: self.view, animated: true)
+            self.view.makeToast(errMsg, duration: 2, position: CSToastPositionCenter)
+            
+            
+        }
+        
+    }
+    
+    func configData() {
+        if self.user?.userStatus == .registred {
+            self.scrollview.isHidden = false
+            self.otherStatusLabel.isHidden = true
+        }else{
+            self.scrollview.isHidden = true
+            self.otherStatusLabel.isHidden = false
+            
+            if self.user?.userStatus == .review_wait{
+       
+                self.otherStatusLabel.text = LanguageHelper.getString(key: "login.apply.wait")
+            }else{
+                self.otherStatusLabel.text = LanguageHelper.getString(key: "login.apply.failed")
+            }
+            
+        }
+    }
+    
     func subViewsLayout(){
+        
+        self.otherStatusLabel.mas_makeConstraints { (make:MASConstraintMaker!) in
+            make.centerY.equalTo()(self.view.mas_centerY)
+            make.centerX.equalTo()(self.view.mas_centerX)
+        }
+        
+        //
         self.headImageView.mas_makeConstraints { (make:MASConstraintMaker!) in
             make.top.equalTo()(self.scrollview.mas_top)?.offset()(kResizedPoint(pt: 20))
             make.left.equalTo()(self.scrollview.mas_left)?.offset()(kResizedPoint(pt: 20))

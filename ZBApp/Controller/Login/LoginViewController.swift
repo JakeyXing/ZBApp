@@ -67,11 +67,22 @@ class LoginViewController: UIViewController,BEMCheckBoxDelegate {
             let resultDic = data as! Dictionary<String,AnyObject>
             let  accessToken = resultDic["accessToken"]
             let  refreshToken = resultDic["refreshToken"]
+            
             setAccessToken(token: accessToken as! String)
             setRefreshToken(token: refreshToken as! String)
             
-            let sharedAppdelegate:AppDelegate = UIApplication.shared.delegate as! AppDelegate
-            sharedAppdelegate.window?.rootViewController = sharedAppdelegate.mainTabBarVc
+            setUserInfo(info: resultDic["data"] as! Dictionary<String, Any>)
+            
+            if getUserStatus() == .review_pass{
+                let sharedAppdelegate:AppDelegate = UIApplication.shared.delegate as! AppDelegate
+                sharedAppdelegate.window?.rootViewController = sharedAppdelegate.mainTabBarVc
+            }else{
+                let reply = CertifApplyController()
+                reply.hidesBottomBarWhenPushed = true
+                self.navigationController?.pushViewController(reply, animated: true)
+            }
+            
+            
           
             
         }) { (data, errMsg) in
