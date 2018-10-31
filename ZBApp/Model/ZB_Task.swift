@@ -20,7 +20,7 @@ var acceptance: String?
     var id: Int64 = 0
     var imgs: [String]?
     var cleanPhotos: [ZB_TaskPhotoItem]?
-    var maintainPhotos: [ZB_UploadImageItem]?
+    var maintainPhotos: [ZB_RepairImageItem]?
     var progress: String?
     var startDate: String?
     var taskInfo: ZB_TaskInfo?

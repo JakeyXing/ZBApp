@@ -106,8 +106,11 @@ class CleanImageCell: UICollectionViewCell {
         let fileNa = imgName + ".png"
         
         uploadDataToAWS(fileName: fileNa, filePath: self.savedImagePath!, success: { (url) in
+            self.delegate?.cleanImageCell(self, imageUploadSucceed: url ?? "", atIndex: self.indexpath)
+            self.progressView.backgroundColor = UIColor.green
         
         }) { (errMsg) in
+            self.progressView.backgroundColor = UIColor.red
 
         }
 //        self.uploadData(fileName: imgName)

@@ -16,7 +16,7 @@ let kNoRefreshTokenNoti = "kNoRefreshTokenNoti"
 let kRefreshTokenInvalidNoti = "kRefreshTokenInvalidNoti"
 
 let refreshAccessTokenApiUrl = BaseApiUrl + "/auth/token/refresh"
-let BaseApiUrl = "http://api.crowd.iwcln.com"   //  http://172.168.6.18:8081
+let BaseApiUrl = "http://172.168.6.18:8081"   //  http://172.168.6.18:8081 http://api.crowd.iwcln.com
 
 
 let LoginUrl = BaseApiUrl + "/auth/login"
@@ -31,6 +31,8 @@ let TransferTaskUrl = BaseApiUrl + "/task/execute/transfer"  //转单
 let StartTaskUrl = BaseApiUrl + "/task/execute/start"  //开始执行任务
 let ApproveTaskUrl = BaseApiUrl + "/task/execute/approve"  //提交审核
 let UserInfoUrl = BaseApiUrl + "/userInfo/myInfo"  //个人信息
+let ReportTaskQuesUrl = BaseApiUrl + "/task/execute/report"  //上报问题
+
 
 
 

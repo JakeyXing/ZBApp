@@ -12,11 +12,11 @@ import Masonry
 class RepairHeaderView: UICollectionReusableView {
     
     //MARK: - 控件
-    lazy var roomNumTiLabel: UILabel = UILabel.cz_label(withText: "房间号:", fontSize: kResizedFont(ft: 16), color: kFontColorGray)
+    lazy var roomNumTiLabel: UILabel = UILabel.cz_label(withText: LanguageHelper.getString(key: "detail.PicUpload.roomNo"), fontSize: kResizedFont(ft: 16), color: kFontColorGray)
     
-    lazy var roomNumLabel: UILabel = UILabel.cz_label(withText: "T25678", fontSize: kResizedFont(ft: 16), color: kFontColorGray)
+    lazy var roomNumLabel: UILabel = UILabel.cz_label(withText: "", fontSize: kResizedFont(ft: 16), color: kFontColorGray)
     
-    lazy var uploadTitle: UILabel = UILabel.cz_label(withText: "上传图片/视频", fontSize: kResizedFont(ft: 15), color: kFontColorGray)
+    lazy var uploadTitle: UILabel = UILabel.cz_label(withText: LanguageHelper.getString(key: "detail.repairPic.uploadTitle"), fontSize: kResizedFont(ft: 15), color: kFontColorGray)
     
     lazy var capView: UIView = {
         let content = UIView()

@@ -87,13 +87,13 @@ class RepairMissionDetailViewController: MissionDetailBaseViewController,RepairP
         self.scrollview.addSubview(self.uploadView)
         self.scrollview.addSubview(self.submitButton)
         
-        self.carryImageView.imageArray = ["https://video.parentschat.com/pic_R3_720.jpg","https://video.parentschat.com/pic_R3_720.jpg","https://video.parentschat.com/pic_R3_720.jpg","https://video.parentschat.com/pic_R3_720.jpg"]
+        self.carryImageView.imageArray = []
 
-        self.carryImageView.fileArray = ["https://video.parentschat.com/pic_R3_720.jpg","https://video.parentschat.com/pic_R3_720.jpg","https://video.parentschat.com/pic_R3_720.jpg","https://video.parentschat.com/pic_R3_720.jpg"]
+        self.carryImageView.fileArray = []
         
 //        self.feedbackView.congfigData()
         self.roomInfoView.roomArray = [] as [ZB_TaskProperty]
-        self.uploadView.congfigData()
+//        self.uploadView.congfigData()
         self.uploadView.delegate = self
         
         self.carryImageView.height = self.carryImageView.viewHeight()
@@ -176,6 +176,7 @@ class RepairMissionDetailViewController: MissionDetailBaseViewController,RepairP
         if (self.currentProgress == .started || self.currentProgress == .approve_failed) {
             self.uploadView.isHidden = false
             self.uploadView.top = self.infoTextView.bottom + kResizedPoint(pt: 10)
+            self.uploadView.congfigDataWithTask(info: self.task!)
             self.uploadView.height = self.uploadView.viewHeight()
             
         }else{
@@ -216,12 +217,16 @@ class RepairMissionDetailViewController: MissionDetailBaseViewController,RepairP
         self.roomInfoView.infoUploadButton.isHidden = true
 
         self.missionBaseInfoView.congfigDataWithTaskInfo(info: self.model!)
+        self.carryMissionInfoView.congfigDataWithTaskInfo(info: self.model!)
         self.carryImageView.imageArray = self.model?.imgs
         self.carryImageView.fileArray = self.model?.documents
-//        self.roomInfoView.roomArray = self.model?.properties
+        self.roomInfoView.roomArray = self.model?.properties
         
         let timeInterv = timeToTimeStamp(time: (self.model?.startDate) ?? "")
         self.submitButton.setTitle(String(format: "%@(%@%@)", LanguageHelper.getString(key: "detail.actionName.qiangdan"),timeStampShortHourStr(timeStamp: timeInterv - 3600),LanguageHelper.getString(key:"detail.time.end")), for: .normal)
+        
+        self.carryMissionInfoView.height = self.carryMissionInfoView.viewHeight()
+        self.carryImageView.top = self.carryMissionInfoView.bottom
         
         self.carryImageView.height = self.carryImageView.viewHeight()
         self.roomInfoView.top = self.carryImageView.bottom + kResizedPoint(pt: 10)
@@ -262,7 +267,7 @@ class RepairMissionDetailViewController: MissionDetailBaseViewController,RepairP
             
             if self.currentProgress == .ready {
                 //我已到达，开始任务
-                let params = ["taskId":self.task?.id ?? 0 ] as [String : Any]
+                let params = ["id":self.task?.id ?? 0 ] as [String : Any]
                 
                 MBProgressHUD.showAdded(to: self.view, animated: true)
                 NetWorkManager.shared.loadRequest(method: .post, url: StartTaskUrl, parameters: params as [String : Any], success: { (data) in
@@ -283,7 +288,7 @@ class RepairMissionDetailViewController: MissionDetailBaseViewController,RepairP
                 
             }else if(self.currentProgress == .started){
                 //提交审核
-                let params = ["taskId":self.task?.id ?? 0 ] as [String : Any]
+                let params = ["id":self.task?.id ?? 0 ] as [String : Any]
                 
                 MBProgressHUD.showAdded(to: self.view, animated: true)
                 NetWorkManager.shared.loadRequest(method: .post, url: ApproveTaskUrl, parameters: params as [String : Any], success: { (data) in
@@ -433,11 +438,10 @@ class RepairMissionDetailViewController: MissionDetailBaseViewController,RepairP
         var images = [SKPhoto]()
         for i in 0..<count{
             let photo = SKPhoto.photoWithImageURL(self.carryImageView.imageArray![i])
-            photo.shouldCachePhotoURLImage = false // you can use image cache by true(NSCache)
+            photo.shouldCachePhotoURLImage = false
             images.append(photo)
         }
         
-        // 2. create PhotoBrowser Instance, and present from your viewController.
         let browser = SKPhotoBrowser(photos: images)
         browser.initializePageIndex(index)
         self.present(browser, animated: true, completion: {})
@@ -459,8 +463,8 @@ class RepairMissionDetailViewController: MissionDetailBaseViewController,RepairP
     func listRoomInfoViewDidTappedRoute(_ view: ListRoomInfoView, routeUrl routeUrlStr: String) {
         let web=WebViewController()
         web.hidesBottomBarWhenPushed = true
-        web.urlStr = "https://www.baidu.com"
-        web.titleStr = "文件名"
+        web.urlStr = routeUrlStr
+        web.titleStr = LanguageHelper.getString(key: "detail.route.pageTitle")
         self.navigationController?.pushViewController(web, animated: true)
     }
     
@@ -475,6 +479,11 @@ class RepairMissionDetailViewController: MissionDetailBaseViewController,RepairP
     func listRoomInfoViewDidTappedUploadFeedback(_ view: ListRoomInfoView) {
         let feedback=QueFeedbackController()
         feedback.hidesBottomBarWhenPushed = true
+        if self.isTaked {
+            feedback.mID = self.task?.id ?? 0
+        }else{
+            feedback.mID = self.model?.id ?? 0
+        }
         self.navigationController?.pushViewController(feedback, animated: true)
     }
     

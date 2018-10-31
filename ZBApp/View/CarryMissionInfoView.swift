@@ -27,7 +27,7 @@ class CarryMissionInfoView: UIView {
         
     }()
     
-    private lazy var missionTitleLabel: UILabel = UILabel.cz_label(withText: "办公室搬场", fontSize: kResizedFont(ft: 15), color: kFontColorGray)
+    private lazy var missionTitleLabel: UILabel = UILabel.cz_label(withText: "", fontSize: kResizedFont(ft: 15), color: kFontColorGray)
     
     lazy var missionDescribNameLabel: UILabel = {
         let lab = UILabel()
@@ -42,7 +42,7 @@ class CarryMissionInfoView: UIView {
         let lab = UILabel()
         lab.textColor = kFontColorGray
         lab.font = kFont(size: 15)
-        lab.text = "海外网10月12日电当地时间10月12日，2018年“新学院奖”在瑞典斯德哥尔摩公共图书馆揭晓，玛丽斯·孔戴(Maryse Condé)获得此奖项"
+        lab.text = ""
         lab.numberOfLines = 0
         return lab
         
@@ -62,7 +62,7 @@ class CarryMissionInfoView: UIView {
         let lab = UILabel()
         lab.textColor = kFontColorGray
         lab.font = kFont(size: 15)
-        lab.text = "海外网10月12日电当地时间10月12日，2018年“新学院奖”在瑞典斯德哥尔摩公共图书馆揭晓，玛丽斯·孔戴(Maryse Condé)获得此奖项"
+        lab.text = ""
         lab.numberOfLines = 0
         return lab
         

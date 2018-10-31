@@ -24,6 +24,9 @@
 "detail.base.base" = "基本薪资";
 "detail.base.bonus" = "奖金";
 
+"detail.base.baseTip" = "完成该任务即可得到的保底薪资，不低于该国相关法律标准。";
+"detail.base.bonusTip" = "任务结束时，由运营进行任务质量验收，根据工作质量确定相应奖金。";
+
 "detail.status.ready" = "待开始";
 "detail.status.started" = "进行中";
 "detail.status.finished" = "已完成";
@@ -48,6 +51,10 @@
 "detail.roomInfo.remark" = "备注";
 "detail.roomInfo.uploadInfo" = "信息上报";
 
+"detail.feedbackUpload.pageTitle" = "问题反馈";
+"detail.feedbackUpload.des" = "问题上报";
+"detail.feedbackUpload.typeTitle" = "类型:";
+
 "detail.roomInfo.roomNum" = "房间号";
 "detail.roomInfo.ksPassword" = "开锁密码";
 "detail.roomInfo.kShortRoute" = "路引";
@@ -64,9 +71,13 @@
 "detail.cleanPic.uploadDes" = "清扫图片上传";
 "detail.PicUploadStatus.failed" = "上传失败";
 
+"detail.repairPic.uploadResult" = "维修结果提交";
+"detail.repairPic.uploadTitle" = "上传图片/视频";
+
+
 "detail.PicUpload.roomNo" = "房间号:";
 "detail.address.pageTitle" = "位置";
-
+"detail.password.pageTitle" = "开锁密码";
 "detail.route.pageTitle" = "路引";
 
 "mission.select.time" = "任务日期";
@@ -90,5 +101,8 @@
 "login.apply.failed" = "审核失败";
 "login.apply.wait" = "正在审核，请耐心等待";
 
+"common.btnTitle.sure" = "确定";
 
-
+"common.country.China" = "中国";
+"common.country.Japan" = "日本";
+"common.country.Australia" = "澳大利亚";

@@ -10,6 +10,7 @@ import UIKit
 import MBProgressHUD
 import Toast
 import ObjectMapper
+import EasyTipView
 
 class MissionDetailBaseViewController: UIViewController {
 
@@ -42,6 +43,15 @@ class MissionDetailBaseViewController: UIViewController {
        
         let tap = UITapGestureRecognizer(target: self, action: #selector(addressTapped))
         view.addressLabel.addGestureRecognizer(tap)
+        
+        view.starImage_1.isUserInteractionEnabled = true
+        let tap1 = UITapGestureRecognizer(target: self, action: #selector(baseTip))
+        view.starImage_1.addGestureRecognizer(tap1)
+        
+        view.starImage_2.isUserInteractionEnabled = true
+        let tap2 = UITapGestureRecognizer(target: self, action: #selector(bonusTip))
+        view.starImage_2.addGestureRecognizer(tap2)
+        
         return view
     }()
     
@@ -81,6 +91,32 @@ class MissionDetailBaseViewController: UIViewController {
         self.navigationController?.pushViewController(map, animated: true)
     }
     
+
+    @objc private func baseTip(){
+        
+        var preferences = EasyTipView.Preferences()
+        preferences.drawing.font = kFont(size: 15)
+        preferences.drawing.foregroundColor = kFontColorGray
+        preferences.drawing.backgroundColor = kTintColorYellow
+        preferences.drawing.arrowPosition = EasyTipView.ArrowPosition.top
+        
+        let tipView = EasyTipView(text: LanguageHelper.getString(key: "detail.base.baseTip"), preferences: preferences)
+        tipView.show(forView: self.missionBaseInfoView.starImage_1, withinSuperview: self.navigationController?.view)
+    
+    }
+    
+    @objc private func bonusTip(){
+        var preferences = EasyTipView.Preferences()
+        preferences.drawing.font = kFont(size: 15)
+        preferences.drawing.foregroundColor = kFontColorGray
+        preferences.drawing.backgroundColor = kTintColorYellow
+        preferences.drawing.arrowPosition = EasyTipView.ArrowPosition.top
+        
+        let tipView = EasyTipView(text: LanguageHelper.getString(key: "detail.base.bonusTip"), preferences: preferences)
+        tipView.show(forView: self.missionBaseInfoView.starImage_2, withinSuperview: self.navigationController?.view)
+        
+    }
+    
     func loadNewDataWithId(taskId: Int64) {
         
         let params = ["taskExecuteId":taskId] as [String : Any]
@@ -97,11 +133,7 @@ class MissionDetailBaseViewController: UIViewController {
             }
             
             let model = Mapper<ZB_Task>().map(JSON: dic as! [String : Any])
-
-//            let model =  ZB_Task.yy_model(with: dic as! [AnyHashable : Any])
-//            let model = ZB_Task()
-//            model.yy_modelSet(with: dic as! [AnyHashable : Any])
-//     
+  
           self.task = model
             
             self.configData()

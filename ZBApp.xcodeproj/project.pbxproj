@@ -81,6 +81,8 @@
 		99D556FA21788A7E006C92A3 /* MissionSegmentBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99D556F921788A7E006C92A3 /* MissionSegmentBar.swift */; };
 		99D69A222175CCC400A5DC09 /* CommonMethod.m in Sources */ = {isa = PBXBuildFile; fileRef = 99D69A212175CCC400A5DC09 /* CommonMethod.m */; };
 		99D69A242175E69400A5DC09 /* repairAddCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99D69A232175E69400A5DC09 /* repairAddCell.swift */; };
+		99D713ED21897952004C313E /* PasswordCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99D713EC21897952004C313E /* PasswordCell.swift */; };
+		99D713EF2189995D004C313E /* ZB_RepairImageItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99D713EE2189995D004C313E /* ZB_RepairImageItem.swift */; };
 		99D781AD217C6C1600611DE0 /* ZB_Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99D781AC217C6C1600611DE0 /* ZB_Task.swift */; };
 		99D781AF217C6F8A00611DE0 /* ZB_Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99D781AE217C6F8A00611DE0 /* ZB_Photo.swift */; };
 		99D781B1217C707D00611DE0 /* ZB_TaskPhotoItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99D781B0217C707D00611DE0 /* ZB_TaskPhotoItem.swift */; };
@@ -179,6 +181,7 @@
 		994F634A216C822C0063044B /* StarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarView.swift; sourceTree = "<group>"; };
 		994F6354216C9C480063044B /* JHNavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JHNavigationBar.swift; sourceTree = "<group>"; };
 		99A8C46A21797CB5009509B8 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
+		99C2575B2189B49F0082AF7A /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		99C2C31C2177084A00C0B94A /* DemoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoViewController.swift; sourceTree = "<group>"; };
 		99C2C31D2177084A00C0B94A /* DemoViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DemoViewController.xib; sourceTree = "<group>"; };
 		99C2C3202177109A00C0B94A /* JHDropdownView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JHDropdownView.swift; sourceTree = "<group>"; };
@@ -193,6 +196,8 @@
 		99D69A202175CCC400A5DC09 /* CommonMethod.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommonMethod.h; sourceTree = "<group>"; };
 		99D69A212175CCC400A5DC09 /* CommonMethod.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CommonMethod.m; sourceTree = "<group>"; };
 		99D69A232175E69400A5DC09 /* repairAddCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = repairAddCell.swift; sourceTree = "<group>"; };
+		99D713EC21897952004C313E /* PasswordCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordCell.swift; sourceTree = "<group>"; };
+		99D713EE2189995D004C313E /* ZB_RepairImageItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZB_RepairImageItem.swift; sourceTree = "<group>"; };
 		99D781AC217C6C1600611DE0 /* ZB_Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZB_Task.swift; sourceTree = "<group>"; };
 		99D781AE217C6F8A00611DE0 /* ZB_Photo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZB_Photo.swift; sourceTree = "<group>"; };
 		99D781B0217C707D00611DE0 /* ZB_TaskPhotoItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZB_TaskPhotoItem.swift; sourceTree = "<group>"; };
@@ -356,6 +361,7 @@
 				99D69A232175E69400A5DC09 /* repairAddCell.swift */,
 				99D556F921788A7E006C92A3 /* MissionSegmentBar.swift */,
 				9936F3AE217F20A400642697 /* FeedbackItemCell.swift */,
+				99D713EC21897952004C313E /* PasswordCell.swift */,
 				994EE461216DEDDE00EB86DD /* JHListChooseView */,
 			);
 			path = View;
@@ -422,6 +428,7 @@
 				99D781AC217C6C1600611DE0 /* ZB_Task.swift */,
 				99D781B0217C707D00611DE0 /* ZB_TaskPhotoItem.swift */,
 				992349EF2180A24300D92120 /* ZB_UploadImageItem.swift */,
+				99D713EE2189995D004C313E /* ZB_RepairImageItem.swift */,
 				99D781AE217C6F8A00611DE0 /* ZB_Photo.swift */,
 				99D781B2217C723100611DE0 /* ZB_TaskInfo.swift */,
 				99D781B4217C724700611DE0 /* ZB_Address.swift */,
@@ -532,6 +539,7 @@
 				Base,
 				"zh-Hans",
 				ja,
+				"zh-Hant",
 			);
 			mainGroup = 99F43ACA21606EB400A84EBD;
 			productRefGroup = 99F43AD421606EB400A84EBD /* Products */;
@@ -612,6 +620,7 @@
 				"${BUILT_PRODUCTS_DIR}/AWSS3/AWSS3.framework",
 				"${BUILT_PRODUCTS_DIR}/BEMCheckBox/BEMCheckBox.framework",
 				"${BUILT_PRODUCTS_DIR}/CYLTabBarController/CYLTabBarController.framework",
+				"${BUILT_PRODUCTS_DIR}/EasyTipView/EasyTipView.framework",
 				"${BUILT_PRODUCTS_DIR}/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/MJRefresh/MJRefresh.framework",
@@ -631,6 +640,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AWSS3.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BEMCheckBox.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CYLTabBarController.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/EasyTipView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManagerSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MJRefresh.framework",
@@ -701,6 +711,7 @@
 				994F6342216C78F20063044B /* NSString+CZPath.m in Sources */,
 				99017C2121708A6B00155724 /* MissionBaseInfoView.swift in Sources */,
 				9945A2B72178DB1200240437 /* MapViewController.swift in Sources */,
+				99D713EF2189995D004C313E /* ZB_RepairImageItem.swift in Sources */,
 				99425B572174763300A18E45 /* ClaenCollectionHeaderView.swift in Sources */,
 				99017C232170A8E900155724 /* CarryMissionInfoView.swift in Sources */,
 				9936F3AF217F20A400642697 /* FeedbackItemCell.swift in Sources */,
@@ -716,6 +727,7 @@
 				99D69A242175E69400A5DC09 /* repairAddCell.swift in Sources */,
 				994EE463216DF6A300EB86DD /* ListChooseCell.swift in Sources */,
 				ADB1322D217AED2A002B811B /* ZBUrl.swift in Sources */,
+				99D713ED21897952004C313E /* PasswordCell.swift in Sources */,
 				992349F02180A24300D92120 /* ZB_UploadImageItem.swift in Sources */,
 				99017C1D2170889500155724 /* CarryMissionDetailViewController.swift in Sources */,
 				99C2C3212177109A00C0B94A /* JHDropdownView.swift in Sources */,
@@ -743,6 +755,7 @@
 				9906B15F2180C4BB0095E1DD /* en */,
 				9906B1612180C5320095E1DD /* zh-Hans */,
 				9906B1622180C55B0095E1DD /* ja */,
+				99C2575B2189B49F0082AF7A /* zh-Hant */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -895,7 +908,10 @@
 				DEVELOPMENT_TEAM = Y6RH2VSRP8;
 				INFOPLIST_FILE = ZBApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.elitestalk.ZBApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = wildElitestalk;
@@ -918,7 +934,10 @@
 				DEVELOPMENT_TEAM = Y6RH2VSRP8;
 				INFOPLIST_FILE = ZBApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.elitestalk.ZBApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = wildElitestalk;

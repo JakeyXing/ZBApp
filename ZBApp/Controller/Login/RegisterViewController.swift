@@ -80,7 +80,7 @@ class RegisterViewController: UIViewController,BEMCheckBoxDelegate {
         
         let str:String = self.areaDropdownView.contentLabel.text ?? ""
         let countryCode :String = String(str[str.index(str.startIndex, offsetBy: 1)..<str.endIndex])
-        let params = ["countryCode":countryCode,"phone":self.phoneTextfield.text] as [String : Any]
+        let params = ["countryCode":countryCode,"phone":self.phoneTextfield.text!] as [String : Any]
         
         MBProgressHUD.showAdded(to: self.view, animated: true)
         NetWorkManager.shared.loadNoTokenRequest(method: .get, url: PhoneCodeUrl, parameters: params as [String : Any], success: { (data) in
@@ -122,7 +122,9 @@ class RegisterViewController: UIViewController,BEMCheckBoxDelegate {
         }
         let str:String = self.areaDropdownView.contentLabel.text ?? ""
         let countryCode :String = String(str[str.index(str.startIndex, offsetBy: 1)..<str.endIndex])
-        let params = ["countryCode":countryCode,"phone":self.phoneTextfield.text,"password":self.passwordTextfield.text,"vertyCode":self.vertyCodeTextfield.text,"code":Int(self.vertyCodeTextfield.text ?? "0")] as [String : Any]
+        
+        let code = Int(self.vertyCodeTextfield.text ?? "0")
+        let params = ["countryCode":countryCode,"phone":self.phoneTextfield.text!,"password":self.passwordTextfield.text!,"vertyCode":self.vertyCodeTextfield.text!,"code":code!] as [String : Any]
         
         MBProgressHUD.showAdded(to: self.view, animated: true)
         NetWorkManager.shared.loadNoTokenRequest(method: .post, url: RegisterUrl, parameters: params as [String : Any], success: { (data) in

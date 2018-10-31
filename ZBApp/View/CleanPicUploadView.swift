@@ -24,7 +24,7 @@ class CleanPicUploadView: UIView {
     private lazy var resultNameLabel: UILabel = UILabel.cz_label(withText: LanguageHelper.getString(key: "detail.cleanPic.uploadDes"), fontSize: kResizedFont(ft: 15), color: kFontColorGray)
     
     
-    private lazy var resultLabel: UILabel = UILabel.cz_label(withText: LanguageHelper.getString(key: "detail.PicUploadStatus.failed"), fontSize: kResizedFont(ft: 15), color: RGBCOLOR(r: 254, 0, 5))
+    private lazy var resultLabel: UILabel = UILabel.cz_label(withText: "", fontSize: kResizedFont(ft: 15), color: RGBCOLOR(r: 254, 0, 5))
     
     lazy var contentView: UIView = {
         let content = UIView()
@@ -72,19 +72,6 @@ class CleanPicUploadView: UIView {
         self.collectionView .reloadData()
         
     }
-    
-//    func congfigData() {
-//        let p1 = ZB_TaskPhotoItem(JSONString: "")
-//        p1!.location = "sddd344"
-//        p1!.photos = [ZB_Photo(JSONString: ""),ZB_Photo(JSONString: ""),ZB_Photo(JSONString: ""),ZB_Photo(JSONString: "")] as? [ZB_Photo]
-//        let p2 = ZB_TaskPhotoItem(JSONString: "")
-//        p2!.location = "wwwwee23"
-//        p2!.photos = [ZB_Photo(JSONString: ""),ZB_Photo(JSONString: ""),ZB_Photo(JSONString: ""),ZB_Photo(JSONString: "")] as? [ZB_Photo]
-//        roomWithImagesArray = [p1,p2] as! [ZB_TaskPhotoItem]
-//
-//        roomWithImagesArrayForUpload = roomWithImagesArray
-//
-//    }
     
     func viewHeight() -> CGFloat {
         let headerH = kResizedPoint(pt: 17+30)
@@ -224,14 +211,19 @@ extension CleanPicUploadView:UICollectionViewDelegateFlowLayout,UICollectionView
     
     //MARK:-CleanImageCellDelegate
     func cleanImageCell(_ cell: CleanImageCell, imageUploadSucceed imageUrl: String, atIndex indexPath: IndexPath) {
-        let photoItem = self.roomWithImagesArray[indexPath.section]
+        let photoItem = self.roomWithImagesArrayForUpload[indexPath.section]
         let photo = photoItem.photos![indexPath.row]
         photo.url = imageUrl
         
+        let item:ZB_TaskPhotoItem = photoItem
+        
+        item.photos?[indexPath.row] = photo
+        self.roomWithImagesArrayForUpload[indexPath.section] = photoItem
         
     }
     
     func cleanImageCell(_ cell: CleanImageCell, imageUploadFailedIndex indexPath: IndexPath) {
+        
         
     }
     

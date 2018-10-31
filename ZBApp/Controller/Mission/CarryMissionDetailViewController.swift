@@ -72,9 +72,8 @@ class CarryMissionDetailViewController: MissionDetailBaseViewController,CarryMis
         self.scrollview.addSubview(self.checkView)
         self.scrollview.addSubview(self.takeButton)
         
-        self.carryImageView.imageArray = ["https://video.parentschat.com/pic_R3_720.jpg","https://video.parentschat.com/pic_R3_720.jpg","https://video.parentschat.com/pic_R3_720.jpg","https://video.parentschat.com/pic_R3_720.jpg"]
-        
-        self.carryImageView.fileArray = ["https://video.parentschat.com/pic_R3_720.jpg","https://video.parentschat.com/pic_R3_720.jpg","https://video.parentschat.com/pic_R3_720.jpg","https://video.parentschat.com/pic_R3_720.jpg"]
+        self.carryImageView.imageArray = []
+        self.carryImageView.fileArray = []
         self.feedbackView.congfigSubViewHeight()
         
 //        self.checkView.congfigDataWithTask(model: ZB_Task(map:))
@@ -194,6 +193,11 @@ class CarryMissionDetailViewController: MissionDetailBaseViewController,CarryMis
     @objc private func infoUploadAction(){
         let feedback=QueFeedbackController()
         feedback.hidesBottomBarWhenPushed = true
+        if self.isTaked {
+            feedback.mID = self.task?.id ?? 0
+        }else{
+           feedback.mID = self.model?.id ?? 0
+        }
         self.navigationController?.pushViewController(feedback, animated: true)
     }
     

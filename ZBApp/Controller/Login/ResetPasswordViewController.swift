@@ -77,7 +77,23 @@ class ResetPasswordViewController: UIViewController,BEMCheckBoxDelegate {
             return
         }
         
-        let params = ["countryCode":self.areaDropdownView.contentLabel.text,"phone":self.phoneTextfield.text]
+        if self.vertyCodeTextfield.text?.count == 0 {
+            self.view.makeToast("请输入验证码", duration: 2, position: CSToastPositionCenter)
+            return
+            
+        }
+        
+        if self.passwordTextfield.text?.count == 0 {
+            self.view.makeToast("请输入密码", duration: 2, position: CSToastPositionCenter)
+            return
+            
+        }
+        let str:String = self.areaDropdownView.contentLabel.text ?? ""
+        let countryCode :String = String(str[str.index(str.startIndex, offsetBy: 1)..<str.endIndex])
+        
+        let code = Int(self.vertyCodeTextfield.text ?? "0")
+        let params = ["countryCode":countryCode,"phone":self.phoneTextfield.text!,"password":self.passwordTextfield.text!,"vertyCode":self.vertyCodeTextfield.text!,"code":code!] as [String : Any]
+        
         
         MBProgressHUD.showAdded(to: self.view, animated: true)
         NetWorkManager.shared.loadNoTokenRequest(method: .get, url: PhoneCodeUrl, parameters: params as [String : Any], success: { (data) in

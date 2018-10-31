@@ -18,13 +18,10 @@ class MissionCell: UITableViewCell {
     
     private lazy var unitLabel: UILabel = UILabel.cz_label(withText: "JPY", fontSize: kResizedFont(ft: 16), color: kFontColorGray)
     
-    private lazy var locaLabel: UILabel = UILabel.cz_label(withText: "浪速区大国", fontSize: 16, color: kFontColorGray)
+    private lazy var locaLabel: UILabel = UILabel.cz_label(withText: "浪速区大国", fontSize: 15, color: kFontColorGray)
+    private lazy var roomNoLabel: UILabel = UILabel.cz_label(withText: "", fontSize: 15, color: kFontColorGray)
     
-//    private lazy var starView: StarView = {
-//        let view = StarView()
-//        view.backgroundColor = kTintColorYellow
-//        return view
-//    }()
+
     lazy var addressIcon: UIImageView = {
         let img = UIImageView()
         img.image = UIImage(named: "location")
@@ -81,8 +78,38 @@ class MissionCell: UITableViewCell {
         self.timeLabel.text = timeStampToString(timeStamp: timeInterv)
         self.priceLabel.text = String(format: "%.1f", model.base)
         self.unitLabel.text = model.currency
+        
+        var proCount = 0
+        proCount = self.model?.taskInfo?.properties?.count ?? 0
+        
+        if proCount > 0 {
+            if proCount == 1{
+                let taskProperty = self.model?.taskInfo?.properties?[0]
+                self.roomNoLabel.text = taskProperty?.doorplate
+            }else{
+                var plates: String = ""
+                for i in 0..<proCount{
+                    let taskProperty = self.model?.taskInfo?.properties?[i]
+                    plates.append(String(format: ",%@", taskProperty?.doorplate ?? ""))
+                }
+                self.roomNoLabel.text = plates
+            }
+            
+        }
+        
         self.locaLabel.text = model.address?.name
-        self.requireLabel.text = LanguageHelper.getString(key: "home.cell.bonus") + String(format: "%.1f", model.bonus) + model.currency!
+        
+        let bouns = String(format: "%.1f", model.bonus)
+        let attributes = [NSAttributedString.Key.foregroundColor: kTintColorYellow]
+        let attributedBouns = NSAttributedString(string: bouns, attributes: attributes)
+        
+        let attributedStr = NSMutableAttributedString()
+        attributedStr.append(NSAttributedString(string: LanguageHelper.getString(key: "home.cell.bonus")))
+        attributedStr.append(attributedBouns)
+        attributedStr.append(NSAttributedString(string: model.currency!))
+
+        self.requireLabel.attributedText = attributedStr
+//        self.requireLabel.text = LanguageHelper.getString(key: "home.cell.bonus") + String(format: "%.1f", model.bonus) + model.currency!
         self.typeLabel.text = typeNameWithStr(str: model.type ?? "")
         self.stateLabel.text = statusNameWithStr(str: model.progress ?? "")
         
@@ -90,9 +117,11 @@ class MissionCell: UITableViewCell {
     
     func setUpUI(){
         self.numLabel.isHidden = true
+        self.roomNoLabel.lineBreakMode = .byTruncatingMiddle
         self.addSubview(timeLabel)
         self.addSubview(priceLabel)
         self.addSubview(unitLabel)
+        self.addSubview(roomNoLabel)
         self.addSubview(locaLabel)
         self.addSubview(addressIcon)
         self.addSubview(requireLabel)
@@ -128,6 +157,12 @@ class MissionCell: UITableViewCell {
         self.locaLabel.mas_makeConstraints { (make:MASConstraintMaker!) in
             make.right.equalTo()(self.addressIcon.mas_left)?.offset()(kResizedPoint(pt: -5))
             make.centerY.equalTo()(self.addressIcon.mas_centerY)
+        }
+        
+        self.roomNoLabel.mas_makeConstraints { (make:MASConstraintMaker!) in
+            make.left.equalTo()(self.timeLabel.mas_left);
+            make.centerY.equalTo()(self.addressIcon.mas_centerY)
+            make.width.lessThanOrEqualTo()(kResizedPoint(pt: 110))
         }
         
         self.requireLabel.mas_makeConstraints { (make:MASConstraintMaker!) in

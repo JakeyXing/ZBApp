@@ -284,6 +284,7 @@ extension RoomInfoView{
     }
     
     @objc private func passwordAction(){
+        
         self.delegate?.roomInfoViewDidTappedPassword(self, password: self.property?.pwdInfos ?? [])
     }
 }

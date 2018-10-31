@@ -12,9 +12,9 @@ import Masonry
 class RepairInfoTextView: UIView {
     
     
-    private lazy var resultNameLabel: UILabel = UILabel.cz_label(withText: "维修结果提交", fontSize: kResizedFont(ft: 15), color: kFontColorGray)
+    private lazy var resultNameLabel: UILabel = UILabel.cz_label(withText: LanguageHelper.getString(key: "detail.repairPic.uploadResult"), fontSize: kResizedFont(ft: 15), color: kFontColorGray)
     
-    private lazy var resultLabel: UILabel = UILabel.cz_label(withText: "上传失败", fontSize: kResizedFont(ft: 15), color: RGBCOLOR(r: 254, 0, 5))
+    private lazy var resultLabel: UILabel = UILabel.cz_label(withText: "", fontSize: kResizedFont(ft: 15), color: RGBCOLOR(r: 254, 0, 5))
     
     private lazy var infoTextView: UITextView = {
         let text = UITextView()

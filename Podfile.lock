@@ -25,6 +25,7 @@ PODS:
     - AWSCore (= 2.6.13)
   - BEMCheckBox (1.4.1)
   - CYLTabBarController (1.17.6)
+  - EasyTipView (2.0.1)
   - IQKeyboardManagerSwift (6.1.1)
   - Masonry (1.1.0)
   - MBProgressHUD (1.1.0)
@@ -43,6 +44,7 @@ DEPENDENCIES:
   - AWSS3 (~> 2.6.13)
   - BEMCheckBox
   - CYLTabBarController (~> 1.17.6)
+  - EasyTipView (~> 2.0.0)
   - IQKeyboardManagerSwift
   - Masonry
   - MBProgressHUD
@@ -61,6 +63,7 @@ SPEC CHECKSUMS:
   AWSS3: 7c178c82c2e648559b7075a663335055327dd4f5
   BEMCheckBox: 5ba6e37ade3d3657b36caecc35c8b75c6c2b1a4e
   CYLTabBarController: c374643dea6dadece8bdff9c70f7387f8ffd7d08
+  EasyTipView: 1515544456d6e943240012e9be5d25d1bb766603
   IQKeyboardManagerSwift: 977affaeb4d6e971975c7790a6850f31d38f1207
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
   MBProgressHUD: e7baa36a220447d8aeb12769bf0585582f3866d9
@@ -70,6 +73,6 @@ SPEC CHECKSUMS:
   SKPhotoBrowser: 76eb862685761707b5745fde7762757966565e07
   Toast: 91b396c56ee72a5790816f40d3a94dd357abc196
 
-PODFILE CHECKSUM: c50cdc9b7530a0efa123ab09b3f400f4e137bb8a
+PODFILE CHECKSUM: d00a39cf6031f263f8d5899db06b6ee9135fff31
 
 COCOAPODS: 1.4.0

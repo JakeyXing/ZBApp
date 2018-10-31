@@ -10,6 +10,7 @@ import UIKit
 import SKPhotoBrowser
 import MBProgressHUD
 import Toast
+import ObjectMapper
 
 class CleanMissionDetailViewController: MissionDetailBaseViewController,CleanPicUploadViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,RoomInfoViewDelegate,FeedbackViewDelegate {
    
@@ -195,7 +196,7 @@ class CleanMissionDetailViewController: MissionDetailBaseViewController,CleanPic
             
             if self.currentProgress == .ready {
                 //我已到达，开始任务
-                let params = ["taskId":self.task?.id ?? 0 ] as [String : Any]
+                let params = ["id":self.task?.id ?? 0 ] as [String : Any]
                 
                 MBProgressHUD.showAdded(to: self.view, animated: true)
                 NetWorkManager.shared.loadRequest(method: .post, url: StartTaskUrl, parameters: params as [String : Any], success: { (data) in
@@ -216,7 +217,23 @@ class CleanMissionDetailViewController: MissionDetailBaseViewController,CleanPic
                 
             }else if(self.currentProgress == .started){
                 //提交审核
-                let params = ["taskId":self.task?.id ?? 0 ] as [String : Any]
+                let cout = self.uploadView.roomWithImagesArrayForUpload.count
+                
+                var cleanPhotos = [[String:Any]]()
+                for i in 0..<cout{
+                    let item = self.uploadView.roomWithImagesArrayForUpload[i]
+                    let photoCount = item.photos!.count
+                    
+                    for index in 0..<photoCount{
+                        let photo = item.photos![index]
+                        photo.location = item.location
+                        let dic:[String: Any] = photo.toJSON()
+                        cleanPhotos.append(dic)
+                    }
+                    
+                }
+                
+                let params = ["id":self.task?.id ?? 0,"cleanPhotos":cleanPhotos ] as [String : Any]
                 
                 MBProgressHUD.showAdded(to: self.view, animated: true)
                 NetWorkManager.shared.loadRequest(method: .post, url: ApproveTaskUrl, parameters: params as [String : Any], success: { (data) in
@@ -286,9 +303,6 @@ class CleanMissionDetailViewController: MissionDetailBaseViewController,CleanPic
         let image = info[UIImagePickerController.InfoKey.originalImage] as! UIImage
         currentImageCell?.uploadImage(img: image)
         
-        
-    
-        
         self.dismiss(animated: true, completion: nil)
     }
     
@@ -307,6 +321,11 @@ class CleanMissionDetailViewController: MissionDetailBaseViewController,CleanPic
     func roomInfoViewDidTappedUploadFeedback(_ view: RoomInfoView) {
         let feedback=QueFeedbackController()
         feedback.hidesBottomBarWhenPushed = true
+        if self.isTaked {
+            feedback.mID = self.task?.id ?? 0
+        }else{
+            feedback.mID = self.model?.id ?? 0
+        }
         self.navigationController?.pushViewController(feedback, animated: true)
         
     }

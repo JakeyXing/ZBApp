@@ -8,12 +8,18 @@
 
 import UIKit
 import Masonry
-class QueFeedbackController: UIViewController,JHNavigationBarDelegate {
+import MBProgressHUD
+import Toast
 
+class QueFeedbackController: UIViewController,JHNavigationBarDelegate {
+    
+    var mID:Int64 = 0
+    var uploadedImageArray:[String]?
+    
     private lazy var navigationBar: JHNavigationBar = {
         let view = JHNavigationBar(frame: CGRect.init(x: 0, y: 0, width: 0, height: 0))
         view.backgroundColor = UIColor.white
-        view.titleLabel.text = "问题反馈"
+        view.titleLabel.text = LanguageHelper.getString(key: "detail.feedbackUpload.pageTitle")
         view.delegate = self
         return view
     }()
@@ -25,7 +31,7 @@ class QueFeedbackController: UIViewController,JHNavigationBarDelegate {
         return view
     }()
     
-    private lazy var nameLabel: UILabel = UILabel.cz_label(withText: "问题上报", fontSize: kResizedFont(ft: 15), color: kFontColorGray)
+    private lazy var nameLabel: UILabel = UILabel.cz_label(withText: LanguageHelper.getString(key: "detail.feedbackUpload.des"), fontSize: kResizedFont(ft: 15), color: kFontColorGray)
     
     private lazy var infoTextView: UITextView = {
         let text = UITextView(frame: CGRect.init())
@@ -36,22 +42,21 @@ class QueFeedbackController: UIViewController,JHNavigationBarDelegate {
         
     }()
     
-    private lazy var typeLabel: UILabel = UILabel.cz_label(withText: "类型:", fontSize: kResizedFont(ft: 15), color: kFontColorGray)
+    private lazy var typeLabel: UILabel = UILabel.cz_label(withText: LanguageHelper.getString(key: "detail.feedbackUpload.typeTitle"), fontSize: kResizedFont(ft: 15), color: kFontColorGray)
     
     private lazy var typeLabelDropdownView: JHDropdownView = {
         let view = JHDropdownView(frame: CGRect.init())
-        view.contentLabel.text = "中国"
+        view.contentLabel.text = LanguageHelper.getString(key: "common.country.China")
         view.contentLabel.textColor = kFontColorBlack
-        view.dataArray = ["中国","日本"]
+        view.dataArray = ["common.country.China","common.country.Japan"]
         return view
     }()
-    
     
     lazy var submitButton: UIButton = {
         let btn = UIButton(type: UIButton.ButtonType.custom)
         btn.setTitleColor(UIColor.white, for: UIControl.State.normal)
         btn.backgroundColor = kTintColorYellow
-        btn.setTitle("确定", for: .normal)
+        btn.setTitle(LanguageHelper.getString(key: "common.btnTitle.sure"), for: .normal)
         btn.titleLabel?.font = kFont(size: 16)
         btn.addTarget(self, action: #selector(sureAction), for: UIControl.Event.touchUpInside)
         return btn
@@ -116,6 +121,32 @@ class QueFeedbackController: UIViewController,JHNavigationBarDelegate {
     
     //MARK: - actions
     @objc private func sureAction(){
+        if self.infoTextView.text?.count == 0 {
+            self.view.makeToast("description is nil", duration: 2, position: CSToastPositionCenter)
+            return
+            
+        }
+        
+        let desc:String = self.infoTextView.text!
+        
+        let params = ["id":self.mID,"description":desc,"imgs":self.uploadedImageArray ?? [],"type":""] as [String : Any]
+        
+        MBProgressHUD.showAdded(to: self.view, animated: true)
+        NetWorkManager.shared.loadRequest(method: .post, url: ReportTaskQuesUrl, parameters: params as [String : Any], success: { (data) in
+            MBProgressHUD.hide(for: self.view, animated: true)
+            
+            let resultDic = data as! Dictionary<String,AnyObject>
+            let dic = resultDic["data"]
+            if dic == nil {
+                return
+            }
+        
+        }) { (data, errMsg) in
+            MBProgressHUD.hide(for: self.view, animated: true)
+            self.view.makeToast(errMsg, duration: 2, position: CSToastPositionCenter)
+            
+            
+        }
    
         
     }

@@ -20,7 +20,7 @@ class RepairPicUploadView: UIView {
     var currentUploadmediaType: UploadMediaType = .image
     weak var delegate: RepairPicUploadViewDelegate?
     
-    var roomWithImagesArray:[[UIImage]] = []
+    var roomWithImagesArray:[ZB_RepairImageItem]?
     
     lazy var contentView: UIView = {
         let content = UIView()
@@ -60,8 +60,11 @@ class RepairPicUploadView: UIView {
     }
     
     
-    func congfigData() {
-        roomWithImagesArray = [[],[]]
+  
+    func congfigDataWithTask(info: ZB_Task){
+        self.roomWithImagesArray = info.maintainPhotos
+        
+        self.collectionView.reloadData()
         
     }
     
@@ -70,13 +73,15 @@ class RepairPicUploadView: UIView {
         let itemH = kResizedPoint(pt: 90+15+5)
         let cap:CGFloat = kResizedPoint(pt: 10)
         
-        let count = self.roomWithImagesArray.count
+        var count = 0
+        count = self.roomWithImagesArray?.count ?? 0
         var viewH:CGFloat = 0
         
         for i in 0..<count {
-            let arr = self.roomWithImagesArray[i]
+            let item = self.roomWithImagesArray![i]
             
-            let arrCount = arr.count + 1
+            let itemPhotoCount = item.photos?.count
+            let arrCount = itemPhotoCount ?? 0 + 1
             
             let nex = arrCount%3
             var h: CGFloat = 0
@@ -89,40 +94,79 @@ class RepairPicUploadView: UIView {
             
             viewH = viewH + (headerH + h)
             
-            
         }
-        
         
         return kResizedPoint(pt: 20) + viewH + kResizedPoint(pt: 10)
     }
     
     func addAndUploadImage(img: UIImage, atIndexPath indexpath: NSIndexPath) {
-        currentUploadmediaType = .video
+        currentUploadmediaType = .image
         
-        var arr = self.roomWithImagesArray[indexpath.section]
-        arr.append(img)
-        self.roomWithImagesArray[indexpath.section] = arr
+        let item = self.roomWithImagesArray![indexpath.section]
         
-        self.collectionView.reloadData()
+        let image = ZB_UploadImageItem(JSON: ["":""])
+        image?.doorplate = item.doorplate
+        image?.propertyId = item.propertyId
+        
+        
+        let imgName = "maint_pic_" + CommonMethod.timestamp()
+        let savedImagePath = CommonMethod.getImagePath(img, imageName: imgName)
+        let fileNa = imgName + ".png"
+        uploadDataToAWS(fileName: fileNa, filePath: savedImagePath!, success: { (url) in
+            image?.url = url
+            item.photos?.append(image!)
+            
+            self.collectionView.reloadData()
+            
+        }) { (errMsg) in
+            
+            
+        }
+        
+        
+//        var arr = self.roomWithImagesArray[indexpath.section]
+//        arr.append(img)
+//        self.roomWithImagesArray[indexpath.section] = arr
+        
+//        self.collectionView.reloadData()
         
     }
     
     func addAndUploadVideo(url: NSURL, atIndexPath indexpath: NSIndexPath) {
-//        let videoName = "repa_v_" + CommonMethod.timestamp() + ".mp4"
-//        let videoURLStr = NSHomeDirectory() + "/Documents/" + videoName
-//        let newVideoURL: NSURL = NSURL(fileURLWithPath: videoURLStr)
-//        CommonMethod.convertVideoQuailty(withInputURL: url as URL, outputURL: newVideoURL as URL) { (aa) in
-//
-//        }
         currentUploadmediaType = .video
         
-        var arr = self.roomWithImagesArray[indexpath.section]
-        let videoImg = CommonMethod.getVideoPreViewImage(url as URL)
+        let item = self.roomWithImagesArray![indexpath.section]
         
-        arr.append(videoImg!)
-        self.roomWithImagesArray[indexpath.section] = arr
+        let image = ZB_UploadImageItem(JSON: ["":""])
+        image?.doorplate = item.doorplate
+        image?.propertyId = item.propertyId
         
-        self.collectionView.reloadData()
+        let videoName = "repa_v_" + CommonMethod.timestamp() + ".mp4"
+        let videoURLStr = NSHomeDirectory() + "/Documents/awsFiles/" + videoName
+        let newVideoURL: NSURL = NSURL(fileURLWithPath: videoURLStr)
+        CommonMethod.convertVideoQuailty(withInputURL: url as URL, outputURL: newVideoURL as URL) { (aa) in
+            
+
+        }
+        
+        uploadDataToAWS(fileName: videoName, filePath: videoURLStr, success: { (url) in
+            image?.url = url
+            item.photos?.append(image!)
+            
+            self.collectionView.reloadData()
+            
+        }) { (errMsg) in
+            
+            
+        }
+        
+//        var arr = self.roomWithImagesArray[indexpath.section]
+//        let videoImg = CommonMethod.getVideoPreViewImage(url as URL)
+//
+//        arr.append(videoImg!)
+//        self.roomWithImagesArray[indexpath.section] = arr
+//
+//        self.collectionView.reloadData()
         
     }
     
@@ -165,13 +209,19 @@ extension RepairPicUploadView{
 
 extension RepairPicUploadView:UICollectionViewDelegateFlowLayout,UICollectionViewDataSource,RepairImageCellDelegate{
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return self.roomWithImagesArray.count
+        return self.roomWithImagesArray?.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        let arr = self.roomWithImagesArray[section]
+        let item = self.roomWithImagesArray![section]
         
-        return arr.count + 1
+        let itemPhotoCount = item.photos?.count
+        let arrCount = itemPhotoCount ?? 0 + 1
+        
+        return arrCount
+//        let arr = self.roomWithImagesArray[section]
+//
+//        return arr.count + 1
     }
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
@@ -192,13 +242,21 @@ extension RepairPicUploadView:UICollectionViewDelegateFlowLayout,UICollectionVie
         collectionView.register(RepairImageCell.self, forCellWithReuseIdentifier: identifierStr)
         collectionView.register(repairAddCell.self, forCellWithReuseIdentifier: identifierStrAdd)
         
-        let arr = self.roomWithImagesArray[indexPath.section]
-        if indexPath.row < arr.count {
+        let item = self.roomWithImagesArray![indexPath.section]
+        let itemPhotoCount = item.photos?.count
+        let arrCount = itemPhotoCount ?? 0
+        
+//        let arr = self.roomWithImagesArray[indexPath.section]
+        
+        if indexPath.row < arrCount {
             let cell:RepairImageCell = collectionView.dequeueReusableCell(withReuseIdentifier: identifierStr, for: indexPath) as! RepairImageCell
-            cell.imageView.image = arr[indexPath.row]
+            let image = item.photos?[indexPath.row]
+            
+//            cell.imageView.image = arr[indexPath.row]
+            cell.imageView.sd_setImage(with: URL(fileURLWithPath: image?.url ?? ""), completed: nil)
             cell.indexpath = indexPath as NSIndexPath
             cell.delegate = self
-            if (indexPath.row == arr.count - 1){
+            if (indexPath.row == arrCount - 1){
                 cell.mediaType = currentUploadmediaType
             }
             return cell
@@ -217,17 +275,22 @@ extension RepairPicUploadView:UICollectionViewDelegateFlowLayout,UICollectionVie
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        let arr = self.roomWithImagesArray[indexPath.section]
-        if indexPath.row < arr.count {
-            let count = arr.count
+//        let arr = self.roomWithImagesArray[indexPath.section]
+        let item = self.roomWithImagesArray![indexPath.section]
+        let itemPhotoCount = item.photos?.count
+        let arrCount = itemPhotoCount ?? 0
+        
+        if indexPath.row < arrCount {
+//            let count = arr.count
 
             var images = [SKPhoto]()
-            for i in 0..<count{
-                let photo = SKPhoto.photoWithImage(arr[i])// add some UIImage
+            for i in 0..<arrCount{
+                let image = item.photos?[i]
+                let photo = SKPhoto.photoWithImageURL(image?.url ?? "")
+                photo.shouldCachePhotoURLImage = false
                 images.append(photo)
             }
             
-            // 2. create PhotoBrowser Instance, and present from your viewController.
             let browser = SKPhotoBrowser(photos: images)
             browser.initializePageIndex(indexPath.row)
             self.viewContainingController()!.present(browser, animated: true, completion: {})
@@ -239,10 +302,13 @@ extension RepairPicUploadView:UICollectionViewDelegateFlowLayout,UICollectionVie
     
      //MARK: - RepairImageCellDelegate
     func repairImageCell(_ cell: RepairImageCell, didClosedAtIndexPath indexPath: IndexPath) {
-        var arr = self.roomWithImagesArray[indexPath.section]
-        arr.remove(at: indexPath.row)
-        self.roomWithImagesArray[indexPath.section] = arr
+//        var arr = self.roomWithImagesArray[indexPath.section]
+//        arr.remove(at: indexPath.row)
+//        self.roomWithImagesArray[indexPath.section] = arr
         
+        let item = self.roomWithImagesArray![indexPath.section]
+        item.photos?.remove(at: indexPath.row)
+        self.roomWithImagesArray![indexPath.section] = item
         self.collectionView.reloadData()
     }
     

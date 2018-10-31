@@ -47,6 +47,13 @@ class TaskStatusViewController: UIViewController {
         return btn
     }()
     
+    lazy var cleanDateButton: UIButton = {
+        let back = UIButton(type: UIButton.ButtonType.custom)
+        back.setImage(UIImage(named: "close"), for: UIControl.State.normal)
+        back.addTarget(self, action: #selector(closeAction), for: UIControl.Event.touchUpInside)
+        return back
+    }()
+    
     lazy var checkBox: BEMCheckBox = {
         let box = BEMCheckBox()
         box.boxType = BEMBoxType.square
@@ -74,7 +81,11 @@ class TaskStatusViewController: UIViewController {
         self.topBarBg.addSubview(self.typeDropdownView)
         self.topBarBg.addSubview(self.timeButton)
         self.topBarBg.addSubview(self.onlyuselessLabel)
+        self.topBarBg.addSubview(self.cleanDateButton)
         self.topBarBg.addSubview(self.checkBox)
+        self.cleanDateButton.isHidden = true
+        self.checkBox.isHidden = true
+        self.onlyuselessLabel.isHidden = true
         self.setTableView()
         
         self.typeDropdownView.mas_makeConstraints { (make:MASConstraintMaker!) in
@@ -89,6 +100,13 @@ class TaskStatusViewController: UIViewController {
             make.left.equalTo()(self.typeDropdownView.mas_right)?.offset()(kResizedPoint(pt: 15))
             make.width.equalTo()(kResizedPoint(pt: 90))
             make.height.equalTo()(kResizedPoint(pt: 30))
+        }
+        
+        self.cleanDateButton.mas_makeConstraints { (make:MASConstraintMaker!) in
+            make.centerY.equalTo()(self.topBarBg.mas_centerY)
+            make.left.equalTo()(self.timeButton.mas_right)?.offset()(kResizedPoint(pt: 2))
+            make.width.equalTo()(kResizedPoint(pt: 35))
+            make.height.equalTo()(kResizedPoint(pt: 32))
         }
         
         self.onlyuselessLabel.mas_makeConstraints { (make:MASConstraintMaker!) in
@@ -217,7 +235,14 @@ class TaskStatusViewController: UIViewController {
         UIApplication.shared.keyWindow?.addSubview(calendarBg)
         
     }
-    
+    @objc private func closeAction(){
+        self.cleanDateButton.isHidden = true
+        self.timeButton.setTitle(LanguageHelper.getString(key: "mission.select.time"), for: .normal)
+        selectedDate = ""
+        
+        self.loadNewData()
+        
+    }
     
 }
 
@@ -296,8 +321,10 @@ extension TaskStatusViewController:UITableViewDelegate,UITableViewDataSource,Cal
         self.loadNewData()
         
     }
-    
+    //MARK: - calendar
     func calendarDidChoosedDate(choosedDate: Date) {
+        self.cleanDateButton.isHidden = false
+        
         //更新提醒时间文本框
         let formatter = DateFormatter()
         //日期样式

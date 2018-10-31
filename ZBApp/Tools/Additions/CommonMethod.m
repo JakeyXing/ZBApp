@@ -23,13 +23,10 @@
     //    }
     
     //图片保存的路径
-    //这里将图片放在沙盒的documents文件夹中
     NSString *documentsPath = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"];
     NSString *awsFilesPath = [documentsPath stringByAppendingPathComponent:@"awsFiles"];
-    //文件管理器
+ 
     NSFileManager *fileManager = [NSFileManager defaultManager];
-    
-    //把刚刚图片转换的data对象拷贝至沙盒中
     [fileManager createDirectoryAtPath:awsFilesPath withIntermediateDirectories:YES attributes:nil error:nil];
     NSString *ImagePath = [[NSString alloc] initWithFormat:@"/%@.png",imageName];
     [fileManager createFileAtPath:[awsFilesPath stringByAppendingString:ImagePath] contents:data attributes:nil];

@@ -71,12 +71,6 @@ class MissionBaseInfoView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    //MARK: - actions
-  
-    @objc private func starImageTapped(){
-//        self.delegate?.rightAction()
-    }
-    
     
 }
 
@@ -225,6 +219,7 @@ extension MissionBaseInfoView{
         }
         
     }
+    
     
 }
 

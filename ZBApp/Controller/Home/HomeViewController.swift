@@ -154,9 +154,9 @@ class HomeViewController: UIViewController {
 }
 
 extension HomeViewController:UITableViewDelegate,UITableViewDataSource,JHDropdownViewDelegate,MissionTypeTopBarDelegate{
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.taskList.count
-//        return 4
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -197,27 +197,6 @@ extension HomeViewController:UITableViewDelegate,UITableViewDataSource,JHDropdow
             print("未知类型")
         }
         
-//        if indexPath.row == 0 {
-//            let carry = CarryMissionDetailViewController()
-//            carry.isTaked = false
-////            carry.model = infoModel
-//            carry.hidesBottomBarWhenPushed = true
-//            self.navigationController?.pushViewController(carry, animated: true)
-//
-//        }else if indexPath.row == 1{
-//            let clean = CleanMissionDetailViewController()
-//            clean.isTaked = false
-////            clean.model = infoModel
-//            clean.hidesBottomBarWhenPushed = true
-//            self.navigationController?.pushViewController(clean, animated: true)
-//        }else if indexPath.row == 2{
-//            let repair = RepairMissionDetailViewController()
-//            repair.isTaked = false
-////            repair.model = infoModel
-//            repair.hidesBottomBarWhenPushed = true
-//            self.navigationController?.pushViewController(repair, animated: true)
-//
-//        }
         
     }
     
@@ -236,6 +215,13 @@ extension HomeViewController:UITableViewDelegate,UITableViewDataSource,JHDropdow
         formatter.dateFormat = "yyyy-MM-dd"
 //        print(formatter.string(from: date))
         selectedDate = formatter.string(from: date)
+        
+        
+        self.loadNewData()
+    }
+    
+    func missionTypeTopBarDidCleanDate(_ topBar: MissionTypeTopBar) {
+        selectedDate = ""
         
         
         self.loadNewData()
