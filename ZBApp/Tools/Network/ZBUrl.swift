@@ -16,7 +16,7 @@ let kNoRefreshTokenNoti = "kNoRefreshTokenNoti"
 let kRefreshTokenInvalidNoti = "kRefreshTokenInvalidNoti"
 
 let refreshAccessTokenApiUrl = BaseApiUrl + "/auth/token/refresh"
-let BaseApiUrl = "http://172.168.6.18:8081"   //  http://172.168.6.18:8081 http://api.crowd.iwcln.com
+let BaseApiUrl = "http://api.crowd.iwcln.com"   //  http://172.168.6.18:8081 http://api.crowd.iwcln.com
 
 
 let LoginUrl = BaseApiUrl + "/auth/login"

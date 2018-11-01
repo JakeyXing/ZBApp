@@ -7,8 +7,8 @@
 //
 
 import UIKit
-
-class WebViewController: UIViewController,JHNavigationBarDelegate {
+import MBProgressHUD
+class WebViewController: UIViewController,JHNavigationBarDelegate,UIWebViewDelegate {
 
     var titleStr: String?
     var urlStr: String?
@@ -22,6 +22,7 @@ class WebViewController: UIViewController,JHNavigationBarDelegate {
     private lazy var webview: UIWebView = {
         let view = UIWebView(frame: CGRect.init(x: 0, y: navigationBarHeight, width: DEVICE_WIDTH, height: DEVICE_HEIGHT - navigationBarHeight))
         view.backgroundColor = UIColor.white
+        view.delegate = self
         view.scalesPageToFit = true
         return view
     }()
@@ -34,6 +35,17 @@ class WebViewController: UIViewController,JHNavigationBarDelegate {
         self.view.addSubview(self.webview)
         
         self.navigationBar.titleLabel.text = self.titleStr;
+        
+        guard (self.urlStr != nil) else {
+            print("urlStr 为空")
+            return
+        }
+        
+        guard (self.urlStr?.count ?? 0 > 0) else {
+            print("urlStr 为空")
+            return
+        }
+        
         self.webview.loadRequest(URLRequest.init(url: URL.init(string: self.urlStr!)!))
 
     }
@@ -41,6 +53,15 @@ class WebViewController: UIViewController,JHNavigationBarDelegate {
     //MARK: - JHNavigationBarDelegate
     func leftAction() {
         self.navigationController?.popViewController(animated: true)
+    }
+    
+    func webView(_ webView: UIWebView, shouldStartLoadWith request: URLRequest, navigationType: UIWebView.NavigationType) -> Bool {
+        MBProgressHUD.showAdded(to: self.view, animated: true)
+        return true
+    }
+    
+    func webViewDidFinishLoad(_ webView: UIWebView) {
+        MBProgressHUD.hide(for: self.view, animated: true)
     }
 
 

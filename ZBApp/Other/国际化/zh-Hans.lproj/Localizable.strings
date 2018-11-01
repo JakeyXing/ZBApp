@@ -106,3 +106,8 @@
 "common.country.China" = "中国";
 "common.country.Japan" = "日本";
 "common.country.Australia" = "澳大利亚";
+
+"tabBar.title.pending" = "待抢任务";
+"tabBar.title.execute" = "我的任务";
+"tabBar.title.mine" = "基本资讯";
+

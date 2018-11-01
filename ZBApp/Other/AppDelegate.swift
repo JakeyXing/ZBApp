@@ -22,6 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        LanguageHelper.shareInstance.initUserLanguage()
         mainTabBarVc = MainTabBarController(viewControllers: self.viewControllers(), tabBarItemsAttributes: self.tabBarItemsAttributesForController())
         
         self.window = UIWindow()
@@ -50,8 +51,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UITabBar.appearance().tintColor = UIColor(red: 255, green: 102, blue: 0, alpha: 1)
         IQKeyboardManager.shared.enable = true
         
-      
-        LanguageHelper.shareInstance.initUserLanguage()
         NotificationCenter.default.addObserver(self, selector: #selector(reLogin), name: NSNotification.Name(rawValue: kRefreshTokenInvalidNoti), object: nil)
         
         return AWSMobileClient.sharedInstance().interceptApplication(application, didFinishLaunchingWithOptions: launchOptions)
@@ -92,15 +91,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func tabBarItemsAttributesForController() ->  [[String : String]] {
         
-        let tabBarItemOne = [CYLTabBarItemTitle:"首页",
+        let tabBarItemOne = [CYLTabBarItemTitle:LanguageHelper.getString(key: "tabBar.title.pending"),
                              CYLTabBarItemImage:"home_normal",
                              CYLTabBarItemSelectedImage:"home_highlight"]
         
-        let tabBarItemTwo = [CYLTabBarItemTitle:"任务",
+        let tabBarItemTwo = [CYLTabBarItemTitle:LanguageHelper.getString(key: "tabBar.title.execute"),
                              CYLTabBarItemImage:"mycity_normal",
                              CYLTabBarItemSelectedImage:"mycity_highlight"]
         
-        let tabBarItemThree = [CYLTabBarItemTitle:"我的",
+        let tabBarItemThree = [CYLTabBarItemTitle:LanguageHelper.getString(key: "tabBar.title.mine"),
                               CYLTabBarItemImage:"account_normal",
                               CYLTabBarItemSelectedImage:"account_highlight"]
         let tabBarItemsAttributes = [tabBarItemOne,tabBarItemTwo,tabBarItemThree]

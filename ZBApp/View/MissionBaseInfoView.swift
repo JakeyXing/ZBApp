@@ -38,19 +38,22 @@ class MissionBaseInfoView: UIView {
     
     lazy var starImage_1: UIImageView = {
         let img = UIImageView()
-        img.image = UIImage(named: "starr")
+        img.image = UIImage(named: "wenhao")
         return img
     }()
     
-    private lazy var salaryLabel_1: UILabel = UILabel.cz_label(withText: "基本薪资 2300 JPY", fontSize: kResizedFont(ft: 16), color: kFontColorGray)
+    private lazy var salaryLabel_1: UILabel = UILabel.cz_label(withText: "2300 JPY", fontSize: kResizedFont(ft: 16), color: kFontColorGray)
+    
+    private lazy var salaryTitleLabel_1: UILabel = UILabel.cz_label(withText: LanguageHelper.getString(key: "detail.base.base"), fontSize: kResizedFont(ft: 16), color: kFontColorGray)
     
     lazy var starImage_2: UIImageView = {
         let img = UIImageView()
-        img.image = UIImage(named: "starr")
+        img.image = UIImage(named: "wenhao")
         return img
     }()
     
-    private lazy var salaryLabel_2: UILabel = UILabel.cz_label(withText: "其他薪资 2000 JPY", fontSize: kResizedFont(ft: 16), color: kFontColorGray)
+    private lazy var salaryLabel_2: UILabel = UILabel.cz_label(withText: "2000 JPY", fontSize: kResizedFont(ft: 16), color: kFontColorGray)
+    private lazy var salaryTitleLabel_2: UILabel = UILabel.cz_label(withText: LanguageHelper.getString(key: "detail.base.bonus"), fontSize: kResizedFont(ft: 16), color: kFontColorGray)
     
     lazy var addressLabel: UILabel = UILabel.cz_label(withText: "浪速区大国2-10-7 難波南", fontSize: kResizedFont(ft: 15), color: kFontColorGray)
     
@@ -87,8 +90,10 @@ extension MissionBaseInfoView{
         self.contentView.addSubview(self.timeLabel)
         self.contentView.addSubview(self.starImage_1)
         self.contentView.addSubview(self.salaryLabel_1)
+        self.contentView.addSubview(self.salaryTitleLabel_1)
         self.contentView.addSubview(self.starImage_2)
         self.contentView.addSubview(self.salaryLabel_2)
+        self.contentView.addSubview(self.salaryTitleLabel_2)
         self.contentView.addSubview(self.addressIcon)
         self.contentView.addSubview(self.addressLabel)
         
@@ -116,8 +121,8 @@ extension MissionBaseInfoView{
             self.timeLabel.text = starTimeStr + "-" + endTimeStr + String(format: "(%@%dh)", LanguageHelper.getString(key: "detail.base.rest"),info.restHours)
         }
     
-        self.salaryLabel_1.text = String(format: "%@ %.0f %@", LanguageHelper.getString(key: "detail.base.base"),info.base,info.currency ?? "JPY")
-        self.salaryLabel_2.text = String(format: "%@ %.0f %@", LanguageHelper.getString(key: "detail.base.bonus"),info.base,info.currency ?? "JPY")
+        self.salaryLabel_1.text = String(format: "%.0f %@",info.base,info.currency ?? "JPY")
+        self.salaryLabel_2.text = String(format: "%.0f %@",info.base,info.currency ?? "JPY")
         
         self.addressLabel.text = info.address?.name
     }
@@ -145,8 +150,8 @@ extension MissionBaseInfoView{
             self.timeLabel.text = starTimeStr + "-" + endTimeStr + String(format: "(%@%dh)", LanguageHelper.getString(key: "detail.base.rest"),info.restHours)
         }
         
-        self.salaryLabel_1.text = String(format: "%@ %.0f %@", LanguageHelper.getString(key: "detail.base.base"),taskInfo?.base ?? 0,taskInfo?.currency ?? "JPY")
-        self.salaryLabel_2.text = String(format: "%@ %.0f %@", LanguageHelper.getString(key: "detail.base.bonus"),taskInfo?.bonus ?? 0,taskInfo?.currency ?? "JPY")
+        self.salaryLabel_1.text = String(format: "%.0f %@", taskInfo?.base ?? 0,taskInfo?.currency ?? "JPY")
+        self.salaryLabel_2.text = String(format: "%.0f %@", taskInfo?.bonus ?? 0,taskInfo?.currency ?? "JPY")
         
         self.addressLabel.text = taskInfo?.address?.name
         
@@ -182,29 +187,44 @@ extension MissionBaseInfoView{
             make.left.equalTo()(self.dateLabel.mas_left)
         }
         
+        self.salaryLabel_1.mas_makeConstraints { (make:MASConstraintMaker!) in
+            make.centerY.equalTo()(self.timeLabel.mas_centerY)
+            make.right.equalTo()(self.contentView.mas_right)?.offset()(kResizedPoint(pt: -20))
+            
+        }
+        
         self.starImage_1.mas_makeConstraints { (make:MASConstraintMaker!) in
             make.centerY.equalTo()(self.timeLabel.mas_centerY)
-            make.right.equalTo()(self.contentView.mas_right)?.offset()(kResizedPoint(pt: -38))
+            make.right.equalTo()(self.salaryLabel_1.mas_left)?.offset()(kResizedPoint(pt: -5))
             make.width.equalTo()(kResizedPoint(pt: 20))
             make.height.equalTo()(kResizedPoint(pt: 20))
         }
         
-        self.salaryLabel_1.mas_makeConstraints { (make:MASConstraintMaker!) in
-            make.centerY.equalTo()(self.starImage_1.mas_centerY)
-            make.right.equalTo()(self.starImage_1.mas_left)?.offset()(kResizedPoint(pt: -2))
-        }
-        
-        self.starImage_2.mas_makeConstraints { (make:MASConstraintMaker!) in
-            make.top.equalTo()(self.starImage_1.mas_bottom)?.offset()(kResizedPoint(pt: 10))
-            make.right.equalTo()(self.starImage_1.mas_right)
-            make.width.equalTo()(kResizedPoint(pt: 20))
-            make.height.equalTo()(kResizedPoint(pt: 20))
+        self.salaryTitleLabel_1.mas_makeConstraints { (make:MASConstraintMaker!) in
+            make.centerY.equalTo()(self.timeLabel.mas_centerY)
+            make.right.equalTo()(self.starImage_1.mas_left)?.offset()(kResizedPoint(pt: 0))
+            
         }
         
         self.salaryLabel_2.mas_makeConstraints { (make:MASConstraintMaker!) in
-            make.centerY.equalTo()(self.starImage_2.mas_centerY)
-            make.right.equalTo()(self.starImage_2.mas_left)?.offset()(kResizedPoint(pt: -2))
+            make.top.equalTo()(self.salaryLabel_1.mas_bottom)?.offset()(kResizedPoint(pt: 10))
+            make.right.equalTo()(self.salaryLabel_1.mas_right)
+            
         }
+        
+        self.starImage_2.mas_makeConstraints { (make:MASConstraintMaker!) in
+            make.centerY.equalTo()(self.salaryLabel_2.mas_centerY)
+            make.right.equalTo()(self.salaryLabel_2.mas_left)?.offset()(kResizedPoint(pt: -5))
+            make.width.equalTo()(kResizedPoint(pt: 20))
+            make.height.equalTo()(kResizedPoint(pt: 20))
+        }
+        
+        self.salaryTitleLabel_2.mas_makeConstraints { (make:MASConstraintMaker!) in
+            make.centerY.equalTo()(self.salaryLabel_2.mas_centerY)
+            make.right.equalTo()(self.starImage_2.mas_left)?.offset()(kResizedPoint(pt: 0))
+            
+        }
+
         
         self.addressLabel.mas_makeConstraints { (make:MASConstraintMaker!) in
             make.top.equalTo()(self.timeLabel.mas_bottom)?.offset()(kResizedPoint(pt: 40))

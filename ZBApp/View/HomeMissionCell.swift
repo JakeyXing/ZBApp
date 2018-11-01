@@ -116,6 +116,7 @@ class HomeMissionCell: UITableViewCell {
     
     func setUpUI(){
         self.roomNoLabel.lineBreakMode = .byTruncatingMiddle
+        self.locaLabel.lineBreakMode = .byTruncatingMiddle
         self.addSubview(timeLabel)
         self.addSubview(priceLabel)
         self.addSubview(unitLabel)
@@ -155,6 +156,7 @@ class HomeMissionCell: UITableViewCell {
         self.locaLabel.mas_makeConstraints { (make:MASConstraintMaker!) in
             make.right.equalTo()(self.addressIcon.mas_left)?.offset()(kResizedPoint(pt: -5))
             make.centerY.equalTo()(self.addressIcon.mas_centerY)
+            make.width.lessThanOrEqualTo()(kResizedPoint(pt: 200))
         }
         
         self.roomNoLabel.mas_makeConstraints { (make:MASConstraintMaker!) in
