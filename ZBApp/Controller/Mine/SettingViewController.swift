@@ -31,9 +31,9 @@ class SettingViewController: UIViewController,JHNavigationBarDelegate {
     
     private lazy var nDropdownView: JHDropdownView = {
         let view = JHDropdownView(frame: CGRect.init())
-        view.contentLabel.text = "中文简体"
+        view.contentLabel.text = "繁体中文"
         view.contentLabel.textColor = kFontColorBlack
-        view.dataArray = ["中文简体","日文","English"]
+        view.dataArray = ["繁體中文","中文简体","日文","English"]
         return view
     }()
     
@@ -134,7 +134,11 @@ class SettingViewController: UIViewController,JHNavigationBarDelegate {
         }else if lague == "日文"{
             LanguageHelper.shareInstance.setLanguage(langeuage: "ja")
             
-        }else{
+        }else if lague == "繁體中文"{
+            LanguageHelper.shareInstance.setLanguage(langeuage: "zh-Hant")
+            
+        }
+        else{
             LanguageHelper.shareInstance.setLanguage(langeuage: "en")
             
         }

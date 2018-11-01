@@ -101,11 +101,41 @@
 "login.apply.failed" = "审核失败";
 "login.apply.wait" = "正在审核，请耐心等待";
 
+"login.nav.title" = "登录";
+"login.pageItem.areaCode" = "国际区号";
+"login.pageItem.phone" = "手机号";
+"login.pageItem.password" = "密码";
+"login.pageItem.showPassword" = "显示密码";
+"login.pageItem.register" = "注册";
+"login.pageItem.resetPass" = "找回密码";
+
+"register.pageItem.code" = "验证码";
+"register.pageItem.sendCode" = "发送验证码";
+"register.pageItem.sendCodeTip" = "请输入验证码";
+
+"register.pageItem.password" = "设置密码";
+"register.pageItem.passwordTip" = "请设置密码";
+
 "common.btnTitle.sure" = "确定";
 
 "common.country.China" = "中国";
 "common.country.Japan" = "日本";
 "common.country.Australia" = "澳大利亚";
+"common.country.Other" = "其他";
+
+"apply.nav.title" = "资质申请";
+"apply.nav.submit" = "提交";
+"apply.item.name" = "姓名";
+"apply.item.nationty" = "国籍(证件国籍)";
+"apply.item.city" = "所在城市(当前)";
+"apply.item.cerType" = "证件类型";
+"apply.cerType.passport" = "护照";
+"apply.cerType.drLicence" = "驾驶证";
+"apply.item.cerNo" = "证件号码";
+"apply.item.uploadCerPic" = "上传证件图片";
+"apply.item.uploadPassportPic" = "上传签证图片";
+"apply.sex.man" = "男";
+"apply.sex.woman" = "女";
 
 "tabBar.title.pending" = "待抢任务";
 "tabBar.title.execute" = "我的任务";

@@ -104,8 +104,10 @@ class NetWorkManager: AFHTTPSessionManager {
                  success : @escaping(_ json:Any?)->(),
                  fail : @escaping(_ errMsg:String)->() )  {
         
+        var params = parameters ?? [String:Any]()
+        params["lang"] = getCurrentLangParam()
         
-        print("\n\n\n**************************************\n\nURL    -> \(url)\n\nParams -> \(String(describing: parameters))\n\n**************************************\n\n\n")
+        print("\n\n\n**************************************\n\nURL    -> \(url)\n\nParams -> \(String(describing: params))\n\n**************************************\n\n\n")
         
         let success = { (task:URLSessionDataTask , json : Any?)->() in
             let resultDic = json as! Dictionary<String,AnyObject>
@@ -248,9 +250,9 @@ class NetWorkManager: AFHTTPSessionManager {
         }
         
         if method == RequestType.get {
-            get(url, parameters: parameters, progress: nil, success: success, failure: failure)
+            get(url, parameters: params, progress: nil, success: success, failure: failure)
         }else {
-            post(url, parameters: parameters, progress: nil, success: success, failure: failure)
+            post(url, parameters: params, progress: nil, success: success, failure: failure)
         }
     }
     

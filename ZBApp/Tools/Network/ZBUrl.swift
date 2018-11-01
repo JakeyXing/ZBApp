@@ -32,6 +32,9 @@ let StartTaskUrl = BaseApiUrl + "/task/execute/start"  //开始执行任务
 let ApproveTaskUrl = BaseApiUrl + "/task/execute/approve"  //提交审核
 let UserInfoUrl = BaseApiUrl + "/userInfo/myInfo"  //个人信息
 let ReportTaskQuesUrl = BaseApiUrl + "/task/execute/report"  //上报问题
+let ApplyUrl = BaseApiUrl + "/userInfo/apply"  //资质申请
+let ApplyCityUrl = BaseApiUrl + "/config/cities"  //citys
+
 
 
 

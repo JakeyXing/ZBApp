@@ -147,6 +147,10 @@ class ResetPasswordViewController: UIViewController,BEMCheckBoxDelegate {
         
     }
     
+    @IBAction func backAction(_ sender: Any) {
+        self.navigationController?.popViewController(animated: true)
+    }
+    
     func didTap(_ checkBox: BEMCheckBox) {
         self.passwordTextfield.isSecureTextEntry = !self.checkbox.on
     }

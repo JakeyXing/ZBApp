@@ -33,8 +33,8 @@ class CertifApplyController: UIViewController,JHNavigationBarDelegate,UIImagePic
     private lazy var navigationBar: JHNavigationBar = {
         let view = JHNavigationBar(frame: CGRect.init(x: 0, y: 0, width: 0, height: 0))
         view.backgroundColor = UIColor.white
-        view.titleLabel.text = "资质申请"
-        view.editButton.setTitle("提交", for: .normal)
+        view.titleLabel.text = LanguageHelper.getString(key: "apply.nav.title")
+        view.editButton.setTitle(LanguageHelper.getString(key: "apply.nav.submit"), for: .normal)
         view.editButton.setTitleColor(kTintColorYellow, for: .normal)
         view.delegate = self
         return view
@@ -64,7 +64,7 @@ class CertifApplyController: UIViewController,JHNavigationBarDelegate,UIImagePic
     private lazy var nameTextField: UITextField = {
         let textField = UITextField(frame: CGRect.init(x: 0, y: 0, width: 300, height: 30))
         textField.borderStyle = UITextField.BorderStyle.none
-        textField.placeholder  = "姓名"
+        textField.placeholder  = LanguageHelper.getString(key: "apply.item.name")
         textField.font = kFont(size: 15)
 //        textField.keyboardType = UIKeyboardType.numberPad
 //        textField.delegate = self
@@ -78,45 +78,45 @@ class CertifApplyController: UIViewController,JHNavigationBarDelegate,UIImagePic
     }()
     
     private lazy var secSegment: UISegmentedControl = {
-        let view = UISegmentedControl(items: ["男","女"])
+        let view = UISegmentedControl(items: [LanguageHelper.getString(key: "apply.sex.man"),LanguageHelper.getString(key: "apply.sex.woman")])
         view.tintColor = kTintColorYellow
         view.selectedSegmentIndex = 0
         return view
     }()
     
-    private lazy var nationLabel: UILabel = UILabel.cz_label(withText: "国籍(证件国籍)", fontSize: kResizedFont(ft: 15), color: kFontColorGray)
-    private lazy var cityLabel: UILabel = UILabel.cz_label(withText: "所在城市(当前)", fontSize: kResizedFont(ft: 15), color: kFontColorGray)
+    private lazy var nationLabel: UILabel = UILabel.cz_label(withText: LanguageHelper.getString(key: "apply.item.nationty"), fontSize: kResizedFont(ft: 15), color: kFontColorGray)
+    private lazy var cityLabel: UILabel = UILabel.cz_label(withText: LanguageHelper.getString(key: "apply.item.city"), fontSize: kResizedFont(ft: 15), color: kFontColorGray)
     
     private lazy var dropdownView1: JHDropdownView = {
         let view = JHDropdownView(frame: CGRect.init())
-        view.contentLabel.text = "中国"
+        view.contentLabel.text = LanguageHelper.getString(key: "common.country.China")
         view.contentLabel.textColor = kFontColorBlack
-        view.dataArray = ["中国","日本"]
+        view.dataArray = ["common.country.China","common.country.Japan","common.country.Australia","common.country.Other"]
         return view
     }()
     
     private lazy var dropdownView2: JHDropdownView = {
         let view = JHDropdownView(frame: CGRect.init())
-        view.contentLabel.text = "东京"
+        view.contentLabel.text = ""
         view.contentLabel.textColor = kFontColorBlack
-        view.dataArray = ["东京","大阪","京都"]
+        view.dataArray = []
         return view
     }()
     
-    private lazy var cerTypeLabel: UILabel = UILabel.cz_label(withText: "证件类型", fontSize: kResizedFont(ft: 15), color: kFontColorGray)
+    private lazy var cerTypeLabel: UILabel = UILabel.cz_label(withText: LanguageHelper.getString(key: "apply.item.cerType"), fontSize: kResizedFont(ft: 15), color: kFontColorGray)
     
     private lazy var dropdownView3: JHDropdownView = {
         let view = JHDropdownView(frame: CGRect.init())
-        view.contentLabel.text = "护照"
+        view.contentLabel.text = LanguageHelper.getString(key: "apply.cerType.passport")
         view.contentLabel.textColor = kFontColorBlack
-        view.dataArray = ["护照","驾驶证"]
+        view.dataArray = ["apply.cerType.passport","apply.cerType.drLicence"]
         return view
     }()
     
     private lazy var cerNumTextField: UITextField = {
         let textField = UITextField(frame: CGRect.init(x: 0, y: 0, width: 300, height: 30))
         textField.borderStyle = UITextField.BorderStyle.none
-        textField.placeholder  = "证件号码"
+        textField.placeholder  = LanguageHelper.getString(key: "apply.item.cerNo")
         textField.font = kFont(size: 15)
         //        textField.keyboardType = UIKeyboardType.numberPad
         //        textField.delegate = self
@@ -129,7 +129,7 @@ class CertifApplyController: UIViewController,JHNavigationBarDelegate,UIImagePic
         return view
     }()
     
-    private lazy var cerPicLabel: UILabel = UILabel.cz_label(withText: "上传证件图片", fontSize: kResizedFont(ft: 15), color: kFontColorGray)
+    private lazy var cerPicLabel: UILabel = UILabel.cz_label(withText: LanguageHelper.getString(key: "apply.item.uploadCerPic"), fontSize: kResizedFont(ft: 15), color: kFontColorGray)
     
     lazy var cerPicImageView: UIImageView = {
         let img = UIImageView()
@@ -153,7 +153,7 @@ class CertifApplyController: UIViewController,JHNavigationBarDelegate,UIImagePic
     
   
     
-    private lazy var passportPicLabel: UILabel = UILabel.cz_label(withText: "上传签证图片", fontSize: kResizedFont(ft: 15), color: kFontColorGray)
+    private lazy var passportPicLabel: UILabel = UILabel.cz_label(withText: LanguageHelper.getString(key: "apply.item.uploadPassportPic"), fontSize: kResizedFont(ft: 15), color: kFontColorGray)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -181,6 +181,8 @@ class CertifApplyController: UIViewController,JHNavigationBarDelegate,UIImagePic
         self.scrollview.addSubview(self.passPicImageView)
         
         self.subViewsLayout()
+        
+        self.loadData()
     }
     
     func loadData(){
@@ -200,10 +202,33 @@ class CertifApplyController: UIViewController,JHNavigationBarDelegate,UIImagePic
             
             let user = Mapper<ZB_User>().map(JSON: dic as! [String : Any])
             self.user = user
-            self.configData()
+//            self.configData()
             
         }) { (data, errMsg) in
             MBProgressHUD.hide(for: self.view, animated: true)
+            self.view.makeToast(errMsg, duration: 2, position: CSToastPositionCenter)
+            
+            
+        }
+        
+        
+        //city
+        let params_1 = [:] as [String : Any]
+        NetWorkManager.shared.loadRequest(method: .get, url: ApplyCityUrl, parameters: params_1 as [String : Any], success: { (data) in
+         
+
+            let resultDic = data as! Dictionary<String,AnyObject>
+            let arr = resultDic["data"]
+            if arr == nil {
+                return
+            }
+            let citys:[String] = arr as! [String]
+            
+            self.dropdownView2.contentLabel.text = citys[0]
+            self.dropdownView2.dataArray = citys
+        
+            
+        }) { (data, errMsg) in
             self.view.makeToast(errMsg, duration: 2, position: CSToastPositionCenter)
             
             
@@ -381,7 +406,79 @@ class CertifApplyController: UIViewController,JHNavigationBarDelegate,UIImagePic
         self.navigationController?.popViewController(animated: true)
     }
     
+    
     func rightAction() {
+        //提交
+        /*{
+         "nationality": "string",
+         "sex": "man",
+         "userImgUrl": "string",
+         "userName": "string",
+         "validNo": "string",
+         "validNoImgUrl": "string",
+         "validType": "string",
+         "visaImgUrl": "string",
+         "workCity": "string"
+         }
+         */
+        
+        if self.nameTextField.text?.count == 0 {
+            self.view.makeToast("name is nil", duration: 2, position: CSToastPositionCenter)
+            return
+            
+        }
+        
+        if userIconUrl == "" {
+            self.view.makeToast("userIcon is nil", duration: 2, position: CSToastPositionCenter)
+            return
+            
+        }
+        
+        if self.cerNumTextField.text?.count == 0 {
+            self.view.makeToast("ID Number is nil", duration: 2, position: CSToastPositionCenter)
+            return
+            
+        }
+        
+        if certiPicUrl == "" {
+            self.view.makeToast("ID picture is nil", duration: 2, position: CSToastPositionCenter)
+            return
+            
+        }
+        
+        if passPortPicUrl == "" {
+            self.view.makeToast("passport picture is nil", duration: 2, position: CSToastPositionCenter)
+            return
+            
+        }
+    
+        var sex = ""
+        if self.secSegment.selectedSegmentIndex == 0 {
+            sex = LanguageHelper.getString(key: "apply.sex.man")
+        }else{
+            sex = LanguageHelper.getString(key: "apply.sex.woman")
+        }
+        
+        
+        let params = ["nationality": self.dropdownView1.contentLabel.text as Any,"sex": sex,"userImgUrl": userIconUrl,"userName": self.nameTextField.text as Any,"validNo": self.cerNumTextField.text as Any,"validNoImgUrl": certiPicUrl,"validType": self.dropdownView3.contentLabel.text as Any,"visaImgUrl": passPortPicUrl,"workCity": self.dropdownView2.contentLabel.text as Any] as [String : Any]
+        
+        MBProgressHUD.showAdded(to: self.view, animated: true)
+        NetWorkManager.shared.loadRequest(method: .post, url: ApplyUrl, parameters: params as [String : Any], success: { (data) in
+            MBProgressHUD.hide(for: self.view, animated: true)
+            
+            
+            let resultDic = data as! Dictionary<String,AnyObject>
+            let dic = resultDic["data"]
+            if dic == nil {
+                return
+            }
+            
+        }) { (data, errMsg) in
+            MBProgressHUD.hide(for: self.view, animated: true)
+            self.view.makeToast(errMsg, duration: 2, position: CSToastPositionCenter)
+            
+            
+        }
         
     }
     

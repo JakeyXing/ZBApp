@@ -138,7 +138,24 @@ func getUserStatus() -> ZB_UserStatus{
     
     let userStaus = ZB_UserStatus(rawValue: status)
     return userStaus ?? .registred
-    
+}
+
+
+
+func getCurrentLangParam() -> String {
+    var lang = ""
+    let langueStr = LanguageHelper.shareInstance.currentLanguageFileName ?? ""
+    switch langueStr {
+    case "zh-Hant":
+        lang = "ZH"
+    case "ja":
+        lang = "JA"
+    case "en":
+        lang = "EN"
+    default:
+        lang = "ZH"
+    }
+    return lang
 }
 
 //按iPhone6尺寸来

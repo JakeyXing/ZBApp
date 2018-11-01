@@ -15,6 +15,7 @@ class LanguageHelper: NSObject {
     static let shareInstance = LanguageHelper()
     let def = UserDefaults.standard
     var bundle : Bundle?
+    var currentLanguageFileName : String?
     
     
     class func getString(key:String) -> String{
@@ -38,15 +39,20 @@ class LanguageHelper: NSObject {
         }
         string = string.replacingOccurrences(of: "-CN", with: "")
         string = string.replacingOccurrences(of: "-US", with: "")
+        currentLanguageFileName = string
         var path = Bundle.main.path(forResource:string , ofType: "lproj")
         if path == nil {
-            path = Bundle.main.path(forResource:"en" , ofType: "lproj")
+//            path = Bundle.main.path(forResource:"en" , ofType: "lproj")
+            
+            //默认繁体
+            currentLanguageFileName = "zh-Hant"
+            path = Bundle.main.path(forResource:"zh-Hant" , ofType: "lproj")
         }
         bundle = Bundle(path: path!)
     }
     
     func setLanguage(langeuage:String) {
-        
+        currentLanguageFileName = langeuage
         let path = Bundle.main.path(forResource:langeuage , ofType: "lproj")
         bundle = Bundle(path: path!)
         def.set(langeuage, forKey: UserLanguage)
