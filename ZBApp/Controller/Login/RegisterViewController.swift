@@ -141,8 +141,10 @@ class RegisterViewController: UIViewController,BEMCheckBoxDelegate {
         let str:String = self.areaDropdownView.contentLabel.text ?? ""
         let countryCode :String = String(str[str.index(str.startIndex, offsetBy: 1)..<str.endIndex])
         
+        let passMd5 = self.passwordTextfield.text?.md5WithSalt(salt: self.phoneTextfield.text!)
+        
         let code = Int(self.vertyCodeTextfield.text ?? "0")
-        let params = ["countryCode":countryCode,"phone":self.phoneTextfield.text!,"password":self.passwordTextfield.text!,"vertyCode":self.vertyCodeTextfield.text!,"code":code!] as [String : Any]
+        let params = ["countryCode":countryCode,"phone":self.phoneTextfield.text!,"password":passMd5!,"vertyCode":self.vertyCodeTextfield.text!,"code":code!] as [String : Any]
         
         MBProgressHUD.showAdded(to: self.view, animated: true)
         NetWorkManager.shared.loadNoTokenRequest(method: .post, url: RegisterUrl, parameters: params as [String : Any], success: { (data) in
@@ -156,13 +158,13 @@ class RegisterViewController: UIViewController,BEMCheckBoxDelegate {
             
             setUserInfo(info: resultDic["data"] as! Dictionary<String, Any>)
             
+            let sharedAppdelegate:AppDelegate = UIApplication.shared.delegate as! AppDelegate
             if getUserStatus() == .review_pass{
-                let sharedAppdelegate:AppDelegate = UIApplication.shared.delegate as! AppDelegate
                 sharedAppdelegate.window?.rootViewController = sharedAppdelegate.mainTabBarVc
             }else{
                 let reply = CertifApplyController()
-                reply.hidesBottomBarWhenPushed = true
-                self.navigationController?.pushViewController(reply, animated: true)
+                let naviVC = UINavigationController(rootViewController: reply)
+                sharedAppdelegate.window?.rootViewController = naviVC
             }
             
         }) { (data, errMsg) in

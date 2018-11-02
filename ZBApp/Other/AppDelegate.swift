@@ -30,18 +30,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let accessToken = getAccessToken()
 
-//        let isLogin = accessToken == "" ? false : true
-//        if isLogin {
-//            self.window?.rootViewController = mainTabBarVc
-//        }else{
-//            let loginVC = LoginViewController()
-//            let naviVC = UINavigationController(rootViewController: loginVC)
-//
-//            self.window?.rootViewController = naviVC
-//        }
-        let demo = DemoViewController()
-        let naviVC = UINavigationController(rootViewController: demo)
-        self.window?.rootViewController = naviVC
+        let isLogin = accessToken == "" ? false : true
+        if isLogin {
+            if getUserStatus() == .review_pass{
+                self.window?.rootViewController = mainTabBarVc
+            }else{
+                let reply = CertifApplyController()
+                let naviVC = UINavigationController(rootViewController: reply)
+                self.window?.rootViewController = naviVC
+            }
+    
+        }else{
+            let loginVC = LoginViewController()
+            let naviVC = UINavigationController(rootViewController: loginVC)
+
+            self.window?.rootViewController = naviVC
+        }
+//        let demo = DemoViewController()
+//        let naviVC = UINavigationController(rootViewController: demo)
+//        self.window?.rootViewController = naviVC
         
         self.window?.makeKeyAndVisible()
         

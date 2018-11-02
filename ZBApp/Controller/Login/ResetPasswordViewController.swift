@@ -118,6 +118,7 @@ class ResetPasswordViewController: UIViewController,BEMCheckBoxDelegate {
         remainingSeconds -= 1
     }
     
+    //提交
     @IBAction func submitAction(_ sender: Any) {
         if self.phoneTextfield.text?.count == 0 {
             self.view.makeToast(LanguageHelper.getString(key: "login.pageItem.phoneTip"), duration: 2, position: CSToastPositionCenter)
@@ -137,11 +138,12 @@ class ResetPasswordViewController: UIViewController,BEMCheckBoxDelegate {
             
         }
         
-        let params = ["countryCode":self.areaDropdownView.contentLabel.text,"phone":self.phoneTextfield.text,"password":self.passwordTextfield.text,"vertyCode":self.vertyCodeTextfield.text]
+        let passMd5 = self.passwordTextfield.text?.md5WithSalt(salt: self.phoneTextfield.text!)
+        
+        let params = ["countryCode":self.areaDropdownView.contentLabel.text,"phone":self.phoneTextfield.text,"password":passMd5,"vertyCode":self.vertyCodeTextfield.text]
         
         MBProgressHUD.showAdded(to: self.view, animated: true)
         NetWorkManager.shared.loadNoTokenRequest(method: .post, url: ResetPassUrl, parameters: params as [String : Any], success: { (data) in
-            
             MBProgressHUD.hide(for: self.view, animated: true)
             
         }) { (data, errMsg) in

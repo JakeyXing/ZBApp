@@ -37,6 +37,7 @@ class CertifApplyController: UIViewController,JHNavigationBarDelegate,UIImagePic
         view.editButton.setTitle(LanguageHelper.getString(key: "apply.nav.submit"), for: .normal)
         view.editButton.setTitleColor(kTintColorYellow, for: .normal)
         view.delegate = self
+        view.backButton.isHidden = true
         return view
     }()
     
@@ -202,7 +203,7 @@ class CertifApplyController: UIViewController,JHNavigationBarDelegate,UIImagePic
             
             let user = Mapper<ZB_User>().map(JSON: dic as! [String : Any])
             self.user = user
-//            self.configData()
+            self.configData()
             
         }) { (data, errMsg) in
             MBProgressHUD.hide(for: self.view, animated: true)
@@ -409,18 +410,7 @@ class CertifApplyController: UIViewController,JHNavigationBarDelegate,UIImagePic
     
     func rightAction() {
         //提交
-        /*{
-         "nationality": "string",
-         "sex": "man",
-         "userImgUrl": "string",
-         "userName": "string",
-         "validNo": "string",
-         "validNoImgUrl": "string",
-         "validType": "string",
-         "visaImgUrl": "string",
-         "workCity": "string"
-         }
-         */
+ 
         
         if self.nameTextField.text?.count == 0 {
             self.view.makeToast("name is nil", duration: 2, position: CSToastPositionCenter)
@@ -472,6 +462,11 @@ class CertifApplyController: UIViewController,JHNavigationBarDelegate,UIImagePic
             if dic == nil {
                 return
             }
+            
+            setUserStatus(status: dic?["userStatus"] as! String)
+            let user = Mapper<ZB_User>().map(JSON: dic as! [String : Any])
+            self.user = user
+            self.configData()
             
         }) { (data, errMsg) in
             MBProgressHUD.hide(for: self.view, animated: true)
