@@ -43,16 +43,16 @@ class PersonalInfoController: UIViewController,JHNavigationBarDelegate,UIImagePi
     }()
     
     private lazy var nameTitleLabel: UILabel = UILabel.cz_label(withText: LanguageHelper.getString(key: "personal.base.name"), fontSize: kResizedFont(ft: 15), color: kFontColorGray)
-    private lazy var nameLabel: UILabel = UILabel.cz_label(withText: "岸谷雄一", fontSize: kResizedFont(ft: 15), color: kFontColorGray)
+    private lazy var nameLabel: UILabel = UILabel.cz_label(withText: "", fontSize: kResizedFont(ft: 15), color: kFontColorGray)
     
     private lazy var sexTitleLabel: UILabel = UILabel.cz_label(withText: LanguageHelper.getString(key: "personal.base.sex"), fontSize: kResizedFont(ft: 15), color: kFontColorGray)
-    private lazy var sexLabel: UILabel = UILabel.cz_label(withText: "男", fontSize: kResizedFont(ft: 15), color: kFontColorGray)
+    private lazy var sexLabel: UILabel = UILabel.cz_label(withText: "", fontSize: kResizedFont(ft: 15), color: kFontColorGray)
     
     private lazy var nationTitleLabel: UILabel = UILabel.cz_label(withText: LanguageHelper.getString(key: "personal.base.natonalty"), fontSize: kResizedFont(ft: 15), color: kFontColorGray)
-    private lazy var nationLabel: UILabel = UILabel.cz_label(withText: "日本", fontSize: kResizedFont(ft: 15), color: kFontColorGray)
+    private lazy var nationLabel: UILabel = UILabel.cz_label(withText: "", fontSize: kResizedFont(ft: 15), color: kFontColorGray)
     
     private lazy var cityTitleLabel: UILabel = UILabel.cz_label(withText: LanguageHelper.getString(key: "personal.base.city"), fontSize: kResizedFont(ft: 15), color: kFontColorGray)
-    private lazy var cityLabel: UILabel = UILabel.cz_label(withText: "东京", fontSize: kResizedFont(ft: 15), color: kFontColorGray)
+    private lazy var cityLabel: UILabel = UILabel.cz_label(withText: "", fontSize: kResizedFont(ft: 15), color: kFontColorGray)
     private lazy var cerTitleLabel: UILabel = {
         let type = UILabel()
         type.font = kMediumFont(size: 16)
@@ -67,7 +67,7 @@ class PersonalInfoController: UIViewController,JHNavigationBarDelegate,UIImagePi
     }()
     
     private lazy var cerTypeTitleLabel: UILabel = UILabel.cz_label(withText: LanguageHelper.getString(key: "personal.ideti.idType"), fontSize: kResizedFont(ft: 15), color: kFontColorGray)
-    private lazy var cerTypeLabel: UILabel = UILabel.cz_label(withText: "身份证", fontSize: kResizedFont(ft: 15), color: kFontColorGray)
+    private lazy var cerTypeLabel: UILabel = UILabel.cz_label(withText: "", fontSize: kResizedFont(ft: 15), color: kFontColorGray)
     
     private lazy var cerNumTitleLabel: UILabel = UILabel.cz_label(withText: LanguageHelper.getString(key: "personal.ideti.idNum"), fontSize: kResizedFont(ft: 15), color: kFontColorGray)
     private lazy var cerNumLabel: UILabel = UILabel.cz_label(withText: "2356778900", fontSize: kResizedFont(ft: 15), color: kFontColorGray)

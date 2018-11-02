@@ -22,7 +22,7 @@ class CheckView: UIView {
         let lab = UILabel()
         lab.textColor = kFontColorGray
         lab.font = kFont(size: 15)
-        lab.text = "非常好呀非常好呀非常好呀非常好呀非常好呀非常好呀非常好呀非常好呀非常好呀非常好呀非常好呀非常好呀"
+        lab.text = ""
         lab.numberOfLines = 0
         return lab
         

@@ -57,7 +57,7 @@ class RoomInfoView: UIView {
         lab.textColor = kFontColorGray
         lab.font = kFont(size: 15)
         lab.numberOfLines = 0
-        lab.text = "多加一条被子多加一条被子多加一条被子多加一条被子多加一条被子"
+        lab.text = ""
         return lab
         
     }()

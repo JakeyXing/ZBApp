@@ -16,7 +16,7 @@ class SettingViewController: UIViewController,JHNavigationBarDelegate {
     private lazy var navigationBar: JHNavigationBar = {
         let view = JHNavigationBar(frame: CGRect.init(x: 0, y: 0, width: 0, height: 0))
         view.backgroundColor = UIColor.white
-        view.titleLabel.text = "设置"
+        view.titleLabel.text = LanguageHelper.getString(key: "mine.btns.setting")
         view.delegate = self
         return view
     }()
@@ -27,7 +27,7 @@ class SettingViewController: UIViewController,JHNavigationBarDelegate {
         return view
     }()
     
-    private lazy var nLabel: UILabel = UILabel.cz_label(withText: "语言版本", fontSize: kResizedFont(ft: 15), color: kFontColorGray)
+    private lazy var nLabel: UILabel = UILabel.cz_label(withText: LanguageHelper.getString(key: "setting.langue.title"), fontSize: kResizedFont(ft: 15), color: kFontColorGray)
     
     private lazy var nDropdownView: JHDropdownView = {
         let view = JHDropdownView(frame: CGRect.init())
@@ -37,12 +37,11 @@ class SettingViewController: UIViewController,JHNavigationBarDelegate {
         return view
     }()
     
-    
     lazy var cleaneCacheButton: UIButton = {
         let btn = UIButton(type: UIButton.ButtonType.custom)
         btn.setTitleColor(UIColor.white, for: UIControl.State.normal)
         btn.backgroundColor = kTintColorYellow
-        btn.setTitle("清除缓存", for: .normal)
+        btn.setTitle(LanguageHelper.getString(key: "setting.btn.cleanCache"), for: .normal)
         btn.titleLabel?.font = kFont(size: 16)
         btn.addTarget(self, action: #selector(cleanAction), for: UIControl.Event.touchUpInside)
         return btn
@@ -52,7 +51,7 @@ class SettingViewController: UIViewController,JHNavigationBarDelegate {
         let btn = UIButton(type: UIButton.ButtonType.custom)
         btn.setTitleColor(UIColor.white, for: UIControl.State.normal)
         btn.backgroundColor = kTintColorYellow
-        btn.setTitle("退出应用", for: .normal)
+        btn.setTitle(LanguageHelper.getString(key: "setting.btn.exit"), for: .normal)
         btn.titleLabel?.font = kFont(size: 16)
         btn.addTarget(self, action: #selector(loginoutAction), for: UIControl.Event.touchUpInside)
         return btn
@@ -62,7 +61,7 @@ class SettingViewController: UIViewController,JHNavigationBarDelegate {
         let btn = UIButton(type: UIButton.ButtonType.custom)
         btn.setTitleColor(UIColor.white, for: UIControl.State.normal)
         btn.backgroundColor = kTintColorYellow
-        btn.setTitle("保存并重启应用", for: .normal)
+        btn.setTitle(LanguageHelper.getString(key: "setting.btn.saveAndRestart"), for: .normal)
         btn.titleLabel?.font = kFont(size: 16)
         btn.addTarget(self, action: #selector(sureAction), for: UIControl.Event.touchUpInside)
         return btn

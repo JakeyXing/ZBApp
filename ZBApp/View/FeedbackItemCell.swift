@@ -16,7 +16,7 @@ class FeedbackItemCell: UITableViewCell {
         require.font = kFont(size: 13)
         require.textColor = kFontColorGray;
         require.textAlignment = NSTextAlignment.right
-        require.text = "日志呀日志呀日志呀日志呀日志呀日志呀"
+        require.text = "aaaaaaaaaa"
         return require
     }()
     

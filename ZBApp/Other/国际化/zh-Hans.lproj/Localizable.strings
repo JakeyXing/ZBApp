@@ -93,6 +93,8 @@
 "detail.password.pageTitle" = "开锁密码";
 "detail.route.pageTitle" = "路引";
 
+"detail.log.pageTitle" = "日志";
+
 "mission.select.time" = "任务日期";
 "mission.select.invalid" = "仅无效订单";
 
@@ -151,6 +153,11 @@
 "apply.item.uploadPassportPic" = "上传签证图片";
 "apply.sex.man" = "男";
 "apply.sex.woman" = "女";
+
+"setting.langue.title" = "语言版本";
+"setting.btn.cleanCache" = "清除缓存";
+"setting.btn.exit" = "退出应用";
+"setting.btn.saveAndRestart" = "保存并重启应用";
 
 "tabBar.title.pending" = "待抢任务";
 "tabBar.title.execute" = "我的任务";

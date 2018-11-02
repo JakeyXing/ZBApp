@@ -27,7 +27,7 @@ class PersonalViewController: UIViewController {
         return img
     }()
     
-     private lazy var nameLabel: UILabel = UILabel.cz_label(withText: "岸谷雄一", fontSize: kResizedFont(ft: 15), color: kFontColorGray)
+     private lazy var nameLabel: UILabel = UILabel.cz_label(withText: "", fontSize: kResizedFont(ft: 15), color: kFontColorGray)
     
     private lazy var star:StarView = StarView()
     

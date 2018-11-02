@@ -14,11 +14,11 @@ class MissionCell: UITableViewCell {
     private var model: ZB_Task?
     private lazy var timeLabel: UILabel = UILabel.cz_label(withText: "2018-07-22", fontSize: kResizedFont(ft: 16), color: kFontColorGray)
     
-    private lazy var priceLabel: UILabel = UILabel.cz_label(withText: "2300~3500", fontSize: kResizedFont(ft: 16), color: kTintColorYellow)
+    private lazy var priceLabel: UILabel = UILabel.cz_label(withText: "", fontSize: kResizedFont(ft: 16), color: kTintColorYellow)
     
     private lazy var unitLabel: UILabel = UILabel.cz_label(withText: "JPY", fontSize: kResizedFont(ft: 16), color: kFontColorGray)
     
-    private lazy var locaLabel: UILabel = UILabel.cz_label(withText: "浪速区大国", fontSize: 15, color: kFontColorGray)
+    private lazy var locaLabel: UILabel = UILabel.cz_label(withText: "", fontSize: 15, color: kFontColorGray)
     private lazy var roomNoLabel: UILabel = UILabel.cz_label(withText: "", fontSize: 15, color: kFontColorGray)
     
 
@@ -33,7 +33,7 @@ class MissionCell: UITableViewCell {
         require.font = kFont(size: 13)
         require.textColor = kFontColorGray;
         require.textAlignment = NSTextAlignment.right
-        require.text = "完成任务，经检查合格且无客诉，可额外获得1300JPY"
+        require.text = ""
         return require
     }()
     
@@ -43,13 +43,13 @@ class MissionCell: UITableViewCell {
         type.textColor = kFontColorGray_177;
         type.textAlignment = NSTextAlignment.center
         type.backgroundColor = UIColor.white
-        type.text = "清扫"
+        type.text = ""
         return type
     }()
     
     private lazy var numLabel: UILabel = UILabel.cz_label(withText: "8+1/10", fontSize: 14, color: kFontColorGray)
     
-    private lazy var stateLabel: UILabel = UILabel.cz_label(withText: "待开始", fontSize: 14, color: kFontColorGray)
+    private lazy var stateLabel: UILabel = UILabel.cz_label(withText: "", fontSize: 14, color: kFontColorGray)
     
     private lazy var bottomCapView: UIView = {
         let view = UIView()

@@ -194,7 +194,7 @@ extension HomeViewController:UITableViewDelegate,UITableViewDataSource,JHDropdow
             clean.hidesBottomBarWhenPushed = true
             self.navigationController?.pushViewController(clean, animated: true)
         default:
-            print("未知类型")
+            print("unkonw type")
         }
         
         

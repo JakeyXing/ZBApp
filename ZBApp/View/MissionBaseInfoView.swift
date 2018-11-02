@@ -13,7 +13,7 @@ class MissionBaseInfoView: UIView {
 
     //MARK: - 控件
     
-    private lazy var statusLabel: UILabel = UILabel.cz_label(withText: "已完成", fontSize: kResizedFont(ft: 15), color: kFontColorGray)
+    private lazy var statusLabel: UILabel = UILabel.cz_label(withText: "", fontSize: kResizedFont(ft: 15), color: kFontColorGray)
     
     lazy var contentView: UIView = {
         let content = UIView()
@@ -29,12 +29,12 @@ class MissionBaseInfoView: UIView {
         lab.textAlignment = NSTextAlignment.center
         lab.font = kFont(size: 16)
         lab.backgroundColor = kTintColorYellow
-        lab.text = "搬场"
+        lab.text = ""
         return lab
         
     }()
     
-    private lazy var timeLabel: UILabel = UILabel.cz_label(withText: "9:00-18:00(休息1h)", fontSize: kResizedFont(ft: 15), color: kFontColorGray)
+    private lazy var timeLabel: UILabel = UILabel.cz_label(withText: "", fontSize: kResizedFont(ft: 15), color: kFontColorGray)
     
     lazy var starImage_1: UIImageView = {
         let img = UIImageView()

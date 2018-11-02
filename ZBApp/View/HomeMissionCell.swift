@@ -18,7 +18,7 @@ class HomeMissionCell: UITableViewCell {
     
     private lazy var unitLabel: UILabel = UILabel.cz_label(withText: "JPY", fontSize: kResizedFont(ft: 16), color: kFontColorGray)
     
-    private lazy var locaLabel: UILabel = UILabel.cz_label(withText: "浪速区大国", fontSize: 15, color: kFontColorGray)
+    private lazy var locaLabel: UILabel = UILabel.cz_label(withText: "", fontSize: 15, color: kFontColorGray)
     private lazy var roomNoLabel: UILabel = UILabel.cz_label(withText: "", fontSize: 15, color: kFontColorGray)
     
 
@@ -43,7 +43,7 @@ class HomeMissionCell: UITableViewCell {
         type.textColor = kFontColorGray_177;
         type.textAlignment = NSTextAlignment.center
         type.backgroundColor = UIColor.white
-        type.text = "清扫"
+        type.text = ""
         return type
     }()
     

@@ -41,7 +41,7 @@ class CleanMissionDetailViewController: MissionDetailBaseViewController,CleanPic
         btn.frame = CGRect.init(x: DEVICE_WIDTH/2-kResizedPoint(pt: 140), y: self.uploadView.bottom+kResizedPoint(pt: 30), width: 280, height: kResizedPoint(pt: 30))
         btn.setTitleColor(UIColor.white, for: UIControl.State.normal)
         btn.backgroundColor = kTintColorYellow
-        btn.setTitle("提交", for: .normal)
+        btn.setTitle(LanguageHelper.getString(key: "apply.nav.submit"), for: .normal)
         btn.titleLabel?.font = kFont(size: 16)
         btn.addTarget(self, action: #selector(takeAction), for: UIControl.Event.touchUpInside)
         return btn

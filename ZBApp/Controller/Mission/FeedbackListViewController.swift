@@ -18,7 +18,7 @@ class FeedbackListViewController: UIViewController,JHNavigationBarDelegate {
         let view = JHNavigationBar(frame: CGRect.init(x: 0, y: 0, width: 0, height: 0))
         view.backgroundColor = UIColor.white
         view.delegate = self
-        view.titleLabel.text = "日志"
+        view.titleLabel.text = LanguageHelper.getString(key: "detail.log.pageTitle")
         return view
     }()
 

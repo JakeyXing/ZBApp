@@ -63,7 +63,7 @@ extension MissionSegmentBar{
     //MARK: - private methods
     
     func initView(){
-        titleArr = ["待开始","进行中","已完成","已取消"]
+        titleArr = [LanguageHelper.getString(key: "detail.status.ready"),LanguageHelper.getString(key: "detail.status.started"),LanguageHelper.getString(key: "detail.status.finished"),LanguageHelper.getString(key: "detail.status.canceled")]
     
         var left = kResizedPoint(pt: 26)
         

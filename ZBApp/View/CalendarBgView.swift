@@ -27,7 +27,7 @@ class CalendarBgView: UIView {
         lab.textColor = RGBCOLOR(r: 46, 46, 46)
         lab.textAlignment = NSTextAlignment.center
         lab.font = kFont(size: 16)
-        lab.text = "选择日期"
+        lab.text = LanguageHelper.getString(key: "home.navi.time")
         return lab
         
     }()
@@ -36,7 +36,7 @@ class CalendarBgView: UIView {
         let btn = UIButton(type: UIButton.ButtonType.custom)
         btn.setTitleColor(kTintColorYellow, for: UIControl.State.normal)
         btn.titleLabel?.font = kFont(size: 15)
-        btn.setTitle("取消", for:  UIControl.State.normal)
+        btn.setTitle(LanguageHelper.getString(key: "detail.repairUploadAction.cancel"), for:  UIControl.State.normal)
         btn.addTarget(self, action: #selector(cancelAction), for: UIControl.Event.touchUpInside)
         return btn
     }()
@@ -45,7 +45,7 @@ class CalendarBgView: UIView {
         let btn = UIButton(type: UIButton.ButtonType.custom)
         btn.setTitleColor(kTintColorYellow, for: UIControl.State.normal)
         btn.titleLabel?.font = kFont(size: 15)
-        btn.setTitle("确定", for:  UIControl.State.normal)
+        btn.setTitle(LanguageHelper.getString(key: "common.btnTitle.sure"), for:  UIControl.State.normal)
         btn.addTarget(self, action: #selector(sureAction), for: UIControl.Event.touchUpInside)
         return btn
     }()
