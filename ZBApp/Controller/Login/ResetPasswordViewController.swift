@@ -15,10 +15,10 @@ class ResetPasswordViewController: UIViewController,BEMCheckBoxDelegate {
 
     var remainingSeconds = 0 {
         willSet {
-            self.sendCodeButton.setTitle("\(newValue)秒后重新获取", for: .normal)
+            self.sendCodeButton.setTitle("\(newValue)", for: .normal)
             
             if newValue <= 0 {
-                self.sendCodeButton.setTitle("发送验证码", for: .normal)
+                self.sendCodeButton.setTitle(LanguageHelper.getString(key: "register.pageItem.sendCode"), for: .normal)
                 isCounting = false
             }
         }
@@ -42,7 +42,11 @@ class ResetPasswordViewController: UIViewController,BEMCheckBoxDelegate {
         }
     }
     
-    
+    @IBOutlet weak var showPassLabel: UILabel!
+    @IBOutlet weak var navTitleLabel: UILabel!
+    @IBOutlet weak var areaCodeTitleLabel: UILabel!
+    @IBOutlet weak var codeTitleLabel: UILabel!
+    @IBOutlet weak var passTitleLabel: UILabel!
     
     @IBOutlet weak var areaDropdownView: JHDropdownView!
     
@@ -53,7 +57,21 @@ class ResetPasswordViewController: UIViewController,BEMCheckBoxDelegate {
     @IBOutlet weak var sendCodeButton: UIButton!
     
     @IBOutlet weak var submitButton: UIButton!
-    
+    //    "login.pageItem.areaCode" = "国际区号";
+    //    "login.pageItem.phone" = "手机号";
+    //    "login.pageItem.phoneTip" = "请输入手机号";
+    //    "login.pageItem.password" = "密码";
+    //    "login.pageItem.passwordTip" = "请输入密码";
+    //    "login.pageItem.showPassword" = "显示密码";
+    //    "login.pageItem.register" = "注册";
+    //    "login.pageItem.resetPass" = "找回密码";
+    //
+    //    "register.pageItem.code" = "验证码";
+    //    "register.pageItem.sendCode" = "发送验证码";
+    //    "register.pageItem.sendCodeTip" = "请输入验证码";
+    //
+    //    "register.pageItem.password" = "设置密码";
+    //    "register.pageItem.passwordTip" = "请设置密码";
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -62,10 +80,21 @@ class ResetPasswordViewController: UIViewController,BEMCheckBoxDelegate {
         self.checkbox.onTintColor = kTintColorYellow
         self.checkbox.onCheckColor = UIColor.white
         self.checkbox.delegate = self
+        self.navTitleLabel.text = LanguageHelper.getString(key: "login.pageItem.resetPass")
+        self.areaCodeTitleLabel.text = LanguageHelper.getString(key: "login.pageItem.areaCode")
+        self.codeTitleLabel.text = LanguageHelper.getString(key: "register.pageItem.code")
+        self.passTitleLabel.text = LanguageHelper.getString(key: "register.pageItem.password")
+        self.phoneTextfield.placeholder = LanguageHelper.getString(key: "login.pageItem.phone")
+        self.vertyCodeTextfield.placeholder = LanguageHelper.getString(key: "register.pageItem.sendCodeTip")
+        self.passwordTextfield.placeholder = LanguageHelper.getString(key: "register.pageItem.passwordTip")
+        self.showPassLabel.text = LanguageHelper.getString(key: "login.pageItem.showPassword")
+        
+        self.sendCodeButton.setTitle(LanguageHelper.getString(key: "register.pageItem.sendCode"), for: .normal)
+        self.submitButton.setTitle(LanguageHelper.getString(key: "apply.nav.submit"), for: .normal)
         
         self.areaDropdownView.contentLabel.text = "+86"
         self.areaDropdownView.contentLabel.textColor = kFontColorBlack
-        self.areaDropdownView.dataArray = ["+86","+81"]
+        self.areaDropdownView.dataArray = ["+86","+81","+61"]
         self.areaDropdownView.extraTop = 0
        
     }
@@ -73,18 +102,19 @@ class ResetPasswordViewController: UIViewController,BEMCheckBoxDelegate {
 
     @IBAction func sendVerCodeAction(_ sender: Any) {
         if self.phoneTextfield.text?.count == 0 {
-            self.view.makeToast("请输入手机号", duration: 2, position: CSToastPositionCenter)
+            self.view.makeToast(LanguageHelper.getString(key: "login.pageItem.phoneTip"), duration: 2, position: CSToastPositionCenter)
             return
+            
         }
         
         if self.vertyCodeTextfield.text?.count == 0 {
-            self.view.makeToast("请输入验证码", duration: 2, position: CSToastPositionCenter)
+            self.view.makeToast(LanguageHelper.getString(key: "register.pageItem.sendCodeTip"), duration: 2, position: CSToastPositionCenter)
             return
             
         }
         
         if self.passwordTextfield.text?.count == 0 {
-            self.view.makeToast("请输入密码", duration: 2, position: CSToastPositionCenter)
+            self.view.makeToast(LanguageHelper.getString(key: "login.pageItem.passwordTip"), duration: 2, position: CSToastPositionCenter)
             return
             
         }

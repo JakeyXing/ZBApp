@@ -12,13 +12,16 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LoginViewController" customModule="ZBApp" customModuleProvider="target">
             <connections>
+                <outlet property="areaCodeTitleLabel" destination="eRM-jM-KXe" id="vEi-V1-Sba"/>
                 <outlet property="areaDropdownView" destination="qNt-4g-t2w" id="V9Q-Xl-bwJ"/>
                 <outlet property="checkbox" destination="mgp-kb-vw9" id="S6G-GX-T83"/>
                 <outlet property="loginButton" destination="2sA-fd-ZiR" id="fKY-dA-rTe"/>
+                <outlet property="navTitleLabel" destination="PWy-9o-d7R" id="thz-jr-rop"/>
                 <outlet property="passwordTextfield" destination="PDB-7t-tuK" id="NAC-sJ-574"/>
                 <outlet property="phoneTextfield" destination="4Y9-rg-HbH" id="627-0w-pyj"/>
                 <outlet property="registerButton" destination="hCG-TI-i8m" id="DRT-yd-v5f"/>
                 <outlet property="resetPasswordButton" destination="s9t-P3-5sl" id="kU7-Ig-w9h"/>
+                <outlet property="showPassLabel" destination="Qjt-ae-UyN" id="Es4-9H-4Qb"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>

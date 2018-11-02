@@ -104,7 +104,9 @@
 "login.nav.title" = "登录";
 "login.pageItem.areaCode" = "国际区号";
 "login.pageItem.phone" = "手机号";
+"login.pageItem.phoneTip" = "请输入手机号";
 "login.pageItem.password" = "密码";
+"login.pageItem.passwordTip" = "请输入密码";
 "login.pageItem.showPassword" = "显示密码";
 "login.pageItem.register" = "注册";
 "login.pageItem.resetPass" = "找回密码";

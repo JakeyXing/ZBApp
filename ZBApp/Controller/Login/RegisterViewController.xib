@@ -12,12 +12,17 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RegisterViewController" customModule="ZBApp" customModuleProvider="target">
             <connections>
+                <outlet property="areaCodeTitleLabel" destination="sje-qg-cwM" id="3Yh-3V-HTJ"/>
                 <outlet property="areaDropdownView" destination="fyo-fh-AXK" id="wgn-1X-cL0"/>
                 <outlet property="checkbox" destination="Nuo-kS-Fb9" id="jVh-oR-Gfa"/>
+                <outlet property="codeTitleLabel" destination="Eft-pN-ISr" id="rtG-fl-X3Z"/>
+                <outlet property="navTitleLabel" destination="nqZ-14-BUT" id="ohy-OI-ZgY"/>
+                <outlet property="passTitleLabel" destination="XX9-6L-KYv" id="v1R-iq-UFy"/>
                 <outlet property="passwordTextfield" destination="05u-RS-DVy" id="cfG-Cb-asd"/>
                 <outlet property="phoneTextfield" destination="4hp-KA-icE" id="ZUg-9G-CXJ"/>
                 <outlet property="registerButton" destination="Gv6-ah-e52" id="Ei0-iZ-Utz"/>
                 <outlet property="sendCodeButton" destination="CJr-Rn-yqp" id="e0r-Zo-XKT"/>
+                <outlet property="showPassLabel" destination="xZw-00-O0V" id="TjD-zW-GhA"/>
                 <outlet property="vertyCodeTextfield" destination="mhB-QM-4Kj" id="aab-sH-6Dx"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>

@@ -12,7 +12,10 @@ import Toast
 import MBProgressHUD
 
 class LoginViewController: UIViewController,BEMCheckBoxDelegate {
-
+    @IBOutlet weak var showPassLabel: UILabel!
+    @IBOutlet weak var navTitleLabel: UILabel!
+    @IBOutlet weak var areaCodeTitleLabel: UILabel!
+    
     @IBOutlet weak var areaDropdownView: JHDropdownView!
     
     @IBOutlet weak var phoneTextfield: UITextField!
@@ -28,8 +31,18 @@ class LoginViewController: UIViewController,BEMCheckBoxDelegate {
     @IBOutlet weak var resetPasswordButton: UIButton!
     
     override func viewDidLoad() {
+
         super.viewDidLoad()
         self.navigationController?.navigationBar.isHidden = true
+        self.navTitleLabel.text = LanguageHelper.getString(key: "login.nav.title")
+        self.areaCodeTitleLabel.text = LanguageHelper.getString(key: "login.pageItem.areaCode")
+        self.phoneTextfield.placeholder = LanguageHelper.getString(key: "login.pageItem.phone")
+        self.passwordTextfield.placeholder = LanguageHelper.getString(key: "login.pageItem.password")
+        self.registerButton.setTitle(LanguageHelper.getString(key: "login.pageItem.register"), for: .normal)
+        self.resetPasswordButton.setTitle(LanguageHelper.getString(key: "login.pageItem.resetPass"), for: .normal)
+        self.loginButton.setTitle(LanguageHelper.getString(key: "login.nav.title"), for: .normal)
+        self.showPassLabel.text = LanguageHelper.getString(key: "login.pageItem.showPassword")
+        
         self.checkbox.boxType = BEMBoxType.square
         self.checkbox.onFillColor = kTintColorYellow
         self.checkbox.onTintColor = kTintColorYellow
@@ -38,19 +51,19 @@ class LoginViewController: UIViewController,BEMCheckBoxDelegate {
         
         self.areaDropdownView.contentLabel.text = "+86"
         self.areaDropdownView.contentLabel.textColor = kFontColorBlack
-        self.areaDropdownView.dataArray = ["+86","+81"]
+        self.areaDropdownView.dataArray = ["+86","+81","+61"]
         self.areaDropdownView.extraTop = 0
     }
 
     @IBAction func loginAction(_ sender: Any) {
         if self.phoneTextfield.text?.count == 0 {
-            self.view.makeToast("请输入手机号", duration: 2, position: CSToastPositionCenter)
+            self.view.makeToast(LanguageHelper.getString(key: "login.pageItem.phoneTip"), duration: 2, position: CSToastPositionCenter)
             return
             
         }
         
         if self.passwordTextfield.text?.count == 0 {
-            self.view.makeToast("请输入密码", duration: 2, position: CSToastPositionCenter)
+            self.view.makeToast(LanguageHelper.getString(key: "login.pageItem.passwordTip"), duration: 2, position: CSToastPositionCenter)
             return
             
         }
