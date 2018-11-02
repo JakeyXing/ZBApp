@@ -87,21 +87,10 @@ class RegisterViewController: UIViewController,BEMCheckBoxDelegate {
  
     }
     
+    //发送验证码
     @IBAction func sendVerCodeAction(_ sender: Any) {
         if self.phoneTextfield.text?.count == 0 {
             self.view.makeToast(LanguageHelper.getString(key: "login.pageItem.phoneTip"), duration: 2, position: CSToastPositionCenter)
-            return
-            
-        }
-        
-        if self.vertyCodeTextfield.text?.count == 0 {
-            self.view.makeToast(LanguageHelper.getString(key: "register.pageItem.sendCodeTip"), duration: 2, position: CSToastPositionCenter)
-            return
-            
-        }
-        
-        if self.passwordTextfield.text?.count == 0 {
-            self.view.makeToast(LanguageHelper.getString(key: "login.pageItem.passwordTip"), duration: 2, position: CSToastPositionCenter)
             return
             
         }
@@ -130,21 +119,22 @@ class RegisterViewController: UIViewController,BEMCheckBoxDelegate {
     }
     
 
+    //注册
     @IBAction func submitAction(_ sender: Any) {
         if self.phoneTextfield.text?.count == 0 {
-            self.view.makeToast("请输入手机号", duration: 2, position: CSToastPositionCenter)
+            self.view.makeToast(LanguageHelper.getString(key: "login.pageItem.phoneTip"), duration: 2, position: CSToastPositionCenter)
             return
             
         }
         
         if self.vertyCodeTextfield.text?.count == 0 {
-            self.view.makeToast("请输入验证码", duration: 2, position: CSToastPositionCenter)
+            self.view.makeToast(LanguageHelper.getString(key: "register.pageItem.sendCodeTip"), duration: 2, position: CSToastPositionCenter)
             return
             
         }
         
         if self.passwordTextfield.text?.count == 0 {
-            self.view.makeToast("请输入密码", duration: 2, position: CSToastPositionCenter)
+            self.view.makeToast(LanguageHelper.getString(key: "login.pageItem.passwordTip"), duration: 2, position: CSToastPositionCenter)
             return
             
         }

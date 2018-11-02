@@ -57,21 +57,6 @@ class ResetPasswordViewController: UIViewController,BEMCheckBoxDelegate {
     @IBOutlet weak var sendCodeButton: UIButton!
     
     @IBOutlet weak var submitButton: UIButton!
-    //    "login.pageItem.areaCode" = "国际区号";
-    //    "login.pageItem.phone" = "手机号";
-    //    "login.pageItem.phoneTip" = "请输入手机号";
-    //    "login.pageItem.password" = "密码";
-    //    "login.pageItem.passwordTip" = "请输入密码";
-    //    "login.pageItem.showPassword" = "显示密码";
-    //    "login.pageItem.register" = "注册";
-    //    "login.pageItem.resetPass" = "找回密码";
-    //
-    //    "register.pageItem.code" = "验证码";
-    //    "register.pageItem.sendCode" = "发送验证码";
-    //    "register.pageItem.sendCodeTip" = "请输入验证码";
-    //
-    //    "register.pageItem.password" = "设置密码";
-    //    "register.pageItem.passwordTip" = "请设置密码";
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -107,17 +92,6 @@ class ResetPasswordViewController: UIViewController,BEMCheckBoxDelegate {
             
         }
         
-        if self.vertyCodeTextfield.text?.count == 0 {
-            self.view.makeToast(LanguageHelper.getString(key: "register.pageItem.sendCodeTip"), duration: 2, position: CSToastPositionCenter)
-            return
-            
-        }
-        
-        if self.passwordTextfield.text?.count == 0 {
-            self.view.makeToast(LanguageHelper.getString(key: "login.pageItem.passwordTip"), duration: 2, position: CSToastPositionCenter)
-            return
-            
-        }
         let str:String = self.areaDropdownView.contentLabel.text ?? ""
         let countryCode :String = String(str[str.index(str.startIndex, offsetBy: 1)..<str.endIndex])
         
@@ -146,19 +120,19 @@ class ResetPasswordViewController: UIViewController,BEMCheckBoxDelegate {
     
     @IBAction func submitAction(_ sender: Any) {
         if self.phoneTextfield.text?.count == 0 {
-            self.view.makeToast("请输入手机号", duration: 2, position: CSToastPositionCenter)
+            self.view.makeToast(LanguageHelper.getString(key: "login.pageItem.phoneTip"), duration: 2, position: CSToastPositionCenter)
             return
             
         }
         
         if self.vertyCodeTextfield.text?.count == 0 {
-            self.view.makeToast("请输入验证码", duration: 2, position: CSToastPositionCenter)
+            self.view.makeToast(LanguageHelper.getString(key: "register.pageItem.sendCodeTip"), duration: 2, position: CSToastPositionCenter)
             return
             
         }
         
         if self.passwordTextfield.text?.count == 0 {
-            self.view.makeToast("请输入密码", duration: 2, position: CSToastPositionCenter)
+            self.view.makeToast(LanguageHelper.getString(key: "login.pageItem.passwordTip"), duration: 2, position: CSToastPositionCenter)
             return
             
         }

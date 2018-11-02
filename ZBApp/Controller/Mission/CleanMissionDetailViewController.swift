@@ -266,9 +266,8 @@ class CleanMissionDetailViewController: MissionDetailBaseViewController,CleanPic
     
     func cleanPicUploadView(_ cleanPicUploadView: CleanPicUploadView,didSelectedCell cell: CleanImageCell,atIndexPath indexPath: IndexPath) {
         currentImageCell = cell
-        
         let alertController = UIAlertController(title: nil, message: nil, preferredStyle: UIAlertController.Style.actionSheet)
-        let lookImageAction = UIAlertAction(title: "查看大图", style:  .default) { (action) in
+        let lookImageAction = UIAlertAction(title: LanguageHelper.getString(key: "detail.repairUploadAction.lookPImage"), style:  .default) { (action) in
             if cell.oriImage == nil{
                 return
             }
@@ -282,7 +281,7 @@ class CleanMissionDetailViewController: MissionDetailBaseViewController,CleanPic
             self.present(browser, animated: true, completion: {})
         }
         
-        let uploadAction = UIAlertAction(title: "上传图片", style:  .default) { (action) in
+        let uploadAction = UIAlertAction(title: LanguageHelper.getString(key: "detail.repairUploadAction.image"), style:  .default) { (action) in
             self.cameraPicker = UIImagePickerController()
             self.cameraPicker.delegate = self
             self.cameraPicker.sourceType = .camera
@@ -291,7 +290,7 @@ class CleanMissionDetailViewController: MissionDetailBaseViewController,CleanPic
 
         }
         
-        let cancelAction = UIAlertAction(title: "取消", style: .cancel, handler: nil)
+        let cancelAction = UIAlertAction(title: LanguageHelper.getString(key: "detail.repairUploadAction.cancel"), style: .cancel, handler: nil)
         
         alertController.addAction(lookImageAction)
         alertController.addAction(uploadAction)

@@ -85,6 +85,8 @@
 "detail.repairUploadAction.video" = "上传视频";
 "detail.repairUploadAction.image" = "上传图片";
 "detail.repairUploadAction.cancel" = "取消";
+"detail.repairUploadAction.lookPImage" = "查看大图";
+
 
 "detail.PicUpload.roomNo" = "房间号:";
 "detail.address.pageTitle" = "位置";
