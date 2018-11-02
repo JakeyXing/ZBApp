@@ -195,8 +195,10 @@ class CarryMissionDetailViewController: MissionDetailBaseViewController,CarryMis
         feedback.hidesBottomBarWhenPushed = true
         if self.isTaked {
             feedback.mID = self.task?.id ?? 0
+            feedback.type = self.task?.type
         }else{
            feedback.mID = self.model?.id ?? 0
+           feedback.type = self.model?.type
         }
         self.navigationController?.pushViewController(feedback, animated: true)
     }
@@ -276,8 +278,9 @@ class CarryMissionDetailViewController: MissionDetailBaseViewController,CarryMis
     func carryMissonImageAndFlieView(_ view: CarryMissonImageAndFlieView, didSelectedFileAtIndex index: NSInteger) {
         let web=WebViewController()
         web.hidesBottomBarWhenPushed = true
-        web.urlStr = "https://www.baidu.com"
-        web.titleStr = "文件名"
+        let urlStr = view.fileArray?[index]
+        web.urlStr = urlStr
+        web.titleStr = LanguageHelper.getString(key: "detail.doument.title")
         self.navigationController?.pushViewController(web, animated: true)
     }
     
@@ -302,7 +305,6 @@ class CarryMissionDetailViewController: MissionDetailBaseViewController,CarryMis
     //MARK:- FeedbackViewDelegate
     func feedbackView(_ view: FeedbackView, lookoverImages images: Array<String>) {
         
-//        let imageArr = ["https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1540296447089&di=8f6fa210da7498a6fefafe93179ef6be&imgtype=0&src=http%3A%2F%2Fp0.ifengimg.com%2Fcmpp%2F2016%2F11%2F04%2F17%2Fe4f9adfd-e00e-4a2f-9c93-e5014330281e_size31_w347_h500.jpg","https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1540296447089&di=8f6fa210da7498a6fefafe93179ef6be&imgtype=0&src=http%3A%2F%2Fp0.ifengimg.com%2Fcmpp%2F2016%2F11%2F04%2F17%2Fe4f9adfd-e00e-4a2f-9c93-e5014330281e_size31_w347_h500.jpg","https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1540296447089&di=8f6fa210da7498a6fefafe93179ef6be&imgtype=0&src=http%3A%2F%2Fp0.ifengimg.com%2Fcmpp%2F2016%2F11%2F04%2F17%2Fe4f9adfd-e00e-4a2f-9c93-e5014330281e_size31_w347_h500.jpg"]
         let count = images.count
         
         var phoImages = [SKPhoto]()

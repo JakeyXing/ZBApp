@@ -14,6 +14,7 @@ import Toast
 class QueFeedbackController: UIViewController,JHNavigationBarDelegate {
     
     var mID:Int64 = 0
+    var type: String!
     var uploadedImageArray:[String]?
     
     private lazy var navigationBar: JHNavigationBar = {
@@ -46,11 +47,12 @@ class QueFeedbackController: UIViewController,JHNavigationBarDelegate {
     
     private lazy var typeLabelDropdownView: JHDropdownView = {
         let view = JHDropdownView(frame: CGRect.init())
-        view.contentLabel.text = LanguageHelper.getString(key: "common.country.China")
+        view.contentLabel.text = LanguageHelper.getString(key: "detail.cleanFeedbackType.cantCleanUp")
         view.contentLabel.textColor = kFontColorBlack
-        view.dataArray = ["common.country.China","common.country.Japan"]
+        view.dataArray = ["detail.cleanFeedbackType.cantCleanUp","detail.cleanFeedbackType.equipmentNotWork","detail.cleanFeedbackType.furnitureDamaged","detail.cleanFeedbackType.changeGoods","detail.cleanFeedbackType.thingsLeftByCustomer","detail.cleanFeedbackType.notCheckin"]
         return view
     }()
+
     
     lazy var submitButton: UIButton = {
         let btn = UIButton(type: UIButton.ButtonType.custom)
@@ -74,6 +76,12 @@ class QueFeedbackController: UIViewController,JHNavigationBarDelegate {
         self.scrollview.addSubview(self.typeLabel)
         self.scrollview.addSubview(self.typeLabelDropdownView)
         self.scrollview.addSubview(self.submitButton)
+        
+        if self.type == "CLEAN" {
+            self.typeLabelDropdownView.isHidden = false
+        }else{
+            self.typeLabelDropdownView.isHidden = true
+        }
         
         self.nameLabel.mas_makeConstraints { (make:MASConstraintMaker!) in
             make.top.equalTo()(self.scrollview.mas_top)?.offset()(kResizedPoint(pt: 20))

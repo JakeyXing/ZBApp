@@ -317,22 +317,19 @@ class RepairMissionDetailViewController: MissionDetailBaseViewController,RepairP
     func repairPicUploadView(_ cleanPicUploadView: RepairPicUploadView, didSelectedAtIndexPath indexPath: IndexPath) {
         currentIndexpath = indexPath as NSIndexPath
         
-        
         let alertController = UIAlertController(title: nil, message: nil, preferredStyle: UIAlertController.Style.actionSheet)
-        let uploadVideoAction = UIAlertAction(title: "上传视频", style:  .default) { (action) in
+        let uploadVideoAction = UIAlertAction(title: LanguageHelper.getString(key: "detail.repairUploadAction.video"), style:  .default) { (action) in
             self.cameraPicker = UIImagePickerController()
             self.cameraPicker.delegate = self
             self.cameraPicker.sourceType = .camera
             self.cameraPicker.mediaTypes = NSArray(objects: kUTTypeMovie) as! [String]
             self.cameraPicker.videoMaximumDuration = 10.0
 
-  
-            
             self.present(self.cameraPicker, animated: true, completion: nil)
         
         }
         
-        let uploadAction = UIAlertAction(title: "上传图片", style:  .default) { (action) in
+        let uploadAction = UIAlertAction(title: LanguageHelper.getString(key: "detail.repairUploadAction.image"), style:  .default) { (action) in
             self.cameraPicker = UIImagePickerController()
             self.cameraPicker.delegate = self
             self.cameraPicker.sourceType = .camera
@@ -341,7 +338,7 @@ class RepairMissionDetailViewController: MissionDetailBaseViewController,RepairP
             
         }
         
-        let cancelAction = UIAlertAction(title: "取消", style: .cancel, handler: nil)
+        let cancelAction = UIAlertAction(title: LanguageHelper.getString(key: "detail.repairUploadAction.cancel"), style: .cancel, handler: nil)
         
         alertController.addAction(uploadVideoAction)
         alertController.addAction(uploadAction)
@@ -453,8 +450,9 @@ class RepairMissionDetailViewController: MissionDetailBaseViewController,RepairP
     func carryMissonImageAndFlieView(_ view: CarryMissonImageAndFlieView, didSelectedFileAtIndex index: NSInteger) {
         let web=WebViewController()
         web.hidesBottomBarWhenPushed = true
-        web.urlStr = "https://www.baidu.com"
-        web.titleStr = "文件名"
+        let urlStr = view.fileArray?[index]
+        web.urlStr = urlStr
+        web.titleStr = LanguageHelper.getString(key: "detail.doument.title")
         self.navigationController?.pushViewController(web, animated: true)
     }
     
@@ -491,17 +489,17 @@ class RepairMissionDetailViewController: MissionDetailBaseViewController,RepairP
     //MARK:- FeedbackViewDelegate
     func feedbackView(_ view: FeedbackView, lookoverImages images: Array<String>) {
         
-        let imageArr = ["https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1540296447089&di=8f6fa210da7498a6fefafe93179ef6be&imgtype=0&src=http%3A%2F%2Fp0.ifengimg.com%2Fcmpp%2F2016%2F11%2F04%2F17%2Fe4f9adfd-e00e-4a2f-9c93-e5014330281e_size31_w347_h500.jpg","https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1540296447089&di=8f6fa210da7498a6fefafe93179ef6be&imgtype=0&src=http%3A%2F%2Fp0.ifengimg.com%2Fcmpp%2F2016%2F11%2F04%2F17%2Fe4f9adfd-e00e-4a2f-9c93-e5014330281e_size31_w347_h500.jpg","https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1540296447089&di=8f6fa210da7498a6fefafe93179ef6be&imgtype=0&src=http%3A%2F%2Fp0.ifengimg.com%2Fcmpp%2F2016%2F11%2F04%2F17%2Fe4f9adfd-e00e-4a2f-9c93-e5014330281e_size31_w347_h500.jpg"]
-        let count = imageArr.count
         
-        var images = [SKPhoto]()
+        let count = images.count
+        
+        var photoImages = [SKPhoto]()
         for i in 0..<count{
-            let photo = SKPhoto.photoWithImageURL(imageArr[i])
+            let photo = SKPhoto.photoWithImageURL(images[i])
             photo.shouldCachePhotoURLImage = false
-            images.append(photo)
+            photoImages.append(photo)
         }
         
-        let browser = SKPhotoBrowser(photos: images)
+        let browser = SKPhotoBrowser(photos: photoImages)
         browser.initializePageIndex(0)
         self.present(browser, animated: true, completion: {})
         

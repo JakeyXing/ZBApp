@@ -63,17 +63,28 @@
 "detail.feedback.morePic" = "查看图片";
 "detail.feedback.moreFeedback" = "查看更多日志";
 "detail.check.title" = "验收结果";
+"detail.doument.title" = "文档";
 
 "detail.submitBtnTit.transfer" = "申请转单";
 "detail.submitBtnTit.startMission" = "我已到达，开始任务";
 "detail.submitBtnTit.approveCheck" = "提交审核";
 
+"detail.cleanFeedbackType.cantCleanUp" = "无法清扫干净位置";
+"detail.cleanFeedbackType.equipmentNotWork" = "电器无法工作";
+"detail.cleanFeedbackType.furnitureDamaged" = "家具物品损坏";
+"detail.cleanFeedbackType.changeGoods" = "易损品更换/补充";
+"detail.cleanFeedbackType.thingsLeftByCustomer" = "客人遗留物品";
+"detail.cleanFeedbackType.notCheckin" = "客人未入住";
+
 "detail.cleanPic.uploadDes" = "清扫图片上传";
 "detail.PicUploadStatus.failed" = "上传失败";
+"detail.cleanPic.uploadPicNumTip" = "您还有图片未成功上传";
 
 "detail.repairPic.uploadResult" = "维修结果提交";
 "detail.repairPic.uploadTitle" = "上传图片/视频";
-
+"detail.repairUploadAction.video" = "上传视频";
+"detail.repairUploadAction.image" = "上传图片";
+"detail.repairUploadAction.cancel" = "取消";
 
 "detail.PicUpload.roomNo" = "房间号:";
 "detail.address.pageTitle" = "位置";

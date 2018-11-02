@@ -227,6 +227,10 @@ class CleanMissionDetailViewController: MissionDetailBaseViewController,CleanPic
                     for index in 0..<photoCount{
                         let photo = item.photos![index]
                         photo.location = item.location
+                        if (photo.url == nil || photo.url == ""){
+                            self.view.makeToast(LanguageHelper.getString(key: "detail.cleanPic.uploadPicNumTip"), duration: 2.5, position: CSToastPositionCenter)
+                            return;
+                        }
                         let dic:[String: Any] = photo.toJSON()
                         cleanPhotos.append(dic)
                     }
@@ -342,17 +346,16 @@ class CleanMissionDetailViewController: MissionDetailBaseViewController,CleanPic
     //MARK:- FeedbackViewDelegate
     func feedbackView(_ view: FeedbackView, lookoverImages images: Array<String>) {
         
-        let imageArr = ["https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1540296447089&di=8f6fa210da7498a6fefafe93179ef6be&imgtype=0&src=http%3A%2F%2Fp0.ifengimg.com%2Fcmpp%2F2016%2F11%2F04%2F17%2Fe4f9adfd-e00e-4a2f-9c93-e5014330281e_size31_w347_h500.jpg","https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1540296447089&di=8f6fa210da7498a6fefafe93179ef6be&imgtype=0&src=http%3A%2F%2Fp0.ifengimg.com%2Fcmpp%2F2016%2F11%2F04%2F17%2Fe4f9adfd-e00e-4a2f-9c93-e5014330281e_size31_w347_h500.jpg","https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1540296447089&di=8f6fa210da7498a6fefafe93179ef6be&imgtype=0&src=http%3A%2F%2Fp0.ifengimg.com%2Fcmpp%2F2016%2F11%2F04%2F17%2Fe4f9adfd-e00e-4a2f-9c93-e5014330281e_size31_w347_h500.jpg"]
-        let count = imageArr.count
+        let count = images.count
         
-        var images = [SKPhoto]()
+        var photoImages = [SKPhoto]()
         for i in 0..<count{
-            let photo = SKPhoto.photoWithImageURL(imageArr[i])
+            let photo = SKPhoto.photoWithImageURL(images[i])
             photo.shouldCachePhotoURLImage = false
-            images.append(photo)
+            photoImages.append(photo)
         }
         
-        let browser = SKPhotoBrowser(photos: images)
+        let browser = SKPhotoBrowser(photos: photoImages)
         browser.initializePageIndex(0)
         self.present(browser, animated: true, completion: {})
         
