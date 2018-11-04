@@ -10,6 +10,8 @@ import UIKit
 import Masonry
 import SKPhotoBrowser
 
+
+/// 维修任务上传图片、视频信息控件
 protocol RepairPicUploadViewDelegate: class {
     func repairPicUploadView(_ cleanPicUploadView: RepairPicUploadView,didSelectedAtIndexPath indexPath: IndexPath);
 }

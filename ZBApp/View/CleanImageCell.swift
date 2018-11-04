@@ -12,6 +12,8 @@ import AWSCore
 import AWSS3
 import AWSCognito
 
+
+/// 清扫位置图片
 protocol CleanImageCellDelegate: class {
     func cleanImageCell(_ cell: CleanImageCell,imageUploadSucceed imageUrl: String,atIndex indexPath:IndexPath)
     

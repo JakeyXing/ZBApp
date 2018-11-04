@@ -9,6 +9,8 @@
 import UIKit
 import Masonry
 
+
+/// 摆场、撤场审核结果显示部分check result
 protocol CheckViewDelegate: class {
     func checkView(_ view: CheckView,didSelectedImageAtIndex index: NSInteger)
     

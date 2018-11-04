@@ -10,6 +10,7 @@ import UIKit
 import Masonry
 
 
+/// 清扫房间图片 显示、上传部分
 protocol CleanPicUploadViewDelegate: class {
     func cleanPicUploadView(_ cleanPicUploadView: CleanPicUploadView,didSelectedCell cell: CleanImageCell,atIndexPath indexPath: IndexPath);
 }
