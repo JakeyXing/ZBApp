@@ -115,6 +115,8 @@
 
 "login.apply.failed" = "审核失败";
 "login.apply.wait" = "正在审核，请耐心等待";
+"login.apply.success" = "恭喜您审核通过";
+
 
 "login.nav.title" = "登录";
 "login.pageItem.areaCode" = "国际区号";

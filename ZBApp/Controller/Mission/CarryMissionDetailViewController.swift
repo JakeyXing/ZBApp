@@ -322,6 +322,8 @@ class CarryMissionDetailViewController: MissionDetailBaseViewController,CarryMis
     
     func feedbackViewMoreAction(_ view: FeedbackView) {
         let feedback = FeedbackListViewController()
+        feedback.taskLogs = self.task?.taskLogs
+        
         feedback.hidesBottomBarWhenPushed = true
         self.navigationController?.pushViewController(feedback, animated: true)
         

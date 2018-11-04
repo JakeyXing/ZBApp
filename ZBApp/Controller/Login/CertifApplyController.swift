@@ -239,9 +239,25 @@ class CertifApplyController: UIViewController,JHNavigationBarDelegate,UIImagePic
     
     func configData() {
         if self.user?.userStatus == .registred {
+            self.navigationBar.editButton.isHidden = false
             self.scrollview.isHidden = false
             self.otherStatusLabel.isHidden = true
+            
+        }else if(self.user?.userStatus == .review_pass){
+            self.navigationBar.editButton.isHidden = true
+            self.navigationBar.editButton.isHidden = true
+            self.scrollview.isHidden = true
+            self.otherStatusLabel.isHidden = false
+            self.otherStatusLabel.text = LanguageHelper.getString(key: "login.apply.success")
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                let sharedAppdelegate:AppDelegate = UIApplication.shared.delegate as! AppDelegate
+                sharedAppdelegate.window?.rootViewController = sharedAppdelegate.mainTabBarVc
+                
+            }
+            
         }else{
+            self.navigationBar.editButton.isHidden = true
             self.scrollview.isHidden = true
             self.otherStatusLabel.isHidden = false
             

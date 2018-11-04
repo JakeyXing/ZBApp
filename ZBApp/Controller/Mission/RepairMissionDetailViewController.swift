@@ -53,12 +53,24 @@ class RepairMissionDetailViewController: MissionDetailBaseViewController,RepairP
     
     lazy var submitButton: UIButton = {
         let btn = UIButton(type: UIButton.ButtonType.custom)
-        btn.frame = CGRect.init(x: DEVICE_WIDTH/2-kResizedPoint(pt: 140), y: self.uploadView.bottom+kResizedPoint(pt: 30), width: 280, height: kResizedPoint(pt: 30))
+        btn.frame = CGRect.init(x: DEVICE_WIDTH/2-kResizedPoint(pt: 90), y: self.uploadView.bottom+kResizedPoint(pt: 30), width: 280, height: kResizedPoint(pt: 30))
         btn.setTitleColor(UIColor.white, for: UIControl.State.normal)
         btn.backgroundColor = kTintColorYellow
         btn.setTitle(LanguageHelper.getString(key: "apply.nav.submit"), for: .normal)
         btn.titleLabel?.font = kFont(size: 16)
         btn.addTarget(self, action: #selector(takeAction), for: UIControl.Event.touchUpInside)
+        return btn
+    }()
+    
+    //申请转单
+    lazy var transferButton: UIButton = {
+        let btn = UIButton(type: UIButton.ButtonType.custom)
+        btn.frame = CGRect.init(x: kResizedPoint(pt: 20), y: self.submitButton.top, width: 80, height: kResizedPoint(pt: 30))
+        btn.setTitleColor(UIColor.blue, for: UIControl.State.normal)
+//        btn.backgroundColor = kTintColorYellow
+        btn.setTitle(LanguageHelper.getString(key: "detail.submitBtnTit.transfer"), for: .normal)
+        btn.titleLabel?.font = kFont(size: 14)
+        btn.addTarget(self, action: #selector(transferAction), for: UIControl.Event.touchUpInside)
         return btn
     }()
 
@@ -86,6 +98,7 @@ class RepairMissionDetailViewController: MissionDetailBaseViewController,RepairP
         self.scrollview.addSubview(self.infoTextView)
         self.scrollview.addSubview(self.uploadView)
         self.scrollview.addSubview(self.submitButton)
+        self.scrollview.addSubview(self.transferButton)
         
         self.carryImageView.imageArray = []
 
@@ -168,24 +181,33 @@ class RepairMissionDetailViewController: MissionDetailBaseViewController,RepairP
         }
         
         
-        //
-        self.infoTextView.top = self.feedbackView.bottom + kResizedPoint(pt: 10)
-        self.infoTextView.height = self.infoTextView.viewHeight()
-        
-        //房间位置图片上传
-        if (self.currentProgress == .started || self.currentProgress == .approve_failed) {
+        //结果提交+图片上传
+        if (self.currentProgress == .started) {
+            //todo
+            
+            //
+            self.infoTextView.isHidden = false
+            self.infoTextView.top = self.feedbackView.bottom + kResizedPoint(pt: 10)
+            self.infoTextView.height = self.infoTextView.viewHeight()
+            
             self.uploadView.isHidden = false
             self.uploadView.top = self.infoTextView.bottom + kResizedPoint(pt: 10)
             self.uploadView.congfigDataWithTask(info: self.task!)
             self.uploadView.height = self.uploadView.viewHeight()
             
         }else{
+            //
+            self.infoTextView.isHidden = true
+            self.infoTextView.top = self.feedbackView.bottom
+            self.infoTextView.height = 0
+            
             self.uploadView.isHidden = true
             self.uploadView.top = self.infoTextView.bottom
             self.uploadView.height = 0
             
             
         }
+        
         
         //提交按钮
         if self.currentProgress == .ready || self.currentProgress == .started{
@@ -206,6 +228,16 @@ class RepairMissionDetailViewController: MissionDetailBaseViewController,RepairP
             self.submitButton.top = self.uploadView.bottom
             self.submitButton.height = 0
         }
+        
+        //转单按钮
+        if self.currentProgress == .ready{
+            self.transferButton.isHidden = false
+            self.transferButton.top = self.submitButton.top
+        }else{
+            self.transferButton.isHidden = true
+        }
+        
+        
         self.scrollview.contentSize = CGSize.init(width: DEVICE_WIDTH, height: self.submitButton.bottom + kResizedPoint(pt: 40))
         
     }
@@ -215,6 +247,8 @@ class RepairMissionDetailViewController: MissionDetailBaseViewController,RepairP
         self.infoTextView.isHidden = true
         self.uploadView.isHidden = true
         self.roomInfoView.infoUploadButton.isHidden = true
+        self.transferButton.isHidden = true
+
 
         self.missionBaseInfoView.congfigDataWithTaskInfo(info: self.model!)
         self.carryMissionInfoView.congfigDataWithTaskInfo(info: self.model!)
@@ -312,6 +346,30 @@ class RepairMissionDetailViewController: MissionDetailBaseViewController,RepairP
         }
         
     }
+    
+    @objc private func transferAction(){
+        //申请转单
+        let params = ["taskId":self.task?.id ?? 0 ] as [String : Any]
+        
+        MBProgressHUD.showAdded(to: self.view, animated: true)
+        NetWorkManager.shared.loadRequest(method: .post, url: TransferTaskUrl, parameters: params as [String : Any], success: { (data) in
+            MBProgressHUD.hide(for: self.view, animated: true)
+            
+            let resultDic = data as! Dictionary<String,AnyObject>
+            let dic = resultDic["data"]
+            if dic == nil {
+                return
+            }
+            self.loadNewDataWithId(taskId: self.task?.id ?? 0)
+            
+        }) { (data, errMsg) in
+            MBProgressHUD.hide(for: self.view, animated: true)
+            self.view.makeToast(errMsg, duration: 2, position: CSToastPositionCenter)
+            
+        }
+        
+    }
+    
     
     //MARK: - RepairPicUploadViewDelegate
     func repairPicUploadView(_ cleanPicUploadView: RepairPicUploadView, didSelectedAtIndexPath indexPath: IndexPath) {
@@ -507,6 +565,7 @@ class RepairMissionDetailViewController: MissionDetailBaseViewController,RepairP
     
     func feedbackViewMoreAction(_ view: FeedbackView) {
         let feedback = FeedbackListViewController()
+        feedback.taskLogs = self.task?.taskLogs
         feedback.hidesBottomBarWhenPushed = true
         self.navigationController?.pushViewController(feedback, animated: true)
         
