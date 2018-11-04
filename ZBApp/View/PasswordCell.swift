@@ -50,8 +50,10 @@ class PasswordCell: UITableViewCell {
     }
     
     func setupData(mode:ZB_PwdInfo) {
+        
         self.model = mode
-        self.titleLabel.text = mode.type
+        let type:String = model?.type ?? ""
+        self.titleLabel.text = LanguageHelper.getString(key: ("detail.roomPassword." + type.lowercased()))//
         self.desLabel.text = mode.desc
         
         let size = CGSize.init(width: DEVICE_WIDTH-kResizedPoint(pt: 10)*2-kResizedPoint(pt: 15), height: CGFloat(HUGE))

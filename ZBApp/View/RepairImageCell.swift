@@ -31,7 +31,7 @@ class RepairImageCell: UICollectionViewCell {
         return img
     }()
     
-    private lazy var progressView: UIView = {
+    lazy var progressView: UIView = {
         let view = UIView()
         view.backgroundColor = UIColor.yellow
         return view

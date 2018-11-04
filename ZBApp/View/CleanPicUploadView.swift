@@ -192,6 +192,7 @@ extension CleanPicUploadView:UICollectionViewDelegateFlowLayout,UICollectionView
         
         let photoItem:ZB_TaskPhotoItem = self.roomWithImagesArray[indexPath.section]
         let photo: ZB_Photo = (photoItem.photos?[indexPath.row])!
+        cell.imageView.sd_setImage(with: NSURL(string: photo.refUrl ?? "")! as? URL, completed: nil)
         cell.nameLabel.text = photo.position
         return cell
     }

@@ -61,7 +61,7 @@ class CheckView: UIView {
     }
     
     func congfigDataWithTask(model: ZB_Task) {
-        self.imageArray = ["https://video.parentschat.com/pic_R3_720.jpg","https://video.parentschat.com/pic_R3_720.jpg","https://video.parentschat.com/pic_R3_720.jpg","https://video.parentschat.com/pic_R3_720.jpg"]
+        self.imageArray = model.imgs
         
     }
     

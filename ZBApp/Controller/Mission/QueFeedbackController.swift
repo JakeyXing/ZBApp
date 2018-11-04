@@ -19,7 +19,6 @@ class QueFeedbackController: UIViewController,JHNavigationBarDelegate,FeedbackIm
     
     var mID:Int64 = 0
     var type: String!
-    var uploadedImageArray:[String]?
     
     private lazy var navigationBar: JHNavigationBar = {
         let view = JHNavigationBar(frame: CGRect.init(x: 0, y: 0, width: 0, height: 0))
@@ -160,7 +159,11 @@ class QueFeedbackController: UIViewController,JHNavigationBarDelegate,FeedbackIm
         
         let desc:String = self.infoTextView.text!
         
-        let params = ["id":self.mID,"description":desc,"imgs":self.uploadedImageArray ?? [],"type":""] as [String : Any]
+        var cleanType = ""
+        if self.type == "CLEAN"{
+            cleanType = self.typeLabelDropdownView.contentLabel.text!
+        }
+        let params = ["id":self.mID,"description":desc,"imgs":self.uploadView.imagesArray ?? [],"type":cleanType] as [String : Any]
         
         MBProgressHUD.showAdded(to: self.view, animated: true)
         NetWorkManager.shared.loadRequest(method: .post, url: ReportTaskQuesUrl, parameters: params as [String : Any], success: { (data) in

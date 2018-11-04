@@ -100,7 +100,10 @@ class FeedbackImageUploadView: UIView {
                 self.imagesArray?.append(url ?? "")
                 self.collectionView.reloadData()
                 self.delegate?.feedbackImageUploadViewDidUplaodSuccess(self)
-               
+                
+                let cell: RepairImageCell = self.collectionView.cellForItem(at: IndexPath(row: index, section: 0)) as! RepairImageCell
+                
+               cell.progressView.backgroundColor = UIColor.green
                 
             })
             

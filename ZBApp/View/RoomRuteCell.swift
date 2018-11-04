@@ -11,7 +11,7 @@ import Masonry
 
 class RoomRuteCell: UITableViewCell {
     //MARK: - 控件
-    private lazy var roomNumLabel: UILabel = UILabel.cz_label(withText: "版大国UR0201", fontSize: kResizedFont(ft: 15), color: kFontColorGray)
+    private lazy var roomNumLabel: UILabel = UILabel.cz_label(withText: "", fontSize: kResizedFont(ft: 15), color: kFontColorGray)
 //    private lazy var passwordTitleLabel: UILabel = UILabel.cz_label(withText: "12344", fontSize: kResizedFont(ft: 15), color: kFontColorGray)
     
     lazy var passwordButton: UIButton = {
@@ -53,6 +53,7 @@ class RoomRuteCell: UITableViewCell {
     }
     
     func configData(model: ZB_TaskProperty){
+        self.roomNumLabel.text = model.doorplate
         
     }
     

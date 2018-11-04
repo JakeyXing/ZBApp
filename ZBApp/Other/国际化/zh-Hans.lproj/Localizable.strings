@@ -87,6 +87,10 @@
 "detail.repairUploadAction.cancel" = "取消";
 "detail.repairUploadAction.lookPImage" = "查看大图";
 
+"detail.roomPassword.lock_guide" = "开锁密码";
+"detail.roomPassword.gate_guide" = "进入楼下大门";
+"detail.roomPassword.key_place" = "获取钥匙";
+
 
 "detail.PicUpload.roomNo" = "房间号:";
 "detail.address.pageTitle" = "位置";
@@ -164,4 +168,5 @@
 "tabBar.title.pending" = "待抢任务";
 "tabBar.title.execute" = "我的任务";
 "tabBar.title.mine" = "基本资讯";
+
 
