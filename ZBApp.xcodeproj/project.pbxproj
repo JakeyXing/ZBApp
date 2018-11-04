@@ -903,18 +903,18 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: jialin he (DX4S332VJ9)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: wendong yang (4S9ZQZBF4B)";
 				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = Y6RH2VSRP8;
+				DEVELOPMENT_TEAM = 2AW9FCADQ6;
 				INFOPLIST_FILE = ZBApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.elitestalk.ZBApp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.iwcln.ocsc;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = wildElitestalk;
+				PROVISIONING_PROFILE_SPECIFIER = "ocsc dev pp";
 				SWIFT_OBJC_BRIDGING_HEADER = ZBApp/ZBApp_Bridge.h;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_SWIFT3_OBJC_INFERENCE = On;
@@ -929,18 +929,18 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: jialin he (DX4S332VJ9)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: wendong yang (2AW9FCADQ6)";
 				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = Y6RH2VSRP8;
+				DEVELOPMENT_TEAM = 2AW9FCADQ6;
 				INFOPLIST_FILE = ZBApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.elitestalk.ZBApp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.iwcln.ocsc;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = wildElitestalk;
+				PROVISIONING_PROFILE_SPECIFIER = "ocsc dis pp";
 				SWIFT_OBJC_BRIDGING_HEADER = ZBApp/ZBApp_Bridge.h;
 				SWIFT_SWIFT3_OBJC_INFERENCE = On;
 				SWIFT_VERSION = 4.2;
