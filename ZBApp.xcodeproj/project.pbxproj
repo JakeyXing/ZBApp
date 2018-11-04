@@ -67,6 +67,7 @@
 		994F6348216C78F20063044B /* UIColor+CZAddition.m in Sources */ = {isa = PBXBuildFile; fileRef = 994F633C216C78F20063044B /* UIColor+CZAddition.m */; };
 		994F634B216C822C0063044B /* StarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 994F634A216C822C0063044B /* StarView.swift */; };
 		994F6355216C9C480063044B /* JHNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 994F6354216C9C480063044B /* JHNavigationBar.swift */; };
+		996622A1218EC77000E6A06A /* FeedbackImageUploadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 996622A0218EC77000E6A06A /* FeedbackImageUploadView.swift */; };
 		99A8C46B21797CB5009509B8 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99A8C46A21797CB5009509B8 /* SettingViewController.swift */; };
 		99C2C31E2177084A00C0B94A /* DemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99C2C31C2177084A00C0B94A /* DemoViewController.swift */; };
 		99C2C31F2177084A00C0B94A /* DemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 99C2C31D2177084A00C0B94A /* DemoViewController.xib */; };
@@ -180,6 +181,7 @@
 		994F6349216C7ADA0063044B /* ZBApp_Bridge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZBApp_Bridge.h; sourceTree = "<group>"; };
 		994F634A216C822C0063044B /* StarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarView.swift; sourceTree = "<group>"; };
 		994F6354216C9C480063044B /* JHNavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JHNavigationBar.swift; sourceTree = "<group>"; };
+		996622A0218EC77000E6A06A /* FeedbackImageUploadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackImageUploadView.swift; sourceTree = "<group>"; };
 		99A8C46A21797CB5009509B8 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		99C2575B2189B49F0082AF7A /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		99C2C31C2177084A00C0B94A /* DemoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoViewController.swift; sourceTree = "<group>"; };
@@ -362,6 +364,7 @@
 				99D556F921788A7E006C92A3 /* MissionSegmentBar.swift */,
 				9936F3AE217F20A400642697 /* FeedbackItemCell.swift */,
 				99D713EC21897952004C313E /* PasswordCell.swift */,
+				996622A0218EC77000E6A06A /* FeedbackImageUploadView.swift */,
 				994EE461216DEDDE00EB86DD /* JHListChooseView */,
 			);
 			path = View;
@@ -732,6 +735,7 @@
 				99017C1D2170889500155724 /* CarryMissionDetailViewController.swift in Sources */,
 				99C2C3212177109A00C0B94A /* JHDropdownView.swift in Sources */,
 				9921CE302160AB70005DC836 /* UnTakeMissionViewController.swift in Sources */,
+				996622A1218EC77000E6A06A /* FeedbackImageUploadView.swift in Sources */,
 				9945BECF217705780001593F /* CertifApplyController.swift in Sources */,
 				990F7B012171D2010075A04C /* CheckView.swift in Sources */,
 				99D781B9217C77E900611DE0 /* ZB_TaskLog.swift in Sources */,
