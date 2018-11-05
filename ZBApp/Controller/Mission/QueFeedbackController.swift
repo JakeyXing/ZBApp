@@ -58,7 +58,7 @@ class QueFeedbackController: UIViewController,JHNavigationBarDelegate,FeedbackIm
     }()
     
     lazy var uploadView: FeedbackImageUploadView = {
-        let view:FeedbackImageUploadView = FeedbackImageUploadView(frame: CGRect.init(x: 0, y: self.typeLabel.bottom+kResizedPoint(pt: 10), width: DEVICE_WIDTH, height: kResizedPoint(pt: 300)))
+        let view:FeedbackImageUploadView = FeedbackImageUploadView(frame: CGRect.init(x: 0, y: self.typeLabel.bottom+kResizedPoint(pt: 10), width: DEVICE_WIDTH, height: kResizedPoint(pt: 200)))
         view.delegate = self
         return view
     }()
@@ -129,7 +129,7 @@ class QueFeedbackController: UIViewController,JHNavigationBarDelegate,FeedbackIm
             make.top.equalTo()(self.typeLabel.mas_bottom)?.offset()(kResizedPoint(pt: 10))
             make.left.equalTo()(self.scrollview.mas_left)
             make.width.equalTo()(DEVICE_WIDTH)
-            make.height.equalTo()(kResizedPoint(pt: 300))
+            make.height.equalTo()(kResizedPoint(pt: 200))
         }
         
         
