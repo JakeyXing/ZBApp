@@ -69,6 +69,8 @@
 "detail.submitBtnTit.startMission" = "我已到达，开始任务";
 "detail.submitBtnTit.approveCheck" = "提交审核";
 
+"detail.transferAction.reason" = "转单理由";
+
 "detail.cleanFeedbackType.cantCleanUp" = "无法清扫干净位置";
 "detail.cleanFeedbackType.equipmentNotWork" = "电器无法工作";
 "detail.cleanFeedbackType.furnitureDamaged" = "家具物品损坏";

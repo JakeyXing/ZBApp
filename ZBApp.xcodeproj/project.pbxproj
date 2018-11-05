@@ -69,6 +69,7 @@
 		994F6355216C9C480063044B /* JHNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 994F6354216C9C480063044B /* JHNavigationBar.swift */; };
 		996622A1218EC77000E6A06A /* FeedbackImageUploadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 996622A0218EC77000E6A06A /* FeedbackImageUploadView.swift */; };
 		99A8C46B21797CB5009509B8 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99A8C46A21797CB5009509B8 /* SettingViewController.swift */; };
+		99AF116E219031EF00531FE1 /* TransferReasonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99AF116D219031EF00531FE1 /* TransferReasonView.swift */; };
 		99C2C31E2177084A00C0B94A /* DemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99C2C31C2177084A00C0B94A /* DemoViewController.swift */; };
 		99C2C31F2177084A00C0B94A /* DemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 99C2C31D2177084A00C0B94A /* DemoViewController.xib */; };
 		99C2C3212177109A00C0B94A /* JHDropdownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99C2C3202177109A00C0B94A /* JHDropdownView.swift */; };
@@ -183,6 +184,7 @@
 		994F6354216C9C480063044B /* JHNavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JHNavigationBar.swift; sourceTree = "<group>"; };
 		996622A0218EC77000E6A06A /* FeedbackImageUploadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackImageUploadView.swift; sourceTree = "<group>"; };
 		99A8C46A21797CB5009509B8 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
+		99AF116D219031EF00531FE1 /* TransferReasonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferReasonView.swift; sourceTree = "<group>"; };
 		99C2575B2189B49F0082AF7A /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		99C2C31C2177084A00C0B94A /* DemoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoViewController.swift; sourceTree = "<group>"; };
 		99C2C31D2177084A00C0B94A /* DemoViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DemoViewController.xib; sourceTree = "<group>"; };
@@ -365,6 +367,7 @@
 				9936F3AE217F20A400642697 /* FeedbackItemCell.swift */,
 				99D713EC21897952004C313E /* PasswordCell.swift */,
 				996622A0218EC77000E6A06A /* FeedbackImageUploadView.swift */,
+				99AF116D219031EF00531FE1 /* TransferReasonView.swift */,
 				994EE461216DEDDE00EB86DD /* JHListChooseView */,
 			);
 			path = View;
@@ -697,6 +700,7 @@
 				9923CBB0216B014100EDCA7A /* MainTabBarController.swift in Sources */,
 				99F1FD252174E156002699FE /* RepairImageCell.swift in Sources */,
 				994F633E216C78F20063044B /* NSArray+Log.m in Sources */,
+				99AF116E219031EF00531FE1 /* TransferReasonView.swift in Sources */,
 				990F7B052171DA570075A04C /* RoomInfoView.swift in Sources */,
 				99F43AD721606EB400A84EBD /* AppDelegate.swift in Sources */,
 				994F634B216C822C0063044B /* StarView.swift in Sources */,
@@ -907,18 +911,18 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: wendong yang (4S9ZQZBF4B)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: jialin he (DX4S332VJ9)";
 				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = 2AW9FCADQ6;
+				DEVELOPMENT_TEAM = Y6RH2VSRP8;
 				INFOPLIST_FILE = ZBApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.iwcln.ocsc;
+				PRODUCT_BUNDLE_IDENTIFIER = com.elitestalk.ocsc;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "ocsc dev pp";
+				PROVISIONING_PROFILE_SPECIFIER = wildElitestalk;
 				SWIFT_OBJC_BRIDGING_HEADER = ZBApp/ZBApp_Bridge.h;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_SWIFT3_OBJC_INFERENCE = On;
@@ -933,18 +937,18 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: wendong yang (2AW9FCADQ6)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: jialin he (DX4S332VJ9)";
 				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = 2AW9FCADQ6;
+				DEVELOPMENT_TEAM = Y6RH2VSRP8;
 				INFOPLIST_FILE = ZBApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.iwcln.ocsc;
+				PRODUCT_BUNDLE_IDENTIFIER = com.elitestalk.ocsc;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "ocsc dis pp";
+				PROVISIONING_PROFILE_SPECIFIER = wildElitestalk;
 				SWIFT_OBJC_BRIDGING_HEADER = ZBApp/ZBApp_Bridge.h;
 				SWIFT_SWIFT3_OBJC_INFERENCE = On;
 				SWIFT_VERSION = 4.2;
