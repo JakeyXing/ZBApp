@@ -348,24 +348,39 @@ class RepairMissionDetailViewController: MissionDetailBaseViewController,RepairP
     }
     
     @objc private func transferAction(){
-        //申请转单
-        let params = ["taskId":self.task?.id ?? 0 ] as [String : Any]
-        
-        MBProgressHUD.showAdded(to: self.view, animated: true)
-        NetWorkManager.shared.loadRequest(method: .post, url: TransferTaskUrl, parameters: params as [String : Any], success: { (data) in
-            MBProgressHUD.hide(for: self.view, animated: true)
-            
-            let resultDic = data as! Dictionary<String,AnyObject>
-            let dic = resultDic["data"]
-            if dic == nil {
-                return
+        let reasonText = TransferReasonView(frame: CGRect.init())
+        reasonText.showInView(suView: self.view) { (reason, isSureAction) in
+            if isSureAction{
+                print("sure:\(String(describing: reason))")
+                if reason == "" {
+                    self.view.makeToast("reason is nil", duration: 2, position: CSToastPositionCenter)
+                    return
+                }
+                
+                
+                //申请转单
+                let params = ["id":self.task?.id ?? 0 ,"reason":reason ?? ""] as [String : Any]
+                
+                MBProgressHUD.showAdded(to: self.view, animated: true)
+                NetWorkManager.shared.loadRequest(method: .post, url: TransferTaskUrl, parameters: params as [String : Any], success: { (data) in
+                    MBProgressHUD.hide(for: self.view, animated: true)
+                    
+                    let resultDic = data as! Dictionary<String,AnyObject>
+                    let dic = resultDic["data"]
+                    if dic == nil {
+                        return
+                    }
+                    self.loadNewDataWithId(taskId: self.task?.id ?? 0)
+                    
+                }) { (data, errMsg) in
+                    MBProgressHUD.hide(for: self.view, animated: true)
+                    self.view.makeToast(errMsg, duration: 2, position: CSToastPositionCenter)
+                    
+                }
+                
+            }else{
+                print("cancel")
             }
-            self.loadNewDataWithId(taskId: self.task?.id ?? 0)
-            
-        }) { (data, errMsg) in
-            MBProgressHUD.hide(for: self.view, animated: true)
-            self.view.makeToast(errMsg, duration: 2, position: CSToastPositionCenter)
-            
         }
         
     }

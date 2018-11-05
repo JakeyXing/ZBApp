@@ -9,7 +9,7 @@
 import UIKit
 import Masonry
 import SKPhotoBrowser
-
+import ObjectMapper
 
 /// 维修任务上传图片、视频信息控件
 protocol RepairPicUploadViewDelegate: class {
@@ -64,7 +64,21 @@ class RepairPicUploadView: UIView {
     
   
     func congfigDataWithTask(info: ZB_Task){
-        self.roomWithImagesArray = info.maintainPhotos
+        var count = 0
+        count = info.taskInfo?.properties?.count ?? 0
+        self.roomWithImagesArray = [ZB_RepairImageItem]()
+        
+        if count > 0 {
+            for i in 0..<count {
+                let property = info.taskInfo?.properties?[i]
+                let imageItem = ZB_RepairImageItem(JSON: ["":""])
+                imageItem?.doorplate = property?.doorplate
+                imageItem?.propertyId = String(format: "%ld", property?.id ?? 0)
+                self.roomWithImagesArray?.append(imageItem!)
+            }
+        }
+        
+//        self.roomWithImagesArray = info.maintainPhotos
         
         self.collectionView.reloadData()
         

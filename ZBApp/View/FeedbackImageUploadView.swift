@@ -24,9 +24,12 @@ class FeedbackImageUploadView: UIView {
     
     lazy var contentView: UIView = {
         let content = UIView()
-        content.backgroundColor = RGBCOLOR(r: 216, 216, 216)
+//        content.backgroundColor = RGBCOLOR(r: 216, 216, 216)
+        content.backgroundColor = UIColor.white
         return content
     }()
+    
+    private var feedbackPicK:UILabel =  UILabel.cz_label(withText: LanguageHelper.getString(key: "detail.statusInfo.imgs"), fontSize: kResizedFont(ft: 15), color: kFontColorGray)
     
     private lazy var collectionView: UICollectionView = {
         let flowLayout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
@@ -36,7 +39,7 @@ class FeedbackImageUploadView: UIView {
         flowLayout.minimumLineSpacing = kResizedPoint(pt: 10)
         flowLayout.sectionInset = UIEdgeInsets.init(top: 0, left: 5, bottom: 0, right: 5)
         
-        collectionV.backgroundColor = RGBCOLOR(r: 216, 216, 216)
+        collectionV.backgroundColor = UIColor.white
         collectionV.isScrollEnabled = false
         collectionV.delegate = self
         collectionV.dataSource = self
@@ -84,7 +87,7 @@ class FeedbackImageUploadView: UIView {
             h = CGFloat(arrCount/3)*(itemH+cap)+itemH
         }
         
-        return kResizedPoint(pt: 20) + h + kResizedPoint(pt: 20)
+        return kResizedPoint(pt: 20) + h + kResizedPoint(pt: 20) + kResizedPoint(pt: 15)
     }
     
     func addAndUploadImage(img: UIImage, atIndexPath index: NSInteger) {
@@ -125,7 +128,9 @@ extension FeedbackImageUploadView{
     
     func initView(){
         self.backgroundColor = kBgColorGray_238_235_220
+        backgroundColor = UIColor.white
         self.addSubview(self.contentView)
+        self.contentView.addSubview(feedbackPicK)
         self.contentView.addSubview(self.collectionView)
         
         self.imagesArray = [String]()
@@ -141,8 +146,13 @@ extension FeedbackImageUploadView{
             make.bottom.equalTo()(self.mas_bottom)
         }
         
+        feedbackPicK.mas_makeConstraints { (make) in
+            make?.top.equalTo()(contentView.mas_top)?.offset()(kResizedPoint(pt: 0))
+            make?.left.equalTo()(contentView.mas_left)
+        }
+        
         self.collectionView.mas_makeConstraints { (make:MASConstraintMaker!) in
-            make.top.equalTo()(self.contentView.mas_top)?.offset()(kResizedPoint(pt: 0))
+            make.top.equalTo()(self.feedbackPicK.mas_bottom)?.offset()(kResizedPoint(pt: 0))
             make.left.equalTo()(self.contentView)?.offset()(kResizedPoint(pt: 0))
             make.right.equalTo()(self.contentView.mas_right)?.offset()(kResizedPoint(pt: 0))
             make.bottom.equalTo()(self.contentView.mas_bottom)
