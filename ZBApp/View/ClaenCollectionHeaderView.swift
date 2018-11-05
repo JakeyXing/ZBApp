@@ -9,6 +9,8 @@
 import UIKit
 import Masonry
 
+
+/// 清扫图片部分房间名称
 class ClaenCollectionHeaderView: UICollectionReusableView {
     
     //MARK: - 控件

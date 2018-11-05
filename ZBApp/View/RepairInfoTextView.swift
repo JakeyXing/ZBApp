@@ -9,8 +9,9 @@
 import UIKit
 import Masonry
 
+
+/// 维修图片、视频上传 数量说明
 class RepairInfoTextView: UIView {
-    
     
     private lazy var resultNameLabel: UILabel = UILabel.cz_label(withText: LanguageHelper.getString(key: "detail.repairPic.uploadResult"), fontSize: kResizedFont(ft: 15), color: kFontColorGray)
     

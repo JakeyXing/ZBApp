@@ -9,10 +9,11 @@
 import UIKit
 import Masonry
 
+
+/// 文件占位
 class FlieItem: UIControl {
     
     //MARK: - 控件
-    
     lazy var fielImageView: UIImageView = {
         let img = UIImageView()
         img.image = UIImage(named: "location")

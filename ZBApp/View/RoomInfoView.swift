@@ -8,6 +8,8 @@
 import UIKit
 import Masonry
 
+
+/// 清扫任务任务信息
 protocol RoomInfoViewDelegate: class {
     func roomInfoViewDidTappedRoute(_ view: RoomInfoView, routeUrl routeUrlStr:String)
     func roomInfoViewDidTappedUploadFeedback(_ view: RoomInfoView)

@@ -12,6 +12,7 @@ import Masonry
 private let  kRoomRuteCellID = "kRoomRuteCellID"
 
 
+/// 维修任务房间号，路引之类
 protocol ListRoomInfoViewDelegate: class {
     func listRoomInfoViewDidTappedRoute(_ view: ListRoomInfoView, routeUrl routeUrlStr:String)
     func listRoomInfoViewDidTappedPassword(_ view: ListRoomInfoView, password passws:[ZB_PwdInfo])

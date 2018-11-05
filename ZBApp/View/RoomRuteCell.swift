@@ -9,6 +9,8 @@
 import UIKit
 import Masonry
 
+
+/// 维修房间条目信息，一个房间房间号，路引
 class RoomRuteCell: UITableViewCell {
     //MARK: - 控件
     private lazy var roomNumLabel: UILabel = UILabel.cz_label(withText: "", fontSize: kResizedFont(ft: 15), color: kFontColorGray)
