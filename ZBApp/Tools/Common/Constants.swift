@@ -283,6 +283,31 @@ func configStatusParamWithStr(typeStr: String)-> String {
     return selectedType
 }
 
+func progressNameWithProgress(progerss: ZB_ProgressType)-> String {
+    switch progerss {
+    case .ready:
+        return LanguageHelper.getString(key: "detail.progress.ready")
+    case .started:
+        return LanguageHelper.getString(key: "detail.progress.started")
+    case .transfer:
+        return LanguageHelper.getString(key: "detail.progress.transfer")
+    case .wail_approve:
+        return LanguageHelper.getString(key: "detail.progress.wail_approve")
+    case .approve_failed:
+        return LanguageHelper.getString(key: "detail.progress.approve_failed")
+    case .finished:
+        return LanguageHelper.getString(key: "detail.progress.finished")
+    case .finished_noshow:
+        return LanguageHelper.getString(key: "detail.progress.finished_noshow")
+    case .abandon_transfer:
+        return LanguageHelper.getString(key: "detail.progress.abandon_transfer")
+    case .abandon_operate:
+        return LanguageHelper.getString(key: "detail.progress.abandon_operate")
+    default:
+        return ""
+    }
+}
+
 
 //MARK: -时间转时间戳函数
 func timeToTimeStamp(time: String) -> Double {

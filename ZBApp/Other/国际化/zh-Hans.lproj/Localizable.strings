@@ -32,6 +32,16 @@
 "detail.status.finished" = "已完成";
 "detail.status.canceled" = "已取消";
 
+"detail.progress.ready" = "待开始";
+"detail.progress.started" = "进行中";
+"detail.progress.transfer" = "申请转单";
+"detail.progress.wail_approve" = "待审核";
+"detail.progress.approve_failed" = "审核失败";
+"detail.progress.finished" = "已完成";
+"detail.progress.finished_noshow" = "已完成(客人未入住)";
+"detail.progress.abandon_transfer" = "流转取消";
+"detail.progress.abandon_operate" = "运营取消";
+
 "detail.statusInfo.title" = "任务标题";
 "detail.statusInfo.describ" = "任务描述";
 "detail.statusInfo.remark" = "补充备注";

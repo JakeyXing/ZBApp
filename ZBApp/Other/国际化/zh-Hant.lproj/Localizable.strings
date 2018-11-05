@@ -6,3 +6,169 @@
   Copyright © 2018年 ParentsChat. All rights reserved.
 */
 
+"home.navi.time" = "選擇日期";
+
+"home.dropDwon.launch" = "擺場";
+"home.dropDwon.dismantle" = "撤場";
+"home.dropDwon.maintain" = "維修";
+"home.dropDwon.clean" = "清掃";
+"home.dropDwon.all" = "全部類型";
+
+"home.cell.bonus" = "完成任務，經檢查合格且無客訴，可額外獲得";
+"home.cell.remainTime" = "截止搶單時間剩餘:";
+
+"detail.nav.title" = "任務詳情";
+"detail.base.rest" = "休息";
+"detail.base.base" = "基本薪資";
+"detail.base.bonus" = "獎金";
+
+"detail.base.baseTip" = "完成該任務即可得到的保底薪資，不低於該國相關法律標準。";
+"detail.base.bonusTip" = "任務結束時，由運營進行任務質量驗收，根據工作質量確定相應獎金。";
+
+"detail.status.ready" = "待開始";
+"detail.status.started" = "進行中";
+"detail.status.finished" = "已完成";
+"detail.status.canceled" = "已取消";
+
+"detail.progress.ready" = "待開始";
+"detail.progress.started" = "進行中";
+"detail.progress.transfer" = "申請轉單";
+"detail.progress.wail_approve" = "待審核";
+"detail.progress.approve_failed" = "審核失敗";
+"detail.progress.finished" = "已完成";
+"detail.progress.finished_noshow" = "已完成(客人未入住)";
+"detail.progress.abandon_transfer" = "流轉取消";
+"detail.progress.abandon_operate" = "運營取消";
+
+"detail.statusInfo.title" = "任務標題";
+"detail.statusInfo.describ" = "任務描述";
+"detail.statusInfo.remark" = "補充備註";
+"detail.statusInfo.imgs" = "圖片";
+"detail.statusInfo.documents" = "文件";
+
+"detail.actionName.qiangdan" = "搶單";
+"detail.time.end" = "截止";
+
+"detail.roomInfo.route" = "路引查看";
+"detail.roomInfo.password" = "密碼";
+"detail.roomInfo.maxGuests" = "最大入住人數 ";
+"detail.roomInfo.nextGuests" = "下次入住人數 ";
+"detail.roomInfo.nextCheckInNights" = "下次入住天數 ";
+"detail.roomInfo.checkinNote" = "入住人數說明";
+"detail.roomInfo.checkinNoteValue" = "按照最大入住人數準備備品，如果下次入住天數大於等於3天，則備品數量加倍； 按照下次入住人數擺放備品。";
+"detail.roomInfo.remark" = "備註";
+"detail.roomInfo.uploadInfo" = "信息上報";
+
+"detail.feedbackUpload.pageTitle" = "問題反饋";
+"detail.feedbackUpload.des" = "問題上報";
+"detail.feedbackUpload.typeTitle" = "類型:";
+
+"detail.roomInfo.roomNum" = "房間號";
+"detail.roomInfo.ksPassword" = "開鎖密碼";
+"detail.roomInfo.kShortRoute" = "路引";
+"detail.roomInfo.lookRoute" = "查看";
+
+"detail.feedback.morePic" = "查看圖片";
+"detail.feedback.moreFeedback" = "查看更多日誌";
+"detail.check.title" = "驗收結果";
+"detail.doument.title" = "文檔";
+
+"detail.submitBtnTit.transfer" = "申請轉單";
+"detail.submitBtnTit.startMission" = "我已到達，開始任務";
+"detail.submitBtnTit.approveCheck" = "提交審核";
+
+"detail.cleanFeedbackType.cantCleanUp" = "無法清掃乾淨位置";
+"detail.cleanFeedbackType.equipmentNotWork" = "電器無法工作";
+"detail.cleanFeedbackType.furnitureDamaged" = "家具物品損壞";
+"detail.cleanFeedbackType.changeGoods" = "易損品更換/補充";
+"detail.cleanFeedbackType.thingsLeftByCustomer" = "客人遺留物品";
+"detail.cleanFeedbackType.notCheckin" = "客人未入住";
+
+"detail.cleanPic.uploadDes" = "清掃圖片上傳";
+"detail.PicUploadStatus.failed" = "上傳失敗";
+"detail.cleanPic.uploadPicNumTip" = "您還有圖片未成功上傳";
+
+"detail.repairPic.uploadResult" = "維修結果提交";
+"detail.repairPic.uploadTitle" = "上傳圖片/視頻";
+"detail.repairUploadAction.video" = "上傳視頻";
+"detail.repairUploadAction.image" = "上傳圖片";
+"detail.repairUploadAction.cancel" = "取消";
+"detail.repairUploadAction.lookPImage" = "查看大圖";
+
+
+"detail.PicUpload.roomNo" = "房間號:";
+"detail.address.pageTitle" = "位置";
+"detail.password.pageTitle" = "開鎖密碼";
+"detail.route.pageTitle" = "路引";
+
+"detail.log.pageTitle" = "日誌";
+
+"mission.select.time" = "任務日期";
+"mission.select.invalid" = "僅無效訂單";
+
+"mine.btns.baseInfo" = "基礎信息";
+"mine.btns.setting" = "設置";
+
+"personal.nav.title" = "個人信息:";
+"personal.base.name" = "真實姓名:";
+"personal.base.sex" = "性別:";
+"personal.base.natonalty" = "國籍:";
+"personal.base.city" = "所在城市:";
+"personal.base.userLevel" = "當前等級:";
+
+"personal.ideti.title" = "身份證件";
+"personal.ideti.idType" = "證件類型:";
+"personal.ideti.idNum" = "證件號碼:";
+"personal.ideti.idPic" = "證件圖片:";
+
+"login.apply.failed" = "審核失敗";
+"login.apply.wait" = "正在審核，請耐心等待";
+"login.apply.success" = "恭喜您審核通過";
+
+
+"login.nav.title" = "登錄";
+"login.pageItem.areaCode" = "國際區號";
+"login.pageItem.phone" = "手機號";
+"login.pageItem.phoneTip" = "請輸入手機號";
+"login.pageItem.password" = "密碼";
+"login.pageItem.passwordTip" = "請輸入密碼";
+"login.pageItem.showPassword" = "顯示密碼";
+"login.pageItem.register" = "註冊";
+"login.pageItem.resetPass" = "找回密碼";
+
+"register.pageItem.code" = "驗證碼";
+"register.pageItem.sendCode" = "發送驗證碼";
+"register.pageItem.sendCodeTip" = "請輸入驗證碼";
+
+"register.pageItem.password" = "設置密碼";
+"register.pageItem.passwordTip" = "請設置密碼";
+
+"common.btnTitle.sure" = "確定";
+
+"common.country.China" = "中國";
+"common.country.Japan" = "日本";
+"common.country.Australia" = "澳大利亞";
+"common.country.Other" = "其他";
+
+"apply.nav.title" = "資質申請";
+"apply.nav.submit" = "提交";
+"apply.item.name" = "姓名";
+"apply.item.nationty" = "國籍(證件國籍)";
+"apply.item.city" = "所在城市(當前)";
+"apply.item.cerType" = "證件類型";
+"apply.cerType.passport" = "護照";
+"apply.cerType.drLicence" = "駕駛證";
+"apply.item.cerNo" = "證件號碼";
+"apply.item.uploadCerPic" = "上傳證件圖片";
+"apply.item.uploadPassportPic" = "上傳簽證圖片";
+"apply.sex.man" = "男";
+"apply.sex.woman" = "女";
+
+"setting.langue.title" = "語言版本";
+"setting.btn.cleanCache" = "清除緩存";
+"setting.btn.exit" = "退出應用";
+"setting.btn.saveAndRestart" = "保存並重啟應用";
+
+"tabBar.title.pending" = "待搶任務";
+"tabBar.title.execute" = "我的任務";
+"tabBar.title.mine" = "基本資訊";

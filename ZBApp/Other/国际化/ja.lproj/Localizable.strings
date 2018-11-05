@@ -6,4 +6,169 @@
   Copyright © 2018年 ParentsChat. All rights reserved.
 */
 
-"home.navi.time" = "日付を選択";
+"home.navi.time" = "タイ";
+
+"home.dropDwon.launch" = "設立";
+"home.dropDwon.dismantle" = "撤场";
+"home.dropDwon.maintain" = "整備";
+"home.dropDwon.clean" = "清掃";
+"home.dropDwon.all" = "全ての形態";
+
+"home.cell.remainTime" = "残りオーダー争奪時間";
+
+"detail.nav.title" = "タスクの詳細";
+"detail.base.rest" = "休憩";
+"detail.base.base" = "基本給料";
+"detail.base.bonus" = "ボーナス";
+
+"detail.base.baseTip" = "任務完成後給料を獲得できる、日本の最低法律基準";
+"detail.base.bonusTip" = "任務完成後、運営が検査し仕事に見合った報酬を与えられる場合がある";
+
+"detail.status.ready" = "開始まで";
+"detail.status.started" = "進行中";
+"detail.status.finished" = "完成済";
+"detail.status.canceled" = "キャンセル済";
+
+"detail.progress.ready" = "開始まで";
+"detail.progress.started" = "進行中";
+"detail.progress.transfer" = "オーダー変更申請";
+"detail.progress.wail_approve" = "保留中のレビュー";
+"detail.progress.approve_failed" = "チェックに失敗しました";
+"detail.progress.finished" = "完成済";
+"detail.progress.finished_noshow" = "お客様はまだチェクインしていない";
+"detail.progress.abandon_transfer" = "移転キャンセル";
+"detail.progress.abandon_operate" = "キャンセル済み(自分で)";
+
+"detail.statusInfo.title" = "任務タイトル";
+"detail.statusInfo.describ" = "詳しい任務";
+"detail.statusInfo.remark" = "補充メモ";
+"detail.statusInfo.imgs" = "写真";
+"detail.statusInfo.documents" = "ファイル";
+
+"detail.actionName.qiangdan" = "した";
+"detail.time.end" = "締め切り";
+
+"detail.roomInfo.route" = "道案内をご覧ください";
+"detail.roomInfo.password" = "携帯番号";
+"detail.roomInfo.maxGuests" = "パスワードを表示 ";
+"detail.roomInfo.nextGuests" = "次回の入居人数 ";
+"detail.roomInfo.nextCheckInNights" = "次の滞在日数 ";
+"detail.roomInfo.checkinNote" = "入居人数説明";
+"detail.roomInfo.checkinNoteValue" = "最大入居人数に従って生活用品を準備する、次の夜の滞在が3日以上の場合はダブル、次回の入居人数に従って生活用品を準備する";
+"detail.roomInfo.remark" = "メモ";
+"detail.roomInfo.uploadInfo" = "連絡報告提出";
+
+"detail.feedbackUpload.pageTitle" = "上司に報告する問題点";
+"detail.feedbackUpload.des" = "提出";
+"detail.feedbackUpload.typeTitle" = "形態";
+
+"detail.roomInfo.roomNum" = "部屋番号";
+"detail.roomInfo.ksPassword" = "鍵の暗証番号";
+"detail.roomInfo.kShortRoute" = "道案内をご覧ください";
+"detail.roomInfo.lookRoute" = "ビュー";
+
+"detail.feedback.morePic" = "写真を確認";
+"detail.feedback.moreFeedback" = "ログをもっと見る";
+"detail.check.title" = "検査結果";
+"detail.doument.title" = "任務タイトル";
+
+"detail.submitBtnTit.transfer" = "オーダー変更申請";
+"detail.submitBtnTit.startMission" = "私はお部屋に入りました。働き始める";
+"detail.submitBtnTit.approveCheck" = "提出";
+
+"detail.cleanFeedbackType.cantCleanUp" = "清掃不可な場所";
+"detail.cleanFeedbackType.equipmentNotWork" = "電気製品故障";
+"detail.cleanFeedbackType.furnitureDamaged" = "家具破損";
+"detail.cleanFeedbackType.changeGoods" = "消耗品補充";
+"detail.cleanFeedbackType.thingsLeftByCustomer" = "お客様の忘れ物";
+"detail.cleanFeedbackType.notCheckin" = "お客様はまだチェクインしていない";
+
+"detail.cleanPic.uploadDes" = "写真をスキャンする";
+"detail.PicUploadStatus.failed" = "失敗した";
+"detail.cleanPic.uploadPicNumTip" = "一部の画像が正常にアップロードされなかった";
+
+"detail.repairPic.uploadResult" = "結果を修正して提出";
+"detail.repairPic.uploadTitle" = "画像/動画のアップロード";
+"detail.repairUploadAction.video" = "ビデオをアップロードする";
+"detail.repairUploadAction.image" = "画像をアップロードする";
+"detail.repairUploadAction.cancel" = "キャンセル";
+"detail.repairUploadAction.lookPImage" = "元の画像を表示";
+
+
+"detail.PicUpload.roomNo" = "部屋番号:";
+"detail.address.pageTitle" = "報告された問題リスト";
+"detail.password.pageTitle" = "部屋の暗証番号";
+"detail.route.pageTitle" = "道案内";
+
+"detail.log.pageTitle" = "ログをもっと見る";
+
+"mission.select.time" = "日付を選択";
+"mission.select.invalid" = "無効な注文のみが含まれています";
+
+"mine.btns.baseInfo" = "基本情報";
+"mine.btns.setting" = "設定";
+
+"personal.nav.title" = "個人情報:";
+"personal.base.name" = "本名:";
+"personal.base.sex" = "性别:";
+"personal.base.natonalty" = "国籍:";
+"personal.base.city" = "所在都市:";
+"personal.base.userLevel" = "レベル";
+
+"personal.ideti.title" = "IDカード";
+"personal.ideti.idType" = "証明のタイプ:";
+"personal.ideti.idNum" = "証明番号:";
+"personal.ideti.idPic" = "ID写真:";
+
+"login.apply.failed" = "チェックに失敗しました";
+"login.apply.wait" = "レビュー中、ちょっと待ってください";
+"login.apply.success" = "おめでとう、合格";
+
+
+"login.nav.title" = "ログイン";
+"login.pageItem.areaCode" = "国際番号";
+"login.pageItem.phone" = "手机号";
+"login.pageItem.phoneTip" = "手机号を入力";
+"login.pageItem.password" = "パスワード";
+"login.pageItem.passwordTip" = "パスワードを入力してください";
+"login.pageItem.showPassword" = "パスワードを表示する";
+"login.pageItem.register" = "アカウント";
+"login.pageItem.resetPass" = "パスワードを取得する";
+
+"register.pageItem.code" = "証明番号";
+"register.pageItem.sendCode" = "証明番号を獲得";
+"register.pageItem.sendCodeTip" = "確認コードを入力してください";
+
+"register.pageItem.password" = "新しい暗証番号";
+"register.pageItem.passwordTip" = "パスワードを設定してください";
+
+"common.btnTitle.sure" = "确定";
+
+"common.country.China" = "中国";
+"common.country.Japan" = "日本";
+"common.country.Australia" = "オーストラリア";
+"common.country.Other" = "その他";
+
+"apply.nav.title" = "資格申請";
+"apply.nav.submit" = "提出";
+"apply.item.name" = "氏名";
+"apply.item.nationty" = "国籍（文書）";
+"apply.item.city" = "所在都市(現在)";
+"apply.item.cerType" = "ドキュメントタイプ";
+"apply.cerType.passport" = "旅券";
+"apply.cerType.drLicence" = "免許所";
+"apply.item.cerNo" = "ID番号";
+"apply.item.uploadCerPic" = "アップロードID";
+"apply.item.uploadPassportPic" = "ビザ写真";
+"apply.sex.man" = "男性";
+"apply.sex.woman" = "女性";
+
+"setting.langue.title" = "言語バージョン";
+"setting.btn.cleanCache" = "キャッシュの消去";
+
+"setting.btn.exit" = "サインアウト";
+"setting.btn.saveAndRestart" = "アプリを保存して再起動します";
+
+"tabBar.title.pending" = "保留中のタスク";
+"tabBar.title.execute" = "私の仕事";
+"tabBar.title.mine" = "基本情報";

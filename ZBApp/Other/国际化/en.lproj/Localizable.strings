@@ -5,4 +5,169 @@
   Created by xingjiehai on 2018/10/24.
   Copyright © 2018年 ParentsChat. All rights reserved.
 */
-"home.navi.time" = "choose date";
+"home.navi.time" = "Select date";
+
+"home.dropDwon.launch" = "Property Opening";
+"home.dropDwon.dismantle" = "Property Withdraw";
+"home.dropDwon.maintain" = "Service";
+"home.dropDwon.clean" = "Cleaning";
+"home.dropDwon.all" = "All types";
+
+"home.cell.bonus" = "Distance from the start time remaining";
+"home.cell.remainTime" = "Deadline time remain";
+
+"detail.nav.title" = "Task Details";
+"detail.base.rest" = "Rest";
+"detail.base.base" = "Basic salary";
+"detail.base.bonus" = "Bonus";
+
+"detail.base.baseTip" = "The guaranteed salary that can be obtained by completing this task,which is not lower than the relevant legal standards of the country.";
+"detail.base.bonusTip" = "After members completing the task, the task quality is checked by the operation and the corresponding bonus is determined based on the quality of the work.";
+
+"detail.status.ready" = "Ready";
+"detail.status.started" = "At work";
+"detail.status.finished" = "Finished";
+"detail.status.canceled" = "Cancelled";
+
+"detail.progress.ready" = "Ready";
+"detail.progress.started" = "At work";
+"detail.progress.transfer" = "Apply for transfer order";
+"detail.progress.wail_approve" = "Pending review";
+"detail.progress.approve_failed" = "check failed";
+"detail.progress.finished" = "Finished";
+"detail.progress.finished_noshow" = "A no-show customer";
+"detail.progress.abandon_transfer" = "transferring cancellation";
+"detail.progress.abandon_operate" = "OP Cancelled";
+
+"detail.statusInfo.title" = "Task title";
+"detail.statusInfo.describ" = "Task details";
+"detail.statusInfo.remark" = "Extra Remarks";
+"detail.statusInfo.imgs" = "Pictures";
+"detail.statusInfo.documents" = "File";
+
+"detail.actionName.qiangdan" = "Grab the order";
+"detail.time.end" = "Deadline";
+
+"detail.roomInfo.route" = "Check the Guide File";
+"detail.roomInfo.password" = "View password";
+"detail.roomInfo.maxGuests" = "Maximum number of guests ";
+"detail.roomInfo.nextGuests" = "The number(ppls) of next stay  ";
+"detail.roomInfo.nextCheckInNights" = "The number of nights in the next stay ";
+"detail.roomInfo.checkinNote" = "Note for ppls";
+"detail.roomInfo.checkinNoteValue" = "Prepare amenities according to the maximum number of guests,double if the next night stay is 3 days or more.Set amenities according to the number(ppls) of next stay ";
+"detail.roomInfo.remark" = "Remarks";
+"detail.roomInfo.uploadInfo" = "Report";
+
+"detail.feedbackUpload.pageTitle" = "Report";
+"detail.feedbackUpload.des" = "Task details";
+"detail.feedbackUpload.typeTitle" = "Type";
+
+"detail.roomInfo.roomNum" = "Room number";
+"detail.roomInfo.ksPassword" = "Password to unlock the door";
+"detail.roomInfo.kShortRoute" = "Check in guide file";
+###"detail.roomInfo.lookRoute" = "View";
+
+"detail.feedback.morePic" = "Check the picture";
+"detail.feedback.moreFeedback" = "See more logs";
+"detail.check.title" = "Reported problem list";
+###"detail.doument.title" = "Tile";
+
+"detail.submitBtnTit.transfer" = "Apply for transferring task";
+"detail.submitBtnTit.startMission" = "I have entered the room and start.";
+"detail.submitBtnTit.approveCheck" = "Submit";
+
+"detail.cleanFeedbackType.cantCleanUp" = "Unable to clean up location";
+"detail.cleanFeedbackType.equipmentNotWork" = "The electric device is not working properly";
+"detail.cleanFeedbackType.furnitureDamaged" = "Damaged furniture";
+"detail.cleanFeedbackType.changeGoods" = "Consumables replacement/supplement";
+"detail.cleanFeedbackType.thingsLeftByCustomer" = "Things the guest left behind";
+"detail.cleanFeedbackType.notCheckin" = "A no-show customer";
+
+"detail.cleanPic.uploadDes" = "Upload pictures (after-cleaning)";
+"detail.PicUploadStatus.failed" = "Failed";
+"detail.cleanPic.uploadPicNumTip" = "Some images were not uploaded successfully";
+
+"detail.repairPic.uploadResult" = "Submit repair result ";
+"detail.repairPic.uploadTitle" = "Upload image/video";
+"detail.repairUploadAction.video" = "Upload video";
+"detail.repairUploadAction.image" = "Upload image";
+"detail.repairUploadAction.cancel" = "Cancel";
+"detail.repairUploadAction.lookPImage" = "View original picture";
+
+
+"detail.PicUpload.roomNo" = "Room number:";
+"detail.address.pageTitle" = "location";
+"detail.password.pageTitle" = "Password to unlock the door";
+"detail.route.pageTitle" = "Check the Guide File";
+
+"detail.log.pageTitle" = "logs";
+
+"mission.select.time" = "Date";
+"mission.select.invalid" = "Only contains invalid order";
+
+"mine.btns.baseInfo" = "Basic Information";
+"mine.btns.setting" = "Set";
+
+"personal.nav.title" = "Personal Information:";
+"personal.base.name" = "Real Name:";
+"personal.base.sex" = "Gender: ";
+"personal.base.natonalty" = "Nationality:";
+"personal.base.city" = "Location City:";
+"personal.base.userLevel" = "current level";
+
+"personal.ideti.title" = "Identity ";
+"personal.ideti.idType" = "Document Type:";
+"personal.ideti.idNum" = "Id Number:";
+"personal.ideti.idPic" = "ID Photo:";
+
+"login.apply.failed" = "check failed";
+"login.apply.wait" = "Under review,Wait a moment";
+"login.apply.success" = "Congratulations,Passed";
+
+
+"login.nav.title" = "login";
+"login.pageItem.areaCode" = "International Area Code";
+"login.pageItem.phone" = "Phone Number";
+"login.pageItem.phoneTip" = "Please type in";
+"login.pageItem.password" = "password";
+"login.pageItem.passwordTip" = "Please type in password";
+"login.pageItem.showPassword" = "Show Password";
+"login.pageItem.register" = "Register";
+"login.pageItem.resetPass" = "Retrieve Password ";
+
+"register.pageItem.code" = "Verification Code ";
+"register.pageItem.sendCode" = "Send Verification Code ";
+"register.pageItem.sendCodeTip" = "Please Enter The Verification Code ";
+
+"register.pageItem.password" = "Set Password ";
+"register.pageItem.passwordTip" = "Please Set Password ";
+
+"common.btnTitle.sure" = "Confirm";
+
+"common.country.China" = "China";
+"common.country.Japan" = "Japan";
+"common.country.Australia" = "Australia";
+"common.country.Other" = "Other";
+
+"apply.nav.title" = "Apply";
+"apply.nav.submit" = "Submit";
+"apply.item.name" = "Name";
+"apply.item.nationty" = "Nationality";
+"apply.item.city" = "Current City";
+"apply.item.cerType" = "Document Type ";
+"apply.cerType.passport" = "Passport";
+"apply.cerType.drLicence" = "Driving license";
+"apply.item.cerNo" = "Document Number";
+"apply.item.uploadCerPic" = "Upload Id Image ";
+"apply.item.uploadPassportPic" = "Upload Visa Image";
+"apply.sex.man" = "Male";
+"apply.sex.woman" = "Female";
+
+"setting.langue.title" = "Language";
+"setting.btn.cleanCache" = "clear cache";
+"setting.btn.exit" = "Sign out";
+"setting.btn.saveAndRestart" = "Save and restart the app";
+
+"tabBar.title.pending" = "Pending tasks";
+"tabBar.title.execute" = "My task";
+"tabBar.title.mine" = "Basic Information";

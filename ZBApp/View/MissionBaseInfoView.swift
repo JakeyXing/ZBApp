@@ -129,8 +129,9 @@ extension MissionBaseInfoView{
     
     //
     func congfigDataWithTask(info: ZB_Task){
-        
-        self.statusLabel.text = statusNameWithStr(str: info.progress ?? "")
+        let progress:String = info.progress ?? "READY"
+        let currentProgress = ZB_ProgressType(rawValue: progress) ?? .ready
+        self.statusLabel.text = progressNameWithProgress(progerss: currentProgress)
         
         let taskInfo = info.taskInfo
         let timeInterv = timeToTimeStamp(time: taskInfo?.startDate ?? "")

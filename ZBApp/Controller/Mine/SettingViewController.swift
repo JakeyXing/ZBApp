@@ -114,6 +114,22 @@ class SettingViewController: UIViewController,JHNavigationBarDelegate {
         }
         
         
+        
+        let langueStr = LanguageHelper.shareInstance.currentLanguageFileName ?? ""
+        switch langueStr {
+        case "zh-Hant":
+            self.nDropdownView.contentLabel.text = "繁體中文"
+        case "ja":
+            self.nDropdownView.contentLabel.text = "日文"
+        case "en":
+            self.nDropdownView.contentLabel.text = "English"
+        case "zh-Hans":
+            self.nDropdownView.contentLabel.text = "中文简体"
+        default:
+            self.nDropdownView.contentLabel.text = "繁體中文"
+        }
+        
+        
     }
     
 
