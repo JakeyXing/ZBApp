@@ -5,6 +5,8 @@
   Created by xingjiehai on 2018/10/24.
   Copyright © 2018年 ParentsChat. All rights reserved.
 */
+
+
 "home.navi.time" = "Select date";
 
 "home.dropDwon.launch" = "Property Opening";
@@ -65,12 +67,12 @@
 "detail.roomInfo.roomNum" = "Room number";
 "detail.roomInfo.ksPassword" = "Password to unlock the door";
 "detail.roomInfo.kShortRoute" = "Check in guide file";
-###"detail.roomInfo.lookRoute" = "View";
+"detail.roomInfo.lookRoute" = "View";
 
 "detail.feedback.morePic" = "Check the picture";
 "detail.feedback.moreFeedback" = "See more logs";
 "detail.check.title" = "Reported problem list";
-###"detail.doument.title" = "Tile";
+"detail.doument.title" = "Tile";
 
 "detail.submitBtnTit.transfer" = "Apply for transferring task";
 "detail.submitBtnTit.startMission" = "I have entered the room and start.";
