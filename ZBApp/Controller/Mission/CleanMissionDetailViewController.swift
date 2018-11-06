@@ -326,8 +326,10 @@ class CleanMissionDetailViewController: MissionDetailBaseViewController,CleanPic
         feedback.hidesBottomBarWhenPushed = true
         if self.isTaked {
             feedback.mID = self.task?.id ?? 0
+            feedback.type = self.task?.taskInfo?.type
         }else{
             feedback.mID = self.model?.id ?? 0
+            feedback.type = self.model?.type
         }
         self.navigationController?.pushViewController(feedback, animated: true)
         

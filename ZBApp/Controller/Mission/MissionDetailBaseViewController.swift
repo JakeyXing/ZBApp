@@ -44,6 +44,10 @@ class MissionDetailBaseViewController: UIViewController {
         let tap = UITapGestureRecognizer(target: self, action: #selector(addressTapped))
         view.addressLabel.addGestureRecognizer(tap)
         
+        let tapp = UITapGestureRecognizer(target: self, action: #selector(addressTapped))
+        view.addressIcon.isUserInteractionEnabled = true
+        view.addressIcon.addGestureRecognizer(tapp)
+        
         view.starImage_1.isUserInteractionEnabled = true
         let tap1 = UITapGestureRecognizer(target: self, action: #selector(baseTip))
         view.starImage_1.addGestureRecognizer(tap1)

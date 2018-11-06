@@ -20,7 +20,7 @@
 "detail.nav.title" = "任務詳情";
 "detail.base.rest" = "休息";
 "detail.base.base" = "基本薪資";
-"detail.base.bonus" = "獎金";
+"detail.base.bonus" = "質量金最高可得";
 
 "detail.base.baseTip" = "完成該任務即可得到的保底薪資，不低於該國相關法律標準。";
 "detail.base.bonusTip" = "任務結束時，由運營進行任務質量驗收，根據工作質量確定相應獎金。";
@@ -95,6 +95,9 @@
 "detail.repairUploadAction.cancel" = "取消";
 "detail.repairUploadAction.lookPImage" = "查看大圖";
 
+"detail.roomPassword.lock_guide" = "開鎖密碼";
+"detail.roomPassword.gate_guide" = "進入樓下大門";
+"detail.roomPassword.key_place" = "獲取鑰匙";
 
 "detail.PicUpload.roomNo" = "房間號:";
 "detail.address.pageTitle" = "位置";

@@ -353,17 +353,19 @@ func timeStampShortHourStr(timeStamp: Double) -> String {
 }
 
 func getFormatRemainTime(secounds:TimeInterval)->String{
-    if secounds.isNaN{
+    let now = Date().timeIntervalSince1970
+    let remain = secounds - now
+    if remain <= 0 {
         return "0m"
     }
-    let day = floor(secounds/(3600*24))
-    let hour = floor(secounds.truncatingRemainder(dividingBy: 3600*24)  / 3600)
-    let minutes = floor(secounds.truncatingRemainder(dividingBy: 3600) / 60)
+    let day = floor(remain/(3600*24))
+    let hour = floor(remain.truncatingRemainder(dividingBy: 3600*24)  / 3600)
+    let minutes = floor(remain.truncatingRemainder(dividingBy: 3600) / 60)
     
     if day == 0 {
-        return String(format: "%02dh%02m", hour, minutes)
+        return String(format: "%dh%dm", Int(hour), Int(minutes))
     }else{
-        return String(format: "%dd%02dh%02m", day, hour, minutes)
+        return String(format: "%dd%dh%dm", Int(day), Int(hour), Int(minutes))
     }
     
 }

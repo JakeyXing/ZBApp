@@ -21,7 +21,7 @@
 "detail.nav.title" = "Task Details";
 "detail.base.rest" = "Rest";
 "detail.base.base" = "Basic salary";
-"detail.base.bonus" = "Bonus";
+"detail.base.bonus" = "You can get the highest quality bonus";
 
 "detail.base.baseTip" = "The guaranteed salary that can be obtained by completing this task,which is not lower than the relevant legal standards of the country.";
 "detail.base.bonusTip" = "After members completing the task, the task quality is checked by the operation and the corresponding bonus is determined based on the quality of the work.";
@@ -96,6 +96,9 @@
 "detail.repairUploadAction.cancel" = "Cancel";
 "detail.repairUploadAction.lookPImage" = "View original picture";
 
+"detail.roomPassword.lock_guide" = "Password to unlock the door";
+"detail.roomPassword.gate_guide" = "Enter the gate";
+"detail.roomPassword.key_place" = "Key";
 
 "detail.PicUpload.roomNo" = "Room number:";
 "detail.address.pageTitle" = "location";

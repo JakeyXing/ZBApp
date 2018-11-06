@@ -19,7 +19,7 @@
 "detail.nav.title" = "タスクの詳細";
 "detail.base.rest" = "休憩";
 "detail.base.base" = "基本給料";
-"detail.base.bonus" = "ボーナス";
+"detail.base.bonus" = "清掃質量最高点賞金有";
 
 "detail.base.baseTip" = "任務完成後給料を獲得できる、日本の最低法律基準";
 "detail.base.bonusTip" = "任務完成後、運営が検査し仕事に見合った報酬を与えられる場合がある";
@@ -94,6 +94,9 @@
 "detail.repairUploadAction.cancel" = "キャンセル";
 "detail.repairUploadAction.lookPImage" = "元の画像を表示";
 
+"detail.roomPassword.lock_guide" = "部屋の暗証番号";
+"detail.roomPassword.gate_guide" = "ゲートに入る";
+"detail.roomPassword.key_place" = "鍵";
 
 "detail.PicUpload.roomNo" = "部屋番号:";
 "detail.address.pageTitle" = "報告された問題リスト";

@@ -22,7 +22,7 @@
 "detail.nav.title" = "任务详情";
 "detail.base.rest" = "休息";
 "detail.base.base" = "基本薪资";
-"detail.base.bonus" = "奖金";
+"detail.base.bonus" = "质量金最高可得";
 
 "detail.base.baseTip" = "完成该任务即可得到的保底薪资，不低于该国相关法律标准。";
 "detail.base.bonusTip" = "任务结束时，由运营进行任务质量验收，根据工作质量确定相应奖金。";

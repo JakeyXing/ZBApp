@@ -119,7 +119,7 @@ class QueFeedbackController: UIViewController,JHNavigationBarDelegate,FeedbackIm
         self.typeLabelDropdownView.mas_makeConstraints { (make:MASConstraintMaker!) in
             make.centerY.equalTo()(self.typeLabel.mas_centerY)
             make.left.equalTo()(self.typeLabel.mas_right)?.offset()(kResizedPoint(pt: 10))
-            make.width.equalTo()(kResizedPoint(pt: 100))
+            make.width.equalTo()(kResizedPoint(pt: 150))
             make.height.equalTo()(kResizedPoint(pt: 20))
         }
         

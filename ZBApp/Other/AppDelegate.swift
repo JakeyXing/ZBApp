@@ -55,7 +55,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //tabbar背景色
         UITabBar.appearance().backgroundColor = UIColor.white
         //tabbar字体颜色
-        UITabBar.appearance().tintColor = UIColor(red: 255, green: 102, blue: 0, alpha: 1)
+        UITabBar.appearance().tintColor = kTintColorYellow
         IQKeyboardManager.shared.enable = true
         
         NotificationCenter.default.addObserver(self, selector: #selector(reLogin), name: NSNotification.Name(rawValue: kRefreshTokenInvalidNoti), object: nil)
@@ -99,16 +99,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func tabBarItemsAttributesForController() ->  [[String : String]] {
         
         let tabBarItemOne = [CYLTabBarItemTitle:LanguageHelper.getString(key: "tabBar.title.pending"),
-                             CYLTabBarItemImage:"home_normal",
-                             CYLTabBarItemSelectedImage:"home_highlight"]
+                             CYLTabBarItemImage:"tab_nor",
+                             CYLTabBarItemSelectedImage:"tab_sel"]
         
         let tabBarItemTwo = [CYLTabBarItemTitle:LanguageHelper.getString(key: "tabBar.title.execute"),
-                             CYLTabBarItemImage:"mycity_normal",
-                             CYLTabBarItemSelectedImage:"mycity_highlight"]
+                             CYLTabBarItemImage:"tab_nor",
+                             CYLTabBarItemSelectedImage:"tab_sel"]
         
         let tabBarItemThree = [CYLTabBarItemTitle:LanguageHelper.getString(key: "tabBar.title.mine"),
-                              CYLTabBarItemImage:"account_normal",
-                              CYLTabBarItemSelectedImage:"account_highlight"]
+                              CYLTabBarItemImage:"tab_nor",
+                              CYLTabBarItemSelectedImage:"tab_sel"]
         let tabBarItemsAttributes = [tabBarItemOne,tabBarItemTwo,tabBarItemThree]
         return tabBarItemsAttributes
     }
