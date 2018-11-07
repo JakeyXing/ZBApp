@@ -31,7 +31,7 @@ class ResetPasswordViewController: UIViewController,BEMCheckBoxDelegate {
             if newValue {
                 countdownTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(RegisterViewController.updateTime(_:)), userInfo: nil, repeats: true)
                 
-                remainingSeconds = 300
+                remainingSeconds = 90
             } else {
                 countdownTimer?.invalidate()
                 countdownTimer = nil
