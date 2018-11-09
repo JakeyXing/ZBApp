@@ -46,7 +46,8 @@ class WebViewController: UIViewController,JHNavigationBarDelegate,UIWebViewDeleg
             return
         }
         
-        self.webview.loadRequest(URLRequest.init(url: URL.init(string: self.urlStr!)!))
+        let urlStr = self.urlStr?.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
+        self.webview.loadRequest(URLRequest.init(url: URL.init(string: urlStr!)!))
 
     }
     
@@ -62,6 +63,10 @@ class WebViewController: UIViewController,JHNavigationBarDelegate,UIWebViewDeleg
     
     func webViewDidFinishLoad(_ webView: UIWebView) {
         MBProgressHUD.hide(for: self.view, animated: true)
+    }
+    
+    func webView(_ webView: UIWebView, didFailLoadWithError error: Error) {
+         MBProgressHUD.hide(for: self.view, animated: true)
     }
 
 

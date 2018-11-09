@@ -24,9 +24,9 @@ class FlieItem: UIControl {
         let lab = UILabel()
         lab.textColor = kFontColorGray
         lab.backgroundColor = kBgColorGray_238_235_220
-        lab.textAlignment = NSTextAlignment.left
+        lab.textAlignment = NSTextAlignment.center
         lab.font = kFont(size: 15)
-        lab.text = "小鸭子游啊游啊游上了岸.pdf"
+        lab.text = ""
         lab.numberOfLines = 2
         lab.lineBreakMode = .byTruncatingMiddle
         return lab
@@ -58,7 +58,7 @@ extension FlieItem{
     //MARK: - private methods
     
     func initView(){
-        self.backgroundColor = UIColor.white
+        self.backgroundColor = UIColor.clear
         self.addSubview(self.fielImageView)
         self.addSubview(self.fileNameLabel)
         
@@ -75,7 +75,8 @@ extension FlieItem{
         
         self.fileNameLabel.mas_makeConstraints { (make:MASConstraintMaker!) in
             make.top.equalTo()(self.fielImageView.mas_bottom)?.offset()(kResizedPoint(pt: 2))
-            make.left.right().equalTo()(self)
+            make.left.equalTo()(self.mas_left)?.offset()(kResizedPoint(pt: -5))
+            make.right.equalTo()(self.mas_right)?.offset()(kResizedPoint(pt: 5))
         }
        
     

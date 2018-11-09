@@ -214,11 +214,12 @@ extension CarryMissonImageAndFlieView{
             flieItem.top = CGFloat(i/3)*kResizedPoint(pt: height+cap)
             
             guard let urlString = self.fileArray?[i],
-                let url = URL(string: urlString) else {
+                let urlStr = urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else {
                     return
             }
-            
-            flieItem.fielImageView.sd_setImage(with: url, placeholderImage: UIImage(named: ""))
+
+            flieItem.fielImageView.image = UIImage(named: self.fileIconWithUrl(url: urlStr))
+            flieItem.fileNameLabel.text = self.fileNameWithUrl(url: urlString)
             flieItem.addTarget(self, action: #selector(tappedFileAction), for: UIControl.Event.touchUpInside)
             
         }
@@ -253,6 +254,35 @@ extension CarryMissonImageAndFlieView{
         let index = btn.tag - 100
         self.delegate?.carryMissonImageAndFlieView(self, didSelectedImageAtIndex: index)
         
+        
+    }
+    
+    func fileIconWithUrl(url:String) -> String {
+        var iconImageName = ""
+        if url.hasSuffix("pdf") {
+            iconImageName = "pdf_icon"
+            
+        }else if url.hasSuffix("PDF") {
+            iconImageName = "pdf_icon"
+            
+        }else if url.hasSuffix("docx") {
+            iconImageName = "docx_icon"
+            
+        }else if url.hasSuffix("xlsx") {
+            iconImageName = "xlsx_icon"
+            
+        }
+        return iconImageName
+        
+    }
+    
+    func fileNameWithUrl(url:String) -> String {
+        var fileName:String = ""
+        let arr = url.split(separator: "/")
+        print(arr)
+        
+        fileName = String(arr[arr.count-1])
+        return fileName
         
     }
     

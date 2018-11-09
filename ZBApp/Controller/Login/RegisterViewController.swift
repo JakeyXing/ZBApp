@@ -160,7 +160,7 @@ class RegisterViewController: UIViewController,BEMCheckBoxDelegate {
             
             let sharedAppdelegate:AppDelegate = UIApplication.shared.delegate as! AppDelegate
             if getUserStatus() == .review_pass{
-                sharedAppdelegate.window?.rootViewController = sharedAppdelegate.mainTabBarVc
+                sharedAppdelegate.resetRootController()
             }else{
                 let reply = CertifApplyController()
                 let naviVC = UINavigationController(rootViewController: reply)
