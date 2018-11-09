@@ -122,7 +122,7 @@ extension MissionBaseInfoView{
         }
     
         self.salaryLabel_1.text = String(format: "%.0f %@",info.base,info.currency ?? "JPY")
-        self.salaryLabel_2.text = String(format: "%.0f %@",info.base,info.currency ?? "JPY")
+        self.salaryLabel_2.text = String(format: "%.0f %@",info.bonus,info.currency ?? "JPY")
         
         self.addressLabel.text = info.address?.name
     }
@@ -139,7 +139,10 @@ extension MissionBaseInfoView{
         self.typeLabel.text = typeNameWithStr(str: taskInfo?.type ?? "")
         
         let starTimeStr = timeStampShortTimeStr(timeStamp: timeInterv)
-        let endTimeStr = timeStampShortTimeStr(timeStamp: (timeInterv + Double(taskInfo?.restHours ?? 0 + (taskInfo?.hoursPerPerson ?? 0) )*3600))
+        let restHoursPerPerson = taskInfo?.restHoursPerPerson ?? 0
+        let hoursPerPerson = taskInfo?.hoursPerPerson ?? 0
+        let worktime = restHoursPerPerson + hoursPerPerson
+        let endTimeStr = timeStampShortTimeStr(timeStamp: (timeInterv + Double(worktime*3600)))
         
         if taskInfo?.type == "CLEAN" {
             if taskInfo?.properties?.count ?? 0 > 0 {
