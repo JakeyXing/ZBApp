@@ -102,11 +102,11 @@ class FeedbackImageUploadView: UIView {
                 
                 self.imagesArray?.append(url ?? "")
                 self.collectionView.reloadData()
+                print("-----> imageName : \(imgName).png")
                 self.delegate?.feedbackImageUploadViewDidUplaodSuccess(self)
                 
-                let cell: RepairImageCell = self.collectionView.cellForItem(at: IndexPath(row: index, section: 0)) as! RepairImageCell
-                
-               cell.progressView.backgroundColor = UIColor.green
+//                let cell: RepairImageCell = self.collectionView.cellForItem(at: IndexPath(row: index, section: 0)) as! RepairImageCell
+//               cell.progressView.backgroundColor = UIColor.green
                 
             })
             
@@ -192,12 +192,13 @@ extension FeedbackImageUploadView:UICollectionViewDelegateFlowLayout,UICollectio
             let cell:RepairImageCell = collectionView.dequeueReusableCell(withReuseIdentifier: identifierStr, for: indexPath) as! RepairImageCell
             let imageUrl = self.imagesArray?[indexPath.row]
             
-            cell.imageView.sd_setImage(with: URL(fileURLWithPath: imageUrl ?? ""), completed: nil)
+            cell.imageView.sd_setImage(with: URL(string: imageUrl ?? ""), completed: nil)
             cell.indexpath = indexPath as NSIndexPath
             cell.delegate = self
             if (indexPath.row == arrCount - 1){
                 cell.mediaType = currentUploadmediaType
             }
+            cell.progressView.backgroundColor = UIColor.green
             return cell
         }else{
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifierStrAdd, for: indexPath)
