@@ -141,7 +141,8 @@ class NetWorkManager: AFHTTPSessionManager {
                         setRefreshToken(token: resultDic["refreshToken"] as! String)
                         
                         //重新加载请求
-                        task.resume()
+//                        task.resume()
+                        self.request(method: method, url: url, parameters: params, success: success, fail: fail)
                         
                         
                     }else{

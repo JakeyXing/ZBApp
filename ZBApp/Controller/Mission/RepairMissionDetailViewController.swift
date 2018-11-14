@@ -308,11 +308,8 @@ class RepairMissionDetailViewController: MissionDetailBaseViewController,RepairP
                     MBProgressHUD.hide(for: self.view, animated: true)
                     
                     let resultDic = data as! Dictionary<String,AnyObject>
-                    let dic = resultDic["data"]
-                    if dic == nil {
-                        return
-                    }
-                    self.loadNewDataWithId(taskId: self.task?.id ?? 0)
+                    let executorId = resultDic["data"] as! Int64
+                    self.loadNewDataWithId(taskId: executorId)
                     
                 }) { (data, errMsg) in
                     MBProgressHUD.hide(for: self.view, animated: true)
@@ -322,7 +319,28 @@ class RepairMissionDetailViewController: MissionDetailBaseViewController,RepairP
                 
             }else if(self.currentProgress == .started){
                 //提交审核
-                let params = ["id":self.task?.id ?? 0 ] as [String : Any]
+                let cout = self.uploadView.roomWithImagesArray?.count ?? 0
+                
+                var maPhotos = [[String:Any]]()
+                
+                for i in 0..<cout{
+                    let item = self.uploadView.roomWithImagesArray![i]
+                    let photoCount = item.photos!.count
+                    
+                    for index in 0..<photoCount{
+                        let photo = item.photos![index]
+                        if (photo.url == nil || photo.url == ""){
+                            
+                            return;
+                        }
+                        let dic:[String: Any] = photo.toJSON()
+                        maPhotos.append(dic)
+                    }
+                    
+                }
+                
+
+                let params = ["id":self.task?.id ?? 0 ,"maintainPhotos":maPhotos] as [String : Any]
                 
                 MBProgressHUD.showAdded(to: self.view, animated: true)
                 NetWorkManager.shared.loadRequest(method: .post, url: ApproveTaskUrl, parameters: params as [String : Any], success: { (data) in
@@ -387,6 +405,34 @@ class RepairMissionDetailViewController: MissionDetailBaseViewController,RepairP
     
     
     //MARK: - RepairPicUploadViewDelegate
+    func repairPicUploadViewDidUplaodSuccess(_ view: RepairPicUploadView) {
+        self.uploadView.height = self.uploadView.viewHeight()
+        
+        //提交按钮
+        if self.currentProgress == .ready || self.currentProgress == .started{
+            self.submitButton.isHidden = false
+            self.submitButton.top = self.uploadView.bottom + kResizedPoint(pt: 30)
+            self.submitButton.height = kResizedFont(ft: 30)
+            
+        }else{
+            self.submitButton.isHidden = true
+            self.submitButton.top = self.uploadView.bottom
+            self.submitButton.height = 0
+        }
+        
+        //转单按钮
+        if self.currentProgress == .ready{
+            self.transferButton.isHidden = false
+            self.transferButton.top = self.submitButton.top
+        }else{
+            self.transferButton.isHidden = true
+        }
+        
+        
+        self.scrollview.contentSize = CGSize.init(width: DEVICE_WIDTH, height: self.submitButton.bottom + kResizedPoint(pt: 40))
+        
+    }
+    
     func repairPicUploadView(_ cleanPicUploadView: RepairPicUploadView, didSelectedAtIndexPath indexPath: IndexPath) {
         currentIndexpath = indexPath as NSIndexPath
         

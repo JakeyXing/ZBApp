@@ -176,3 +176,4 @@
 "tabBar.title.pending" = "Pending tasks";
 "tabBar.title.execute" = "My task";
 "tabBar.title.mine" = "Basic Information";
+"other" = "Other";

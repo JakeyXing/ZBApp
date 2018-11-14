@@ -10,7 +10,7 @@ import UIKit
 import ObjectMapper
 class ZB_RepairImageItem: Mappable{
     var doorplate: String?
-    var propertyId: String?
+    var propertyId: Int64 = 0
     var photos: [ZB_UploadImageItem]?//自己用
     
     

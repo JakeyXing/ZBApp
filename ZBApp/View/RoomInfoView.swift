@@ -18,6 +18,8 @@ protocol RoomInfoViewDelegate: class {
 class RoomInfoView: UIView {
     weak var delegate: RoomInfoViewDelegate?
     
+    private var hideHeight = 0
+    
     var property: ZB_TaskProperty?//
     lazy var contentView: UIView = {
         let content = UIView()
@@ -130,6 +132,7 @@ class RoomInfoView: UIView {
         self.infoUploadButton.isHidden = true
         
         self.congfigSubViewHeight()
+        
     }
     
     
@@ -288,6 +291,39 @@ extension RoomInfoView{
     @objc private func passwordAction(){
         
         self.delegate?.roomInfoViewDidTappedPassword(self, password: self.property?.pwdInfos ?? [])
+    }
+    
+    func hidePass() {
+//        passwordButton.isHidden = true
+//        roadRuteLabel.isHidden = true
+//        roadRuteImageView.isHidden = true
+        passwordButton.setImage(nil, for: .normal)
+        passwordButton.titleLabel?.mas_updateConstraints({ (maker) in
+            maker?.width.equalTo()(0)
+            maker?.height.equalTo()(0)
+        })
+        passwordButton.mas_updateConstraints { (maker) in
+            maker?.width.equalTo()(0)
+            maker?.height.equalTo()(0)
+        }
+//        passwordButton.imageView?.mas_updateConstraints({ (maker) in
+//            maker?.width.equalTo()(0)
+//            maker?.height.equalTo()(0)
+//        })
+        roadRuteImageView.mas_updateConstraints { (maker) in
+            maker?.width.equalTo()(0)
+            maker?.height.equalTo()(0)
+        }
+        roadRuteLabel.mas_updateConstraints { (maker) in
+            maker?.width.equalTo()(0)
+            maker?.height.equalTo()(0)
+        }
+        
+        nextCheckinNumLabel.mas_updateConstraints { (maker) in
+            maker?.top.equalTo()(passwordButton.mas_bottom)
+        }
+        
+        hideHeight = 50
     }
 }
 

@@ -22,6 +22,8 @@ class JHDropdownView: UIView,JHListChooseViewDelegate {
     //MARK: - delegate
     weak var delegate: JHDropdownViewDelegate?
     var dataArray : [String]!
+    
+    var index = 0
         
     var extraTop = navigationBarHeight
     lazy var typeListView: JHListChooseView = {
@@ -106,6 +108,7 @@ class JHDropdownView: UIView,JHListChooseViewDelegate {
     }
     
     func listChooseView(_ listChooseView: JHListChooseView, didSelectedIndex index: NSInteger) {
+        self.index = index
         self.delegate?.dropdownView(self, didSelectedString: self.dataArray[index])
         self.contentLabel.text = LanguageHelper.getString(key: self.dataArray[index])
         self.typeListView.removeFromSuperview()

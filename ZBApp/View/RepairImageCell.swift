@@ -9,10 +9,6 @@
 import UIKit
 import Masonry
 
-enum UploadMediaType {
-    case image, video
-}
-
 protocol RepairImageCellDelegate: class {
     func repairImageCell(_ cell: RepairImageCell,didClosedAtIndexPath indexPath: IndexPath);
 

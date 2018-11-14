@@ -8,10 +8,18 @@
 
 import UIKit
 import ObjectMapper
+
+enum UploadMediaType {
+    case image, video
+}
+
 class ZB_UploadImageItem: Mappable{
    var doorplate: String?
-   var propertyId: String?
+   var propertyId: Int64 = 0
    var url: String?
+    
+    var videoPicName: String?////
+    var mediaType = UploadMediaType.image
   
 
     required init?(map: Map) {

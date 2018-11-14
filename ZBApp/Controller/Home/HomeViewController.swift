@@ -45,6 +45,7 @@ class HomeViewController: UIViewController {
         self.setTableView()
         
         self.loadNewData()
+        
     }
     
     func setTableView(){
@@ -149,6 +150,10 @@ class HomeViewController: UIViewController {
             
         }
         
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        loadNewData() //详情如果抢单首页不再显示
     }
     
 }

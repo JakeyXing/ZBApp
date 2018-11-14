@@ -95,7 +95,7 @@ class FeedbackImageUploadView: UIView {
     
         let imgName = "feedback_pic_" + CommonMethod.timestamp()
         let savedImagePath = CommonMethod.getImagePath(img, imageName: imgName)
-        let fileNa = imgName + ".png"
+        let fileNa = imgName + ".jpg"
         uploadDataToAWS(fileName: fileNa, filePath: savedImagePath!, success: { (url) in
             
             DispatchQueue.main.async(execute: {

@@ -213,12 +213,12 @@ class CarryMissionDetailViewController: MissionDetailBaseViewController,CarryMis
                 MBProgressHUD.hide(for: self.view, animated: true)
                 
                 let resultDic = data as! Dictionary<String,AnyObject>
-                let dic = resultDic["data"]
-                if dic == nil {
+                let executorId = resultDic["data"] as! Int64
+                if executorId == nil {
                     return
                 }
                 self.isTaked = true
-                self.loadNewDataWithId(taskId: self.model?.id ?? 0)
+                self.loadNewDataWithId(taskId: executorId ?? 0)
                 
             }) { (data, errMsg) in
                 MBProgressHUD.hide(for: self.view, animated: true)

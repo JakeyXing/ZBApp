@@ -175,3 +175,4 @@
 "tabBar.title.pending" = "保留中のタスク";
 "tabBar.title.execute" = "私の仕事";
 "tabBar.title.mine" = "基本情報";
+"other" = "その他";

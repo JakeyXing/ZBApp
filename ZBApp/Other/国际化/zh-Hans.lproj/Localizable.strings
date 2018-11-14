@@ -180,5 +180,6 @@
 "tabBar.title.pending" = "待抢任务";
 "tabBar.title.execute" = "我的任务";
 "tabBar.title.mine" = "基本资讯";
+"other" = "其它";
 
 

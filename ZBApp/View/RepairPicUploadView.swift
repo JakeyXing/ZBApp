@@ -14,6 +14,7 @@ import ObjectMapper
 /// 维修任务上传图片、视频信息控件
 protocol RepairPicUploadViewDelegate: class {
     func repairPicUploadView(_ cleanPicUploadView: RepairPicUploadView,didSelectedAtIndexPath indexPath: IndexPath);
+    func repairPicUploadViewDidUplaodSuccess(_ view: RepairPicUploadView);
 }
 
 class RepairPicUploadView: UIView {
@@ -73,7 +74,7 @@ class RepairPicUploadView: UIView {
                 let property = info.taskInfo?.properties?[i]
                 let imageItem = ZB_RepairImageItem(JSON: ["":""])
                 imageItem?.doorplate = property?.doorplate
-                imageItem?.propertyId = String(format: "%ld", property?.id ?? 0)
+                imageItem?.propertyId = property?.id ?? 0
                 self.roomWithImagesArray?.append(imageItem!)
             }
         }
@@ -120,19 +121,33 @@ class RepairPicUploadView: UIView {
         
         let item = self.roomWithImagesArray![indexpath.section]
         
+        if(item.photos == nil || item.photos?.count == 0){
+           item.photos = [ZB_UploadImageItem]()
+        }
+        
         let image = ZB_UploadImageItem(JSON: ["":""])
         image?.doorplate = item.doorplate
         image?.propertyId = item.propertyId
+        image?.mediaType = currentUploadmediaType
         
         
         let imgName = "maint_pic_" + CommonMethod.timestamp()
         let savedImagePath = CommonMethod.getImagePath(img, imageName: imgName)
-        let fileNa = imgName + ".png"
+        let fileNa = imgName + ".jpg"
         uploadDataToAWS(fileName: fileNa, filePath: savedImagePath!, success: { (url) in
-            image?.url = url
-            item.photos?.append(image!)
             
-            self.collectionView.reloadData()
+            
+            DispatchQueue.main.async(execute: {
+                image?.url = url
+                item.photos?.append(image!)
+                self.roomWithImagesArray![indexpath.section] = item
+                self.collectionView.reloadData()
+                self.delegate?.repairPicUploadViewDidUplaodSuccess(self)
+                
+                
+            })
+            
+            
             
         }) { (errMsg) in
             
@@ -152,10 +167,14 @@ class RepairPicUploadView: UIView {
         currentUploadmediaType = .video
         
         let item = self.roomWithImagesArray![indexpath.section]
+        if(item.photos == nil || item.photos?.count == 0){
+            item.photos = [ZB_UploadImageItem]()
+        }
         
         let image = ZB_UploadImageItem(JSON: ["":""])
         image?.doorplate = item.doorplate
         image?.propertyId = item.propertyId
+        image?.mediaType = currentUploadmediaType
         
         let videoName = "repa_v_" + CommonMethod.timestamp() + ".mp4"
         let videoURLStr = NSHomeDirectory() + "/Documents/awsFiles/" + videoName
@@ -164,12 +183,27 @@ class RepairPicUploadView: UIView {
             
 
         }
+        let videoImgName = "video_pre_pic_" + CommonMethod.timestamp()
+        let videoImg = CommonMethod.getVideoPreViewImage(url as URL)
+        image?.videoPicName = CommonMethod.getImagePath(videoImg, imageName: videoImgName)
         
         uploadDataToAWS(fileName: videoName, filePath: videoURLStr, success: { (url) in
             image?.url = url
             item.photos?.append(image!)
             
             self.collectionView.reloadData()
+            
+            
+            DispatchQueue.main.async(execute: {
+                image?.url = url
+                
+                item.photos?.append(image!)
+                self.roomWithImagesArray![indexpath.section] = item
+                self.collectionView.reloadData()
+                self.delegate?.repairPicUploadViewDidUplaodSuccess(self)
+                
+                
+            })
             
         }) { (errMsg) in
             
@@ -232,7 +266,7 @@ extension RepairPicUploadView:UICollectionViewDelegateFlowLayout,UICollectionVie
         let item = self.roomWithImagesArray![section]
         
         let itemPhotoCount = item.photos?.count
-        let arrCount = itemPhotoCount ?? 0 + 1
+        let arrCount = (itemPhotoCount ?? 0) + 1
         
         return arrCount
 //        let arr = self.roomWithImagesArray[section]
@@ -269,12 +303,21 @@ extension RepairPicUploadView:UICollectionViewDelegateFlowLayout,UICollectionVie
             let image = item.photos?[indexPath.row]
             
 //            cell.imageView.image = arr[indexPath.row]
-            cell.imageView.sd_setImage(with: URL(fileURLWithPath: image?.url ?? ""), completed: nil)
+//            cell.imageView.sd_setImage(with: NSURL(string: image?.url ?? "")! as URL, completed: nil)
             cell.indexpath = indexPath as NSIndexPath
             cell.delegate = self
-            if (indexPath.row == arrCount - 1){
-                cell.mediaType = currentUploadmediaType
+            cell.progressView.backgroundColor = UIColor.green
+            cell.mediaType = image?.mediaType ?? .image
+//            if (indexPath.row == arrCount - 1){
+//                cell.mediaType = currentUploadmediaType
+//            }
+            if(image?.mediaType == UploadMediaType.image){
+                cell.imageView.sd_setImage(with: NSURL(string: image?.url ?? "")! as URL, completed: nil)
+                
+            }else{
+                cell.imageView.image = UIImage(contentsOfFile: image?.videoPicName ?? "")
             }
+            
             return cell
         }else{
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifierStrAdd, for: indexPath)
