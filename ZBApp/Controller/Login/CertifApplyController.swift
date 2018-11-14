@@ -505,7 +505,7 @@ class CertifApplyController: UIViewController,JHNavigationBarDelegate,UIImagePic
             
             let savedImagePath = CommonMethod.getImagePath(image, imageName: imgName)
             
-            let fileNa = imgName + ".png"
+            let fileNa = imgName + ".jpg"
             
             uploadDataToAWS(fileName: fileNa, filePath: savedImagePath!, success: { (url) in
                 
@@ -524,7 +524,7 @@ class CertifApplyController: UIViewController,JHNavigationBarDelegate,UIImagePic
             
             let imgName = "cer_pic_" + CommonMethod.timestamp()
             let savedImagePath = CommonMethod.getImagePath(image, imageName: imgName)
-            let fileNa = imgName + ".png"
+            let fileNa = imgName + ".jpg"
             uploadDataToAWS(fileName: fileNa, filePath: savedImagePath!, success: { (url) in
                 
                 DispatchQueue.main.async(execute: {
@@ -552,7 +552,7 @@ class CertifApplyController: UIViewController,JHNavigationBarDelegate,UIImagePic
             
             let imgName = "passport_pic_" + CommonMethod.timestamp()
             let savedImagePath = CommonMethod.getImagePath(image, imageName: imgName)
-            let fileNa = imgName + ".png"
+            let fileNa = imgName + ".jpg"
             uploadDataToAWS(fileName: fileNa, filePath: savedImagePath!, success: { (url) in
                 
                 DispatchQueue.main.async(execute: {

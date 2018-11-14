@@ -105,7 +105,7 @@ class CleanImageCell: UICollectionViewCell {
         
         self.savedImagePath = CommonMethod.getImagePath(img, imageName: imgName)
         
-        let fileNa = imgName + ".png"
+        let fileNa = imgName + ".jpg"
         
         uploadDataToAWS(fileName: fileNa, filePath: self.savedImagePath!, success: { (url) in
             self.delegate?.cleanImageCell(self, imageUploadSucceed: url ?? "", atIndex: self.indexpath)
@@ -128,7 +128,7 @@ class CleanImageCell: UICollectionViewCell {
 //            print("异常--")
 //        }
         
-        let key = "product/" + fileName + ".png"
+        let key = "product/" + fileName + ".jpg"
       
         print("\(String(describing: self.savedImagePath))")
         let fileUrl = URL(fileURLWithPath: self.savedImagePath ?? "")
