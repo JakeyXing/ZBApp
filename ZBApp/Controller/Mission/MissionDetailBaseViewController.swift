@@ -139,6 +139,7 @@ class MissionDetailBaseViewController: UIViewController {
             let model = Mapper<ZB_Task>().map(JSON: dic as! [String : Any])
   
           self.task = model
+            self.model = model?.taskInfo
             
             self.configData()
         }) { (data, errMsg) in

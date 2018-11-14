@@ -214,11 +214,8 @@ class CarryMissionDetailViewController: MissionDetailBaseViewController,CarryMis
                 
                 let resultDic = data as! Dictionary<String,AnyObject>
                 let executorId = resultDic["data"] as! Int64
-                if executorId == nil {
-                    return
-                }
                 self.isTaked = true
-                self.loadNewDataWithId(taskId: executorId ?? 0)
+                self.loadNewDataWithId(taskId: executorId)
                 
             }) { (data, errMsg) in
                 MBProgressHUD.hide(for: self.view, animated: true)
@@ -246,11 +243,11 @@ class CarryMissionDetailViewController: MissionDetailBaseViewController,CarryMis
                         NetWorkManager.shared.loadRequest(method: .post, url: TransferTaskUrl, parameters: params as [String : Any], success: { (data) in
                             MBProgressHUD.hide(for: self.view, animated: true)
                             
-                            let resultDic = data as! Dictionary<String,AnyObject>
-                            let dic = resultDic["data"]
-                            if dic == nil {
-                                return
-                            }
+//                            let resultDic = data as! Dictionary<String,AnyObject>
+//                            let dic = resultDic["data"]
+//                            if dic == nil {
+//                                return
+//                            }
                             self.loadNewDataWithId(taskId: self.task?.id ?? 0)
                             
                         }) { (data, errMsg) in

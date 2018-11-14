@@ -183,11 +183,8 @@ class CleanMissionDetailViewController: MissionDetailBaseViewController,CleanPic
                 
                 let resultDic = data as! Dictionary<String,AnyObject>
                 let executorId = resultDic["data"] as! Int64
-                if executorId == nil {
-                    return
-                }
                 self.isTaked = true
-                self.loadNewDataWithId(taskId: executorId ?? 0)
+                self.loadNewDataWithId(taskId: executorId)
                 
             }) { (data, errMsg) in
                 MBProgressHUD.hide(for: self.view, animated: true)
@@ -205,11 +202,11 @@ class CleanMissionDetailViewController: MissionDetailBaseViewController,CleanPic
                 NetWorkManager.shared.loadRequest(method: .post, url: StartTaskUrl, parameters: params as [String : Any], success: { (data) in
                     MBProgressHUD.hide(for: self.view, animated: true)
                     
-                    let resultDic = data as! Dictionary<String,AnyObject>
-                    let dic = resultDic["data"]
-                    if dic == nil {
-                        return
-                    }
+//                    let resultDic = data as! Dictionary<String,AnyObject>
+//                    let dic = resultDic["data"]
+//                    if dic == nil {
+//                        return
+//                    }
                     self.loadNewDataWithId(taskId: self.task?.id ?? 0)
                     
                 }) { (data, errMsg) in
@@ -246,11 +243,11 @@ class CleanMissionDetailViewController: MissionDetailBaseViewController,CleanPic
                 NetWorkManager.shared.loadRequest(method: .post, url: ApproveTaskUrl, parameters: params as [String : Any], success: { (data) in
                     MBProgressHUD.hide(for: self.view, animated: true)
                     
-                    let resultDic = data as! Dictionary<String,AnyObject>
-                    let dic = resultDic["data"]
-                    if dic == nil {
-                        return
-                    }
+//                    let resultDic = data as! Dictionary<String,AnyObject>
+//                    let dic = resultDic["data"]
+//                    if dic == nil {
+//                        return
+//                    }
                     self.loadNewDataWithId(taskId: self.task?.id ?? 0)
                     
                 }) { (data, errMsg) in
