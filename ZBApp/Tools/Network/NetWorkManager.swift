@@ -86,7 +86,7 @@ class NetWorkManager: AFHTTPSessionManager {
             let code:String = resultDic["code"] as! String
             if code == "200" {
                 success(json)
-            }else{
+            }else if code != "1001"{
                 fail(json,resultDic["msg"] as! String)
             }
             
@@ -106,6 +106,7 @@ class NetWorkManager: AFHTTPSessionManager {
         
         var params = parameters ?? [String:Any]()
         params["lang"] = getCurrentLangParam()
+        let outSuccess = success
         
         print("\n\n\n**************************************\n\nURL    -> \(url)\n\nParams -> \(String(describing: params))\n\n**************************************\n\n\n")
         
@@ -137,11 +138,13 @@ class NetWorkManager: AFHTTPSessionManager {
                         
                         //accessToken 更新成功 刷新数据
                         errMsg = refreshData_msg
-                        setAccessToken(token: resultDic["accessToken"] as! String)
+                        let accessToken = resultDic["accessToken"] as! String
+                        setAccessToken(token: accessToken)
                         setRefreshToken(token: resultDic["refreshToken"] as! String)
                         
                         //重新加载请求
 //                        task.resume()
+                        NetWorkManager.shared.requestSerializer.setValue(accessToken, forHTTPHeaderField: "accessToken")
                         self.request(method: method, url: url, parameters: params, success: success, fail: fail)
                         
                         
@@ -208,16 +211,18 @@ class NetWorkManager: AFHTTPSessionManager {
                     let resultDic = jsonDa as! Dictionary<String,AnyObject>
                     let code:String = resultDic["code"] as! String
                     if code == "200" {
-                        
+                   
                         //accessToken 更新成功 刷新数据
                         errMsg = refreshData_msg
-                        setAccessToken(token: resultDic["accessToken"] as! String)
+                        let accessToken = resultDic["accessToken"] as! String
+                        setAccessToken(token: accessToken)
                         setRefreshToken(token: resultDic["refreshToken"] as! String)
                         
                         //重新加载请求
-                        task?.resume()
-                      
-                       
+                        //                        task.resume()
+                        NetWorkManager.shared.requestSerializer.setValue(accessToken, forHTTPHeaderField: "accessToken")
+                        self.request(method: method, url: url, parameters: params, success: outSuccess, fail: fail)
+                        
                     }else{
                         //其他错误默认 refresh token 失效
                         errMsg = "refresh token expired"

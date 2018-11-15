@@ -353,7 +353,7 @@ class RepairMissionDetailViewController: MissionDetailBaseViewController,RepairP
                 }
                 
 
-                let params = ["id":self.task?.id ?? 0 ,"maintainPhotos":maPhotos] as [String : Any]
+                let params = ["id":self.task?.id ?? 0 ,"maintainPhotos":maPhotos,"desc":infoTextView.acceptance.text!] as [String : Any]
                 
                 MBProgressHUD.showAdded(to: self.view, animated: true)
                 NetWorkManager.shared.loadRequest(method: .post, url: ApproveTaskUrl, parameters: params as [String : Any], success: { (data) in

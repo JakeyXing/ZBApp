@@ -17,7 +17,7 @@ class RepairInfoTextView: UIView {
     
     private lazy var resultLabel: UILabel = UILabel.cz_label(withText: "", fontSize: kResizedFont(ft: 15), color: RGBCOLOR(r: 254, 0, 5))
     
-    private lazy var infoTextView: UITextView = {
+    lazy var acceptance: UITextView = {
         let text = UITextView()
         return text
         
@@ -56,7 +56,7 @@ extension RepairInfoTextView{
         
         self.addSubview(self.resultNameLabel)
         self.addSubview(self.resultLabel)
-        self.addSubview(self.infoTextView)
+        self.addSubview(self.acceptance)
       
         
         self.subViewsLayout()
@@ -76,7 +76,7 @@ extension RepairInfoTextView{
             make.height.equalTo()(kResizedPoint(pt: 17))
         }
         
-        self.infoTextView.mas_makeConstraints { (make:MASConstraintMaker!) in
+        self.acceptance.mas_makeConstraints { (make:MASConstraintMaker!) in
             make.top.equalTo()(self.resultNameLabel.mas_bottom)?.offset()(kResizedPoint(pt: 10))
             make.left.equalTo()(self)?.offset()(kResizedPoint(pt: 20))
             make.right.equalTo()(self.mas_right)?.offset()(kResizedPoint(pt: -20))

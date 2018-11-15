@@ -104,7 +104,6 @@ class JHDropdownView: UIView,JHListChooseViewDelegate {
     func listChooseViewDidClosed(_ listChooseView: JHListChooseView) {
         
         self.typeListView.removeFromSuperview()
-        
     }
     
     func listChooseView(_ listChooseView: JHListChooseView, didSelectedIndex index: NSInteger) {

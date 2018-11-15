@@ -98,7 +98,7 @@ class RepairPicUploadView: UIView {
             let item = self.roomWithImagesArray![i]
             
             let itemPhotoCount = item.photos?.count
-            let arrCount = itemPhotoCount ?? 0 + 1
+            let arrCount = (itemPhotoCount ?? 0) + 1
             
             let nex = arrCount%3
             var h: CGFloat = 0
