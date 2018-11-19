@@ -124,7 +124,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let naviVC = UINavigationController(rootViewController: loginVC)
         
         self.window?.rootViewController = naviVC
-        
     }
     
     public func resetRootController() {
