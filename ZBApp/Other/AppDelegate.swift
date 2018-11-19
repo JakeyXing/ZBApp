@@ -94,7 +94,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let viewControllers = [home,unTakeMission, personal]
         
         return viewControllers
-        
     }
     
     
