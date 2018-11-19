@@ -430,7 +430,16 @@ extension String {
         free(buffer);
         return md5String.uppercased();
     }
-    
+}
 
-    
+func pathUrlEncode(path :String) -> String {
+    var chars = CharacterSet.urlQueryAllowed
+    chars.insert("+")
+    let result = path.addingPercentEncoding(withAllowedCharacters: chars)
+    myPrint(items: result)
+    return result!
+}
+
+func myPrint(items: Any...) {
+    print("-----> \(items) <-----")
 }

@@ -60,6 +60,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         NotificationCenter.default.addObserver(self, selector: #selector(reLogin), name: NSNotification.Name(rawValue: kRefreshTokenInvalidNoti), object: nil)
         
+        test()
+        
         return AWSMobileClient.sharedInstance().interceptApplication(application, didFinishLaunchingWithOptions: launchOptions)
 //        return true
     }
@@ -131,4 +133,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.window?.rootViewController = mainTabBarVc
     }
 
+    func test() {
+        let str = "2【1  】2 3 -4  _5  8 年中国!!区块链产业白皮书(1)(1)(1)_77.pdf"
+        let result = pathUrlEncode(path:pathUrlEncode(path: str))
+        let res = result.replacingOccurrences(of: "%2520", with: "+")
+        myPrint(items: res)
+    }
 }

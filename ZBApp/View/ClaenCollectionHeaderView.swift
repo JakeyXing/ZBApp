@@ -13,8 +13,8 @@ import Masonry
 /// 清扫图片部分房间名称
 class ClaenCollectionHeaderView: UICollectionReusableView {
     
-    //MARK: - 控件
-    lazy var roomNumTiLabel: UILabel = UILabel.cz_label(withText: LanguageHelper.getString(key: "detail.PicUpload.roomNo"), fontSize: kResizedFont(ft: 16), color: kFontColorGray)
+    //MARK: - 控件    LanguageHelper.getString(key: "detail.PicUpload.roomNo")
+    lazy var roomNumTiLabel: UILabel = UILabel.cz_label(withText: "", fontSize: kResizedFont(ft: 16), color: kFontColorGray)
     
     lazy var roomNumLabel: UILabel = UILabel.cz_label(withText: "T25678", fontSize: kResizedFont(ft: 16), color: kFontColorGray)
     

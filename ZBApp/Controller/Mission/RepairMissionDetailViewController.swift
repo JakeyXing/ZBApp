@@ -580,12 +580,17 @@ class RepairMissionDetailViewController: MissionDetailBaseViewController,RepairP
     }
     
     func carryMissonImageAndFlieView(_ view: CarryMissonImageAndFlieView, didSelectedFileAtIndex index: NSInteger) {
-        let web=WebViewController()
-        web.hidesBottomBarWhenPushed = true
+//        let web=WebViewController()
+//        web.hidesBottomBarWhenPushed = true
         let urlStr = view.fileArray?[index]
-        web.urlStr = urlStr
-        web.titleStr = LanguageHelper.getString(key: "detail.doument.title")
-        self.navigationController?.pushViewController(web, animated: true)
+        
+        let result = pathUrlEncode(path:pathUrlEncode(path: urlStr!))
+        let res = result.replacingOccurrences(of: "%2520", with: "+")
+        
+        UIApplication.shared.openURL(URL(string: res)!)
+//        web.urlStr = res
+//        web.titleStr = LanguageHelper.getString(key: "detail.doument.title")
+//        self.navigationController?.pushViewController(web, animated: true)
     }
     
     

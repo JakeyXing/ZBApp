@@ -83,7 +83,7 @@ class HomeMissionCell: UITableViewCell {
         var proCount = 0
         proCount = self.model?.properties?.count ?? 0
         
-        if proCount > 0 {
+        if (proCount > 0 && "CLEAN/MAINTAIN".contains(model.type!)){
             if proCount == 1{
                 let taskProperty = self.model?.properties?[0]
                 self.roomNoLabel.text = taskProperty?.doorplate
@@ -95,7 +95,8 @@ class HomeMissionCell: UITableViewCell {
                 }
                 self.roomNoLabel.text = plates
             }
-            
+        } else {
+            roomNoLabel.isHidden = true
         }
         
         let bouns = String(format: "%.1f", model.bonus)
