@@ -176,3 +176,11 @@
 "tabBar.title.execute" = "私の仕事";
 "tabBar.title.mine" = "基本情報";
 "other" = "その他";
+
+
+
+
+
+
+"detail.clean.worktime" = "推定勤務時間：1.5時間";
+"detail.cleanFeedbackType.guestNoCheckOut" = "お客様はまだチェックアウトしていない";

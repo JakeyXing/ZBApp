@@ -19,7 +19,7 @@ class CleanMissionDetailViewController: MissionDetailBaseViewController,CleanPic
     
     
     lazy var roomInfoView: RoomInfoView = {
-        let view = RoomInfoView(frame: CGRect.init(x: 0, y: self.missionBaseInfoView.bottom+kResizedPoint(pt: 10), width: DEVICE_WIDTH, height: kResizedPoint(pt: 300)))
+        let view = RoomInfoView(frame: CGRect.init(x: 0, y: self.missionBaseInfoView.bottom+kResizedPoint(pt: 10 + 50), width: DEVICE_WIDTH, height: kResizedPoint(pt: 300)))
         view.delegate = self
         return view
     }()
@@ -50,11 +50,28 @@ class CleanMissionDetailViewController: MissionDetailBaseViewController,CleanPic
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
     }
     
     override func addSubViews() {
         super.addSubViews()
+        
+        missionBaseInfoView.contentView.mas_updateConstraints { (maker) in
+            maker?.height.equalTo()(125 + 50)
+        }
+        
+        missionBaseInfoView.mas_updateConstraints { (maker) in
+            maker?.height.equalTo()(164 + 50)
+            maker?.width.equalTo()(DEVICE_WIDTH)
+        }
+        
+        missionBaseInfoView.cleanWorkTimeL.mas_updateConstraints { (maker) in
+            maker?.height.equalTo()(20)
+        }
+        
+        missionBaseInfoView.addressLabel.mas_updateConstraints { (maker) in
+            maker?.top.equalTo()(missionBaseInfoView.timeLabel.mas_bottom)?.offset()(70)
+        }
+        
         self.scrollview.addSubview(self.roomInfoView)
         self.scrollview.addSubview(self.feedbackView)
         self.scrollview.addSubview(self.uploadView)

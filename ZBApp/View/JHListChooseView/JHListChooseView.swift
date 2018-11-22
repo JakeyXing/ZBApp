@@ -20,9 +20,18 @@ class JHListChooseView: UIView {
         didSet{
             let dateArray = typeArray
             if (dateArray != nil) {
-                let tempH = CGFloat(kResizedPoint(pt: 45)) * CGFloat(dateArray?.count ?? 0)
-                self.tabelBgView.frame = CGRect.init(x:kResizedPoint(pt: 20) , y: navigationBarHeight, width: kResizedPoint(pt: 100), height: kResizedPoint(pt: 30)+tempH)
-                self.tableView.frame = CGRect.init(x: 0, y: kResizedPoint(pt: 15), width: kResizedPoint(pt: 100), height: kResizedPoint(pt: 5)+tempH)
+//                let tempH = CGFloat(kResizedPoint(pt: 45)) * CGFloat(dateArray?.count ?? 0)
+                // 计算实际字符长度,
+                var maxWidth = CGFloat(0)
+                for item in dateArray ?? [] {
+                    let realText = LanguageHelper.getString(key: item)
+                    let width = textWidth(text: realText)
+                    if width > maxWidth {
+                        maxWidth = width
+                    }
+                }
+                self.tabelBgView.frame = CGRect.init(x:kResizedPoint(pt: 20) , y: navigationBarHeight, width: kResizedPoint(pt: maxWidth + 20), height: kResizedPoint(pt: 30)+200)
+                self.tableView.frame = CGRect.init(x: 0, y: kResizedPoint(pt: 15), width: kResizedPoint(pt: maxWidth + 20), height: kResizedPoint(pt: 5)+200)
             }
             self.tableView.reloadData()
         }
@@ -137,4 +146,10 @@ extension JHListChooseView{
     }
     
     
+}
+
+// 计算文本长度
+func textWidth(text:String) -> CGFloat {
+    let size = text.size(withAttributes: [NSAttributedString.Key.font:UIFont.systemFont(ofSize: 16.0)])
+    return size.width
 }

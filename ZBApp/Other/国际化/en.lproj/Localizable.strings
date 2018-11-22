@@ -177,3 +177,10 @@
 "tabBar.title.execute" = "My task";
 "tabBar.title.mine" = "Basic Information";
 "other" = "Other";
+
+
+
+
+
+"detail.clean.worktime" = "Estimated working hours: 1.5 hours";
+"detail.cleanFeedbackType.guestNoCheckOut" = "Guest didn't check out";

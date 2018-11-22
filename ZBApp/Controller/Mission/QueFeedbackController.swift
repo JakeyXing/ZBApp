@@ -48,12 +48,12 @@ class QueFeedbackController: UIViewController,JHNavigationBarDelegate,FeedbackIm
     
     private lazy var typeLabel: UILabel = UILabel.cz_label(withText: LanguageHelper.getString(key: "detail.feedbackUpload.typeTitle"), fontSize: kResizedFont(ft: 15), color: kFontColorGray)
     
-    private lazy var cleanTypes = ["UNABLE_CLEAN_UP","DEVICE_NOT_WORK","FURNITURE_DAMAGE","CONSUMABLES_REPLACEMENT","CUSTOMER_THINGS_LEFT_BEHIND","NO_SHOW","OTHER"]
+    private lazy var cleanTypes = ["GUESTS_NOT_CHECK_OUT","UNABLE_CLEAN_UP","DEVICE_NOT_WORK","FURNITURE_DAMAGE","CONSUMABLES_REPLACEMENT","CUSTOMER_THINGS_LEFT_BEHIND","NO_SHOW","OTHER"]
     private lazy var typeLabelDropdownView: JHDropdownView = {
         let view = JHDropdownView(frame: CGRect.init())
-        view.contentLabel.text = LanguageHelper.getString(key: "detail.cleanFeedbackType.cantCleanUp")
+        view.contentLabel.text = LanguageHelper.getString(key: "detail.cleanFeedbackType.guestNoCheckOut")
         view.contentLabel.textColor = kFontColorBlack
-        view.dataArray = ["detail.cleanFeedbackType.cantCleanUp","detail.cleanFeedbackType.equipmentNotWork","detail.cleanFeedbackType.furnitureDamaged","detail.cleanFeedbackType.changeGoods","detail.cleanFeedbackType.thingsLeftByCustomer","detail.cleanFeedbackType.notCheckin","other"]
+        view.dataArray = ["detail.cleanFeedbackType.guestNoCheckOut","detail.cleanFeedbackType.cantCleanUp","detail.cleanFeedbackType.equipmentNotWork","detail.cleanFeedbackType.furnitureDamaged","detail.cleanFeedbackType.changeGoods","detail.cleanFeedbackType.thingsLeftByCustomer","detail.cleanFeedbackType.notCheckin","other"]
         return view
     }()
     

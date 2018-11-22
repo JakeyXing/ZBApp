@@ -182,4 +182,5 @@
 "tabBar.title.mine" = "基本资讯";
 "other" = "其它";
 
-
+"detail.clean.worktime" = "預計工作時長：1.5h";
+"detail.cleanFeedbackType.guestNoCheckOut" = "客人未退房";

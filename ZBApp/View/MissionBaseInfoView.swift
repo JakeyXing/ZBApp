@@ -34,7 +34,7 @@ class MissionBaseInfoView: UIView {
         
     }()
     
-    private lazy var timeLabel: UILabel = UILabel.cz_label(withText: "", fontSize: kResizedFont(ft: 15), color: kFontColorGray)
+    lazy var timeLabel: UILabel = UILabel.cz_label(withText: "", fontSize: kResizedFont(ft: 15), color: kFontColorGray)
     
     lazy var starImage_1: UIImageView = {
         let img = UIImageView()
@@ -56,6 +56,8 @@ class MissionBaseInfoView: UIView {
     private lazy var salaryTitleLabel_2: UILabel = UILabel.cz_label(withText: LanguageHelper.getString(key: "detail.base.bonus"), fontSize: kResizedFont(ft: 16), color: kFontColorGray)
     
     lazy var addressLabel: UILabel = UILabel.cz_label(withText: "浪速区大国2-10-7 難波南", fontSize: kResizedFont(ft: 15), color: kFontColorGray)
+    
+    lazy var cleanWorkTimeL: UILabel = UILabel.cz_label(withText: LanguageHelper.getString(key: "detail.clean.worktime"), fontSize: kResizedFont(ft: 15), color: kFontColorGray)
     
     lazy var addressIcon: UIImageView = {
         let img = UIImageView()
@@ -95,8 +97,9 @@ extension MissionBaseInfoView{
         self.contentView.addSubview(self.salaryLabel_2)
         self.contentView.addSubview(self.salaryTitleLabel_2)
         self.contentView.addSubview(self.addressIcon)
+        self.contentView.addSubview(self.cleanWorkTimeL)
         self.contentView.addSubview(self.addressLabel)
-        
+
         self.subViewsLayout()
     }
     
@@ -177,6 +180,7 @@ extension MissionBaseInfoView{
         self.dateLabel.mas_makeConstraints { (make:MASConstraintMaker!) in
             make.top.equalTo()(self.contentView.mas_top)?.offset()(kResizedPoint(pt: 10))
             make.left.equalTo()(self.contentView.mas_left)?.offset()(kResizedPoint(pt: 20))
+            make.height.equalTo()(25)
         }
         
         self.typeLabel.mas_makeConstraints { (make:MASConstraintMaker!) in
@@ -189,6 +193,7 @@ extension MissionBaseInfoView{
         self.timeLabel.mas_makeConstraints { (make:MASConstraintMaker!) in
             make.top.equalTo()(self.dateLabel.mas_bottom)?.offset()(kResizedPoint(pt: 15))
             make.left.equalTo()(self.dateLabel.mas_left)
+            make.height.equalTo()(25)
         }
         
         self.salaryLabel_1.mas_makeConstraints { (make:MASConstraintMaker!) in
@@ -229,9 +234,14 @@ extension MissionBaseInfoView{
             
         }
 
+        self.cleanWorkTimeL.mas_makeConstraints { (make:MASConstraintMaker!) in
+            make.top.equalTo()(self.timeLabel.mas_bottom)?.offset()(kResizedPoint(pt: 40))
+            make.left.equalTo()(self.dateLabel.mas_left)
+            make.height.equalTo()(0)
+        }
         
         self.addressLabel.mas_makeConstraints { (make:MASConstraintMaker!) in
-            make.top.equalTo()(self.timeLabel.mas_bottom)?.offset()(kResizedPoint(pt: 40))
+            make.top.equalTo()(self.timeLabel.mas_bottom)?.offset()(kResizedPoint(pt: 35))
             make.left.equalTo()(self.dateLabel.mas_left)
         }
         
