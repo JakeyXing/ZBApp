@@ -11,7 +11,7 @@ target 'ZBApp' do
 #  pod 'YYModel'
   pod 'SDWebImage'
   pod 'ObjectMapper'
-  pod 'EasyTipView', '~> 2.0.0'
+  pod 'EasyTipView', '~> 2.0.1'
   
   pod 'AWSMobileClient', '~> 2.6.13'  # For AWSMobileClient
   pod 'AWSS3', '~> 2.6.13'            # For file transfers
@@ -23,5 +23,7 @@ target 'ZBApp' do
   pod 'MBProgressHUD'
   pod 'MJRefresh'
   pod 'Toast'
+  
+  pod 'Firebase/Core'
 
 end

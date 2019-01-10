@@ -54,7 +54,14 @@ class PasswordCell: UITableViewCell {
         self.model = mode
         let type:String = model?.type ?? ""
         self.titleLabel.text = LanguageHelper.getString(key: ("detail.roomPassword." + type.lowercased()))//
-        self.desLabel.text = mode.desc
+//        self.desLabel.text = mode.desc
+//        let attrStr = NSAttributedString(string: mode.desc ?? "", attributes: [NSAttributedString.Key:])
+//        NSDocumentTypeDocumentAttribute
+//        NSHTMLTextDocumentType
+//        let attrStr = NSAttributedString(string: mode.desc ?? "", attributes: [NSAttributedString.DocumentAttributeKey.documentType : NSAttributedString.DocumentType.html])
+        let att = try? NSAttributedString(data: mode.desc?.data(using: String.Encoding.unicode) ?? "".data(using: String.Encoding.unicode)!, options: [NSAttributedString.DocumentReadingOptionKey.documentType : NSAttributedString.DocumentType.html], documentAttributes: nil)
+//        desLabel.attributedText = attrStr
+        desLabel.attributedText = att
         
         let size = CGSize.init(width: DEVICE_WIDTH-kResizedPoint(pt: 10)*2-kResizedPoint(pt: 15), height: CGFloat(HUGE))
         

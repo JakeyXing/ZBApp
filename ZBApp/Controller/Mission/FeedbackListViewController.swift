@@ -10,11 +10,16 @@ import UIKit
 import MJRefresh
 import MBProgressHUD
 import Toast
+import SKPhotoBrowser
 
 private let  kFeedbackItemCell = "kFeedbackItemCell"
 class FeedbackListViewController: UIViewController,JHNavigationBarDelegate {
     
-    var taskLogs: [ZB_TaskLog]?
+    var taskLogs: [ZB_TaskLog]? {
+        didSet {
+            taskLogs = taskLogs?.reversed()
+        }
+    }
     private lazy var navigationBar: JHNavigationBar = {
         let view = JHNavigationBar(frame: CGRect.init(x: 0, y: 0, width: 0, height: 0))
         view.backgroundColor = UIColor.white
@@ -54,6 +59,26 @@ class FeedbackListViewController: UIViewController,JHNavigationBarDelegate {
     
 }
 
+extension FeedbackListViewController : FeedbackItemCellDelegate {
+    func feedbackItemCell(_ cell: FeedbackItemCell, lookoverImages images: Array<String>) {
+//        var images = [SKLocalPhoto]()
+//        let photo = SKLocalPhoto.photoWithImageURL("..some_local_path/150x150.png")
+//        images.append(photo)
+//
+//        // 2. create PhotoBrowser Instance, and present.
+//        let browser = SKPhotoBrowser(photos: images)
+//        browser.initializePageIndex(0)
+//        presentViewController(browser, animated: true, completion: {})
+        var skImages = [SKPhoto]()
+        for url in images {
+            let photo = SKPhoto.photoWithImageURL(url)
+            skImages.append(photo)
+        }
+        let browser = SKPhotoBrowser(photos: skImages)
+        present(browser, animated: true) {}
+    }
+}
+
 extension FeedbackListViewController:UITableViewDelegate,UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.taskLogs?.count ?? 0
@@ -61,6 +86,7 @@ extension FeedbackListViewController:UITableViewDelegate,UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell:FeedbackItemCell = tableView.dequeueReusableCell(withIdentifier: kFeedbackItemCell, for: indexPath) as! FeedbackItemCell
+        cell.delegate = self
         let log = self.taskLogs![indexPath.row]
         cell.congfigDataWithLog(model: log)
         return cell

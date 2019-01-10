@@ -114,7 +114,8 @@ class LoginViewController: UIViewController,BEMCheckBoxDelegate {
         self.navigationController?.pushViewController(registerVC, animated: true)
     }
     @IBAction func resetpasswordAction(_ sender: Any) {
-        let resetVC = ResetPasswordViewController()
+        let resetVC = RegisterViewController()
+        resetVC.pageTitle = "RestPassword"
         self.navigationController?.pushViewController(resetVC, animated: true)
     }
     

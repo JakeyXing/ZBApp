@@ -48,13 +48,16 @@ class CleanMissionDetailViewController: MissionDetailBaseViewController,CleanPic
     }()
     
     override func viewDidLoad() {
+        if !isTaked {
+            roomInfoView.hidePass()
+        }
         super.viewDidLoad()
-        
     }
     
     override func addSubViews() {
         super.addSubViews()
         
+        // 清扫添加了默认工时label
         missionBaseInfoView.contentView.mas_updateConstraints { (maker) in
             maker?.height.equalTo()(125 + 50)
         }
@@ -142,7 +145,7 @@ class CleanMissionDetailViewController: MissionDetailBaseViewController,CleanPic
         }
         
         //提交按钮
-        if self.currentProgress == .ready || self.currentProgress == .started{
+        if self.currentProgress == .ready || self.currentProgress == .started || currentProgress == .approve_failed{
             self.submitButton.isHidden = false
             self.submitButton.top = self.uploadView.bottom + kResizedPoint(pt: 30)
             self.submitButton.height = kResizedFont(ft: 30)
@@ -232,7 +235,7 @@ class CleanMissionDetailViewController: MissionDetailBaseViewController,CleanPic
                     
                 }
                 
-            }else if(self.currentProgress == .started){
+            }else if(self.currentProgress == .started || currentProgress == .approve_failed){
                 //提交审核
                 let cout = self.uploadView.roomWithImagesArrayForUpload.count
                 
@@ -244,7 +247,7 @@ class CleanMissionDetailViewController: MissionDetailBaseViewController,CleanPic
                     for index in 0..<photoCount{
                         let photo = item.photos![index]
                         photo.location = item.location
-                        if (photo.url == nil || photo.url == ""){
+                        if (photo.url == nil || photo.url == "" || !photo.upload){
                             self.view.makeToast(LanguageHelper.getString(key: "detail.cleanPic.uploadPicNumTip"), duration: 2.5, position: CSToastPositionCenter)
                             return;
                         }
@@ -281,21 +284,35 @@ class CleanMissionDetailViewController: MissionDetailBaseViewController,CleanPic
     
     //MARK: - CleanPicUploadViewDelegate
     
-    func cleanPicUploadView(_ cleanPicUploadView: CleanPicUploadView,didSelectedCell cell: CleanImageCell,atIndexPath indexPath: IndexPath) {
+    func cleanPicUploadView(_ cleanPicUploadView: CleanPicUploadView,didSelectedCell cell: CleanImageCell,atIndexPath indexPath: IndexPath,originUrl oriUrl : String?) {
         currentImageCell = cell
         let alertController = UIAlertController(title: nil, message: nil, preferredStyle: UIAlertController.Style.actionSheet)
         let lookImageAction = UIAlertAction(title: LanguageHelper.getString(key: "detail.repairUploadAction.lookPImage"), style:  .default) { (action) in
-            if cell.oriImage == nil{
+            if cell.oriImage != nil{
+                var images = [SKPhoto]()
+                let photo = SKPhoto.photoWithImage(cell.oriImage!)// add some UIImage
+                images.append(photo)
+                
+                let browser = SKPhotoBrowser(photos: images)
+                browser.initializePageIndex(0)
+                self.present(browser, animated: true, completion: {})
                 return
+            } else if oriUrl != nil {
+                
+//                let photoItem:ZB_TaskPhotoItem = self.roomWithImagesArray[indexPath.section]
+//                let photo: ZB_Photo = (photoItem.photos?[indexPath.row])!
+                
+                var images = [SKPhoto]()
+                let photo = SKPhoto.photoWithImageURL(oriUrl!)
+                photo.shouldCachePhotoURLImage = false // you can use image cache by true(NSCache)
+                images.append(photo)
+                
+                // 2. create PhotoBrowser Instance, and present.
+                let browser = SKPhotoBrowser(photos: images)
+                browser.initializePageIndex(0)
+                self.present(browser, animated: true, completion: {})
             }
 
-            var images = [SKPhoto]()
-            let photo = SKPhoto.photoWithImage(cell.oriImage!)// add some UIImage
-            images.append(photo)
-            
-            let browser = SKPhotoBrowser(photos: images)
-            browser.initializePageIndex(0)
-            self.present(browser, animated: true, completion: {})
         }
         
         let uploadAction = UIAlertAction(title: LanguageHelper.getString(key: "detail.repairUploadAction.image"), style:  .default) { (action) in
@@ -321,6 +338,7 @@ class CleanMissionDetailViewController: MissionDetailBaseViewController,CleanPic
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         
         let image = info[UIImagePickerController.InfoKey.originalImage] as! UIImage
+        currentImageCell?.progressView.backgroundColor = UIColor.yellow
         currentImageCell?.uploadImage(img: image)
         
         self.dismiss(animated: true, completion: nil)

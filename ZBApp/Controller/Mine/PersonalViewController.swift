@@ -157,7 +157,7 @@ class PersonalViewController: UIViewController {
     
     func configData() {
         self.nameLabel.text = self.user?.userName
-        self.headImageView.sd_setImage(with: URL(fileURLWithPath: user?.userImgUrl ?? ""), placeholderImage: UIImage(named: "defaultHear"), options: [], completed: nil)
+        headImageView.sd_setImage(with: URL(string: user?.userImgUrl ?? ""), placeholderImage: UIImage(named: "defaultHear"), options: [], completed: nil)
         self.star.levelLabel.text =  String(format: "%@%@", LanguageHelper.getString(key: "personal.base.userLevel"),self.user?.userLevel ?? "")
         
     }

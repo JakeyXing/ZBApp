@@ -184,3 +184,10 @@
 
 "detail.clean.worktime" = "Estimated working hours: 1.5 hours";
 "detail.cleanFeedbackType.guestNoCheckOut" = "Guest didn't check out";
+
+"detail.taskProfile.realStart" = "The actual start time";
+"detail.taskProfile.realEnd" = "The actual end time";
+"detail.taskProfile.realRest" = "Rest time";
+"detail.taskProfile.realFine" = "Deduction amount";
+"detail.taskProfile.realCommission" = "The actual commission";
+"apply.item.avatar_upload" = "Upload avatar";

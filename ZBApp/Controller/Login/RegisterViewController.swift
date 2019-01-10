@@ -12,6 +12,8 @@ import Toast
 import MBProgressHUD
 class RegisterViewController: UIViewController,BEMCheckBoxDelegate {
     
+    var pageTitle = ""
+    
     var remainingSeconds = 0 {
         willSet {
             self.sendCodeButton.setTitle("\(newValue)", for: .normal)
@@ -68,7 +70,11 @@ class RegisterViewController: UIViewController,BEMCheckBoxDelegate {
         self.checkbox.onTintColor = kTintColorYellow
         self.checkbox.onCheckColor = UIColor.white
         self.checkbox.delegate = self
-        self.navTitleLabel.text = LanguageHelper.getString(key: "login.pageItem.register")
+        if pageTitle == "RestPassword" {
+            self.navTitleLabel.text = LanguageHelper.getString(key: "login.pageItem.resetPass")
+        } else {
+            self.navTitleLabel.text = LanguageHelper.getString(key: "login.pageItem.register")
+        }
         self.areaCodeTitleLabel.text = LanguageHelper.getString(key: "login.pageItem.areaCode")
         self.codeTitleLabel.text = LanguageHelper.getString(key: "register.pageItem.code")
         self.passTitleLabel.text = LanguageHelper.getString(key: "register.pageItem.password")
@@ -147,24 +153,34 @@ class RegisterViewController: UIViewController,BEMCheckBoxDelegate {
         let params = ["countryCode":countryCode,"phone":self.phoneTextfield.text!,"password":passMd5!,"vertyCode":self.vertyCodeTextfield.text!,"code":code!] as [String : Any]
         
         MBProgressHUD.showAdded(to: self.view, animated: true)
-        NetWorkManager.shared.loadNoTokenRequest(method: .post, url: RegisterUrl, parameters: params as [String : Any], success: { (data) in
-            
-            MBProgressHUD.hide(for: self.view, animated: true)
-            let resultDic = data as! Dictionary<String,AnyObject>
-            let  accessToken = resultDic["accessToken"]
-            let  refreshToken = resultDic["refreshToken"]
-            setAccessToken(token: accessToken as! String)
-            setRefreshToken(token: refreshToken as! String)
-            
-            setUserInfo(info: resultDic["data"] as! Dictionary<String, Any>)
-            
-            let sharedAppdelegate:AppDelegate = UIApplication.shared.delegate as! AppDelegate
-            if getUserStatus() == .review_pass{
-                sharedAppdelegate.resetRootController()
-            }else{
-                let reply = CertifApplyController()
-                let naviVC = UINavigationController(rootViewController: reply)
-                sharedAppdelegate.window?.rootViewController = naviVC
+        var url:String
+        if pageTitle == "RestPassword" {
+            url = ResetPassUrl
+        } else {
+            url = RegisterUrl
+        }
+        NetWorkManager.shared.loadNoTokenRequest(method: .post, url: url, parameters: params as [String : Any], success: { (data) in
+            if self.pageTitle == "RestPassword" {
+                let loginVc = LoginViewController()
+                self.navigationController?.pushViewController(loginVc, animated: true)
+            } else {
+                MBProgressHUD.hide(for: self.view, animated: true)
+                let resultDic = data as! Dictionary<String,AnyObject>
+                let  accessToken = resultDic["accessToken"]
+                let  refreshToken = resultDic["refreshToken"]
+                setAccessToken(token: accessToken as! String)
+                setRefreshToken(token: refreshToken as! String)
+                
+                setUserInfo(info: resultDic["data"] as! Dictionary<String, Any>)
+                
+                let sharedAppdelegate:AppDelegate = UIApplication.shared.delegate as! AppDelegate
+                if getUserStatus() == .review_pass{
+                    sharedAppdelegate.resetRootController()
+                }else{
+                    let reply = CertifApplyController()
+                    let naviVC = UINavigationController(rootViewController: reply)
+                    sharedAppdelegate.window?.rootViewController = naviVC
+                }
             }
             
         }) { (data, errMsg) in

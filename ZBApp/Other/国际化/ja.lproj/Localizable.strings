@@ -184,3 +184,11 @@
 
 "detail.clean.worktime" = "推定勤務時間：1.5時間";
 "detail.cleanFeedbackType.guestNoCheckOut" = "お客様はまだチェックアウトしていない";
+
+"detail.taskProfile.realStart" = "実際の開始時間";
+"detail.taskProfile.realEnd" = "実際の終了時刻";
+"detail.taskProfile.realRest" = "休憩時間";
+"detail.taskProfile.realFine" = "控除額";
+"detail.taskProfile.realCommission" = "実際の手数料";
+"apply.item.avatar_upload" = "アバターをアップロード";
+

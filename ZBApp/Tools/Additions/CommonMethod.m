@@ -10,7 +10,7 @@
 @implementation CommonMethod
 //照片获取本地路径转换
 + (NSString *)getImagePath:(UIImage *)Image imageName:(NSString *)imageName{
-    UIImage *sizedImage = [self imageWithImageSimple:Image scaledToSize:CGSizeMake(1080, 1080)];
+    UIImage *sizedImage = [self imageWithImageSimple:Image scaledToSize:CGSizeMake(750, 750)];
     
     NSString *filePath = nil;
     NSData *data = nil;

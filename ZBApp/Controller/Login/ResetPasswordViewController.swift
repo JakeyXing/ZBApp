@@ -95,9 +95,7 @@ class ResetPasswordViewController: UIViewController,BEMCheckBoxDelegate {
         let str:String = self.areaDropdownView.contentLabel.text ?? ""
         let countryCode :String = String(str[str.index(str.startIndex, offsetBy: 1)..<str.endIndex])
         
-        let code = Int(self.vertyCodeTextfield.text ?? "0")
-        let params = ["countryCode":countryCode,"phone":self.phoneTextfield.text!,"password":self.passwordTextfield.text!,"vertyCode":self.vertyCodeTextfield.text!,"code":code!] as [String : Any]
-        
+        let params = ["countryCode":countryCode,"phone":self.phoneTextfield.text!] as [String : Any]
         
         MBProgressHUD.showAdded(to: self.view, animated: true)
         NetWorkManager.shared.loadNoTokenRequest(method: .get, url: PhoneCodeUrl, parameters: params as [String : Any], success: { (data) in
@@ -140,7 +138,10 @@ class ResetPasswordViewController: UIViewController,BEMCheckBoxDelegate {
         
         let passMd5 = self.passwordTextfield.text?.md5WithSalt(salt: self.phoneTextfield.text!)
         
-        let params = ["countryCode":self.areaDropdownView.contentLabel.text,"phone":self.phoneTextfield.text,"password":passMd5,"vertyCode":self.vertyCodeTextfield.text]
+        let str:String = self.areaDropdownView.contentLabel.text ?? ""
+        let countryCode :String = String(str[str.index(str.startIndex, offsetBy: 1)..<str.endIndex])
+        
+        let params = ["countryCode":countryCode,"phone":self.phoneTextfield.text!,"password":passMd5!,"vertyCode":self.vertyCodeTextfield.text!]
         
         MBProgressHUD.showAdded(to: self.view, animated: true)
         NetWorkManager.shared.loadNoTokenRequest(method: .post, url: ResetPassUrl, parameters: params as [String : Any], success: { (data) in

@@ -138,7 +138,7 @@ class PersonalInfoController: UIViewController,JHNavigationBarDelegate,UIImagePi
         self.cerNumLabel.text = self.user?.validNo
         
         if self.user?.visaImgUrl != nil {
-            self.passPicImageView.sd_setImage(with: URL(fileURLWithPath: self.user?.visaImgUrl ?? ""), completed: nil)
+            self.passPicImageView.sd_setImage(with: URL(string: self.user?.visaImgUrl ?? ""), completed: nil)
             self.passPicImageView.mas_updateConstraints { (make:MASConstraintMaker!) in
                 make.width.equalTo()(kResizedPoint(pt: 330))
                 make.height.equalTo()(kResizedPoint(pt: 330))
@@ -148,7 +148,7 @@ class PersonalInfoController: UIViewController,JHNavigationBarDelegate,UIImagePi
         }
         
         if self.user?.validNoImgUrl != nil {
-            self.cerPicImageView.sd_setImage(with: URL(fileURLWithPath: self.user?.validNoImgUrl ?? ""), completed: nil)
+            self.cerPicImageView.sd_setImage(with: URL(string: self.user?.validNoImgUrl ?? ""), completed: nil)
             self.cerPicImageView.mas_updateConstraints { (make:MASConstraintMaker!) in
                 make.width.equalTo()(kResizedPoint(pt: 330))
                 make.height.equalTo()(kResizedPoint(pt: 330))

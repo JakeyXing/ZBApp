@@ -40,13 +40,17 @@ class WebViewController: UIViewController,JHNavigationBarDelegate,UIWebViewDeleg
             print("urlStr 为空")
             return
         }
-        
+
         guard (self.urlStr?.count ?? 0 > 0) else {
             print("urlStr 为空")
             return
         }
         
-        let urlStr = self.urlStr?.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
+//        urlStr = "https://s3-ap-northeast-1.amazonaws.com/ostay-clean/product/%25E5%25A4%25A7%25E5%25AE%25AB%25E6%2588%25BF%25E9%2597%25B4%25E5%258F%25B7+%2526+%25E6%2588%25BF%25E9%2597%25A8%25E5%25AF%2586%25E7%25A0%2581_29.xlsx"
+        var urlStr = self.urlStr?.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
+        urlStr = urlStr?.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
+        urlStr = urlStr?.replacingOccurrences(of: "%2520", with: "+")
+        urlStr = urlStr?.replacingOccurrences(of: "&", with: "%2526")
         self.webview.loadRequest(URLRequest.init(url: URL.init(string: urlStr!)!))
 
     }
@@ -57,16 +61,16 @@ class WebViewController: UIViewController,JHNavigationBarDelegate,UIWebViewDeleg
     }
     
     func webView(_ webView: UIWebView, shouldStartLoadWith request: URLRequest, navigationType: UIWebView.NavigationType) -> Bool {
-        MBProgressHUD.showAdded(to: self.view, animated: true)
+        MBProgressHUD.showAdded(to: self.webview, animated: true)
         return true
     }
     
     func webViewDidFinishLoad(_ webView: UIWebView) {
-        MBProgressHUD.hide(for: self.view, animated: true)
+        MBProgressHUD.hide(for: self.webview, animated: true)
     }
     
     func webView(_ webView: UIWebView, didFailLoadWithError error: Error) {
-         MBProgressHUD.hide(for: self.view, animated: true)
+         MBProgressHUD.hide(for: webview, animated: true)
     }
 
 

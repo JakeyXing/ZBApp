@@ -11,6 +11,7 @@ import CYLTabBarController
 import IQKeyboardManagerSwift
 import AWSCore
 import AWSMobileClient
+import Firebase
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -19,9 +20,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var mainTabBarVc: MainTabBarController!
     var usermodel: ZB_User?
-    
+    var langDic:Dictionary<String,String>!
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        FirebaseApp.configure()
         LanguageHelper.shareInstance.initUserLanguage()
         mainTabBarVc = MainTabBarController(viewControllers: self.viewControllers(), tabBarItemsAttributes: self.tabBarItemsAttributesForController())
         
@@ -48,7 +50,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
 //        let demo = DemoViewController()
 //        let naviVC = UINavigationController(rootViewController: demo)
-//        self.window?.rootViewController = naviVC
+//        self.window?.rootViewController = CertifApplyController()
         
         self.window?.makeKeyAndVisible()
         
@@ -132,9 +134,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func test() {
-        let str = "2【1  】2 3 -4  _5  8 年中国!!区块链产业白皮书(1)(1)(1)_77.pdf"
-        let result = pathUrlEncode(path:pathUrlEncode(path: str))
-        let res = result.replacingOccurrences(of: "%2520", with: "+")
-        myPrint(items: res)
+//        let str = "2【1  】2 3 -4  _5  8 年中国!!区块链产业白皮书(1)(1)(1)_77.pdf"
+//        let result = pathUrlEncode(path:pathUrlEncode(path: str))
+//        let res = result.replacingOccurrences(of: "%2520", with: "+")
+//        myPrint(items: res)
+//        let request = AFHTTPRequestSerializer.init()
+        
     }
 }

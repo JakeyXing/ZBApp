@@ -12,7 +12,7 @@ import Masonry
 
 /// 清扫房间图片 显示、上传部分
 protocol CleanPicUploadViewDelegate: class {
-    func cleanPicUploadView(_ cleanPicUploadView: CleanPicUploadView,didSelectedCell cell: CleanImageCell,atIndexPath indexPath: IndexPath);
+    func cleanPicUploadView(_ cleanPicUploadView: CleanPicUploadView,didSelectedCell cell: CleanImageCell,atIndexPath indexPath: IndexPath,originUrl oriUrl : String?);
 }
 
 class CleanPicUploadView: UIView {
@@ -21,7 +21,7 @@ class CleanPicUploadView: UIView {
     
     var roomWithImagesArray:[ZB_TaskPhotoItem] = []
     var roomWithImagesArrayForUpload:[ZB_TaskPhotoItem] = []//
-    
+    var langDic:Dictionary<String,String>?
     private lazy var resultNameLabel: UILabel = UILabel.cz_label(withText: LanguageHelper.getString(key: "detail.cleanPic.uploadDes"), fontSize: kResizedFont(ft: 15), color: kFontColorGray)
     
     
@@ -56,6 +56,8 @@ class CleanPicUploadView: UIView {
     //MARK: - lifeCycle
     override init(frame: CGRect) {
         super.init(frame: frame)
+        let sharedAppdelegate:AppDelegate = UIApplication.shared.delegate as! AppDelegate
+        langDic = sharedAppdelegate.langDic
         initView()
         
     }
@@ -174,7 +176,12 @@ extension CleanPicUploadView:UICollectionViewDelegateFlowLayout,UICollectionView
         if (kind == UICollectionView.elementKindSectionHeader){
             let header:ClaenCollectionHeaderView = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "ClaenCollectionHeaderView", for: indexPath) as! ClaenCollectionHeaderView
             let photoItem:ZB_TaskPhotoItem = self.roomWithImagesArray[indexPath.section]
-            header.roomNumLabel.text = photoItem.location
+            
+            if langDic != nil && !(langDic?.isEmpty)! {
+                header.roomNumLabel.text = langDic?[photoItem.location!]
+            } else {
+                header.roomNumLabel.text = photoItem.location!
+            }
             return header
         }
         
@@ -193,8 +200,13 @@ extension CleanPicUploadView:UICollectionViewDelegateFlowLayout,UICollectionView
         
         let photoItem:ZB_TaskPhotoItem = self.roomWithImagesArray[indexPath.section]
         let photo: ZB_Photo = (photoItem.photos?[indexPath.row])!
-        cell.imageView.sd_setImage(with: NSURL(string: photo.refUrl ?? "")! as? URL, completed: nil)
-        cell.nameLabel.text = photo.position
+        cell.imageView.sd_setImage(with: NSURL(string: (photo.url ?? photo.refUrl) ?? "")! as URL, completed: nil)
+        
+        if langDic != nil && !(langDic?.isEmpty)! {
+            cell.nameLabel.text = langDic?[photo.position!]
+        } else {
+            cell.nameLabel.text = photo.position
+        }
         return cell
     }
     
@@ -206,15 +218,18 @@ extension CleanPicUploadView:UICollectionViewDelegateFlowLayout,UICollectionView
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let cell: CleanImageCell = self.collectionView.cellForItem(at: indexPath) as! CleanImageCell
-        self.delegate?.cleanPicUploadView(self, didSelectedCell: cell,atIndexPath: indexPath)
-
         
+        let photoItem:ZB_TaskPhotoItem = self.roomWithImagesArray[indexPath.section]
+        let photo: ZB_Photo = (photoItem.photos?[indexPath.row])!
+        
+        self.delegate?.cleanPicUploadView(self, didSelectedCell: cell,atIndexPath: indexPath,originUrl: (photo.url ?? photo.refUrl) ?? "")
     }
     
     //MARK:-CleanImageCellDelegate
     func cleanImageCell(_ cell: CleanImageCell, imageUploadSucceed imageUrl: String, atIndex indexPath: IndexPath) {
         let photoItem = self.roomWithImagesArrayForUpload[indexPath.section]
         let photo = photoItem.photos![indexPath.row]
+        photo.upload = true
         photo.url = imageUrl
         
         let item:ZB_TaskPhotoItem = photoItem

@@ -17,7 +17,7 @@ let kRefreshTokenInvalidNoti = "kRefreshTokenInvalidNoti"
 
 let refreshAccessTokenApiUrl = BaseApiUrl + "/auth/token/refresh"
 let BaseApiUrl = "http://api.crowd.iwcln.com"   //  http://172.168.6.18:8081 http://api.crowd.iwcln.com
-
+//let BaseApiUrl = "http://172.168.6.18:8081"
 
 let LoginUrl = BaseApiUrl + "/auth/login"
 let RegisterUrl = BaseApiUrl + "/auth/phone/register"
@@ -34,6 +34,7 @@ let UserInfoUrl = BaseApiUrl + "/userInfo/myInfo"  //个人信息
 let ReportTaskQuesUrl = BaseApiUrl + "/task/execute/report"  //上报问题
 let ApplyUrl = BaseApiUrl + "/userInfo/apply"  //资质申请
 let ApplyCityUrl = BaseApiUrl + "/config/cities"  //citys
+let I18nUrl = BaseApiUrl + "/config/i18n"
 
 
 

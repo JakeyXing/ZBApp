@@ -51,7 +51,7 @@
 "detail.actionName.qiangdan" = "抢单";
 "detail.time.end" = "截止";
 
-"detail.roomInfo.route" = "路引查看";
+"detail.roomInfo.route" = "路引";
 "detail.roomInfo.password" = "密码";
 "detail.roomInfo.maxGuests" = "最大入住人数 ";
 "detail.roomInfo.nextGuests" = "下次入住人数 ";
@@ -184,3 +184,11 @@
 
 "detail.clean.worktime" = "預計工作時長：1.5h";
 "detail.cleanFeedbackType.guestNoCheckOut" = "客人未退房";
+
+"detail.taskProfile.realStart" = "实际开始时间";
+"detail.taskProfile.realEnd" = "实际结束时间";
+"detail.taskProfile.realRest" = "休息时间";
+"detail.taskProfile.realFine" = "任务罚金";
+"detail.taskProfile.realCommission" = "任务佣金";
+"apply.item.avatar_upload" = "上传头像";
+

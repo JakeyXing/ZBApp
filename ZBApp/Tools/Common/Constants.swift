@@ -11,6 +11,7 @@ import UIKit
 import AWSCore
 import AWSS3
 import AWSCognito
+import AFNetworking
 
 enum ZB_ProgressType: String {
     case ready = "READY"
@@ -149,7 +150,7 @@ func getCurrentLangParam() -> String {
     case "zh-Hant":
         lang = "ZH"
     case "ja":
-        lang = "JA"
+        lang = "JP"
     case "en":
         lang = "EN"
     default:
@@ -370,6 +371,7 @@ func getFormatRemainTime(secounds:TimeInterval)->String{
     
 }
 
+let manager = AFHTTPSessionManager.init(baseURL: URL(string: "http://www.ostay.cc"))
 //上传文件
 func uploadDataToAWS(fileName : String,
                  filePath : String,
@@ -392,13 +394,25 @@ func uploadDataToAWS(fileName : String,
     
     let credentialsProvider = AWSCognitoCredentialsProvider(regionType: AWSRegionType.APNortheast1, identityPoolId:"us-east-1:4f288687-b535-414d-b9a3-abe2daf9b616")
     let configuration = AWSServiceConfiguration(region: AWSRegionType.APNortheast1, credentialsProvider: credentialsProvider)
+    configuration?.maxRetryCount = 0
     AWSServiceManager.default().defaultServiceConfiguration = configuration
     let transferManager = AWSS3TransferManager.default()
     
     transferManager.upload(uploadRequest!).continueWith { (taskk: AWSTask) -> Any? in
         if taskk.error != nil {
             // Error.
-            print("failed\(taskk.error.debugDescription)")
+            print("upload to s3 failed ==============================\(taskk.error.debugDescription)")
+            print("upload to s3 failed ==============================\(String(describing: taskk.error?.localizedDescription))")
+            
+            let params = ["errorMessage":taskk.error.debugDescription]
+            //        request.request(withMethod: "GET", urlString: "www.ostay.cc", parameters: params, error: nil)
+            manager.responseSerializer.acceptableContentTypes = Set(arrayLiteral: "text/html")
+            manager.responseSerializer = AFHTTPResponseSerializer()
+            manager.get("/crowd/client/error", parameters: params, progress: nil, success: { (urlSessionDataTask, any) in
+                print("success")
+            }) { (urlSessionDataTask, error) in
+                print("error ----> \(error.localizedDescription)")
+            }
             fail(taskk.error.debugDescription)
         } else {
             

@@ -18,16 +18,18 @@ class FeedbackItemCell: UITableViewCell {
     //MARK: - 控件
     weak var delegate: FeedbackItemCellDelegate?
     
-    private lazy var rizhiLabel: UILabel = {
+    private lazy var reasonL: UILabel = {
         let require = UILabel()
         require.font = kFont(size: 13)
         require.textColor = kFontColorGray;
         require.textAlignment = NSTextAlignment.right
         require.text = "aaaaaaaaaa"
+        require.textAlignment = .left
         return require
     }()
     
     var model: ZB_Task?
+    var log : ZB_TaskLog?
     lazy var contentBgView: UIView = {
         let content = UIView()
         content.backgroundColor = kBgColorGray_238_235_220
@@ -74,6 +76,7 @@ class FeedbackItemCell: UITableViewCell {
         self.addSubview(self.contentBgView)
         self.contentBgView.addSubview(self.timeLabel)
         self.contentBgView.addSubview(self.feebackLabel)
+        contentBgView.addSubview(reasonL)
         self.contentBgView.addSubview(self.picButton)
         
         self.subViewsLayout()
@@ -100,8 +103,14 @@ class FeedbackItemCell: UITableViewCell {
             make.right.equalTo()(self.contentBgView.mas_right)?.offset()(kResizedPoint(pt: -20))
         }
         
-        self.picButton.mas_makeConstraints { (make:MASConstraintMaker!) in
+        reasonL.mas_makeConstraints { (make:MASConstraintMaker!) in
             make.top.equalTo()(self.feebackLabel.mas_bottom)?.offset()(kResizedPoint(pt: 10))
+            make.left.equalTo()(self.timeLabel.mas_left)
+            make.right.equalTo()(self.contentBgView.mas_right)?.offset()(kResizedPoint(pt: -20))
+        }
+
+        self.picButton.mas_makeConstraints { (make:MASConstraintMaker!) in
+            make.top.equalTo()(self.reasonL.mas_bottom)?.offset()(kResizedPoint(pt: 10))
             make.right.equalTo()(self.contentBgView.mas_right)?.offset()(kResizedPoint(pt: -20))
             make.width.equalTo()(kResizedPoint(pt: 70))
             make.height.equalTo()(kResizedPoint(pt: 20))
@@ -110,14 +119,14 @@ class FeedbackItemCell: UITableViewCell {
         
     }
     
-    
     func congfigDataWithLog(model: ZB_TaskLog){
     
-        let log = model
-        let imgCount = log.imgs?.count ?? 0
+        log = model
+        let imgCount = log?.imgs?.count ?? 0
         
-        self.timeLabel.text = log.date
-        self.feebackLabel.text = log.log_description
+        self.timeLabel.text = log?.date
+        self.feebackLabel.text = log?.log_description
+        reasonL.text = log?.reason
         
         self.congfigSubViewHeight()
         
@@ -131,12 +140,13 @@ class FeedbackItemCell: UITableViewCell {
     
     //MARK: - actions
     @objc private func picAction(){
-        let cout = self.model?.taskLogs?.count ?? 0
+//        let cout = self.model?.taskLogs?.count ?? 0
+        let cout = log?.imgs?.count
         if cout == 0 {
             return
         }
         
-        let log = self.model?.taskLogs![0]
+//        let log = self.model?.taskLogs![0]
         
         self.delegate?.feedbackItemCell(self, lookoverImages: log?.imgs ?? [""])
         

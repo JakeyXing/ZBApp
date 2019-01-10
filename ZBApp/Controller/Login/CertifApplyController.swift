@@ -52,14 +52,21 @@ class CertifApplyController: UIViewController,JHNavigationBarDelegate,UIImagePic
     
     lazy var headImageView: UIImageView = {
         let img = UIImageView()
-        img.image = UIImage(named: "defaultHear")
+        img.image = UIImage(named: "avatar_upload")
         img.contentMode = .scaleAspectFill
-        img.layer.cornerRadius = kResizedPoint(pt: 24)
+        img.layer.cornerRadius = kResizedPoint(pt: 40)
         img.clipsToBounds = true
         img.isUserInteractionEnabled = true
         let tap1 = UITapGestureRecognizer(target: self, action: #selector(headImageViewTapped))
         img.addGestureRecognizer(tap1)
         return img
+    }()
+    
+    lazy var avatarUploadLabel:UILabel = {
+       let label = UILabel.cz_label(withText: LanguageHelper.getString(key: "apply.item.avatar_upload"), fontSize: kResizedFont(ft: 15), color: kFontColorGray)
+        label?.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(headImageViewTapped)))
+        label?.isUserInteractionEnabled = true
+        return label!
     }()
     
     private lazy var nameTextField: UITextField = {
@@ -165,6 +172,7 @@ class CertifApplyController: UIViewController,JHNavigationBarDelegate,UIImagePic
         self.view.addSubview(self.otherStatusLabel)
         
         self.scrollview.addSubview(self.headImageView)
+        scrollview.addSubview(avatarUploadLabel)
         self.scrollview.addSubview(self.nameTextField)
         self.scrollview.addSubview(self.lineView)
         self.scrollview.addSubview(self.secSegment)
@@ -281,13 +289,19 @@ class CertifApplyController: UIViewController,JHNavigationBarDelegate,UIImagePic
         //
         self.headImageView.mas_makeConstraints { (make:MASConstraintMaker!) in
             make.top.equalTo()(self.scrollview.mas_top)?.offset()(kResizedPoint(pt: 20))
-            make.left.equalTo()(self.scrollview.mas_left)?.offset()(kResizedPoint(pt: 20))
-            make.width.equalTo()(kResizedPoint(pt: 48))
-            make.height.equalTo()(kResizedPoint(pt: 48))
+            make.left.equalTo()(self.scrollview.mas_left)?.offset()(kResizedPoint(pt: 120))
+            make.width.equalTo()(kResizedPoint(pt: 80))
+            make.height.equalTo()(kResizedPoint(pt: 80))
         }
+        
+        avatarUploadLabel.mas_makeConstraints { (maker) in
+            maker?.centerY.equalTo()(headImageView.mas_centerY)
+            maker?.left.equalTo()(scrollview.mas_left)?.offset()(kResizedFont(ft: 20))
+        }
+        
         self.nameTextField.mas_makeConstraints { (make:MASConstraintMaker!) in
-            make.centerY.equalTo()(self.headImageView.mas_centerY)
-            make.left.equalTo()(self.headImageView.mas_right)?.offset()(kResizedPoint(pt: 15))
+            make.top.equalTo()(headImageView.mas_bottom)?.offset()(kResizedFont(ft: 8))
+            make.left.equalTo()(avatarUploadLabel.mas_left)?.offset()(kResizedPoint(pt: 15))
             make.width.equalTo()(kResizedPoint(pt: 260))
             make.height.equalTo()(kResizedPoint(pt: 30))
         }
@@ -300,15 +314,15 @@ class CertifApplyController: UIViewController,JHNavigationBarDelegate,UIImagePic
         }
         
         self.secSegment.mas_makeConstraints { (make:MASConstraintMaker!) in
-            make.top.equalTo()(self.headImageView.mas_bottom)?.offset()(kResizedPoint(pt: 20))
-            make.left.equalTo()(self.headImageView.mas_left)
+            make.top.equalTo()(nameTextField.mas_bottom)?.offset()(kResizedPoint(pt: 20))
+            make.left.equalTo()(avatarUploadLabel.mas_left)
             make.width.equalTo()(kResizedPoint(pt: 80))
             make.height.equalTo()(kResizedPoint(pt: 20))
         }
         
         self.nationLabel.mas_makeConstraints { (make:MASConstraintMaker!) in
             make.top.equalTo()(self.secSegment.mas_bottom)?.offset()(kResizedPoint(pt: 20))
-            make.left.equalTo()(self.headImageView.mas_left)
+            make.left.equalTo()(avatarUploadLabel.mas_left)
             make.height.equalTo()(kResizedPoint(pt: 17))
         }
         
@@ -334,7 +348,7 @@ class CertifApplyController: UIViewController,JHNavigationBarDelegate,UIImagePic
         
         self.cerTypeLabel.mas_makeConstraints { (make:MASConstraintMaker!) in
             make.top.equalTo()(self.dropdownView2.mas_bottom)?.offset()(kResizedPoint(pt: 20))
-            make.left.equalTo()(self.headImageView.mas_left)
+            make.left.equalTo()(avatarUploadLabel.mas_left)
             make.height.equalTo()(kResizedPoint(pt: 17))
         }
         
@@ -363,7 +377,7 @@ class CertifApplyController: UIViewController,JHNavigationBarDelegate,UIImagePic
         
         self.cerPicLabel.mas_makeConstraints { (make:MASConstraintMaker!) in
             make.top.equalTo()(self.dropdownView3.mas_bottom)?.offset()(kResizedPoint(pt: 20))
-            make.left.equalTo()(self.headImageView.mas_left)
+            make.left.equalTo()(avatarUploadLabel.mas_left)
             make.height.equalTo()(kResizedPoint(pt: 17))
         }
         
@@ -376,7 +390,7 @@ class CertifApplyController: UIViewController,JHNavigationBarDelegate,UIImagePic
         
         self.passportPicLabel.mas_makeConstraints { (make:MASConstraintMaker!) in
             make.top.equalTo()(self.cerPicImageView.mas_bottom)?.offset()(kResizedPoint(pt: 20))
-            make.left.equalTo()(self.headImageView.mas_left)
+            make.left.equalTo()(avatarUploadLabel.mas_left)
             make.height.equalTo()(kResizedPoint(pt: 17))
         }
         
@@ -511,9 +525,7 @@ class CertifApplyController: UIViewController,JHNavigationBarDelegate,UIImagePic
                 
                 DispatchQueue.main.async(execute: {
                     self.headImageView.image = image
-                    
                     self.userIconUrl = url ?? ""
-                  
                 })
                 
             }) { (errMsg) in

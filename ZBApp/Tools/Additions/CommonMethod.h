@@ -11,6 +11,7 @@
 #import <AVFoundation/AVFoundation.h>
 @interface CommonMethod : NSObject
 + (NSString *)getImagePath:(UIImage *)Image imageName:(NSString *)imageName;
++ (UIImage *)imageWithImageSimple:(UIImage*)image scaledToSize:(CGSize)newSize;
 + (void)deleteAwsFiles;
 + (void) convertVideoQuailtyWithInputURL:(NSURL*)inputURL
                                outputURL:(NSURL*)outputURL

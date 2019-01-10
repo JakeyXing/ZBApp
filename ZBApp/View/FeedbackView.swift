@@ -36,7 +36,16 @@ class FeedbackView: UIView {
         return lab
         
     }()
-    
+    lazy var reasonL: UILabel = {
+        let lab = UILabel()
+        lab.textColor = kFontColorGray
+        lab.font = kFont(size: 15)
+        lab.text = "反馈-海外网10月12日电当地时间10月12日，2018年“新学院奖”在瑞典斯德哥尔摩公共图书馆揭晓，玛丽斯·孔戴(Maryse Condé)获得此奖项"
+        lab.numberOfLines = 0
+        return lab
+        
+    }()
+
     lazy var picButton: UIButton = {
         let btn = UIButton(type: UIButton.ButtonType.custom)
         btn.setTitleColor(RGBCOLOR(r: 254, 0, 5), for: UIControl.State.normal)
@@ -70,7 +79,7 @@ class FeedbackView: UIView {
         let size = CGSize.init(width: DEVICE_WIDTH-kResizedPoint(pt: 20)*2, height: CGFloat(HUGE))
         let fbH = UILabel.cz_labelHeight(withText: self.feebackLabel.text, size: size, font: self.feebackLabel.font)
         //10+17+10+h+10+20+10
-        let contentH = kResizedPoint(pt: 77)+fbH
+        let contentH = kResizedPoint(pt: 77)+fbH + fbH + kResizedPoint(pt: 10)
         self.contentView.mas_updateConstraints{ (make:MASConstraintMaker!) in
             make.height.equalTo()(contentH)
         }
@@ -83,11 +92,13 @@ class FeedbackView: UIView {
             return
         }
         
-        let log = model.taskLogs![0]
+        let log = model.taskLogs!.last!
         let imgCount = log.imgs?.count ?? 0
         
         self.timeLabel.text = log.date
         self.feebackLabel.text = log.log_description
+        reasonL.text = log.reason
+        
         
         self.congfigSubViewHeight()
         
@@ -128,7 +139,7 @@ class FeedbackView: UIView {
         
         
         let fbH = UILabel.cz_labelHeight(withText: self.feebackLabel.text, size: size, font: self.feebackLabel.font)
-        let contentH = kResizedPoint(pt: 77)+fbH
+        let contentH = kResizedPoint(pt: 77)+fbH + fbH + kResizedPoint(pt: 10)
         
         //10 +17+10+h+
         let cout = self.model?.taskLogs?.count ?? 0
@@ -154,6 +165,7 @@ extension FeedbackView{
         self.addSubview(self.contentView)
         self.contentView.addSubview(self.timeLabel)
         self.contentView.addSubview(self.feebackLabel)
+        contentView.addSubview(reasonL)
         self.contentView.addSubview(self.picButton)
         self.addSubview(self.moreButton)
         
@@ -180,8 +192,14 @@ extension FeedbackView{
             make.right.equalTo()(self.contentView.mas_right)?.offset()(kResizedPoint(pt: -20))
         }
         
-        self.picButton.mas_makeConstraints { (make:MASConstraintMaker!) in
+        reasonL.mas_makeConstraints { (make:MASConstraintMaker!) in
             make.top.equalTo()(self.feebackLabel.mas_bottom)?.offset()(kResizedPoint(pt: 10))
+            make.left.equalTo()(self.feebackLabel.mas_left)
+            make.right.equalTo()(self.contentView.mas_right)?.offset()(kResizedPoint(pt: -20))
+        }
+
+        self.picButton.mas_makeConstraints { (make:MASConstraintMaker!) in
+            make.top.equalTo()(self.reasonL.mas_bottom)?.offset()(kResizedPoint(pt: 10))
             make.right.equalTo()(self.contentView.mas_right)?.offset()(kResizedPoint(pt: -20))
             make.width.equalTo()(kResizedPoint(pt: 70))
             make.height.equalTo()(kResizedPoint(pt: 20))

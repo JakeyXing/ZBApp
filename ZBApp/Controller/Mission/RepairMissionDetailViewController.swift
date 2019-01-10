@@ -76,6 +76,13 @@ class RepairMissionDetailViewController: MissionDetailBaseViewController,RepairP
 
     
     override func viewDidLoad() {
+        if !isTaked {
+            roomInfoView.clipsToBounds = true
+            roomInfoView.hide = true
+            roomInfoView.mas_updateConstraints { (maker) in
+                maker?.height.equalTo()(0)
+            }
+        }
         super.viewDidLoad()
         
         // MARK: - 键盘即将弹出

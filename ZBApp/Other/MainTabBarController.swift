@@ -14,9 +14,22 @@ class MainTabBarController: CYLTabBarController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        getI18n()
     }
     
 
+    func getI18n() {
+        NetWorkManager.shared.loadRequest(method: .get, url: I18nUrl,parameters: nil, success: { (data) in
+            let resultDic = data as! Dictionary<String,AnyObject>
+            if let dic = resultDic["data"]{
+                let i18n = dic["photoRefs"] as! Dictionary<String,AnyObject>
+                let sharedAppdelegate:AppDelegate = UIApplication.shared.delegate as! AppDelegate
+                sharedAppdelegate.langDic = i18n[getCurrentLangParam()] as! Dictionary<String,String>
+                myPrint(items: sharedAppdelegate.langDic["room"])
+            }
+        }) { (data, errMsg) in
+        }
+    }
 }
 
 

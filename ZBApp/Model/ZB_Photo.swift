@@ -14,6 +14,7 @@ class ZB_Photo: Mappable {
     var position: String?
     var location: String?
     var refUrl: String?
+    var upload = false
     
     required init?(map: Map) {
         

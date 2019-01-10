@@ -48,6 +48,15 @@ class CarryMissionDetailViewController: MissionDetailBaseViewController,CarryMis
         return view
     }()
     
+    lazy var taskProfile:UIView = {
+        let label = UILabel()
+        label.text = "placeholder"
+        label.sizeToFit()
+        let v = UIView(frame: CGRect(x: 0, y: carryImageView.bottom + kResizedPoint(pt: 10), width: DEVICE_WIDTH, height: (label.frame.height + 2) * 5 + CGFloat(16)))
+        v.backgroundColor = kBgColorGray_238_235_220
+       return v
+    }()
+    
     lazy var takeButton: UIButton = {
         let btn = UIButton(type: UIButton.ButtonType.custom)
         btn.frame = CGRect.init(x: DEVICE_WIDTH/2-kResizedPoint(pt: 140), y: self.checkView.bottom+kResizedPoint(pt: 40), width: 280, height: kResizedPoint(pt: 30))
@@ -59,15 +68,65 @@ class CarryMissionDetailViewController: MissionDetailBaseViewController,CarryMis
         return btn
     }()
     
+    let startDate:UILabel = {
+        let la = UILabel()
+        la.text = "placeholder"
+        la.sizeToFit()
+       return la
+    }()
+    let endDate:UILabel = {
+        let la = UILabel()
+        la.text = "placeholder"
+        la.sizeToFit()
+        return la
+    }()
+    let restHours:UILabel = {
+        let la = UILabel()
+        la.text = "placeholder"
+        la.sizeToFit()
+        return la
+    }()
+    let fine:UILabel = {
+        let la = UILabel()
+        la.text = "placeholder"
+        la.sizeToFit()
+        return la
+    }()
+    let commission:UILabel = {
+        let la = UILabel()
+        la.text = "placeholder"
+        la.sizeToFit()
+        return la
+    }()
+
     override func viewDidLoad() {
         super.viewDidLoad()
     }
     
     override func addSubViews() {
         super.addSubViews()
+        
+        let label = UILabel()
+        label.text = "placeholder"
+        label.sizeToFit()
+        let height = label.frame.height + 2
+//        taskProfile.frame = CGRect(x: <#T##CGFloat#>, y: <#T##CGFloat#>, width: <#T##CGFloat#>, height: <#T##CGFloat#>)
+        
+        taskProfile.addSubview(startDate)
+        taskProfile.addSubview(endDate)
+        taskProfile.addSubview(restHours)
+        taskProfile.addSubview(fine)
+        taskProfile.addSubview(commission)
+        
+        if !isTaked || currentProgress != .finished{
+            taskProfile.height = 0
+            taskProfile.clipsToBounds = true
+        }
+        
         self.scrollview.addSubview(self.carryMissionInfoView)
         self.scrollview.addSubview(self.carryImageView)
         self.scrollview.addSubview(self.infoUploadButton)
+        scrollview.addSubview(taskProfile)
         self.scrollview.addSubview(self.feedbackView)
         self.scrollview.addSubview(self.checkView)
         self.scrollview.addSubview(self.takeButton)
@@ -82,7 +141,21 @@ class CarryMissionDetailViewController: MissionDetailBaseViewController,CarryMis
         self.carryImageView.top = self.carryMissionInfoView.bottom
         
         self.carryImageView.height = self.carryImageView.viewHeight()
-        self.feedbackView.top = self.carryImageView.bottom+kResizedPoint(pt: 10)
+        taskProfile.top = carryImageView.bottom + kResizedPoint(pt: 10)
+        
+        startDate.top = 8
+        let left = CGFloat(20)
+        startDate.left = left
+        endDate.left = left
+        restHours.left = left
+        fine.left = left
+        commission.left = left
+        endDate.top = startDate.bottom + 2
+        restHours.top = endDate.bottom + 2
+        fine.top = restHours.bottom + 2
+        commission.top = fine.bottom + 2
+    
+        self.feedbackView.top = taskProfile.bottom+kResizedPoint(pt: 10)
         
         self.feedbackView.height = self.feedbackView.viewHeight()
         self.checkView.top = self.feedbackView.bottom+kResizedPoint(pt: 20)
@@ -90,7 +163,10 @@ class CarryMissionDetailViewController: MissionDetailBaseViewController,CarryMis
         self.checkView.height = self.checkView.viewHeight()
         self.takeButton.top = self.checkView.bottom+kResizedPoint(pt: 40)
         
-        self.scrollview.contentSize = CGSize.init(width: DEVICE_WIDTH, height: self.missionBaseInfoView.height + kResizedPoint(pt: 10)+self.carryMissionInfoView.height + self.carryImageView.height + kResizedPoint(pt: 10) + self.feedbackView.height + kResizedPoint(pt: 20) + self.checkView.height + kResizedPoint(pt: 40+30))
+        
+        self.scrollview.contentSize = CGSize.init(width: DEVICE_WIDTH, height: self.missionBaseInfoView.height + kResizedPoint(pt: 10)+self.carryMissionInfoView.height + self.carryImageView.height + kResizedPoint(pt: 10) + self.feedbackView.height + kResizedPoint(pt: 20) + self.checkView.height + kResizedPoint(pt: 40+30)
+            + height * 5 + 10
+        )
     }
     
     override func configData() {
@@ -120,15 +196,54 @@ class CarryMissionDetailViewController: MissionDetailBaseViewController,CarryMis
             self.infoUploadButton.height = 0
         }
         
+        taskProfile.top = infoUploadButton.bottom + 10
+        if let start = task?.startDate {
+            startDate.text = "\(LanguageHelper.getString(key: "detail.taskProfile.realStart")):\(start)"
+            startDate.sizeToFit()
+        } else {
+            startDate.height = 0
+            endDate.top = 8
+        }
+        if let end = task?.endDate {
+            endDate.text = "\(LanguageHelper.getString(key: "detail.taskProfile.realEnd")):\(end)"
+            endDate.sizeToFit()
+        } else {
+            endDate.height = 0
+            restHours.top = startDate.bottom + 2
+        }
+        if let rest = task?.restHours, rest > 0 {
+            restHours.text = "\(LanguageHelper.getString(key: "detail.taskProfile.realRest")):\(rest)"
+            restHours.sizeToFit()
+        } else {
+            restHours.height = 0
+            fine.top = endDate.bottom + 2
+        }
+        if let fin = task?.fine, fin > 0 {
+            fine.text = "\(LanguageHelper.getString(key: "detail.taskProfile.realFine")):\(fin)"
+            fine.sizeToFit()
+        } else {
+            fine.height = 0
+            commission.top = restHours.bottom + 2
+        }
+        if let commissio = task?.base, commissio > 0 {
+            commission.text = "\(LanguageHelper.getString(key: "detail.taskProfile.realCommission")):\(commissio)+\(task!.bonus)\(model?.currency ?? "JPY")"
+            commission.sizeToFit()
+        } else {
+            commission.height = 0
+        }
+        
+        taskProfile.height -= taskProfile.height - commission.bottom
+
+        
         //logs
         self.feedbackView.congfigDataWithTask(model: self.task!)
         self.feedbackView.height = self.feedbackView.viewHeight()
         let cout = self.task!.taskLogs?.count ?? 0
         if cout == 0 {
             self.feedbackView.clipsToBounds = true;
-            self.feedbackView.top = self.infoUploadButton.bottom
+            self.feedbackView.top = self.taskProfile.bottom
         }else{
-            self.feedbackView.top = self.infoUploadButton.bottom + kResizedPoint(pt: 10)
+            self.feedbackView.top = self.taskProfile.bottom + kResizedPoint(pt: 10)
         }
         
         //验收结果
@@ -158,9 +273,6 @@ class CarryMissionDetailViewController: MissionDetailBaseViewController,CarryMis
             self.takeButton.height = 0
         }
         self.scrollview.contentSize = CGSize.init(width: DEVICE_WIDTH, height: self.takeButton.bottom + kResizedPoint(pt: 40))
-        
-      
-        
     }
     
     override func setupDataWithHomeModel() {

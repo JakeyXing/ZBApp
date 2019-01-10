@@ -114,8 +114,11 @@ class ListRoomInfoView: UIView {
 //        self.roomArray = self.model?.properties
 //       
 //    }
-    
+    var hide = false
     func viewHeight() -> CGFloat {
+        if hide {
+            return CGFloat(0)
+        }
         let tabH = kResizedPoint(pt: 27)*CGFloat(self.roomArray?.count ?? 0)+kResizedPoint(pt: 10)
         self.tableview.mas_updateConstraints() { (make:MASConstraintMaker!) in
             make.height.equalTo()(tabH)

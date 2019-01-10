@@ -52,7 +52,7 @@ class CleanImageCell: UICollectionViewCell {
         
     }()
     
-    private lazy var progressView: UIView = {
+    lazy var progressView: UIView = {
         let view = UIView()
         view.backgroundColor = UIColor.yellow
         return view
@@ -99,10 +99,12 @@ class CleanImageCell: UICollectionViewCell {
     }
     
     func uploadImage(img:UIImage) {
-        self.imageView.image = img
+//        self.imageView.image = img
         self.oriImage = img
         let imgName = "clen_pic_" + CommonMethod.timestamp()
         
+        self.imageView.image = CommonMethod.image(withImageSimple: img, scaledTo: CGSize.init(width: 750, height: 750))
+        // [self imageWithImageSimple:Image scaledToSize:CGSizeMake(1080, 1080)]
         self.savedImagePath = CommonMethod.getImagePath(img, imageName: imgName)
         
         let fileNa = imgName + ".jpg"
@@ -121,12 +123,6 @@ class CleanImageCell: UICollectionViewCell {
     
     
     func uploadData(fileName: String) {
-//        var data = Data()
-//        do {
-//            try data =  Data(contentsOf: URL(fileURLWithPath: self.savedImagePath ?? ""))
-//        } catch  {
-//            print("异常--")
-//        }
         
         let key = "product/" + fileName + ".jpg"
       

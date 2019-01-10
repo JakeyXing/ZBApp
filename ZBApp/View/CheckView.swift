@@ -18,7 +18,7 @@ protocol CheckViewDelegate: class {
 class CheckView: UIView {
     weak var delegate: CheckViewDelegate?
     
-    lazy var titleLabel: UILabel = UILabel.cz_label(withText: LanguageHelper.getString(key: "detail.check.title"), fontSize: kResizedFont(ft: 15), color: kFontColorGray)
+    lazy var titleLabel: UILabel = UILabel.cz_label(withText: LanguageHelper.getString(key: "detail.check.title"), fontSize: kResizedFont(ft: 15), color: UIColor.black)
     
     lazy var contentLabel: UILabel = {
         let lab = UILabel()
@@ -64,7 +64,7 @@ class CheckView: UIView {
     
     func congfigDataWithTask(model: ZB_Task) {
         self.imageArray = model.imgs
-        
+        contentLabel.text = model.acceptance
     }
     
     
