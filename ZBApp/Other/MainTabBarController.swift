@@ -8,6 +8,10 @@
 
 import UIKit
 import CYLTabBarController
+import AFNetworking
+
+var networkType:String = ""
+
 class MainTabBarController: CYLTabBarController {
 
     override func viewDidLoad() {
@@ -15,6 +19,26 @@ class MainTabBarController: CYLTabBarController {
 
         // Do any additional setup after loading the view.
         getI18n()
+        
+        let reachabilityManager = AFNetworkReachabilityManager.shared()
+        reachabilityManager.startMonitoring()
+        reachabilityManager.setReachabilityStatusChange { (status) in
+            switch status {
+            case .unknown:
+                print("未识别网络")
+                networkType = "Unknow"
+            case .reachableViaWWAN:
+                print("移动网络")
+                networkType = "WWAN"
+            case .reachableViaWiFi:
+                print("Wi-Fi网络")
+                networkType = "Wi-Fi"
+            case .notReachable:
+                print("网络不可达")
+                networkType = "NotReachable"
+            }
+        }
+        
     }
     
 

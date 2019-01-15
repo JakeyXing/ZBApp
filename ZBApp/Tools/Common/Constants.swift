@@ -388,30 +388,44 @@ func uploadDataToAWS(fileName : String,
     uploadRequest?.acl = AWSS3ObjectCannedACL.publicRead
     uploadRequest?.uploadProgress = { (bytesSent, totalBytesSent, totalBytesExpectedToSend) -> Void in
         DispatchQueue.main.async(execute: {
-            print("\(bytesSent)")
+            print("bytesSent ----> \(bytesSent); totalBytesSent ----> \(totalBytesSent); totalBytesExpectedToSend ----> \(totalBytesExpectedToSend)")
         })
     }
     
     let credentialsProvider = AWSCognitoCredentialsProvider(regionType: AWSRegionType.APNortheast1, identityPoolId:"us-east-1:4f288687-b535-414d-b9a3-abe2daf9b616")
     let configuration = AWSServiceConfiguration(region: AWSRegionType.APNortheast1, credentialsProvider: credentialsProvider)
-    configuration?.maxRetryCount = 0
+    configuration?.maxRetryCount = 3
+    configuration?.timeoutIntervalForRequest = 20
     AWSServiceManager.default().defaultServiceConfiguration = configuration
     let transferManager = AWSS3TransferManager.default()
     
     transferManager.upload(uploadRequest!).continueWith { (taskk: AWSTask) -> Any? in
         if taskk.error != nil {
             // Error.
-            print("upload to s3 failed ==============================\(taskk.error.debugDescription)")
-            print("upload to s3 failed ==============================\(String(describing: taskk.error?.localizedDescription))")
+//            print("upload to s3 failed ==============================\(taskk.error.debugDescription)")
+            let errorInfo = taskk.error?.localizedDescription
+            print("upload to s3 failed ==============================\(errorInfo!)")
             
-            let params = ["errorMessage":taskk.error.debugDescription]
+            var params = getImageUploadMessage()
+            params["server"] = "https://s3-ap-northeast-1.amazonaws.com"
+            params["maxRetryCount"] = "3"
+            params["timeoutInterval"] = "20"
+            params["filePath"] = "https://s3-ap-northeast-1.amazonaws.com/ostay-clean/" + key
+            
+            let attr = try? FileManager.default.attributesOfItem(atPath: filePath)
+            let fileSize = attr?[FileAttributeKey.size] as! UInt64
+            params["fileSize"] = String(fileSize)
+            params["reason"] = taskk.error?.localizedDescription
+            myPrint(items: params)
+            myPrint(items: params["deviceModel"]!)
+
             //        request.request(withMethod: "GET", urlString: "www.ostay.cc", parameters: params, error: nil)
             manager.responseSerializer.acceptableContentTypes = Set(arrayLiteral: "text/html")
             manager.responseSerializer = AFHTTPResponseSerializer()
             manager.get("/crowd/client/error", parameters: params, progress: nil, success: { (urlSessionDataTask, any) in
-                print("success")
+//                print("success")
             }) { (urlSessionDataTask, error) in
-                print("error ----> \(error.localizedDescription)")
+//                print("error ----> \(error.localizedDescription)")
             }
             fail(taskk.error.debugDescription)
         } else {
@@ -456,4 +470,52 @@ func pathUrlEncode(path :String) -> String {
 
 func myPrint(items: Any...) {
     print("-----> \(items) <-----")
+}
+
+func getImageUploadMessage() -> Dictionary<String,String> {
+    var message = [String:String]()
+    message["deviceModel"] = UIDevice.current.deviceModel
+    message["systemVersion"] = UIDevice.current.systemVersion
+    let infoDic = Bundle.main.infoDictionary
+    let appVersion = infoDic?["CFBundleShortVersionString"] // 获取App的版本
+    let appBuildVersion = infoDic?["CFBundleVersion"] // 获取App的build版本
+    let appName = infoDic?["CFBundleDisplayName"]
+    message["appVersion"] = appVersion as? String
+    message["appBuildVersion"] = appBuildVersion as? String
+    message["appName"] = appName as? String
+    message["networkType"] = networkType
+    
+    return message
+}
+
+extension UIDevice {
+    var deviceModel: String {
+        var systemInfo = utsname()
+        uname(&systemInfo)
+        let machineMirror = Mirror(reflecting: systemInfo.machine)
+        let identifier = machineMirror.children.reduce("") { identifier, element in
+            guard let value = element.value as? Int8, value != 0 else { return identifier }
+            return identifier + String(UnicodeScalar(UInt8(value)))
+        }
+        
+        switch identifier {
+        case "iPhone5,3":  return "iPhone 5c (GSM)"
+        case "iPhone5,4":  return "iPhone 5c (GSM+CDMA)"
+        case "iPhone6,1":  return "iPhone 5s (GSM)"
+        case "iPhone6,2":  return "iPhone 5s (GSM+CDMA)"
+        case "iPhone7,2":  return "iPhone 6"
+        case "iPhone7,1":  return "iPhone 6 Plus"
+        case "iPhone8,1":  return "iPhone 6s"
+        case "iPhone8,2":  return "iPhone 6s Plus"
+        case "iPhone8,4":  return "iPhone SE"
+        case "iPhone9,1":   return "国行、日版、港行iPhone 7"
+        case "iPhone9,2":  return "港行、国行iPhone 7 Plus"
+        case "iPhone9,3":  return "美版、台版iPhone 7"
+        case "iPhone9,4":  return "美版、台版iPhone 7 Plus"
+        case "iPhone10,1","iPhone10,4":   return "iPhone 8"
+        case "iPhone10,2","iPhone10,5":   return "iPhone 8 Plus"
+        case "iPhone10,3","iPhone10,6":   return "iPhone X"
+        default:  return identifier
+        }
+    }
 }

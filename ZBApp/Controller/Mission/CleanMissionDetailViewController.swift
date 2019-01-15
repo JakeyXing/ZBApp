@@ -11,6 +11,7 @@ import SKPhotoBrowser
 import MBProgressHUD
 import Toast
 import ObjectMapper
+import AFNetworking
 
 class CleanMissionDetailViewController: MissionDetailBaseViewController,CleanPicUploadViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,RoomInfoViewDelegate,FeedbackViewDelegate {
    
@@ -47,11 +48,15 @@ class CleanMissionDetailViewController: MissionDetailBaseViewController,CleanPic
         return btn
     }()
     
+    let netTestManager:AFHTTPSessionManager = AFHTTPSessionManager.init(baseURL: URL(string: ""))
     override func viewDidLoad() {
         if !isTaked {
             roomInfoView.hidePass()
         }
         super.viewDidLoad()
+        
+        netTestManager.responseSerializer.acceptableContentTypes = Set(arrayLiteral: "text/html")
+        netTestManager.responseSerializer = AFHTTPResponseSerializer()
     }
     
     override func addSubViews() {
@@ -339,7 +344,7 @@ class CleanMissionDetailViewController: MissionDetailBaseViewController,CleanPic
         
         let image = info[UIImagePickerController.InfoKey.originalImage] as! UIImage
         currentImageCell?.progressView.backgroundColor = UIColor.yellow
-        currentImageCell?.uploadImage(img: image)
+        currentImageCell?.uploadImage(img: image,netTestManager:netTestManager)
         
         self.dismiss(animated: true, completion: nil)
     }
