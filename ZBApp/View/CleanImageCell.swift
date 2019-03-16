@@ -105,8 +105,9 @@ class CleanImageCell: UICollectionViewCell {
     func uploadImage(img:UIImage,netTestManager:AFHTTPSessionManager) {
 //        self.imageView.image = img
         self.oriImage = img
-        let imgName = "clen_pic_" + CommonMethod.timestamp()
-        
+        let imgName = "clen_pic_" + CommonMethod.timestamp() + "_" + "\(getUserInfo()["id"]!)"
+//        let imgName = "testtest"
+
         self.imageView.image = CommonMethod.image(withImageSimple: img, scaledTo: CGSize.init(width: 750, height: 750))
         // [self imageWithImageSimple:Image scaledToSize:CGSizeMake(1080, 1080)]
         self.savedImagePath = CommonMethod.getImagePath(img, imageName: imgName)
@@ -125,7 +126,7 @@ class CleanImageCell: UICollectionViewCell {
                 self.progressView.backgroundColor = UIColor.red
             })
         }
-        
+
         for website in websites {
             let start = Date().timeIntervalSince1970
             netTestManager.get(website, parameters: nil, progress: nil, success: { (task, any) in

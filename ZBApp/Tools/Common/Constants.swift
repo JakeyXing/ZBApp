@@ -371,12 +371,42 @@ func getFormatRemainTime(secounds:TimeInterval)->String{
     
 }
 
+func getTransferManager(key:String,fileUrl:URL,retry:Bool) -> AWSS3TransferManager {
+    let uploadRequest = AWSS3TransferManagerUploadRequest()
+    uploadRequest?.bucket = "ostay-clean"
+    uploadRequest?.key = key
+    uploadRequest?.body = fileUrl
+    uploadRequest?.acl = AWSS3ObjectCannedACL.publicRead
+    uploadRequest?.uploadProgress = { (bytesSent, totalBytesSent, totalBytesExpectedToSend) -> Void in
+        DispatchQueue.main.async(execute: {
+            print("bytesSent ----> \(bytesSent); totalBytesSent ----> \(totalBytesSent); totalBytesExpectedToSend ----> \(totalBytesExpectedToSend)")
+        })
+    }
+    let credentialsProvider = AWSCognitoCredentialsProvider(regionType: AWSRegionType.APNortheast1, identityPoolId:"us-east-1:4f288687-b535-414d-b9a3-abe2daf9b616")
+    let configuration = AWSServiceConfiguration(region: AWSRegionType.APNortheast1, credentialsProvider: credentialsProvider)
+    let anonymous = AWSServiceConfiguration(region: .APNortheast1, credentialsProvider: AWSAnonymousCredentialsProvider())
+    if retry {
+        configuration?.maxRetryCount = 3
+        configuration?.timeoutIntervalForRequest = 20
+        let service = AWSServiceManager.init()
+        service.defaultServiceConfiguration = configuration
+        let manager = AWSS3TransferManager.init()
+        return manager
+    }
+    AWSServiceManager.default()?.defaultServiceConfiguration = configuration
+    
+    let client = AWSServiceManager()
+    client.defaultServiceConfiguration = anonymous
+    
+    return AWSS3TransferManager.default()
+}
+
 let manager = AFHTTPSessionManager.init(baseURL: URL(string: "http://www.ostay.cc"))
 //上传文件
 func uploadDataToAWS(fileName : String,
-                 filePath : String,
-                 success : @escaping(_ fileUrl:String?)->(),
-                 fail : @escaping(_ errMsg:String)->()){
+                     filePath : String,
+                     success : @escaping(_ fileUrl:String?)->(),
+                     fail : @escaping(_ errMsg:String)->()){
     
     let key = "product/" + fileName
     
@@ -392,8 +422,9 @@ func uploadDataToAWS(fileName : String,
         })
     }
     
-    let credentialsProvider = AWSCognitoCredentialsProvider(regionType: AWSRegionType.APNortheast1, identityPoolId:"us-east-1:4f288687-b535-414d-b9a3-abe2daf9b616")
+    let credentialsProvider = AWSCognitoCredentialsProvider(regionType: AWSRegionType.APNortheast1, identityPoolId:"ap-northeast-1:55a61e5d-f0dd-4ce9-b4a9-ddc2824afc3e")
     let configuration = AWSServiceConfiguration(region: AWSRegionType.APNortheast1, credentialsProvider: credentialsProvider)
+    //    let configuration = AWSServiceConfiguration(region: AWSRegionType.APNortheast1, credentialsProvider: AWSAnonymousCredentialsProvider())
     configuration?.maxRetryCount = 3
     configuration?.timeoutIntervalForRequest = 20
     AWSServiceManager.default().defaultServiceConfiguration = configuration
@@ -402,9 +433,9 @@ func uploadDataToAWS(fileName : String,
     transferManager.upload(uploadRequest!).continueWith { (taskk: AWSTask) -> Any? in
         if taskk.error != nil {
             // Error.
-//            print("upload to s3 failed ==============================\(taskk.error.debugDescription)")
-            let errorInfo = taskk.error?.localizedDescription
-            print("upload to s3 failed ==============================\(errorInfo!)")
+            //            print("upload to s3 failed ==============================\(taskk.error.debugDescription)")
+            let errorInfo = taskk.error.debugDescription
+            print("upload to s3 failed ==============================\(errorInfo)")
             
             var params = getImageUploadMessage()
             params["server"] = "https://s3-ap-northeast-1.amazonaws.com"
@@ -415,17 +446,17 @@ func uploadDataToAWS(fileName : String,
             let attr = try? FileManager.default.attributesOfItem(atPath: filePath)
             let fileSize = attr?[FileAttributeKey.size] as! UInt64
             params["fileSize"] = String(fileSize)
-            params["reason"] = taskk.error?.localizedDescription
+            params["reason"] = taskk.error.debugDescription
             myPrint(items: params)
             myPrint(items: params["deviceModel"]!)
-
+            
             //        request.request(withMethod: "GET", urlString: "www.ostay.cc", parameters: params, error: nil)
             manager.responseSerializer.acceptableContentTypes = Set(arrayLiteral: "text/html")
             manager.responseSerializer = AFHTTPResponseSerializer()
-            manager.get("/crowd/client/error", parameters: params, progress: nil, success: { (urlSessionDataTask, any) in
-//                print("success")
+            manager.get("/crowd/client/debugerror/", parameters: params, progress: nil, success: { (urlSessionDataTask, any) in
+                //                print("success")
             }) { (urlSessionDataTask, error) in
-//                print("error ----> \(error.localizedDescription)")
+                //                print("error ----> \(error.localizedDescription)")
             }
             fail(taskk.error.debugDescription)
         } else {
@@ -438,6 +469,59 @@ func uploadDataToAWS(fileName : String,
         
     }
     
+}
+
+func uploadToAWS(fileName : String,
+                     filePath : String,
+                     success : @escaping(_ fileUrl:String?)->(),
+                     fail : @escaping(_ errMsg:String)->()){
+
+    let key = "product/" + fileName
+
+    let fileUrl = URL(fileURLWithPath: filePath )
+    let data = try? Data(contentsOf: fileUrl)
+
+
+    let expression = AWSS3TransferUtilityUploadExpression()
+    expression.progressBlock = {(task, progress) in
+        DispatchQueue.main.async(execute: {
+            // Do something e.g. Update a progress bar.
+        })
+    }
+
+    var completionHandler: AWSS3TransferUtilityUploadCompletionHandlerBlock?
+    completionHandler = { (task, error) -> Void in
+        if error != nil {
+            print("error\(error)")
+        }
+        let url = kAWSBaseUrl + key
+
+        success("success:\(url)")
+        DispatchQueue.main.async(execute: {
+            // Do something e.g. Alert a user for transfer completion.
+            // On failed uploads, `error` contains the error object.
+        })
+    }
+
+    let transferUtility = AWSS3TransferUtility.default()
+    
+    transferUtility.uploadData(data!,
+                               bucket: "ostay-clean",
+                               key: key,
+                               contentType: "application/x-jpg",
+                               expression: expression,
+                               completionHandler: completionHandler).continueWith {
+                                (task) -> AnyObject! in
+                                if let error = task.error {
+                                    print("Error: \(error.localizedDescription)")
+                                }
+
+                                if let _ = task.result {
+                                    // Do something with uploadTask.
+                                }
+                                return nil;
+    }
+
 }
 
 

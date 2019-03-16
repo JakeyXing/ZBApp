@@ -36,10 +36,21 @@ class CleanMissionDetailViewController: MissionDetailBaseViewController,CleanPic
         return view
     }()
     
+    //申请转单
+    lazy var transferButton: UIButton = {
+        let btn = UIButton(type: UIButton.ButtonType.custom)
+        btn.frame = CGRect.init(x: kResizedPoint(pt: 20), y: self.submitButton.top, width: 80, height: kResizedPoint(pt: 30))
+        btn.setTitleColor(UIColor.blue, for: UIControl.State.normal)
+        //        btn.backgroundColor = kTintColorYellow
+        btn.setTitle(LanguageHelper.getString(key: "detail.submitBtnTit.transfer"), for: .normal)
+        btn.titleLabel?.font = kFont(size: 14)
+        btn.addTarget(self, action: #selector(transferAction), for: UIControl.Event.touchUpInside)
+        return btn
+    }()
 
     lazy var submitButton: UIButton = {
         let btn = UIButton(type: UIButton.ButtonType.custom)
-        btn.frame = CGRect.init(x: DEVICE_WIDTH/2-kResizedPoint(pt: 140), y: self.uploadView.bottom+kResizedPoint(pt: 30), width: 280, height: kResizedPoint(pt: 30))
+        btn.frame = CGRect.init(x: DEVICE_WIDTH/2-kResizedPoint(pt: 80), y: self.uploadView.bottom+kResizedPoint(pt: 30), width: 180, height: kResizedPoint(pt: 30))
         btn.setTitleColor(UIColor.white, for: UIControl.State.normal)
         btn.backgroundColor = kTintColorYellow
         btn.setTitle(LanguageHelper.getString(key: "apply.nav.submit"), for: .normal)
@@ -83,8 +94,9 @@ class CleanMissionDetailViewController: MissionDetailBaseViewController,CleanPic
         self.scrollview.addSubview(self.roomInfoView)
         self.scrollview.addSubview(self.feedbackView)
         self.scrollview.addSubview(self.uploadView)
+        self.scrollview.addSubview(self.transferButton)
         self.scrollview.addSubview(self.submitButton)
-        
+
         self.uploadView.delegate = self
         
         self.feedbackView.congfigSubViewHeight()
@@ -145,8 +157,6 @@ class CleanMissionDetailViewController: MissionDetailBaseViewController,CleanPic
             self.uploadView.isHidden = true
             self.uploadView.top = self.feedbackView.bottom
             self.uploadView.height = 0
-           
-        
         }
         
         //提交按钮
@@ -157,10 +167,8 @@ class CleanMissionDetailViewController: MissionDetailBaseViewController,CleanPic
             
             if self.currentProgress == .ready {
                 self.submitButton.setTitle(LanguageHelper.getString(key: "detail.submitBtnTit.startMission"), for: .normal)
-                
             }else{
                 self.submitButton.setTitle(LanguageHelper.getString(key: "detail.submitBtnTit.approveCheck"), for: .normal)
-                
             }
             
         }else{
@@ -168,11 +176,21 @@ class CleanMissionDetailViewController: MissionDetailBaseViewController,CleanPic
             self.submitButton.top = self.uploadView.bottom
             self.submitButton.height = 0
         }
+        
+        //转单按钮
+        if self.currentProgress == .ready{
+            self.transferButton.isHidden = false
+            self.transferButton.top = self.submitButton.top
+        }else{
+            self.transferButton.isHidden = true
+        }
+        
         self.scrollview.contentSize = CGSize.init(width: DEVICE_WIDTH, height: self.submitButton.bottom + kResizedPoint(pt: 40))
         
         if "FINISHED_NOSHOW,FINISHED,ABANDON_TRANSFER,ABANDON_OPERATE,CANCELED".contains(progress) {
             roomInfoView.hidePass()
         }
+        
     }
     
     override func setupDataWithHomeModel() {
@@ -195,9 +213,38 @@ class CleanMissionDetailViewController: MissionDetailBaseViewController,CleanPic
         
     }
     
+    @objc private func transferAction(){
+        let reasonText = TransferReasonView(frame: CGRect.init())
+        reasonText.showInView(suView: self.view) { (reason, isSureAction) in
+            if isSureAction{
+                print("sure:\(String(describing: reason))")
+                if reason == "" {
+                    self.view.makeToast("reason is nil", duration: 2, position: CSToastPositionCenter)
+                    return
+                }
+                
+                //申请转单
+                let params = ["id":self.task?.id ?? 0 ,"reason":reason ?? ""] as [String : Any]
+                
+                MBProgressHUD.showAdded(to: self.view, animated: true)
+                NetWorkManager.shared.loadRequest(method: .post, url: TransferTaskUrl, parameters: params as [String : Any], success: { (data) in
+                    MBProgressHUD.hide(for: self.view, animated: true)
+                    self.loadNewDataWithId(taskId: self.task?.id ?? 0)
+                    
+                }) { (data, errMsg) in
+                    MBProgressHUD.hide(for: self.view, animated: true)
+                    self.view.makeToast(errMsg, duration: 2, position: CSToastPositionCenter)
+                }
+            }else{
+                print("cancel")
+            }
+        }
+    }
     
     //MARK: - actions
     @objc private func takeAction(){
+        submitButton.isEnabled = false
+        submitButton.backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
         if self.isTaked == false {
             //抢单
             let params = ["taskId":self.model?.id ?? 0] as [String : Any]
@@ -205,20 +252,20 @@ class CleanMissionDetailViewController: MissionDetailBaseViewController,CleanPic
             MBProgressHUD.showAdded(to: self.view, animated: true)
             NetWorkManager.shared.loadRequest(method: .post, url: ReceiveTaskUrl, parameters: params as [String : Any], success: { (data) in
                 MBProgressHUD.hide(for: self.view, animated: true)
-                
                 let resultDic = data as! Dictionary<String,AnyObject>
                 let executorId = resultDic["data"] as! Int64
                 self.isTaked = true
                 self.loadNewDataWithId(taskId: executorId)
-                
+                self.submitButton.isEnabled = true
+                self.submitButton.backgroundColor = kTintColorYellow
+                self.view.makeToast("success", duration: 2, position: CSToastPositionCenter)
             }) { (data, errMsg) in
                 MBProgressHUD.hide(for: self.view, animated: true)
                 self.view.makeToast(errMsg, duration: 2, position: CSToastPositionCenter)
-                
-                
+                self.submitButton.isEnabled = true
+                self.submitButton.backgroundColor = kTintColorYellow
             }
         }else{
-            
             if self.currentProgress == .ready {
                 //我已到达，开始任务
                 let params = ["id":self.task?.id ?? 0 ] as [String : Any]
@@ -226,18 +273,15 @@ class CleanMissionDetailViewController: MissionDetailBaseViewController,CleanPic
                 MBProgressHUD.showAdded(to: self.view, animated: true)
                 NetWorkManager.shared.loadRequest(method: .post, url: StartTaskUrl, parameters: params as [String : Any], success: { (data) in
                     MBProgressHUD.hide(for: self.view, animated: true)
-                    
-//                    let resultDic = data as! Dictionary<String,AnyObject>
-//                    let dic = resultDic["data"]
-//                    if dic == nil {
-//                        return
-//                    }
+                    self.view.makeToast("success", duration: 2, position: CSToastPositionCenter)
                     self.loadNewDataWithId(taskId: self.task?.id ?? 0)
-                    
+                    self.submitButton.isEnabled = true
+                    self.submitButton.backgroundColor = kTintColorYellow
                 }) { (data, errMsg) in
                     MBProgressHUD.hide(for: self.view, animated: true)
                     self.view.makeToast(errMsg, duration: 2, position: CSToastPositionCenter)
-                    
+                    self.submitButton.isEnabled = true
+                    self.submitButton.backgroundColor = kTintColorYellow
                 }
                 
             }else if(self.currentProgress == .started || currentProgress == .approve_failed){
@@ -248,10 +292,14 @@ class CleanMissionDetailViewController: MissionDetailBaseViewController,CleanPic
                 for i in 0..<cout{
                     let item = self.uploadView.roomWithImagesArrayForUpload[i]
                     let photoCount = item.photos!.count
-                    
+
                     for index in 0..<photoCount{
                         let photo = item.photos![index]
                         photo.location = item.location
+                        
+                        photo.url = "http:////"
+                        photo.upload = true
+                        
                         if (photo.url == nil || photo.url == "" || !photo.upload){
                             self.view.makeToast(LanguageHelper.getString(key: "detail.cleanPic.uploadPicNumTip"), duration: 2.5, position: CSToastPositionCenter)
                             return;
@@ -259,7 +307,7 @@ class CleanMissionDetailViewController: MissionDetailBaseViewController,CleanPic
                         let dic:[String: Any] = photo.toJSON()
                         cleanPhotos.append(dic)
                     }
-                    
+
                 }
                 
                 let params = ["id":self.task?.id ?? 0,"cleanPhotos":cleanPhotos ] as [String : Any]
@@ -267,18 +315,15 @@ class CleanMissionDetailViewController: MissionDetailBaseViewController,CleanPic
                 MBProgressHUD.showAdded(to: self.view, animated: true)
                 NetWorkManager.shared.loadRequest(method: .post, url: ApproveTaskUrl, parameters: params as [String : Any], success: { (data) in
                     MBProgressHUD.hide(for: self.view, animated: true)
-                    
-//                    let resultDic = data as! Dictionary<String,AnyObject>
-//                    let dic = resultDic["data"]
-//                    if dic == nil {
-//                        return
-//                    }
+                    self.view.makeToast("success", duration: 2, position: CSToastPositionCenter)
                     self.loadNewDataWithId(taskId: self.task?.id ?? 0)
-                    
+                    self.submitButton.isEnabled = true
+                    self.submitButton.backgroundColor = kTintColorYellow
                 }) { (data, errMsg) in
                     MBProgressHUD.hide(for: self.view, animated: true)
                     self.view.makeToast(errMsg, duration: 2, position: CSToastPositionCenter)
-                    
+                    self.submitButton.isEnabled = true
+                    self.submitButton.backgroundColor = kTintColorYellow
                 }
                 
             }
@@ -381,7 +426,6 @@ class CleanMissionDetailViewController: MissionDetailBaseViewController,CleanPic
         pass.hidesBottomBarWhenPushed = true
         pass.passArr = passws
         self.navigationController?.pushViewController(pass, animated: true)
-        
     }
     
     //MARK:- FeedbackViewDelegate

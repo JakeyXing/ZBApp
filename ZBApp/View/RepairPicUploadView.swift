@@ -131,7 +131,7 @@ class RepairPicUploadView: UIView {
         image?.mediaType = currentUploadmediaType
         
         
-        let imgName = "maint_pic_" + CommonMethod.timestamp()
+        let imgName = "maint_pic_" + CommonMethod.timestamp() + "_" + "\(getUserInfo()["id"]!)"
         let savedImagePath = CommonMethod.getImagePath(img, imageName: imgName)
         let fileNa = imgName + ".jpg"
         uploadDataToAWS(fileName: fileNa, filePath: savedImagePath!, success: { (url) in
@@ -183,7 +183,7 @@ class RepairPicUploadView: UIView {
             
 
         }
-        let videoImgName = "video_pre_pic_" + CommonMethod.timestamp()
+        let videoImgName = "video_pre_pic_" + CommonMethod.timestamp() + "_" + "\(getUserInfo()["id"]!)"
         let videoImg = CommonMethod.getVideoPreViewImage(url as URL)
         image?.videoPicName = CommonMethod.getImagePath(videoImg, imageName: videoImgName)
         

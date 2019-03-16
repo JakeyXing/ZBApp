@@ -11,7 +11,6 @@ import CYLTabBarController
 import IQKeyboardManagerSwift
 import AWSCore
 import AWSMobileClient
-import Firebase
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -23,7 +22,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var langDic:Dictionary<String,String>!
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        FirebaseApp.configure()
         LanguageHelper.shareInstance.initUserLanguage()
         mainTabBarVc = MainTabBarController(viewControllers: self.viewControllers(), tabBarItemsAttributes: self.tabBarItemsAttributesForController())
         
@@ -62,7 +60,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         NotificationCenter.default.addObserver(self, selector: #selector(reLogin), name: NSNotification.Name(rawValue: kRefreshTokenInvalidNoti), object: nil)
         
-        test()
+//        test()
         
         return AWSMobileClient.sharedInstance().interceptApplication(application, didFinishLaunchingWithOptions: launchOptions)
 //        return true

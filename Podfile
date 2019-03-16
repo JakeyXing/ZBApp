@@ -23,7 +23,5 @@ target 'ZBApp' do
   pod 'MBProgressHUD'
   pod 'MJRefresh'
   pod 'Toast'
-  
-  pod 'Firebase/Core'
 
 end

@@ -515,22 +515,29 @@ class CertifApplyController: UIViewController,JHNavigationBarDelegate,UIImagePic
         switch uploadImageType {
         case .headIcon:
             
-            let imgName = "userIcon_pic_" + CommonMethod.timestamp()
-            
+            let imgName = "userIcon_pic_" + CommonMethod.timestamp() + "_" + "\(getUserInfo()["id"]!)"
+//            let imgName = "testtest"
+
             let savedImagePath = CommonMethod.getImagePath(image, imageName: imgName)
             
             let fileNa = imgName + ".jpg"
             
             uploadDataToAWS(fileName: fileNa, filePath: savedImagePath!, success: { (url) in
-                
+
                 DispatchQueue.main.async(execute: {
                     self.headImageView.image = image
                     self.userIconUrl = url ?? ""
                 })
-                
+
             }) { (errMsg) in
-                
+
             }
+
+//            uploadToAWS(fileName: fileNa, filePath: savedImagePath!, success: { (url) in
+//                myPrint(items: "change green")
+//            }) { (errMsg) in
+//                myPrint(items: "change red")
+//            }
             
         case .certiPic:
             

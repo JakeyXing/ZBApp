@@ -93,7 +93,7 @@ class FeedbackImageUploadView: UIView {
     func addAndUploadImage(img: UIImage, atIndexPath index: NSInteger) {
         currentUploadmediaType = .image
     
-        let imgName = "feedback_pic_" + CommonMethod.timestamp()
+        let imgName = "feedback_pic_" + CommonMethod.timestamp() + "_" + "\(getUserInfo()["id"]!)"
         let savedImagePath = CommonMethod.getImagePath(img, imageName: imgName)
         let fileNa = imgName + ".jpg"
         uploadDataToAWS(fileName: fileNa, filePath: savedImagePath!, success: { (url) in
